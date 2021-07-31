@@ -1,13 +1,6 @@
 #include "header.h"
 
-/**
- * @brief       Get image data from an input file
- * 
- * @param path  Path to input image file
- * @param img   Image data
- * @return int  Returns SUCCESS or FAIL
- */
-int readImage(char *path, ImageData *img)
+int readImage(const char *path, ImageData *img)
 {
     // Check inputs
     if (!path || !img)
@@ -15,7 +8,7 @@ int readImage(char *path, ImageData *img)
 
     // Init variables
     int retval = FAIL;
-    uint32_t jpegSubsamp = 0, width = 0, height = 0;
+    int jpegSubsamp = 0, width = 0, height = 0;
     uint64_t imgSize = 0;
 
     uint8_t *compImg = nullptr;
@@ -68,14 +61,7 @@ cleanup:
     return retval;
 }
 
-/**
- * @brief       Save image data to an output file
- * 
- * @param path  Path to output image file
- * @param img   Image data
- * @return int  Returns SUCCESS or FAIL
- */
-int saveImage(char *path, ImageData *img)
+int saveImage(const char *path, ImageData *img)
 {
     // Check inputs
     if (!path || !img)
@@ -123,7 +109,20 @@ cleanup:
     return retval;
 }
 
-int dimBackground()
+int dimBackground(ImageData *img, float k, ImageData *out)
 {
-    // Gamma correction result = 255 * (image/255)^k
+    if (!img)
+        return FAIL;
+    if (!out)
+        out = img;
+
+    uint8_t *ptrIn = img->data;
+    uint8_t *ptrOut = out->data;
+    uint64_t len = img->width * img->height * COLOR_COMPONENTS;
+
+#pragma omp simd
+    for (uint64_t idx = 0; idx < len; ++idx)
+        ptrOut[idx] = ptrIn[idx] * k;
+
+    return 0;
 }

@@ -1,6 +1,8 @@
 #pragma once
 
+#include <math.h>
 #include <stdio.h>
+#include <stdlib.h>
 #include <inttypes.h>
 
 #include <turbojpeg.h>
@@ -11,7 +13,7 @@
 #define JPEG_QUALITY 90
 
 #ifndef nullptr
-#define nullptr NULL;
+#define nullptr NULL
 #endif
 
 #define SUCCESS 0;
@@ -26,7 +28,30 @@ struct ImageData_t
 };
 typedef struct ImageData_t ImageData;
 
-int readImage(char *path, ImageData *img);
-int saveImage(char *path, ImageData *img);
+/**
+ * @brief       Get image data from an input file
+ * 
+ * @param path  Path to input image file
+ * @param img   Image data
+ * @return int  Returns SUCCESS or FAIL
+ */
+int readImage(const char *path, ImageData *img);
 
-int dimBackground();
+/**
+ * @brief       Save image data to an output file
+ * 
+ * @param path  Path to output image file
+ * @param img   Image data
+ * @return int  Returns SUCCESS or FAIL
+ */
+int saveImage(const char *path, ImageData *img);
+
+/**
+ * @brief       Dim the whole image
+ * 
+ * @param img   Input image data
+ * @param k     Gamma correction rate
+ * @param out   (Optional) Output image data. If it is null operation will be in-place
+ * @return int  Returns SUCCESS or FAIL
+ */
+int dimBackground(ImageData *img, float k, ImageData *out);
