@@ -111,10 +111,23 @@ cleanup:
 
 int dimBackground(ImageData *img, float k, ImageData *out)
 {
+    // Check input
     if (!img)
         return FAIL;
+
+    // Determine whether in-place or out-of-place
     if (!out)
         out = img;
+    else
+    {
+        out->data = (uint8_t *)malloc(img->width * img->height * COLOR_COMPONENTS * sizeof(uint8_t));
+        if (!(out->data))
+            return FAIL;
+
+        out->width = img->width;
+        out->height = img->height;
+        out->size = img->size;
+    }
 
     uint8_t *ptrIn = img->data;
     uint8_t *ptrOut = out->data;
@@ -125,4 +138,26 @@ int dimBackground(ImageData *img, float k, ImageData *out)
         ptrOut[idx] = ptrIn[idx] * k;
 
     return 0;
+}
+
+int kaleidoscope(ImageData *img, float k)
+{
+    int retval = FAIL;
+
+    ImageData background;
+
+    // Prepare background image
+    retval = dimBackground(img, 0.5, &background);
+    if (retval < 0)
+        goto cleanup;
+
+    // Slice triangle
+
+    // Rotate and merge with background
+
+cleanup:
+
+    free(background.data);
+
+    return retval;
 }

@@ -7,7 +7,7 @@
 
 #include <turbojpeg.h>
 
-/// Assume always colored image
+/// Assume always 3 component image
 #define COLOR_COMPONENTS 3
 /// Quality of the output image
 #define JPEG_QUALITY 90
@@ -55,3 +55,12 @@ int saveImage(const char *path, ImageData *img);
  * @return int  Returns SUCCESS or FAIL
  */
 int dimBackground(ImageData *img, float k, ImageData *out);
+
+/**
+ * @brief 
+ * 
+ * @param img 
+ * @param k 
+ * @return int 
+ */
+int kaleidoscope(ImageData *img, float k);
