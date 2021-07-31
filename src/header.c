@@ -140,11 +140,64 @@ int dimBackground(ImageData *img, float k, ImageData *out)
     return 0;
 }
 
-int kaleidoscope(ImageData *img, float k)
+int sliceTriangle(ImageData *img, PointData *slicedData, int n, float scaleDown)
 {
-    int retval = FAIL;
+    // Init variables
+    uint64_t ctr = 0;
+    uint16_t topAngle = 360 / n;
+    double tanVal = tan(topAngle / 2 * M_PI / 180);
 
+    // Sliced data should be centered
+    const uint32_t moveHeight = img->height / 2 * scaleDown;
+
+    // Allocate output
+    slicedData = (PointData *)malloc(img->height * (img->height * tanVal) * COLOR_COMPONENTS * sizeof(PointData));
+    if (!slicedData)
+        return FAIL;
+
+    for (uint32_t idx = 0; idx < img->height; ++idx)
+    {
+        // Fix points
+        uint32_t heightOffset = idx * img->width * COLOR_COMPONENTS;
+        uint32_t currentHeight = round((idx - img->height / 2) * scaleDown) + moveHeight;
+
+        // Offset is the base length / 2 of triangle for current height
+        uint32_t offset = idx * tanVal;
+
+        // Calculate indexes
+        uint32_t start = (img->width / 2 - offset) * COLOR_COMPONENTS;
+        start = start - start % 3;
+        uint32_t end = start + 2 * offset * COLOR_COMPONENTS;
+
+        for (uint32_t jdx = start; jdx < end; jdx += 3)
+        {
+            // Point position respect to center
+            slicedData[ctr].x = round((jdx - img->width / 2) * scaleDown);
+            slicedData[ctr].y = currentHeight;
+
+            // Values of the pixel
+            slicedData[ctr].value[0] = img->data[heightOffset + jdx];
+            slicedData[ctr].value[1] = img->data[heightOffset + jdx + 1];
+            slicedData[ctr].value[2] = img->data[heightOffset + jdx + 2];
+            ctr += 3;
+        }
+    }
+
+    // DEBUG
+    uint64_t ctr2 = (img->height * (img->height * tanVal) * COLOR_COMPONENTS);
+    printf("Allocated: %ld Set: %ld\n", ctr2, ctr);
+
+    return SUCCESS;
+}
+
+int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
+{
+    if (!img || n < 0 || scaleDown > 0.5)
+        return FAIL;
+
+    int retval = FAIL;
     ImageData background;
+    PointData *slicedData = nullptr;
 
     // Prepare background image
     retval = dimBackground(img, 0.5, &background);
@@ -152,11 +205,22 @@ int kaleidoscope(ImageData *img, float k)
         goto cleanup;
 
     // Slice triangle
+    retval = sliceTriangle(img, slicedData, n, scaleDown);
+    if (retval < 0)
+        goto cleanup;
 
     // Rotate and merge with background
+    for (int idx = 0; idx < n; ++idx)
+    {
+        // Find rotation matrix
 
+        // Rotate data and merge
+    }
+
+    retval = SUCCESS;
 cleanup:
 
+    free(slicedData);
     free(background.data);
 
     return retval;

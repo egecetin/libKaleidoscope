@@ -1,5 +1,11 @@
 #include "header.h"
 
+/* TODO
+    If image height >> image width sliced triangle should change
+    Rethink allocated area of slicedData
+    After scale down one point have more than one data (Average values?)
+*/
+
 int main(int argc, char *argv[])
 {
     int retval = -1;
@@ -38,7 +44,9 @@ int main(int argc, char *argv[])
     retval = readImage(path, &imgData);
     printf(" %d\n", retval);
 
-    retval = dimBackground(&imgData, 0.5, nullptr);
+    retval = kaleidoscope(&imgData, 6, 0.5, 0.25);
+    printf(" %d\n", retval);
+    //retval = dimBackground(&imgData, 0.5, nullptr);
 
     printf("Saving %s... ", outPath);
     retval = saveImage(outPath, &imgData);
