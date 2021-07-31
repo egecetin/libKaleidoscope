@@ -1,7 +1,7 @@
 #include "header.h"
 
 /* TODO
-    If image height >> image width sliced triangle should change
+    If image height >> image width sliced triangle should centered
     Rethink allocated area of slicedData
     After scale down one point have more than one data (Average values?)
 */

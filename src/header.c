@@ -147,7 +147,7 @@ int sliceTriangle(ImageData *img, PointData *slicedData, int n, float scaleDown)
     uint16_t topAngle = 360 / n;
     double tanVal = tan(topAngle / 2 * M_PI / 180);
 
-    // Sliced data should be centered
+    // Sliced data should be centered after the operation
     const uint32_t moveHeight = img->height / 2 * scaleDown;
 
     // Allocate output
@@ -166,7 +166,7 @@ int sliceTriangle(ImageData *img, PointData *slicedData, int n, float scaleDown)
 
         // Calculate indexes
         uint32_t start = (img->width / 2 - offset) * COLOR_COMPONENTS;
-        start = start - start % 3;
+        start = start - start % 3; // Move to first color component
         uint32_t end = start + 2 * offset * COLOR_COMPONENTS;
 
         for (uint32_t jdx = start; jdx < end; jdx += 3)
@@ -176,9 +176,7 @@ int sliceTriangle(ImageData *img, PointData *slicedData, int n, float scaleDown)
             slicedData[ctr].y = currentHeight;
 
             // Values of the pixel
-            slicedData[ctr].value[0] = img->data[heightOffset + jdx];
-            slicedData[ctr].value[1] = img->data[heightOffset + jdx + 1];
-            slicedData[ctr].value[2] = img->data[heightOffset + jdx + 2];
+            memcpy(slicedData[ctr].value, img->data[heightOffset + jdx], 3);
             ctr += 3;
         }
     }
@@ -192,7 +190,7 @@ int sliceTriangle(ImageData *img, PointData *slicedData, int n, float scaleDown)
 
 int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
 {
-    if (!img || n < 0 || scaleDown > 0.5)
+    if (!img || n < 2 || scaleDown > 0.5)
         return FAIL;
 
     int retval = FAIL;

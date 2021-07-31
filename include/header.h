@@ -3,6 +3,7 @@
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
+#include <memory.h>
 #include <inttypes.h>
 
 #include <turbojpeg.h>
