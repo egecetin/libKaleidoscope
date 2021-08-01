@@ -24,7 +24,7 @@ struct PointData_t
 {
     int32_t x;
     int32_t y;
-    uint8_t value[3];
+    uint8_t value[COLOR_COMPONENTS];
 };
 typedef struct PointData_t PointData;
 
@@ -70,10 +70,11 @@ int dimBackground(ImageData *img, float k, ImageData *out);
  * 
  * @param img           Input image
  * @param slicedData    Output sliced image data
+ * @param len           Length of the output data
  * @param n             N for kaleidoscope effect
  * @param scaleDown     Scale factor of sliced data (Should be less than 0.5)
  * @return int          Returns SUCCESS or FAIL
  */
-int sliceTriangle(ImageData *img, PointData *slicedData, int n, float scaleDown);
+int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, float scaleDown);
 
 int kaleidoscope(ImageData *img, int n, float k, float scaleDown);

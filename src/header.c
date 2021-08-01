@@ -140,86 +140,109 @@ int dimBackground(ImageData *img, float k, ImageData *out)
     return 0;
 }
 
-int sliceTriangle(ImageData *img, PointData *slicedData, int n, float scaleDown)
+int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, float scaleDown)
 {
     // Init variables
     uint64_t ctr = 0;
     uint16_t topAngle = 360 / n;
+    float quantizationScale = 1.1;
     double tanVal = tan(topAngle / 2 * M_PI / 180);
 
+    // Sliced data should be centered before the operation
+    const uint32_t preMoveHeight = abs((int32_t)(img->width / (4 * tanVal)) - (int32_t)img->height / 2);
     // Sliced data should be centered after the operation
     const uint32_t moveHeight = img->height / 2 * scaleDown;
 
-    // Allocate output
-    slicedData = (PointData *)malloc(img->height * (img->height * tanVal) * COLOR_COMPONENTS * sizeof(PointData));
-    if (!slicedData)
+    // Allocate output (Mathematical area differ from pixel area because of quantization)
+    *slicedData = (PointData *)malloc(img->height * (img->height * tanVal) * COLOR_COMPONENTS * quantizationScale * sizeof(PointData));
+    if (!(*slicedData))
         return FAIL;
+    PointData *pSlicedData = *slicedData;
 
-    for (uint32_t idx = 0; idx < img->height; ++idx)
+    for (uint32_t idx = 0; idx < img->height - preMoveHeight; ++idx)
     {
         // Fix points
-        uint32_t heightOffset = idx * img->width * COLOR_COMPONENTS;
-        uint32_t currentHeight = round((idx - img->height / 2) * scaleDown) + moveHeight;
+        uint32_t heightOffset = (idx + preMoveHeight) * img->width * COLOR_COMPONENTS;
+        uint32_t currentHeight = round(((int64_t)idx - img->height / 2) * scaleDown) + moveHeight;
 
         // Offset is the base length / 2 of triangle for current height
         uint32_t offset = idx * tanVal;
 
         // Calculate indexes
         uint32_t start = (img->width / 2 - offset) * COLOR_COMPONENTS;
-        start = start - start % 3; // Move to first color component
+        start = start - start % COLOR_COMPONENTS; // Move to first color component
         uint32_t end = start + 2 * offset * COLOR_COMPONENTS;
 
-        for (uint32_t jdx = start; jdx < end; jdx += 3)
+        for (uint32_t jdx = start; jdx < end; jdx += COLOR_COMPONENTS)
         {
             // Point position respect to center
-            slicedData[ctr].x = round((jdx - img->width / 2) * scaleDown);
-            slicedData[ctr].y = currentHeight;
+            pSlicedData[ctr].x = round(((int64_t)jdx - img->width / 2 * 3) / COLOR_COMPONENTS * scaleDown);
+            pSlicedData[ctr].y = currentHeight;
 
             // Values of the pixel
-            memcpy(slicedData[ctr].value, img->data[heightOffset + jdx], 3);
-            ctr += 3;
+            memcpy(pSlicedData[ctr].value, &(img->data[heightOffset + jdx]), COLOR_COMPONENTS);
+            ctr += COLOR_COMPONENTS;
         }
     }
+    *len = ctr;
 
     // DEBUG
-    uint64_t ctr2 = (img->height * (img->height * tanVal) * COLOR_COMPONENTS);
-    printf("Allocated: %ld Set: %ld\n", ctr2, ctr);
+    // uint64_t ctr2 = (img->height * (img->height * tanVal) * COLOR_COMPONENTS);
+    // printf("Allocated: %ld Set: %ld\n", ctr2, ctr);
 
     return SUCCESS;
 }
 
 int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
 {
-    if (!img || n < 2 || scaleDown > 0.5)
+    // Check inputs
+    if (!img || n < 0 || scaleDown > 0.5 || k < 0.0)
         return FAIL;
 
     int retval = FAIL;
-    ImageData background;
+    uint64_t len = 0;
     PointData *slicedData = nullptr;
 
-    // Prepare background image
-    retval = dimBackground(img, 0.5, &background);
+    // Slice triangle
+    retval = sliceTriangle(img, &slicedData, &len, n, scaleDown);
     if (retval < 0)
         goto cleanup;
 
-    // Slice triangle
-    retval = sliceTriangle(img, slicedData, n, scaleDown);
+    // Prepare background image
+    retval = dimBackground(img, k, nullptr);
     if (retval < 0)
         goto cleanup;
 
     // Rotate and merge with background
-    for (int idx = 0; idx < n; ++idx)
+    for (uint16_t idx = 0; idx < n; ++idx)
     {
+        uint16_t rotationAngle = idx * 360 / n;
+
         // Find rotation matrix
+        float cosVal = cos(rotationAngle * M_PI / 180);
+        float sinVal = sin(rotationAngle * M_PI / 180);
 
         // Rotate data and merge
+        for (uint64_t jdx = 0; jdx < len; ++jdx)
+        {
+            // New coordinates (Origin is the center of image)
+            int32_t newX = slicedData[jdx].x * cosVal + slicedData[jdx].y * sinVal;
+            int32_t newY = slicedData[jdx].y * cosVal - slicedData[jdx].x * sinVal;
+
+            // Find absolute coordinates (Left top)
+            newX = newX + img->width / 2;
+            newY = newY + img->height / 2;
+
+            // Merge
+            if (newX < img->width && newX > 0 && newY < img->height && newY > 0)
+                memcpy(&(img->data[(newY * img->width + newX) * COLOR_COMPONENTS]), slicedData[jdx].value, COLOR_COMPONENTS);
+        }
     }
 
     retval = SUCCESS;
 cleanup:
 
     free(slicedData);
-    free(background.data);
 
     return retval;
 }
