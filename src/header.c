@@ -196,7 +196,7 @@ int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, 
 int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
 {
     // Check inputs
-    if (!img || n < 0 || scaleDown > 0.5 || k < 0.0)
+    if (!img || n < 0 || k < 0.0)
         return FAIL;
 
     int retval = FAIL;
