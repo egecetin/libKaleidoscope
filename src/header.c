@@ -46,7 +46,6 @@ int readImage(const char *path, ImageData *img)
     // Set output
     img->width = width;
     img->height = height;
-    img->size = imgSize;
     img->data = decompImg;
     decompImg = nullptr;
 
@@ -98,7 +97,6 @@ int saveImage(const char *path, ImageData *img)
     img->data = nullptr;
     img->height = 0;
     img->width = 0;
-    img->size = 0;
 
 cleanup:
 
@@ -126,7 +124,6 @@ int dimBackground(ImageData *img, float k, ImageData *out)
 
         out->width = img->width;
         out->height = img->height;
-        out->size = img->size;
     }
 
     uint8_t *ptrIn = img->data;
@@ -144,13 +141,13 @@ int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, 
 {
     // Init variables
     uint64_t ctr = 0;
-    const uint16_t topAngle = 360 / n;
+    const float topAngle = (float)360 / n;
     const float quantizationScale = 1.1;
-    const double tanVal = tan(topAngle / 2 * M_PI / 180);
+    const double tanVal = tan((float)topAngle / 2 * M_PI / 180);
 
     // Sliced data should be centered before the operation
     const uint32_t preMoveHeight = abs((int32_t)(img->width / (4 * tanVal)) - (int32_t)img->height / 2);
-    // Sliced data should be centered after the operation
+    // Sliced data should be centered after the scaledown
     const uint32_t moveHeight = img->height / 2 * scaleDown;
 
     // Allocate output (Mathematical area differ from pixel area because of quantization)
@@ -201,6 +198,7 @@ int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
 
     int retval = FAIL;
     uint64_t len = 0;
+    uint64_t *hitData = nullptr;
     PointData *slicedData = nullptr;
 
     // Slice triangle
@@ -214,9 +212,10 @@ int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
         goto cleanup;
 
     // Rotate and merge with background
+    hitData = (uint64_t *)calloc(img->width * img->height, sizeof(uint64_t));
     for (uint16_t idx = 0; idx < n; ++idx)
     {
-        uint16_t rotationAngle = idx * 360 / n;
+        float rotationAngle = idx * ((float)360 / n);
 
         // Find rotation matrix
         float cosVal = cos(rotationAngle * M_PI / 180);
@@ -235,14 +234,21 @@ int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
 
             // Merge
             if (newX < img->width && newX > 0 && newY < img->height && newY > 0)
+            {
+                // Sign point
+                ++(hitData[newY * img->width + newX]);
                 memcpy(&(img->data[(newY * img->width + newX) * COLOR_COMPONENTS]), slicedData[jdx].value, COLOR_COMPONENTS);
+            }
         }
     }
+
+    // Interpolate
 
     retval = SUCCESS;
 cleanup:
 
     free(slicedData);
+    free(hitData);
 
     return retval;
 }

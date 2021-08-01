@@ -32,7 +32,6 @@ struct ImageData_t
 {
     uint32_t width;
     uint32_t height;
-    uint64_t size;
     uint8_t *data;
 };
 typedef struct ImageData_t ImageData;

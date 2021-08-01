@@ -1,7 +1,7 @@
 #include "header.h"
 
 /* TODO
-    After scale down one point have more than one data (Average values?)
+    After scale down one point have more than one data (Average degrades performance)
     Interpolation after rotation
 */
 
@@ -11,16 +11,21 @@ int main(int argc, char *argv[])
     printf("Start...\n");
 
     /*
-    if(argc < 3)
+    if(argc < 4)
     {
-        printf("Usage ./kaleidoscope <Input Image Path> <Output Image Path>");
+        printf("Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N>");
         return retval;
     }
+
+    char *path = argv[1];
+    char *outPath = argv[2];
+    int n = atoi(argv[3]);
     */
 
     // Only for debug
     char path[] = "/mnt/c/Users/egece/Pictures/deneme.jpg";
     char outPath[] = "/mnt/c/Users/egece/Pictures/out.jpg";
+    int n = 11;
 
     ImageData imgData;
     printf("Reading %s... ", path);
@@ -28,7 +33,7 @@ int main(int argc, char *argv[])
     printf(" %d\n", !retval);
 
     printf("Applying effect... ");
-    retval = kaleidoscope(&imgData, 11, 0.35, 0.45);
+    retval = kaleidoscope(&imgData, n, 0.35, 0.35);
     printf(" %d\n", !retval);
 
     printf("Saving %s... ", outPath);
@@ -37,5 +42,5 @@ int main(int argc, char *argv[])
 
     printf("Done...\n");
 
-    return 0;
+    return retval;
 }
