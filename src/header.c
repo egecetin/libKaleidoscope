@@ -131,7 +131,7 @@ int dimBackground(ImageData *img, float k, ImageData *out)
 
     uint8_t *ptrIn = img->data;
     uint8_t *ptrOut = out->data;
-    uint64_t len = img->width * img->height * COLOR_COMPONENTS;
+    const uint64_t len = img->width * img->height * COLOR_COMPONENTS;
 
 #pragma omp simd
     for (uint64_t idx = 0; idx < len; ++idx)
@@ -144,9 +144,9 @@ int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, 
 {
     // Init variables
     uint64_t ctr = 0;
-    uint16_t topAngle = 360 / n;
-    float quantizationScale = 1.1;
-    double tanVal = tan(topAngle / 2 * M_PI / 180);
+    const uint16_t topAngle = 360 / n;
+    const float quantizationScale = 1.1;
+    const double tanVal = tan(topAngle / 2 * M_PI / 180);
 
     // Sliced data should be centered before the operation
     const uint32_t preMoveHeight = abs((int32_t)(img->width / (4 * tanVal)) - (int32_t)img->height / 2);
@@ -162,11 +162,11 @@ int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, 
     for (uint32_t idx = 0; idx < img->height - preMoveHeight; ++idx)
     {
         // Fix points
-        uint32_t heightOffset = (idx + preMoveHeight) * img->width * COLOR_COMPONENTS;
-        uint32_t currentHeight = round(((int64_t)idx - img->height / 2) * scaleDown) + moveHeight;
+        const uint32_t heightOffset = (idx + preMoveHeight) * img->width * COLOR_COMPONENTS;
+        const uint32_t currentHeight = round(((int64_t)idx - img->height / 2) * scaleDown) + moveHeight;
 
         // Offset is the base length / 2 of triangle for current height
-        uint32_t offset = idx * tanVal;
+        const uint32_t offset = idx * tanVal;
 
         // Calculate indexes
         uint32_t start = (img->width / 2 - offset) * COLOR_COMPONENTS;

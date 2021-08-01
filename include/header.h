@@ -59,7 +59,7 @@ int saveImage(const char *path, ImageData *img);
  * @brief       Dim the whole image
  * 
  * @param img   Input image data
- * @param k     Gamma correction rate
+ * @param k     Background dimming scale
  * @param out   (Optional) Output image data. If it is null operation will be in-place
  * @return int  Returns SUCCESS or FAIL
  */
@@ -77,4 +77,13 @@ int dimBackground(ImageData *img, float k, ImageData *out);
  */
 int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, float scaleDown);
 
+/**
+ * @brief           Main function
+ * 
+ * @param img       Input image
+ * @param n         N for kaleidoscope effect
+ * @param k         Background dimming scale
+ * @param scaleDown Scale factor for sliced image
+ * @return int      Returns SUCCESS or FAIL
+ */
 int kaleidoscope(ImageData *img, int n, float k, float scaleDown);
