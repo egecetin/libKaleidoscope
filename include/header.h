@@ -62,7 +62,7 @@ int saveImage(const char *path, ImageData *img);
  * @param out   (Optional) Output image data. If it is null operation will be in-place
  * @return int  Returns SUCCESS or FAIL
  */
-int dimBackground(ImageData *img, float k, ImageData *out);
+static inline int dimBackground(ImageData *img, float k, ImageData *out);
 
 /**
  * @brief               Slice a scaled triangle from image
@@ -74,7 +74,28 @@ int dimBackground(ImageData *img, float k, ImageData *out);
  * @param scaleDown     Scale factor of sliced data (Should be less than 0.5)
  * @return int          Returns SUCCESS or FAIL
  */
-int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, float scaleDown);
+static inline int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, float scaleDown);
+
+/**
+ * @brief               Merge sliced img to main image
+ * 
+ * @param img           Source image
+ * @param slicedData    Sliced triangle
+ * @param hitData       Data points for interpolation
+ * @param len           Length of the slicedData
+ * @param n             N for kaleidoscope effect
+ * @return int          Returns SUCCESS or FAIL
+ */
+static inline int rotateAndMerge(ImageData *img, PointData *slicedData, uint64_t len, uint8_t *hitData, int n);
+
+/**
+ * @brief           Very simple implementation of nearest neighbour interpolation
+ * 
+ * @param img       Merged image
+ * @param hitData   Modified point info
+ * @return int 
+ */
+static inline int interpolate(ImageData *img, uint8_t *hitData);
 
 /**
  * @brief           Main function

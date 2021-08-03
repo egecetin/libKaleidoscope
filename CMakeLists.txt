@@ -3,7 +3,7 @@ cmake_minimum_required(VERSION 3.12)
 project(kaleidoscope VERSION 1.0.0)
 
 # Compile options
-add_compile_options(-Wall -pedantic)
+add_compile_options(-Wall -Wextra -pedantic)
 
 set(CMAKE_C_FLAGS_DEBUG "${CMAKE_C_FLAGS} -O0 -g -fopenmp")
 set(CMAKE_CXX_FLAGS_DEBUG "${CMAKE_CXX_FLAGS} -O0 -g -fopenmp")

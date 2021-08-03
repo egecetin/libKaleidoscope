@@ -9,7 +9,7 @@ int readImage(const char *path, ImageData *img)
     // Init variables
     int retval = FAIL;
     int jpegSubsamp = 0, width = 0, height = 0;
-    uint64_t imgSize = 0;
+    int64_t imgSize = 0;
 
     uint8_t *compImg = nullptr;
     uint8_t *decompImg = nullptr;
@@ -107,7 +107,7 @@ cleanup:
     return retval;
 }
 
-int dimBackground(ImageData *img, float k, ImageData *out)
+static inline int dimBackground(ImageData *img, float k, ImageData *out)
 {
     // Check input
     if (!img)
@@ -137,7 +137,7 @@ int dimBackground(ImageData *img, float k, ImageData *out)
     return 0;
 }
 
-int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, float scaleDown)
+static inline int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, float scaleDown)
 {
     // Init variables
     uint64_t ctr = 0;
@@ -182,37 +182,13 @@ int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, 
         }
     }
     *len = ctr;
-
-    // DEBUG
-    // uint64_t ctr2 = (img->height * (img->height * tanVal) * COLOR_COMPONENTS);
-    // printf("Allocated: %ld Set: %ld\n", ctr2, ctr);
+    *slicedData = (PointData *)realloc(*slicedData, ctr * sizeof(PointData));
 
     return SUCCESS;
 }
 
-int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
+static inline int rotateAndMerge(ImageData *img, PointData *slicedData, uint64_t len, uint8_t *hitData, int n)
 {
-    // Check inputs
-    if (!img || n < 0 || k < 0.0)
-        return FAIL;
-
-    int retval = FAIL;
-    uint64_t len = 0;
-    uint64_t *hitData = nullptr;
-    PointData *slicedData = nullptr;
-
-    // Slice triangle
-    retval = sliceTriangle(img, &slicedData, &len, n, scaleDown);
-    if (retval < 0)
-        goto cleanup;
-
-    // Prepare background image
-    retval = dimBackground(img, k, nullptr);
-    if (retval < 0)
-        goto cleanup;
-
-    // Rotate and merge with background
-    hitData = (uint64_t *)calloc(img->width * img->height, sizeof(uint64_t));
     for (uint16_t idx = 0; idx < n; ++idx)
     {
         float rotationAngle = idx * ((float)360 / n);
@@ -228,21 +204,83 @@ int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
             int32_t newX = slicedData[jdx].x * cosVal + slicedData[jdx].y * sinVal;
             int32_t newY = slicedData[jdx].y * cosVal - slicedData[jdx].x * sinVal;
 
-            // Find absolute coordinates (Left top)
+            // Find absolute coordinates (Origin left top)
             newX = newX + img->width / 2;
             newY = newY + img->height / 2;
 
-            // Merge
             if (newX < img->width && newX > 0 && newY < img->height && newY > 0)
             {
                 // Sign point
-                ++(hitData[newY * img->width + newX]);
+                hitData[newY * img->width + newX] = 1;
+                // Merge
                 memcpy(&(img->data[(newY * img->width + newX) * COLOR_COMPONENTS]), slicedData[jdx].value, COLOR_COMPONENTS);
             }
         }
     }
 
+    return SUCCESS;
+}
+
+static inline int interpolate(ImageData *img, uint8_t *hitData)
+{
+    for (uint64_t idx = 1; idx < img->height - 1; ++idx)
+    {
+        uint64_t heightOffset = idx * img->width;
+        for (uint64_t jdx = 1; jdx < img->width - 1; ++jdx)
+        {
+            if (!hitData[heightOffset + jdx])
+            {
+                // Check left
+                if (hitData[heightOffset + jdx - 1])
+                    memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx - 1) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
+                // Check right
+                else if (hitData[heightOffset + jdx + 1])
+                    memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx + 1) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
+                // Check above
+                else if (hitData[heightOffset + jdx - img->width])
+                    memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx - img->width) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
+                // Check below
+                else if (hitData[heightOffset + jdx + img->width])
+                    memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx + img->width) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
+            }
+        }
+    }
+
+    return SUCCESS;
+}
+
+int kaleidoscope(ImageData *img, int n, float k, float scaleDown)
+{
+    // Check inputs
+    if (!img || n < 0 || k < 0.0)
+        return FAIL;
+
+    int retval = FAIL;
+    uint64_t len = 0;
+    PointData *slicedData = nullptr;
+    uint8_t *hitData = (uint8_t *)calloc(img->width * img->height, sizeof(uint8_t));
+    if (!hitData)
+        goto cleanup;
+
+    // Slice triangle
+    retval = sliceTriangle(img, &slicedData, &len, n, scaleDown);
+    if (retval < 0)
+        goto cleanup;
+
+    // Prepare background image
+    retval = dimBackground(img, k, nullptr);
+    if (retval < 0)
+        goto cleanup;
+
+    // Rotate and merge with background
+    retval = rotateAndMerge(img, slicedData, len, hitData, n);
+    if (retval < 0)
+        goto cleanup;
+
     // Interpolate
+    retval = interpolate(img, hitData);
+    if (retval < 0)
+        goto cleanup;
 
     retval = SUCCESS;
 cleanup:
