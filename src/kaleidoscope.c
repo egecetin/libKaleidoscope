@@ -191,7 +191,6 @@ static inline int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t
 		}
 	}
 	*len = ctr;
-	*slicedData = (PointData *)realloc(*slicedData, ctr * sizeof(PointData));
 
 	return SUCCESS;
 }
@@ -270,7 +269,7 @@ int kaleidoscope(ImageData *img, int n, double k, double scaleDown)
 
 	uint8_t *hitData = (uint8_t *)calloc(img->width * img->height, sizeof(uint8_t));
 	if (!hitData)
-		goto cleanup;
+		return FAIL;
 
 	// Slice triangle
 	retval = sliceTriangle(img, &slicedData, &len, n, scaleDown);
