@@ -1,4 +1,4 @@
-#include "header.h"
+#include "kaleidoscope.h"
 
 #ifdef WIN32
 #define _USE_MATH_DEFINES

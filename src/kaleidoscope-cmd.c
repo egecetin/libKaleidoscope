@@ -1,4 +1,4 @@
-#include "header.h"
+#include "kaleidoscope.h"
 
 #include <stdio.h>
 #include <stdlib.h>
