@@ -1,22 +1,15 @@
 cmake_minimum_required(VERSION 3.12)
-
 project(kaleidoscope VERSION 1.1.0)
 
-# Compile options
-set(CMAKE_C_FLAGS_RELEASE "${CMAKE_C_FLAGS} -DNDEBUG")
-set(CMAKE_RUNTIME_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/bin")
-set(CMAKE_ARCHIVE_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/bin")
-set(CMAKE_LIBRARY_OUTPUT_DIRECTORY "${PROJECT_SOURCE_DIR}/build/bin")
-
-FILE(GLOB ProjectSources ${PROJECT_SOURCE_DIR}/src/*.c ${PROJECT_SOURCE_DIR}/src/**/*.c)
+FILE(GLOB KaleidoscopeSources ${CMAKE_CURRENT_SOURCE_DIR}/src/*.c ${CMAKE_CURRENT_SOURCE_DIR}/src/**/*.c)
 
 # Thirdparty libraries
-add_subdirectory("thirdparty/libjpeg-turbo")
+add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo")
 
 # Project files
-include_directories(thirdparty/libjpeg-turbo)
-include_directories(${PROJECT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
+include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Compile
-add_executable(kaleidoscope ${ProjectSources})
+add_executable(kaleidoscope ${KaleidoscopeSources})
 target_link_libraries(kaleidoscope turbojpeg-static)
