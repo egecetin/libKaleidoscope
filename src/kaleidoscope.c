@@ -23,7 +23,7 @@ static inline int dimBackground(ImageData *img, double k, ImageData *out)
 		out = img;
 	else
 	{
-		out->data = (unsigned char *)malloc(img->width * img->height * img->nComponent * sizeof(unsigned char));
+		out->data = (unsigned char *)malloc(img->width * img->height * img->nComponents * sizeof(unsigned char));
 		if (!(out->data))
 			return EXIT_FAILURE;
 
@@ -33,7 +33,7 @@ static inline int dimBackground(ImageData *img, double k, ImageData *out)
 
 	unsigned char *ptrIn = img->data;
 	unsigned char *ptrOut = out->data;
-	const unsigned long long len = img->width * img->height * img->nComponent;
+	const unsigned long long len = img->width * img->height * img->nComponents;
 
 	for (unsigned long long idx = 0; idx < len; ++idx)
 		ptrOut[idx] = (unsigned char)(ptrIn[idx] * k);
@@ -99,7 +99,6 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
 {
 	int retval = EXIT_FAILURE;
-	retval = EXIT_SUCCESS;
 
 	// Parameters of triangle
 	const double topAngle = 360.0 / n;
@@ -132,7 +131,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		goto cleanup;
 
 #ifndef NDEBUG
-	imgBuffer.nComponent = 1;
+	imgBuffer.nComponents = 1;
 	imgBuffer.width = width;
 	imgBuffer.height = height;
 	imgBuffer.data = (unsigned char *)calloc(nPixels, sizeof(unsigned char));
@@ -176,7 +175,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		else
 			imgBuffer.data[idx] = 0;
 	}
-	saveImage("imgSrcMask.jpg", &imgBuffer, 90);
+	saveImage("imgSrcMask.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
 #endif
 
 	// Rotate all points and fix origin to left top
@@ -198,7 +197,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		else
 			imgBuffer.data[idx] = 0;
 	}
-	saveImage("imgDstMask.jpg", &imgBuffer, 90);
+	saveImage("imgDstMask.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
 #endif
 
 	/*
@@ -229,9 +228,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
 	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
-	retval = EXIT_SUCCESS;
 	*/
-
+	retval = EXIT_SUCCESS;
 cleanup:
 
 #ifndef NDEBUG
@@ -254,25 +252,7 @@ cleanup:
 
 void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
 {
-	for (size_t idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponent; idx += 3)
-	{
-		if (handler->pTransferFunc[idx / imgIn->nComponent].srcLocation.x &&
-			handler->pTransferFunc[idx / imgIn->nComponent].srcLocation.y)
-		{
-			imgOut->data[idx] = 255;
-			imgOut->data[idx + 1] = 255;
-			imgOut->data[idx + 2] = 255;
-		}
-		else
-		{
-			imgOut->data[idx] = 0;
-			imgOut->data[idx + 1] = 0;
-			imgOut->data[idx + 2] = 0;
-		}
-	}
-	return;
-
-	for (unsigned long long idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponent; ++idx)
+	for (unsigned long long idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
 		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
 	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
 	{
