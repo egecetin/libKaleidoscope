@@ -16,4 +16,5 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_library(kaleidoscope-static ${KaleidoscopeSources})
 target_link_libraries(kaleidoscope-static turbojpeg-static)
 
-add_executable(kaleidoscope ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c)
+add_executable(kaleidoscope-cmd ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c)
+target_link_libraries(kaleidoscope-cmd kaleidoscope-static)
