@@ -10,14 +10,10 @@ int readImage(const char *path, ImageData *img)
 	// Init variables
 	int retval = EXIT_FAILURE;
 
+	FILE *fptr = NULL;
 	int width = 0, height = 0;
 	unsigned long imgSize = 0;
-	unsigned char nComponent = 3;
-
-	unsigned char *compImg = NULL;
-	unsigned char *decompImg = NULL;
-
-	FILE *fptr = NULL;
+	unsigned char nComponent = 3, *compImg = NULL, *decompImg = NULL;
 	tjhandle jpegDecompressor = NULL;
 
 	// Check inputs
@@ -34,7 +30,7 @@ int readImage(const char *path, ImageData *img)
 
 	// Read file
 	compImg = (unsigned char *)malloc(imgSize * sizeof(unsigned char));
-	if (fread(compImg, imgSize, 1, fptr) < 1)
+	if (!compImg || (fread(compImg, imgSize, 1, fptr) < 1))
 		goto cleanup;
 
 	// Decompress
@@ -46,15 +42,16 @@ int readImage(const char *path, ImageData *img)
 	if (retval < 0)
 		goto cleanup;
 	decompImg = (unsigned char *)malloc(width * height * nComponent * sizeof(unsigned char));
-	retval = tjDecompress(jpegDecompressor, compImg, imgSize, decompImg, width, 0, height, 3, TJFLAG_FASTDCT);
+	if(!decompImg)
+		goto cleanup;
+	retval = tjDecompress(jpegDecompressor, compImg, imgSize, decompImg, width, 0, height, nComponent, TJFLAG_FASTDCT);
 	if (retval < 0)
 		goto cleanup;
 
 	// Set output
 	img->width = width;
 	img->height = height;
-	img->nComponent = nComponent;
-	img->format = TJPF_RGB;
+	img->nComponents = nComponent;
 	img->data = decompImg;
 	decompImg = NULL;
 
@@ -68,14 +65,14 @@ cleanup:
 	return retval;
 }
 
-int saveImage(const char *path, ImageData *img, int jpegQuality)
+int saveImage(const char *path, ImageData *img, enum TJPF pixelFormat, enum TJSAMP samplingFormat, int jpegQuality)
 {
 	// Init variables
 	int retval = EXIT_FAILURE;
-	unsigned int outSize = 0;
-	unsigned char *compImg = NULL;
 
 	FILE *fptr = NULL;
+	unsigned int outSize = 0;
+	unsigned char *compImg = NULL;
 	tjhandle jpegCompressor = NULL;
 
 	// Check inputs
@@ -87,8 +84,8 @@ int saveImage(const char *path, ImageData *img, int jpegQuality)
 	if (!jpegCompressor)
 		goto cleanup;
 
-	retval = tjCompress2(jpegCompressor, img->data, img->width, 0, img->height, TJPF_RGB, &compImg, &outSize,
-						 TJSAMP_444, jpegQuality, TJFLAG_FASTDCT);
+	retval = tjCompress2(jpegCompressor, img->data, img->width, 0, img->height, pixelFormat, &compImg, &outSize,
+						 samplingFormat, jpegQuality, TJFLAG_FASTDCT);
 	if (retval < 0)
 		goto cleanup;
 
@@ -99,7 +96,6 @@ int saveImage(const char *path, ImageData *img, int jpegQuality)
 	if (fwrite(compImg, outSize, 1, fptr) < 1)
 		goto cleanup;
 
-	// Clean ImageData (since the main aim of the app is write data to file)
 	retval = EXIT_SUCCESS;
 
 cleanup:
@@ -108,4 +104,16 @@ cleanup:
 	tjFree(compImg);
 
 	return retval;
+}
+
+inline int initImageData(ImageData *img, int width, int height, int nComponents)
+{
+	img->data = (unsigned char*)malloc(width * height * nComponents);
+	if (!img->data)
+		return EXIT_FAILURE;
+
+	img->height = height;
+	img->nComponents = nComponents;
+	img->width = width;
+	return EXIT_SUCCESS;
 }
