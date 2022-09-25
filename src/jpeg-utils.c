@@ -46,7 +46,7 @@ int readImage(const char *path, ImageData *img)
 	if (retval < 0)
 		goto cleanup;
 	decompImg = (unsigned char *)malloc(width * height * nComponent * sizeof(unsigned char));
-	retval = tjDecompress(jpegDecompressor, compImg, imgSize, decompImg, width, 0, height, TJPF_RGB, TJFLAG_FASTDCT);
+	retval = tjDecompress(jpegDecompressor, compImg, imgSize, decompImg, width, 0, height, 3, TJFLAG_FASTDCT);
 	if (retval < 0)
 		goto cleanup;
 
@@ -72,10 +72,10 @@ int saveImage(const char *path, ImageData *img, int jpegQuality)
 {
 	// Init variables
 	int retval = EXIT_FAILURE;
-	uint32_t outSize = 0;
+	unsigned int outSize = 0;
+	unsigned char *compImg = NULL;
 
 	FILE *fptr = NULL;
-	uint8_t *compImg = NULL;
 	tjhandle jpegCompressor = NULL;
 
 	// Check inputs
@@ -87,8 +87,8 @@ int saveImage(const char *path, ImageData *img, int jpegQuality)
 	if (!jpegCompressor)
 		goto cleanup;
 
-	retval = tjCompress(jpegCompressor, img->data, img->width, 0, img->height, img->format, &compImg, &outSize,
-						TJSAMP_444, jpegQuality, TJFLAG_FASTDCT);
+	retval = tjCompress2(jpegCompressor, img->data, img->width, 0, img->height, TJPF_RGB, &compImg, &outSize,
+						 TJSAMP_444, jpegQuality, TJFLAG_FASTDCT);
 	if (retval < 0)
 		goto cleanup;
 

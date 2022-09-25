@@ -9,10 +9,10 @@
  */
 struct ImageData_t
 {
-	unsigned int width;
-	unsigned int height;
+	int width;
+	int height;
 	unsigned char nComponent;
-	unsigned char format;
+	char format;
 	unsigned char *data;
 };
 typedef struct ImageData_t ImageData;
