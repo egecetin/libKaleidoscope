@@ -1,109 +1,76 @@
-#pragma once
-
-#include <inttypes.h>
-
-/// Assume always 3 component image
-#define COLOR_COMPONENTS 3
-/// Quality of the output image
-#define JPEG_QUALITY 90
-
-#ifndef nullptr
-#define nullptr NULL
-#endif
-
-#define SUCCESS 0;
-#define FAIL -1;
-
-/**
- * @brief Data struct for pixels
- */
-struct PointData_t
-{
-	int32_t x;
-	int32_t y;
-	uint8_t value[COLOR_COMPONENTS];
-};
-typedef struct PointData_t PointData;
+#ifndef _KALEIDOSCOPE_H_
+#define _KALEIDOSCOPE_H_
 
 /**
  * @brief Data struct for images
  */
 struct ImageData_t
 {
-	uint32_t width;
-	uint32_t height;
-	uint8_t *data;
+	int width;
+	int height;
+	unsigned char nComponents;
+	unsigned char *data;
 };
 typedef struct ImageData_t ImageData;
 
 /**
- * @brief Get image data from an input file
- *
- * @param[in] path Path to input image file
- * @param[out] img Image data
- * @return int  Returns SUCCESS or FAIL
+ * @brief Data struct for pixel locations
  */
-int readImage(const char *path, ImageData *img);
+struct Point2D_t
+{
+	int x;
+	int y;
+};
+typedef struct Point2D_t Point2D;
 
 /**
- * @brief Save image data to an output file
- *
- * @param[in] path Path to output image file
- * @param[in] img Image data
- * @return int Returns SUCCESS or FAIL
+ * @brief Data struct for transformation information
  */
-int saveImage(const char *path, ImageData *img);
+struct TransformationInfo_t
+{
+	// Location from source image
+	Point2D srcLocation;
+	// Location to destination image
+	Point2D dstLocation;
+	// Length for bulk replacement
+	unsigned int length;
+};
+typedef struct TransformationInfo_t TransformationInfo;
 
 /**
- * @brief Dim the whole image
- *
- * @param[in, out] img Input image data
- * @param[in] k Background dimming scale
- * @param[out] out (Optional) Output image data. If it is null operation will be in-place
- * @return int Returns SUCCESS or FAIL
+ * @brief Struct for kaleidoscope effect generator
  */
-static inline int dimBackground(ImageData *img, double k, ImageData *out);
+struct KaleidoscopeHandle_t
+{
+	unsigned long long nPoints;
+	TransformationInfo *pTransferFunc;
+};
+typedef struct KaleidoscopeHandle_t KaleidoscopeHandle;
 
 /**
- * @brief Slice a scaled triangle from image
- *
- * @param[in] img Input image
- * @param[out] slicedData Output sliced image data
- * @param[out] len Length of the output data
- * @param[in] n N for kaleidoscope effect
- * @param[in] scaleDown Scale factor of sliced data (Should be less than 0.5)
- * @return int Returns SUCCESS or FAIL
+ * @brief Initializes kaleidoscope handler
+ * @param[in, out] handler Kaleidoscope effect handler
+ * @param[in] n Number of images for effect
+ * @param[in] width Image width
+ * @param[in] height Image height
+ * @param[in] scaleDown Scale down ratio to shrink image. Must be between 0.0 and 1.0
+ * @return int 0 on success, negative otherwise
  */
-static inline int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, double scaleDown);
+int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown);
 
 /**
- * @brief Merge sliced img to main image 
- *
- * @param[in, out] img Source image
- * @param[in] slicedData Sliced triangle
- * @param[out] hitData Data points for interpolation
- * @param[in] len Length of the slicedData
- * @param[in] n N for kaleidoscope effect
- * @return int Returns SUCCESS or FAIL
+ * @brief Applies kaleidoscope effect to image
+ * @param[in] handler Kaleidoscope effect handler
+ * @param[in] k Variable to dim background. Should be between 0.0 and 1.0
+ * @param[in] imgIn Input image
+ * @param[out] imgOut Output image
  */
-static inline int rotateAndMerge(ImageData *img, PointData *slicedData, uint64_t len, uint8_t *hitData, int n);
+void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut);
 
 /**
- * @brief Very simple implementation of nearest neighbour interpolation
- *
- * @param[in, out] img Merged image
- * @param[in] hitData Modified point info
- * @return int
+ * @brief Deinitializes kaleidoscope handler
+ * @param[in] handler Kaleidoscope effect handler
  */
-static inline int interpolate(ImageData *img, uint8_t *hitData);
+void deInitKaleidoscope(KaleidoscopeHandle *handler);
 
-/**
- * @brief Main function
- *
- * @param[in, out] img Input image
- * @param[in] n N for kaleidoscope effect
- * @param[in] k Background dimming scale
- * @param[in] scaleDown Scale factor for sliced image
- * @return int Returns SUCCESS or FAIL
- */
-int kaleidoscope(ImageData *img, int n, double k, double scaleDown);
+#endif // _KALEIDOSCOPE_H_
