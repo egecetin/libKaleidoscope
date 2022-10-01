@@ -48,7 +48,7 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 
 	for (int idx = 0; idx < width * height; ++idx)
 	{
-		if (orgData[idx].dstLocation.x && orgData[idx].dstLocation.y)
+		if (orgData[idx].dstLocation.x || orgData[idx].dstLocation.y)
 		{
 			int newX = (int)round(orgData[idx].dstLocation.x * cosVal + orgData[idx].dstLocation.y * sinVal);
 			int newY = (int)round(orgData[idx].dstLocation.y * cosVal - orgData[idx].dstLocation.x * sinVal);
@@ -57,7 +57,7 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 			newX += (width / 2);
 			newY += (height / 2);
 
-			if (newX < width && newX > 0 && newY < height && newY > 0)
+			if (newX <= width && newX >= 0 && newY <= height && newY >= 0)
 			{
 				outData[newY * width + newX].srcLocation = orgData[idx].srcLocation;
 				outData[newY * width + newX].dstLocation.x = newX;
