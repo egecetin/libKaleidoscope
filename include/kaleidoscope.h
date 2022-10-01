@@ -73,4 +73,20 @@ void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn
  */
 void deInitKaleidoscope(KaleidoscopeHandle *handler);
 
+/**
+ * @brief Allocates memory for image
+ * @param[in] img Image data
+ * @param[in] width Width of image
+ * @param[in] height Height of image
+ * @param[in] nComponents Number of components
+ * @return int Returns 0 on success
+ */
+int initImageData(ImageData *img, int width, int height, int nComponents);
+
+/**
+ * @brief Free memory allocated by read image
+ * @param[in] img Image data
+ */
+void freeImageData(ImageData *img);
+
 #endif // _KALEIDOSCOPE_H_

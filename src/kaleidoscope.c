@@ -12,35 +12,6 @@
 #include "jpeg-utils.h"
 #endif
 
-static inline int dimBackground(ImageData *img, double k, ImageData *out)
-{
-	// Check input
-	if (!img)
-		return EXIT_FAILURE;
-
-	// Determine whether in-place or out-of-place
-	if (!out)
-		out = img;
-	else
-	{
-		out->data = (unsigned char *)malloc(img->width * img->height * img->nComponents * sizeof(unsigned char));
-		if (!(out->data))
-			return EXIT_FAILURE;
-
-		out->width = img->width;
-		out->height = img->height;
-	}
-
-	unsigned char *ptrIn = img->data;
-	unsigned char *ptrOut = out->data;
-	const unsigned long long len = img->width * img->height * img->nComponents;
-
-	for (unsigned long long idx = 0; idx < len; ++idx)
-		ptrOut[idx] = (unsigned char)(ptrIn[idx] * k);
-
-	return EXIT_SUCCESS;
-}
-
 void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int width, int height)
 {
 	// Very simple implementation of nearest neighbour interpolation
@@ -159,8 +130,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 			ptr[jdx].srcLocation.y = idx;
 
 			// Calculate coordinates respect to center to prepare rotating
-			ptr[jdx].dstLocation.x = (jdx - width / 2) * scaleDown;
-			ptr[jdx].dstLocation.y = (idx - heightStart - height / 2) * scaleDown + scaleDownOffset;
+			ptr[jdx].dstLocation.x = (int)((jdx - width / 2) * scaleDown);
+			ptr[jdx].dstLocation.y = (int)((idx - heightStart - height / 2) * scaleDown + scaleDownOffset);
 
 			ptr[jdx].length = 1;
 		}
@@ -200,27 +171,27 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	saveImage("imgDstMask.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
 #endif
 
-	/*
 	// Reduction and set to points for handler
 	handler->nPoints = 0;
 	for (unsigned long long idx = 0; idx < nPixels - 1; ++idx)
 	{
 		unsigned int ctr = 0;
-		TransformationInfo *ptr = &buffPtr2[idx];
+		TransformationInfo *ptr = &buffPtr1[idx];
 		if (!(ptr->srcLocation.x) && !(ptr->srcLocation.y) && !(ptr->dstLocation.x) && !(ptr->dstLocation.y))
 			continue;
 
 		for (unsigned long long jdx = idx + 1; jdx < nPixels; ++jdx)
 		{
 			++ctr;
-			if ((ptr->srcLocation.y * width + ptr->srcLocation.x) ==
-				(buffPtr2[jdx].srcLocation.y * width + buffPtr2[jdx].srcLocation.x + 1))
-				ptr = &buffPtr2[jdx];
+			long long xOffset1 = (ptr->srcLocation.y * width + ptr->srcLocation.x);
+			long long xOffset2 = (buffPtr1[jdx].srcLocation.y * width + buffPtr1[jdx].srcLocation.x + 1);
+			if (xOffset2 - xOffset1 == 1)
+				ptr = &buffPtr1[jdx];
 			else
 				break;
 		}
 
-		buffPtr1[handler->nPoints] = buffPtr2[idx];
+		buffPtr1[handler->nPoints] = buffPtr1[idx];
 		buffPtr1[handler->nPoints].length = ctr;
 		++(handler->nPoints);
 		idx += (ctr - 1);
@@ -228,40 +199,53 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
 	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
-	*/
 	retval = EXIT_SUCCESS;
+
 cleanup:
 
 #ifndef NDEBUG
 	free(imgBuffer.data);
 #endif
-
-	handler->nPoints = nPixels;
-	handler->pTransferFunc = buffPtr1;
-
-	/*
 	free(buffPtr1);
-	// free(buffPtr2);
+	free(buffPtr2);
 
 	if (retval == EXIT_FAILURE)
 		free(handler->pTransferFunc);
-	*/
 
 	return retval;
 }
 
 void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
 {
+	// Dim image
 	for (unsigned long long idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
 		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
 	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
 	{
 		unsigned long long srcIdx =
-			handler->pTransferFunc[idx].srcLocation.y * imgIn->width + handler->pTransferFunc[idx].srcLocation.x;
+			handler->pTransferFunc[idx].srcLocation.y * imgIn->width * imgIn->nComponents + handler->pTransferFunc[idx].srcLocation.x * imgIn->nComponents;
 		unsigned long long dstIdx =
-			handler->pTransferFunc[idx].dstLocation.y * imgIn->width + handler->pTransferFunc[idx].dstLocation.x;
-		memcpy(imgOut->data[dstIdx], imgIn->data[srcIdx], handler->pTransferFunc[idx].length);
+			handler->pTransferFunc[idx].dstLocation.y * imgIn->width * imgIn->nComponents + handler->pTransferFunc[idx].dstLocation.x * imgIn->nComponents;
+		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), handler->pTransferFunc[idx].length * imgIn->nComponents);
 	}
 }
 
 void deInitKaleidoscope(KaleidoscopeHandle *handler) { free(handler->pTransferFunc); }
+
+int initImageData(ImageData *img, int width, int height, int nComponents)
+{
+	img->data = (unsigned char *)malloc(width * height * nComponents);
+	if (!img->data)
+		return EXIT_FAILURE;
+
+	img->height = height;
+	img->nComponents = nComponents;
+	img->width = width;
+	return EXIT_SUCCESS;
+}
+
+void deInitImageData(ImageData *img)
+{
+	if (img)
+		free(img->data);
+}
