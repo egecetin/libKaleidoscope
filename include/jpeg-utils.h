@@ -27,20 +27,4 @@ int readImage(const char *path, ImageData *img);
  */
 int saveImage(const char *path, ImageData *img, enum TJPF pixelFormat, enum TJSAMP samplingFormat, int jpegQuality);
 
-/**
- * @brief Allocates memory for image
- * @param[in] img Image data
- * @param[in] width Width of image
- * @param[in] height Height of image
- * @param[in] nComponents Number of components
- * @return int Returns 0 on success
- */
-static inline int initImageData(ImageData *img, int width, int height, int nComponents);
-
-/**
- * @brief Free memory allocated by read image
- * @param[in] img Image data
- */
-static inline void freeImageData(ImageData *img) { free(img->data); }
-
 #endif // _JPEG_UTILS_H_

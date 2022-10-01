@@ -3,8 +3,6 @@
 #include <stdio.h>
 #include <stdlib.h>
 
-#include <turbojpeg.h>
-
 int readImage(const char *path, ImageData *img)
 {
 	// Init variables
@@ -104,16 +102,4 @@ cleanup:
 	tjFree(compImg);
 
 	return retval;
-}
-
-inline int initImageData(ImageData *img, int width, int height, int nComponents)
-{
-	img->data = (unsigned char*)malloc(width * height * nComponents);
-	if (!img->data)
-		return EXIT_FAILURE;
-
-	img->height = height;
-	img->nComponents = nComponents;
-	img->width = width;
-	return EXIT_SUCCESS;
 }
