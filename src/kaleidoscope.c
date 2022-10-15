@@ -156,6 +156,18 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		rotatePoints(buffPtr2, buffPtr1, width, height, rotationAngle);
 	}
 
+#ifndef NDEBUG
+	// Save destination mask as image
+	for (size_t idx = 0; idx < nPixels; ++idx)
+	{
+		if (buffPtr2[idx].dstLocation.x && buffPtr2[idx].dstLocation.y)
+			imgBuffer.data[idx] = 255;
+		else
+			imgBuffer.data[idx] = 0;
+	}
+	saveImage("imgDstMaskPre.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
+#endif
+
 	// Fill rotation artifacts
 	interpolate(buffPtr2, buffPtr1, width, height);
 
