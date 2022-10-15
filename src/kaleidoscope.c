@@ -24,14 +24,22 @@ void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int wi
 			TransformationInfo *ptrOut = &dataOut[heightOffset + jdx];
 			if (!(ptrIn->dstLocation.x) && !(ptrIn->dstLocation.y))
 			{
-				if (((ptrIn - 1)->dstLocation.x) || ((ptrIn - 1)->dstLocation.y))
+				if (((ptrIn - 1)->dstLocation.x) || ((ptrIn - 1)->dstLocation.y)) // Left
 					*ptrOut = *(ptrIn - 1);
-				else if (((ptrIn + 1)->dstLocation.x) || ((ptrIn + 1)->dstLocation.y))
+				else if (((ptrIn + 1)->dstLocation.x) || ((ptrIn + 1)->dstLocation.y)) // Right
 					*ptrOut = *(ptrIn + 1);
-				else if (((ptrIn - width)->dstLocation.x) || ((ptrIn - width)->dstLocation.y))
+				else if (((ptrIn - width)->dstLocation.x) || ((ptrIn - width)->dstLocation.y)) // Top
 					*ptrOut = *(ptrIn - width);
-				else if (((ptrIn + width)->dstLocation.x) || ((ptrIn + width)->dstLocation.y))
+				else if (((ptrIn + width)->dstLocation.x) || ((ptrIn + width)->dstLocation.y)) // Bottom
 					*ptrOut = *(ptrIn + width);
+				else if (((ptrIn - width - 1)->dstLocation.x) || ((ptrIn - width - 1)->dstLocation.y)) // Top-Left
+					*ptrOut = *(ptrIn - width - 1);
+				else if (((ptrIn - width + 1)->dstLocation.x) || ((ptrIn - width + 1)->dstLocation.y)) // Top-Right
+					*ptrOut = *(ptrIn - width + 1);
+				else if (((ptrIn + width - 1)->dstLocation.x) || ((ptrIn + width - 1)->dstLocation.y)) // Bottom-Left
+					*ptrOut = *(ptrIn + width - 1);
+				else if (((ptrIn + width - 1)->dstLocation.x) || ((ptrIn + width - 1)->dstLocation.y)) // Bottom-Right
+					*ptrOut = *(ptrIn + width + 1);
 				else
 					memset(ptrOut, 0, sizeof(TransformationInfo));
 			}
