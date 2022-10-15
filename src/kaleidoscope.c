@@ -140,14 +140,12 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 			// Calculate coordinates respect to center to prepare rotating
 			ptr[jdx].dstLocation.x = (int)((jdx - width / 2) * scaleDown);
 			ptr[jdx].dstLocation.y = (int)((idx - heightStart - height / 2) * scaleDown + scaleDownOffset);
-
-			ptr[jdx].length = 1;
 		}
 	}
 
 #ifndef NDEBUG
 	// Save source mask as image
-	for (size_t idx = 0; idx < nPixels; ++idx)
+	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
 		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
 			imgBuffer.data[idx] = 255;
@@ -166,7 +164,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 #ifndef NDEBUG
 	// Save destination mask as image
-	for (size_t idx = 0; idx < nPixels; ++idx)
+	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
 		if (buffPtr2[idx].dstLocation.x && buffPtr2[idx].dstLocation.y)
 			imgBuffer.data[idx] = 255;
@@ -181,7 +179,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 #ifndef NDEBUG
 	// Save destination mask as image
-	for (size_t idx = 0; idx < nPixels; ++idx)
+	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
 		if (buffPtr1[idx].dstLocation.x && buffPtr1[idx].dstLocation.y)
 			imgBuffer.data[idx] = 255;
@@ -193,28 +191,14 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	// Reduction and set to points for handler
 	handler->nPoints = 0;
-	for (unsigned long long idx = 0; idx < nPixels - 1; ++idx)
+	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
-		unsigned int ctr = 0;
 		TransformationInfo *ptr = &buffPtr1[idx];
-		if (!(ptr->srcLocation.x) && !(ptr->srcLocation.y) && !(ptr->dstLocation.x) && !(ptr->dstLocation.y))
+		if (!(ptr->dstLocation.x) || !(ptr->dstLocation.y))
 			continue;
 
-		for (unsigned long long jdx = idx + 1; jdx < nPixels; ++jdx)
-		{
-			++ctr;
-			long long xOffset1 = (ptr->srcLocation.y * width + ptr->srcLocation.x);
-			long long xOffset2 = (buffPtr1[jdx].srcLocation.y * width + buffPtr1[jdx].srcLocation.x + 1);
-			if (xOffset2 - xOffset1 == 1)
-				ptr = &buffPtr1[jdx];
-			else
-				break;
-		}
-
 		buffPtr1[handler->nPoints] = buffPtr1[idx];
-		buffPtr1[handler->nPoints].length = ctr;
 		++(handler->nPoints);
-		idx += (ctr - 1);
 	}
 
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
@@ -242,11 +226,11 @@ void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn
 		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
 	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
 	{
-		unsigned long long srcIdx =
-			handler->pTransferFunc[idx].srcLocation.y * imgIn->width * imgIn->nComponents + handler->pTransferFunc[idx].srcLocation.x * imgIn->nComponents;
-		unsigned long long dstIdx =
-			handler->pTransferFunc[idx].dstLocation.y * imgIn->width * imgIn->nComponents + handler->pTransferFunc[idx].dstLocation.x * imgIn->nComponents;
-		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), handler->pTransferFunc[idx].length * imgIn->nComponents);
+		unsigned long long srcIdx = handler->pTransferFunc[idx].srcLocation.y * imgIn->width * imgIn->nComponents +
+									handler->pTransferFunc[idx].srcLocation.x * imgIn->nComponents;
+		unsigned long long dstIdx = handler->pTransferFunc[idx].dstLocation.y * imgIn->width * imgIn->nComponents +
+									handler->pTransferFunc[idx].dstLocation.x * imgIn->nComponents;
+		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), imgIn->nComponents);
 	}
 }
 

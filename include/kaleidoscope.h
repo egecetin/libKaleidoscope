@@ -32,8 +32,6 @@ struct TransformationInfo_t
 	Point2D srcLocation;
 	// Location to destination image
 	Point2D dstLocation;
-	// Length for bulk replacement
-	unsigned int length;
 };
 typedef struct TransformationInfo_t TransformationInfo;
 
