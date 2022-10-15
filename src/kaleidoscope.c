@@ -181,7 +181,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	// Save destination mask as image
 	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
-		if (buffPtr1[idx].dstLocation.x && buffPtr1[idx].dstLocation.y)
+		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
 			imgBuffer.data[idx] = 255;
 		else
 			imgBuffer.data[idx] = 0;
@@ -194,10 +194,10 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
 		TransformationInfo *ptr = &buffPtr1[idx];
-		if (!(ptr->dstLocation.x) || !(ptr->dstLocation.y))
+		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
 			continue;
 
-		buffPtr1[handler->nPoints] = buffPtr1[idx];
+		buffPtr1[handler->nPoints] = *ptr;
 		++(handler->nPoints);
 	}
 
