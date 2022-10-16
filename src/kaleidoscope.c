@@ -127,7 +127,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 #endif
 
 	// Check parameters
-	if (!handler || n <= 0 || width <= 0 || height <= 0 || scaleDown < 0.0 || scaleDown > 1.0)
+	if (!handler || n <= 2 || width <= 0 || height <= 0 || scaleDown < 0.0 || scaleDown > 1.0)
 		return retval;
 
 	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
