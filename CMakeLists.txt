@@ -14,6 +14,18 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Compile
 add_library(kaleidoscope-static ${KaleidoscopeSources})
+if(CMAKE_C_COMPILER_ID MATCHES "GNU"
+     OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
+     OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
+     OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+    target_link_libraries(kaleidoscope-static m)
+endif()
 
 add_executable(kaleidoscope-cmd ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c)
-target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static)
+target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static m)
+if(CMAKE_C_COMPILER_ID MATCHES "GNU"
+     OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
+     OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
+     OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+    target_link_libraries(kaleidoscope-cmd m)
+endif()
