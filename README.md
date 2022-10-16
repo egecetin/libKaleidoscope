@@ -14,7 +14,7 @@ Use the following commands,
 
 ```
 mkdir build && cd build
-cmake ..
+cmake -DNDEBUG ..
 cmake --build .
 ```
 
