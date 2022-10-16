@@ -23,9 +23,9 @@ int main(int argc, char *argv[])
 	}
 	printf("Start...\n");
 
-	char *path = argv[1];
-	char *outPath = argv[2];
-	int n = atoi(argv[3]);
+	path = argv[1];
+	outPath = argv[2];
+	n = atoi(argv[3]);
 	
 	if (argc > 4)
 	{
