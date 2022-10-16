@@ -108,7 +108,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	// Parameters of triangle
 	const double topAngle = 360.0 / n;
 	const double tanVal = tan(topAngle / 2.0 * M_PI / 180.0); // tan(topAngle / 2) in radians
-	const int triangleHeight = (int)round(width / (2.0 * tanVal));
+	const int triangleHeight = min((int)round(width / (2.0 * tanVal)), height - 1);
 
 	// Offsets
 	const int heightStart = (height - triangleHeight) / 2;
@@ -146,7 +146,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
 		goto cleanup;
 
-	for (int idx = heightStart; idx <= heightEnd; ++idx)
+	for (int idx = heightStart; idx < heightEnd; ++idx)
 	{
 		const int currentBaseLength = (int)((idx - heightStart) * tanVal);
 
