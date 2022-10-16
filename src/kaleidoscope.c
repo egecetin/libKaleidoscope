@@ -8,294 +8,283 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include <turbojpeg.h>
+#ifndef NDEBUG
+#include "jpeg-utils/jpeg-utils.h"
+#endif
 
-int readImage(const char *path, ImageData *img)
+void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int width, int height)
 {
-	// Init variables
-	int retval = FAIL;
-	int jpegSubsamp = 0, width = 0, height = 0;
-	int32_t imgSize = 0;
-
-	uint8_t *compImg = nullptr;
-	uint8_t *decompImg = nullptr;
-
-	FILE *fptr = nullptr;
-	tjhandle jpegDecompressor = nullptr;
-
-	// Check inputs
-	if (!path || !img)
-		return FAIL;
-
-	// Find file
-	if ((fptr = fopen(path, "rb")) == NULL)
-		goto cleanup;
-	if (fseek(fptr, 0, SEEK_END) < 0 || ((imgSize = ftell(fptr)) < 0) || fseek(fptr, 0, SEEK_SET) < 0)
-		goto cleanup;
-	if (imgSize == 0)
-		goto cleanup;
-
-	// Read file
-	compImg = (uint8_t *)malloc(imgSize * sizeof(uint8_t));
-	if (fread(compImg, imgSize, 1, fptr) < 1)
-		goto cleanup;
-
-	// Decompress
-	jpegDecompressor = tjInitDecompress();
-	if (!jpegDecompressor)
-		goto cleanup;
-
-	retval = tjDecompressHeader2(jpegDecompressor, compImg, imgSize, &width, &height, &jpegSubsamp);
-	if (retval < 0)
-		goto cleanup;
-	decompImg = (uint8_t *)malloc(width * height * COLOR_COMPONENTS * sizeof(uint8_t));
-	retval = tjDecompress2(jpegDecompressor, compImg, imgSize, decompImg, width, 0, height, TJPF_RGB, TJFLAG_FASTDCT);
-	if (retval < 0)
-		goto cleanup;
-
-	// Set output
-	img->width = width;
-	img->height = height;
-	img->data = decompImg;
-	decompImg = nullptr;
-
-cleanup:
-
-	tjDestroy(jpegDecompressor);
-	fclose(fptr);
-
-	free(compImg);
-	free(decompImg);
-
-	return retval;
-}
-
-int saveImage(const char *path, ImageData *img)
-{
-	// Init variables
-	int retval = FAIL;
-	uint32_t outSize = 0;
-
-	uint8_t *compImg = nullptr;
-
-	tjhandle jpegCompressor = nullptr;
-	FILE *fptr = nullptr;
-
-	// Check inputs
-	if (!path || !img)
-		return FAIL;
-
-	// Compress
-	jpegCompressor = tjInitCompress();
-	if (!jpegCompressor)
-		goto cleanup;
-
-	retval = tjCompress2(jpegCompressor, img->data, img->width, 0, img->height, TJPF_RGB, &compImg, &outSize, TJSAMP_444, JPEG_QUALITY, TJFLAG_FASTDCT);
-	if (retval < 0)
-		goto cleanup;
-
-	// Write file
-	retval = FAIL; // To simplfy if checks
-	if ((fptr = fopen(path, "wb")) == NULL)
-		goto cleanup;
-	if (fwrite(compImg, outSize, 1, fptr) < 1)
-		goto cleanup;
-
-	// Clean ImageData (since the main aim of the app is write data to file)
-	retval = SUCCESS;
-	free(img->data);
-	img->data = nullptr;
-	img->height = 0;
-	img->width = 0;
-
-cleanup:
-
-	fclose(fptr);
-	tjDestroy(jpegCompressor);
-	tjFree(compImg);
-
-	return retval;
-}
-
-static inline int dimBackground(ImageData *img, double k, ImageData *out)
-{
-	// Check input
-	if (!img)
-		return FAIL;
-
-	// Determine whether in-place or out-of-place
-	if (!out)
-		out = img;
-	else
+	// Very simple implementation of nearest neighbour interpolation
+	for (int idx = 1; idx < height - 1; ++idx)
 	{
-		out->data = (uint8_t *)malloc(img->width * img->height * COLOR_COMPONENTS * sizeof(uint8_t));
-		if (!(out->data))
-			return FAIL;
-
-		out->width = img->width;
-		out->height = img->height;
-	}
-
-	uint8_t *ptrIn = img->data;
-	uint8_t *ptrOut = out->data;
-	const uint64_t len = img->width * img->height * COLOR_COMPONENTS;
-
-	for (uint64_t idx = 0; idx < len; ++idx)
-		ptrOut[idx] = (uint8_t)(ptrIn[idx] * k);
-
-	return SUCCESS;
-}
-
-static inline int sliceTriangle(ImageData *img, PointData **slicedData, uint64_t *len, int n, double scaleDown)
-{
-	// Init variables
-	uint64_t ctr = 0;
-	const float topAngle = 360.0f / n;
-	const float quantizationScale = 1.1f;
-	const double tanVal = tan(topAngle / 2 * M_PI / 180);
-
-	// Sliced data should be centered before the operation
-	const uint32_t preMoveHeight = abs((int32_t)(img->width / (4 * tanVal)) - (int32_t)img->height / 2);
-	// Sliced data should be centered after the scaledown
-	const uint32_t moveHeight = (uint32_t)(img->height / 2 * scaleDown);
-
-	// Allocate output (Mathematical area differ from pixel area because of quantization)
-	*slicedData = (PointData *)malloc((size_t)(img->height * (img->height * tanVal) * COLOR_COMPONENTS * quantizationScale * sizeof(PointData)));
-	if (!(*slicedData))
-		return FAIL;
-	PointData *pSlicedData = *slicedData;
-
-	for (uint32_t idx = 0; idx < img->height - preMoveHeight; ++idx)
-	{
-		// Fix points
-		const uint32_t heightOffset = (idx + preMoveHeight) * img->width * COLOR_COMPONENTS;
-		const uint32_t currentHeight = (uint32_t)(round(((int64_t)idx - img->height / 2) * scaleDown) + moveHeight);
-
-		// Offset is the base length / 2 of triangle for current height
-		const uint32_t offset = (uint32_t)(idx * tanVal);
-
-		// Calculate indexes
-		uint32_t start = (img->width / 2 - offset) * COLOR_COMPONENTS;
-		start = start - start % COLOR_COMPONENTS; // Move to first color component
-		uint32_t end = start + 2 * offset * COLOR_COMPONENTS;
-
-		for (uint32_t jdx = start; jdx < end; jdx += COLOR_COMPONENTS)
+		int heightOffset = idx * width;
+		for (int jdx = 1; jdx < width - 1; ++jdx)
 		{
-			// Point position respect to center
-			pSlicedData[ctr].x = (int32_t)(round(((int64_t)jdx - img->width / 2 * COLOR_COMPONENTS) / COLOR_COMPONENTS * scaleDown));
-			pSlicedData[ctr].y = currentHeight;
-
-			// Values of the pixel
-			memcpy(pSlicedData[ctr].value, &(img->data[heightOffset + jdx]), COLOR_COMPONENTS);
-			ctr += COLOR_COMPONENTS;
+			TransformationInfo *ptrIn = &dataIn[heightOffset + jdx];
+			TransformationInfo *ptrOut = &dataOut[heightOffset + jdx];
+			if (!(ptrIn->dstLocation.x) && !(ptrIn->dstLocation.y))
+			{
+				ptrOut->dstLocation.x = jdx;
+				ptrOut->dstLocation.y = idx;
+				if (((ptrIn - 1)->dstLocation.x) || ((ptrIn - 1)->dstLocation.y)) // Left
+				{
+					ptrOut->srcLocation.x = (ptrIn - 1)->srcLocation.x + 1;
+					ptrOut->srcLocation.y = (ptrIn - 1)->srcLocation.y;
+				}
+				else if (((ptrIn + 1)->dstLocation.x) || ((ptrIn + 1)->dstLocation.y)) // Right
+				{
+					ptrOut->srcLocation.x = (ptrIn + 1)->srcLocation.x - 1;
+					ptrOut->srcLocation.y = (ptrIn + 1)->srcLocation.y;
+				}
+				else if (((ptrIn - width)->dstLocation.x) || ((ptrIn - width)->dstLocation.y)) // Top
+				{
+					ptrOut->srcLocation.x = (ptrIn - width)->srcLocation.x;
+					ptrOut->srcLocation.y = (ptrIn - width)->srcLocation.y - 1;
+				}
+				else if (((ptrIn + width)->dstLocation.x) || ((ptrIn + width)->dstLocation.y)) // Bottom
+				{
+					ptrOut->srcLocation.x = (ptrIn + width)->srcLocation.x;
+					ptrOut->srcLocation.y = (ptrIn + width)->srcLocation.y + 1;
+				}
+				else if (((ptrIn - width - 1)->dstLocation.x) || ((ptrIn - width - 1)->dstLocation.y)) // Top-Left
+				{
+					ptrOut->srcLocation.x = (ptrIn - width - 1)->srcLocation.x - 1;
+					ptrOut->srcLocation.y = (ptrIn - width - 1)->srcLocation.y - 1;
+				}
+				else if (((ptrIn - width + 1)->dstLocation.x) || ((ptrIn - width + 1)->dstLocation.y)) // Top-Right
+				{
+					ptrOut->srcLocation.x = (ptrIn - width + 1)->srcLocation.x + 1;
+					ptrOut->srcLocation.y = (ptrIn - width + 1)->srcLocation.y - 1;
+				}
+				else if (((ptrIn + width - 1)->dstLocation.x) || ((ptrIn + width - 1)->dstLocation.y)) // Bottom-Left
+				{
+					ptrOut->srcLocation.x = (ptrIn + width - 1)->srcLocation.x - 1;
+					ptrOut->srcLocation.y = (ptrIn + width - 1)->srcLocation.y - 1;
+				}
+				else if (((ptrIn + width + 1)->dstLocation.x) || ((ptrIn + width + 1)->dstLocation.y)) // Bottom-Right
+				{
+					ptrOut->srcLocation.x = (ptrIn + width + 1)->srcLocation.x + 1;
+					ptrOut->srcLocation.y = (ptrIn + width + 1)->srcLocation.y + 1;
+				}
+				else
+					memset(ptrOut, 0, sizeof(TransformationInfo));
+			}
+			else
+				*ptrOut = *ptrIn;
 		}
 	}
-	*len = ctr;
-
-	return SUCCESS;
 }
 
-static inline int rotateAndMerge(ImageData *img, PointData *slicedData, uint64_t len, uint8_t *hitData, int n)
+void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle)
 {
-	for (uint16_t idx = 0; idx < n; ++idx)
+	double cosVal = cos(angle * M_PI / 180);
+	double sinVal = sin(angle * M_PI / 180);
+
+	for (int idx = 0; idx < width * height; ++idx)
+	{
+		if (orgData[idx].dstLocation.x || orgData[idx].dstLocation.y)
+		{
+			int newX = (int)round(orgData[idx].dstLocation.x * cosVal + orgData[idx].dstLocation.y * sinVal);
+			int newY = (int)round(orgData[idx].dstLocation.y * cosVal - orgData[idx].dstLocation.x * sinVal);
+
+			// Fix origin to top left again
+			newX += (width / 2);
+			newY += (height / 2);
+
+			if (newX <= width && newX >= 0 && newY <= height && newY >= 0)
+			{
+				outData[newY * width + newX].srcLocation = orgData[idx].srcLocation;
+				outData[newY * width + newX].dstLocation.x = newX;
+				outData[newY * width + newX].dstLocation.y = newY;
+			}
+		}
+	}
+}
+
+int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
+{
+	int retval = EXIT_FAILURE;
+
+	// Parameters of triangle
+	const double topAngle = 360.0 / n;
+	const double tanVal = tan(topAngle / 2.0 * M_PI / 180.0); // tan(topAngle / 2) in radians
+	const int triangleHeight = min((int)round(width / (2.0 * tanVal)), height - 1);
+
+	// Offsets
+	const int heightStart = (height - triangleHeight) / 2;
+	const int heightEnd = (height + triangleHeight) / 2;
+	const int scaleDownOffset = (int)(height * scaleDown / 2);
+
+	// Total number of pixels
+	const int nPixels = width * height;
+
+	// Init same size arrays for simplicity to determine target pixel coordinates
+	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
+
+#ifndef NDEBUG
+	// Debug variables
+	ImageData imgBuffer;
+#endif
+
+	// Check parameters
+	if (!handler || n <= 2 || width <= 0 || height <= 0 || scaleDown < 0.0 || scaleDown > 1.0)
+		return retval;
+
+	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
+	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
+	if (!buffPtr1 || !buffPtr2)
+		goto cleanup;
+
+#ifndef NDEBUG
+	imgBuffer.nComponents = 1;
+	imgBuffer.width = width;
+	imgBuffer.height = height;
+	imgBuffer.data = (unsigned char *)calloc(nPixels, sizeof(unsigned char));
+#endif
+
+	// Ensure limits within image
+	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
+		goto cleanup;
+
+	for (int idx = heightStart; idx < heightEnd; ++idx)
+	{
+		const int currentBaseLength = (int)((idx - heightStart) * tanVal);
+
+		const int widthStart = (width / 2 - currentBaseLength);
+		const int widthEnd = (width / 2 + currentBaseLength);
+
+		// Ensure limits within image
+		if (widthStart < 0 || widthStart > width || widthEnd < 0 || widthEnd > width)
+			continue;
+
+		TransformationInfo *ptr = &buffPtr1[idx * width];
+		for (int jdx = widthStart; jdx <= widthEnd; ++jdx)
+		{
+			ptr[jdx].srcLocation.x = jdx;
+			ptr[jdx].srcLocation.y = idx;
+
+			// Calculate coordinates respect to center to prepare rotating
+			ptr[jdx].dstLocation.x = (int)((jdx - width / 2) * scaleDown);
+			ptr[jdx].dstLocation.y = (int)((idx - heightStart - height / 2) * scaleDown + scaleDownOffset);
+		}
+	}
+
+#ifndef NDEBUG
+	memset(imgBuffer.data, 0, nPixels);
+	// Save source mask as image
+	for (unsigned long long idx = 0; idx < nPixels; ++idx)
+	{
+		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
+			imgBuffer.data[idx] = 255;
+	}
+	saveImage("imgSrcMaskPre.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
+#endif
+
+	// Rotate all points and fix origin to left top
+	for (int idx = 0; idx < n; ++idx)
 	{
 		double rotationAngle = idx * (360.0 / n);
-
-		// Find rotation matrix
-		double cosVal = cos(rotationAngle * M_PI / 180);
-		double sinVal = sin(rotationAngle * M_PI / 180);
-
-		// Rotate data and merge
-		for (uint64_t jdx = 0; jdx < len; ++jdx)
-		{
-			// New coordinates (Origin is the center of image)
-			int32_t newX = (int32_t)(slicedData[jdx].x * cosVal + slicedData[jdx].y * sinVal);
-			int32_t newY = (int32_t)(slicedData[jdx].y * cosVal - slicedData[jdx].x * sinVal);
-
-			// Find absolute coordinates (Origin left top)
-			newX = newX + img->width / 2;
-			newY = newY + img->height / 2;
-
-			if (newX < img->width && newX > 0 && newY < img->height && newY > 0)
-			{
-				// Sign point
-				hitData[newY * img->width + newX] = 1;
-				// Merge
-				memcpy(&(img->data[(newY * img->width + newX) * COLOR_COMPONENTS]), slicedData[jdx].value, COLOR_COMPONENTS);
-			}
-		}
+		rotatePoints(buffPtr2, buffPtr1, width, height, rotationAngle);
 	}
 
-	return SUCCESS;
-}
-
-static inline int interpolate(ImageData *img, uint8_t *hitData)
-{
-	for (uint64_t idx = 1; idx < img->height - 1; ++idx)
+#ifndef NDEBUG
+	memset(imgBuffer.data, 0, nPixels);
+	// Save destination mask as image
+	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
-		uint64_t heightOffset = idx * img->width;
-		for (uint64_t jdx = 1; jdx < img->width - 1; ++jdx)
-		{
-			if (!hitData[heightOffset + jdx])
-			{
-				// Check left
-				if (hitData[heightOffset + jdx - 1])
-					memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx - 1) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
-				// Check right
-				else if (hitData[heightOffset + jdx + 1])
-					memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx + 1) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
-				// Check above
-				else if (hitData[heightOffset + jdx - img->width])
-					memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx - img->width) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
-				// Check below
-				else if (hitData[heightOffset + jdx + img->width])
-					memcpy(&(img->data[(heightOffset + jdx) * COLOR_COMPONENTS]), &(img->data[(heightOffset + jdx + img->width) * COLOR_COMPONENTS]), COLOR_COMPONENTS);
-			}
-		}
+		if (buffPtr2[idx].dstLocation.x && buffPtr2[idx].dstLocation.y)
+			imgBuffer.data[idx] = 255;
+	}
+	saveImage("imgDstMaskPre.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
+#endif
+
+	// Fill rotation artifacts
+	interpolate(buffPtr2, buffPtr1, width, height);
+
+	// Reduction and set to points for handler
+	handler->nPoints = 0;
+	for (unsigned long long idx = 0; idx < nPixels; ++idx)
+	{
+		TransformationInfo *ptr = &buffPtr1[idx];
+		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
+			continue;
+
+		buffPtr1[handler->nPoints] = *ptr;
+		++(handler->nPoints);
 	}
 
-	return SUCCESS;
-}
+#ifndef NDEBUG
+	// Save final source mask as image
+	memset(imgBuffer.data, 0, nPixels);
+	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
+	{
+		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
+			imgBuffer.data[buffPtr1[idx].srcLocation.y * width + buffPtr1[idx].srcLocation.x] = 255;
+	}
+	saveImage("imgSrcMaskPost.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
 
-int kaleidoscope(ImageData *img, int n, double k, double scaleDown)
-{
-	int retval = FAIL;
-	uint64_t len = 0;
-	PointData *slicedData = nullptr;
+	memset(imgBuffer.data, 0, nPixels);
+	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
+	{
+		if (buffPtr1[idx].dstLocation.x && buffPtr1[idx].dstLocation.y)
+			imgBuffer.data[buffPtr1[idx].dstLocation.y * width + buffPtr1[idx].dstLocation.x] = 255;
+	}
+	saveImage("imgDstMaskPost.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
+#endif
 
-	// Check inputs
-	if (!img || n < 0 || k < 0.0)
-		return FAIL;
+	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
+	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
+	retval = EXIT_SUCCESS;
 
-	uint8_t *hitData = (uint8_t *)calloc(img->width * img->height, sizeof(uint8_t));
-	if (!hitData)
-		return FAIL;
-
-	// Slice triangle
-	retval = sliceTriangle(img, &slicedData, &len, n, scaleDown);
-	if (retval < 0)
-		goto cleanup;
-
-	// Prepare background image
-	retval = dimBackground(img, k, nullptr);
-	if (retval < 0)
-		goto cleanup;
-
-	// Rotate and merge with background
-	retval = rotateAndMerge(img, slicedData, len, hitData, n);
-	if (retval < 0)
-		goto cleanup;
-
-	// Interpolate
-	retval = interpolate(img, hitData);
-	if (retval < 0)
-		goto cleanup;
-
-	retval = SUCCESS;
 cleanup:
 
-	free(slicedData);
-	free(hitData);
+#ifndef NDEBUG
+	free(imgBuffer.data);
+#endif
+	free(buffPtr1);
+	free(buffPtr2);
+
+	if (retval == EXIT_FAILURE)
+		free(handler->pTransferFunc);
 
 	return retval;
+}
+
+void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
+{
+	// Dim image
+	for (unsigned long long idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
+		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
+	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
+	{
+		unsigned long long srcIdx = handler->pTransferFunc[idx].srcLocation.y * imgIn->width * imgIn->nComponents +
+									handler->pTransferFunc[idx].srcLocation.x * imgIn->nComponents;
+		unsigned long long dstIdx = handler->pTransferFunc[idx].dstLocation.y * imgIn->width * imgIn->nComponents +
+									handler->pTransferFunc[idx].dstLocation.x * imgIn->nComponents;
+		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), imgIn->nComponents);
+	}
+}
+
+void deInitKaleidoscope(KaleidoscopeHandle *handler)
+{
+	if (handler)
+		free(handler->pTransferFunc);
+}
+
+int initImageData(ImageData *img, int width, int height, int nComponents)
+{
+	img->data = (unsigned char *)malloc(width * height * nComponents);
+	if (!img->data)
+		return EXIT_FAILURE;
+
+	img->height = height;
+	img->nComponents = nComponents;
+	img->width = width;
+	return EXIT_SUCCESS;
+}
+
+void deInitImageData(ImageData *img)
+{
+	if (img)
+		free(img->data);
 }

@@ -1,3 +1,4 @@
+#include "jpeg-utils/jpeg-utils.h"
 #include "kaleidoscope.h"
 
 #include <stdio.h>
@@ -5,7 +6,13 @@
 
 int main(int argc, char *argv[])
 {
-	int retval = -1;
+	char *path = NULL, *outPath = NULL;
+	int n = 6, retval = EXIT_FAILURE;
+	double k = 0.30;
+	double scaleDown = 0.45;
+
+	KaleidoscopeHandle handler;
+	ImageData imgData, outData;
 
 	// Parse inputs
 	if (argc < 4)
@@ -16,11 +23,10 @@ int main(int argc, char *argv[])
 	}
 	printf("Start...\n");
 
-	char *path = argv[1];
-	char *outPath = argv[2];
-	int n = atoi(argv[3]);
-	double k = 0.30;
-	double scaleDown = 0.45;
+	path = argv[1];
+	outPath = argv[2];
+	n = atoi(argv[3]);
+
 	if (argc > 4)
 	{
 		k = atof(argv[4]);
@@ -28,21 +34,30 @@ int main(int argc, char *argv[])
 	}
 
 	// Process
-	ImageData imgData;
-	printf("Reading %s... ", path);
+	printf("Reading %s ... ", path);
 	if ((retval = readImage(path, &imgData)))
 		return retval;
 	printf(" %d\n", !retval);
 
-	printf("Applying effect... ");
-	if ((retval = kaleidoscope(&imgData, n, k, scaleDown)))
+	printf("Initializing ... ");
+	if (initImageData(&outData, imgData.width, imgData.height, imgData.nComponents))
+		return EXIT_FAILURE;
+	if ((retval = initKaleidoscope(&handler, n, imgData.width, imgData.height, scaleDown)))
 		return retval;
 	printf(" %d\n", !retval);
 
+	printf("Processing ...");
+	processKaleidoscope(&handler, k, &imgData, &outData);
+	printf(" 1\n");
+
 	printf("Saving %s... ", outPath);
-	if ((retval = saveImage(outPath, &imgData)))
+	if ((retval = saveImage(outPath, &outData, TJPF_RGB, TJSAMP_444, 90)))
 		return retval;
 	printf(" %d\n", !retval);
+
+	deInitImageData(&imgData);
+	deInitImageData(&outData);
+	deInitKaleidoscope(&handler);
 
 	printf("Done...\n");
 
