@@ -2,7 +2,7 @@ cmake_minimum_required(VERSION 3.12)
 project(kaleidoscope VERSION 2.0.0)
 
 FILE(GLOB KaleidoscopeSources 
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c)
 
 # Thirdparty libraries

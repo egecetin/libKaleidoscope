@@ -9,7 +9,7 @@
 #include <string.h>
 
 #ifndef NDEBUG
-#include "jpeg-utils.h"
+#include "jpeg-utils/jpeg-utils.h"
 #endif
 
 void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int width, int height)

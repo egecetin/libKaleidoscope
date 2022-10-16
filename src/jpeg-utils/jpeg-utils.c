@@ -1,4 +1,4 @@
-#include "jpeg-utils.h"
+#include "jpeg-utils/jpeg-utils.h"
 
 #include <stdio.h>
 #include <stdlib.h>
