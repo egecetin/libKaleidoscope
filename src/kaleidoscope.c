@@ -24,22 +24,48 @@ void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int wi
 			TransformationInfo *ptrOut = &dataOut[heightOffset + jdx];
 			if (!(ptrIn->dstLocation.x) && !(ptrIn->dstLocation.y))
 			{
+				ptrOut->dstLocation.x = jdx;
+				ptrOut->dstLocation.y = idx;
 				if (((ptrIn - 1)->dstLocation.x) || ((ptrIn - 1)->dstLocation.y)) // Left
-					*ptrOut = *(ptrIn - 1);
+				{
+					ptrOut->srcLocation.x = (ptrIn - 1)->srcLocation.x + 1;
+					ptrOut->srcLocation.y = (ptrIn - 1)->srcLocation.y;
+				}
 				else if (((ptrIn + 1)->dstLocation.x) || ((ptrIn + 1)->dstLocation.y)) // Right
-					*ptrOut = *(ptrIn + 1);
+				{
+					ptrOut->srcLocation.x = (ptrIn + 1)->srcLocation.x - 1;
+					ptrOut->srcLocation.y = (ptrIn + 1)->srcLocation.y;
+				}
 				else if (((ptrIn - width)->dstLocation.x) || ((ptrIn - width)->dstLocation.y)) // Top
-					*ptrOut = *(ptrIn - width);
+				{
+					ptrOut->srcLocation.x = (ptrIn - width)->srcLocation.x;
+					ptrOut->srcLocation.y = (ptrIn - width)->srcLocation.y - 1;
+				}
 				else if (((ptrIn + width)->dstLocation.x) || ((ptrIn + width)->dstLocation.y)) // Bottom
-					*ptrOut = *(ptrIn + width);
+				{
+					ptrOut->srcLocation.x = (ptrIn + width)->srcLocation.x;
+					ptrOut->srcLocation.y = (ptrIn + width)->srcLocation.y + 1;
+				}
 				else if (((ptrIn - width - 1)->dstLocation.x) || ((ptrIn - width - 1)->dstLocation.y)) // Top-Left
-					*ptrOut = *(ptrIn - width - 1);
+				{
+					ptrOut->srcLocation.x = (ptrIn - width - 1)->srcLocation.x - 1;
+					ptrOut->srcLocation.y = (ptrIn - width - 1)->srcLocation.y - 1;
+				}
 				else if (((ptrIn - width + 1)->dstLocation.x) || ((ptrIn - width + 1)->dstLocation.y)) // Top-Right
-					*ptrOut = *(ptrIn - width + 1);
+				{
+					ptrOut->srcLocation.x = (ptrIn - width + 1)->srcLocation.x + 1;
+					ptrOut->srcLocation.y = (ptrIn - width + 1)->srcLocation.y - 1;
+				}
 				else if (((ptrIn + width - 1)->dstLocation.x) || ((ptrIn + width - 1)->dstLocation.y)) // Bottom-Left
-					*ptrOut = *(ptrIn + width - 1);
-				else if (((ptrIn + width - 1)->dstLocation.x) || ((ptrIn + width - 1)->dstLocation.y)) // Bottom-Right
-					*ptrOut = *(ptrIn + width + 1);
+				{
+					ptrOut->srcLocation.x = (ptrIn + width - 1)->srcLocation.x - 1;
+					ptrOut->srcLocation.y = (ptrIn + width - 1)->srcLocation.y - 1;
+				}
+				else if (((ptrIn + width + 1)->dstLocation.x) || ((ptrIn + width + 1)->dstLocation.y)) // Bottom-Right
+				{
+					ptrOut->srcLocation.x = (ptrIn + width + 1)->srcLocation.x + 1;
+					ptrOut->srcLocation.y = (ptrIn + width + 1)->srcLocation.y + 1;
+				}
 				else
 					memset(ptrOut, 0, sizeof(TransformationInfo));
 			}
@@ -144,15 +170,14 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	}
 
 #ifndef NDEBUG
+	memset(imgBuffer.data, 0, nPixels);
 	// Save source mask as image
 	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
 		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
 			imgBuffer.data[idx] = 255;
-		else
-			imgBuffer.data[idx] = 0;
 	}
-	saveImage("imgSrcMask.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
+	saveImage("imgSrcMaskPre.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
 #endif
 
 	// Rotate all points and fix origin to left top
@@ -163,31 +188,18 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	}
 
 #ifndef NDEBUG
+	memset(imgBuffer.data, 0, nPixels);
 	// Save destination mask as image
 	for (unsigned long long idx = 0; idx < nPixels; ++idx)
 	{
 		if (buffPtr2[idx].dstLocation.x && buffPtr2[idx].dstLocation.y)
 			imgBuffer.data[idx] = 255;
-		else
-			imgBuffer.data[idx] = 0;
 	}
 	saveImage("imgDstMaskPre.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
 #endif
 
 	// Fill rotation artifacts
 	interpolate(buffPtr2, buffPtr1, width, height);
-
-#ifndef NDEBUG
-	// Save destination mask as image
-	for (unsigned long long idx = 0; idx < nPixels; ++idx)
-	{
-		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
-			imgBuffer.data[idx] = 255;
-		else
-			imgBuffer.data[idx] = 0;
-	}
-	saveImage("imgDstMask.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
-#endif
 
 	// Reduction and set to points for handler
 	handler->nPoints = 0;
@@ -200,6 +212,25 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		buffPtr1[handler->nPoints] = *ptr;
 		++(handler->nPoints);
 	}
+
+#ifndef NDEBUG
+	// Save final source mask as image
+	memset(imgBuffer.data, 0, nPixels);
+	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
+	{
+		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
+			imgBuffer.data[buffPtr1[idx].srcLocation.y * width + buffPtr1[idx].srcLocation.x] = 255;
+	}
+	saveImage("imgSrcMaskPost.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
+
+	memset(imgBuffer.data, 0, nPixels);
+	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
+	{
+		if (buffPtr1[idx].dstLocation.x && buffPtr1[idx].dstLocation.y)
+			imgBuffer.data[buffPtr1[idx].dstLocation.y * width + buffPtr1[idx].dstLocation.x] = 255;
+	}
+	saveImage("imgDstMaskPost.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
+#endif
 
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
 	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
