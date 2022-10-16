@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(kaleidoscope VERSION 2.0.0)
+project(kaleidoscope VERSION 1.0.0)
 
 file(GLOB KaleidoscopeSources
     ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c
