@@ -26,7 +26,7 @@ int main(int argc, char *argv[])
 	path = argv[1];
 	outPath = argv[2];
 	n = atoi(argv[3]);
-	
+
 	if (argc > 4)
 	{
 		k = atof(argv[4]);
@@ -54,6 +54,10 @@ int main(int argc, char *argv[])
 	if ((retval = saveImage(outPath, &outData, TJPF_RGB, TJSAMP_444, 90)))
 		return retval;
 	printf(" %d\n", !retval);
+
+	deInitImageData(&imgData);
+	deInitImageData(&outData);
+	deInitKaleidoscope(&handler);
 
 	printf("Done...\n");
 

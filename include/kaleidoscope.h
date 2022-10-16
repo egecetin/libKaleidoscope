@@ -85,6 +85,6 @@ int initImageData(ImageData *img, int width, int height, int nComponents);
  * @brief Free memory allocated by read image
  * @param[in] img Image data
  */
-void freeImageData(ImageData *img);
+void deInitImageData(ImageData *img);
 
 #endif // _KALEIDOSCOPE_H_

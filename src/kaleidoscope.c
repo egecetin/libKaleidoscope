@@ -265,7 +265,11 @@ void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn
 	}
 }
 
-void deInitKaleidoscope(KaleidoscopeHandle *handler) { free(handler->pTransferFunc); }
+void deInitKaleidoscope(KaleidoscopeHandle *handler)
+{
+	if (handler)
+		free(handler->pTransferFunc);
+}
 
 int initImageData(ImageData *img, int width, int height, int nComponents)
 {
