@@ -22,7 +22,7 @@ if(CMAKE_C_COMPILER_ID MATCHES "GNU"
 endif()
 
 add_executable(kaleidoscope-cmd ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c)
-target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static m)
+target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static)
 if(CMAKE_C_COMPILER_ID MATCHES "GNU"
      OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
      OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
