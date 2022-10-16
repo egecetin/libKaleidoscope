@@ -6,17 +6,11 @@ repos:
       - id: trailing-whitespace
       - id: check-case-conflict
       - id: check-merge-conflict
-      - id: check-json
         exclude: config_empty.json
       - id: check-yaml
-      - id: check-xml
       - id: end-of-file-fixer
       - id: mixed-line-ending
         args: ['--fix=lf']
-  - repo: https://github.com/psf/black
-    rev: 22.8.0
-    hooks:
-      - id: black
   - repo: https://github.com/pocc/pre-commit-hooks
     rev: v1.3.5
     hooks:
