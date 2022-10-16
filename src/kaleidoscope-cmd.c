@@ -3,13 +3,16 @@
 
 #include <stdio.h>
 #include <stdlib.h>
+#include <time.h>
 
 int main(int argc, char *argv[])
 {
 	char *path = NULL, *outPath = NULL;
-	int n = 6, retval = EXIT_FAILURE;
+	int n = 6, retval = EXIT_FAILURE, benchmark = 0;
 	double k = 0.30;
 	double scaleDown = 0.45;
+	unsigned long long ctr, maxCtr = 0;
+	double startTime, endTime;
 
 	KaleidoscopeHandle handler;
 	ImageData imgData, outData;
@@ -26,8 +29,12 @@ int main(int argc, char *argv[])
 	path = argv[1];
 	outPath = argv[2];
 	n = atoi(argv[3]);
-
-	if (argc > 4)
+	if (argc == 5)
+	{
+		benchmark = 1;
+		maxCtr = atoll(argv[4]);
+	}
+	if (argc == 6)
 	{
 		k = atof(argv[4]);
 		scaleDown = atof(argv[5]);
@@ -47,8 +54,18 @@ int main(int argc, char *argv[])
 	printf(" %d\n", !retval);
 
 	printf("Processing ...");
-	processKaleidoscope(&handler, k, &imgData, &outData);
+	startTime = (float)clock() / CLOCKS_PER_SEC;
+	for (unsigned long long ctr = 0; ctr < maxCtr; ++ctr)
+	{
+		processKaleidoscope(&handler, k, &imgData, &outData);
+		if (!benchmark)
+			break;
+	}
+	endTime = (float)clock() / CLOCKS_PER_SEC;
 	printf(" 1\n");
+
+	if (benchmark)
+		printf("FPS %5.3f\n", 1 / ((endTime - startTime) / maxCtr));
 
 	printf("Saving %s... ", outPath);
 	if ((retval = saveImage(outPath, &outData, TJPF_RGB, TJSAMP_444, 90)))
