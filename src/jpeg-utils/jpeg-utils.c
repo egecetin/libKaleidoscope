@@ -69,7 +69,7 @@ int saveImage(const char *path, ImageData *img, enum TJPF pixelFormat, enum TJSA
 	int retval = EXIT_FAILURE;
 
 	FILE *fptr = NULL;
-	unsigned int outSize = 0;
+	long unsigned int outSize = 0;
 	unsigned char *compImg = NULL;
 	tjhandle jpegCompressor = NULL;
 

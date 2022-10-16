@@ -14,7 +14,7 @@ Use the following commands,
 
 ```
 mkdir build && cd build
-cmake -DNDEBUG ..
+cmake -DCMAKE_BUILD_TYPE=Release -DNDEBUG=1 ..
 cmake --build .
 ```
 
@@ -33,7 +33,15 @@ Alternatively you can directly use the command line program to create kaleidosco
 You can see an example below for ```N=8```
 
 <div align="center">
-<img src="data/ac-synin.jpg" width="425"/> <img src="data/ac-synin-out.jpg" width="425"/>
-<br>
-<small>Image source: AC Valhalla</small>
+    <img src="data/ac-synin.jpg" width="425"/> <img src="data/ac-synin-out.jpg" width="425"/>
+    <br>
+    <small>Image source: AC Valhalla</small>
 </div>
+
+## Benchmark
+
+It is really fast! On a Intel i7-11800H CPU it achieves ~135 FPS for a Full HD (1920 x 1080) image
+
+If you want to benchmark code on your system use this command,
+
+```./kaleidoscope <Input Image Path> <Output Image Path> <N> <Number of loop>```
