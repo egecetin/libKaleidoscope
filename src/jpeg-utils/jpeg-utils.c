@@ -40,7 +40,7 @@ int readImage(const char *path, ImageData *img)
 	if (retval < 0)
 		goto cleanup;
 	decompImg = (unsigned char *)malloc(width * height * nComponent * sizeof(unsigned char));
-	if(!decompImg)
+	if (!decompImg)
 		goto cleanup;
 	retval = tjDecompress(jpegDecompressor, compImg, imgSize, decompImg, width, 0, height, nComponent, TJFLAG_FASTDCT);
 	if (retval < 0)
@@ -88,7 +88,7 @@ int saveImage(const char *path, ImageData *img, enum TJPF pixelFormat, enum TJSA
 		goto cleanup;
 
 	// Write file
-	retval = EXIT_FAILURE; // To simplfy if checks
+	retval = EXIT_FAILURE; // To simplify if checks
 	if ((fptr = fopen(path, "wb")) == NULL)
 		goto cleanup;
 	if (fwrite(compImg, outSize, 1, fptr) < 1)

@@ -1,0 +1,17 @@
+[files]
+extend-exclude = [
+                    "build/",
+                    "cmake/",
+                    "thirdparty/",
+                    "codespell-ignore-list.txt"
+                 ]
+
+[default.extend-identifiers]
+
+
+[default.extend-words]
+Ege="Ege"
+
+[type.make]
+extend-glob = []
+check-file = false
