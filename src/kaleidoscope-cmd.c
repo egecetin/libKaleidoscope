@@ -55,7 +55,7 @@ int main(int argc, char *argv[])
 
 	printf("Processing ...");
 	startTime = (float)clock() / CLOCKS_PER_SEC;
-	for (unsigned long long ctr = 0; ctr < maxCtr; ++ctr)
+	for (ctr = 0; ctr < maxCtr; ++ctr)
 	{
 		processKaleidoscope(&handler, k, &imgData, &outData);
 		if (!benchmark)
