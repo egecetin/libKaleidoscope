@@ -8,10 +8,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#ifndef NDEBUG
-#include "jpeg-utils/jpeg-utils.h"
-#endif
-
 void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int width, int height)
 {
 	// Very simple implementation of nearest neighbour interpolation
@@ -121,11 +117,6 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	// Init same size arrays for simplicity to determine target pixel coordinates
 	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
 
-#ifndef NDEBUG
-	// Debug variables
-	ImageData imgBuffer;
-#endif
-
 	// Check parameters
 	if (!handler || n <= 2 || width <= 0 || height <= 0 || scaleDown < 0.0 || scaleDown > 1.0)
 		return retval;
@@ -134,13 +125,6 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	if (!buffPtr1 || !buffPtr2)
 		goto cleanup;
-
-#ifndef NDEBUG
-	imgBuffer.nComponents = 1;
-	imgBuffer.width = width;
-	imgBuffer.height = height;
-	imgBuffer.data = (unsigned char *)calloc(nPixels, sizeof(unsigned char));
-#endif
 
 	// Ensure limits within image
 	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
@@ -169,34 +153,12 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		}
 	}
 
-#ifndef NDEBUG
-	memset(imgBuffer.data, 0, nPixels);
-	// Save source mask as image
-	for (unsigned long long idx = 0; idx < nPixels; ++idx)
-	{
-		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
-			imgBuffer.data[idx] = 255;
-	}
-	saveImage("imgSrcMaskPre.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
-#endif
-
 	// Rotate all points and fix origin to left top
 	for (int idx = 0; idx < n; ++idx)
 	{
 		double rotationAngle = idx * (360.0 / n);
 		rotatePoints(buffPtr2, buffPtr1, width, height, rotationAngle);
 	}
-
-#ifndef NDEBUG
-	memset(imgBuffer.data, 0, nPixels);
-	// Save destination mask as image
-	for (unsigned long long idx = 0; idx < nPixels; ++idx)
-	{
-		if (buffPtr2[idx].dstLocation.x && buffPtr2[idx].dstLocation.y)
-			imgBuffer.data[idx] = 255;
-	}
-	saveImage("imgDstMaskPre.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
-#endif
 
 	// Fill rotation artifacts
 	interpolate(buffPtr2, buffPtr1, width, height);
@@ -213,34 +175,11 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		++(handler->nPoints);
 	}
 
-#ifndef NDEBUG
-	// Save final source mask as image
-	memset(imgBuffer.data, 0, nPixels);
-	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
-	{
-		if (buffPtr1[idx].srcLocation.x && buffPtr1[idx].srcLocation.y)
-			imgBuffer.data[buffPtr1[idx].srcLocation.y * width + buffPtr1[idx].srcLocation.x] = 255;
-	}
-	saveImage("imgSrcMaskPost.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
-
-	memset(imgBuffer.data, 0, nPixels);
-	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
-	{
-		if (buffPtr1[idx].dstLocation.x && buffPtr1[idx].dstLocation.y)
-			imgBuffer.data[buffPtr1[idx].dstLocation.y * width + buffPtr1[idx].dstLocation.x] = 255;
-	}
-	saveImage("imgDstMaskPost.jpg", &imgBuffer, TJPF_GRAY, TJSAMP_GRAY, 90);
-#endif
-
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
 	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
 	retval = EXIT_SUCCESS;
 
 cleanup:
-
-#ifndef NDEBUG
-	free(imgBuffer.data);
-#endif
 	free(buffPtr1);
 	free(buffPtr2);
 

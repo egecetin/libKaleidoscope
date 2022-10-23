@@ -18,7 +18,7 @@ Use the following commands,
 
 ```
 mkdir build && cd build
-cmake -DCMAKE_BUILD_TYPE=Release -DNDEBUG=1 ..
+cmake ..
 cmake --build .
 ```
 
