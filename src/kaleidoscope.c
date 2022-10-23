@@ -219,7 +219,7 @@ void deInitKaleidoscope(KaleidoscopeHandle *handler)
 
 int initImageData(ImageData *img, int width, int height, int nComponents)
 {
-	img->data = (unsigned char *)malloc(width * height * nComponents);
+	img->data = (unsigned char *)malloc((size_t)width * height * nComponents);
 	if (!img->data)
 		return EXIT_FAILURE;
 
