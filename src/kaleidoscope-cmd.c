@@ -11,7 +11,7 @@ int main(int argc, char *argv[])
 	int n = 6, retval = EXIT_FAILURE, benchmark = 0;
 	double k = 0.30;
 	double scaleDown = 0.45;
-	unsigned long long ctr, maxCtr = 0;
+	unsigned long long ctr, maxCtr = 1;
 	double startTime, endTime;
 
 	KaleidoscopeHandle handler;
