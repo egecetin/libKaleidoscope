@@ -1,11 +1,6 @@
 cmake_minimum_required(VERSION 3.12)
 project(kaleidoscope VERSION 1.0.0)
 
-# Source files
-file(GLOB KaleidoscopeSources
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c
-    ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c)
-
 # Options
 set(CMAKE_DEBUG_POSTFIX d)
 
@@ -16,7 +11,7 @@ option(ENABLE_CMD_TOOL "Enables command line tool" ON)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 # Targets
-add_library(kaleidoscope-static STATIC ${KaleidoscopeSources})
+add_library(kaleidoscope-static STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c)
 set_target_properties(
     kaleidoscope-static
     PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
@@ -31,7 +26,7 @@ if(CMAKE_C_COMPILER_ID MATCHES "GNU"
 endif()
 
 if(ENABLE_SHARED)
-    add_library(kaleidoscope-shared SHARED ${KaleidoscopeSources})
+    add_library(kaleidoscope-shared SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c)
     set_target_properties(
         kaleidoscope-shared
         PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
@@ -50,7 +45,9 @@ if(ENABLE_CMD_TOOL)
     add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo")
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
 
-    add_executable(kaleidoscope-cmd ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c)
+    add_executable(kaleidoscope-cmd
+                    ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c
+                    ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c)
     target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static)
     if(CMAKE_C_COMPILER_ID MATCHES "GNU"
         OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"

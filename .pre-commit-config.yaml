@@ -14,6 +14,8 @@ repos:
     rev: v1.3.5
     hooks:
       - id: clang-format
+      - id: cppcheck
+        args: ['--std=c89', '--language=c', '--suppressions-list=cppcheckSuppressions.txt']
   - repo: https://github.com/cmake-lint/cmake-lint
     rev: 1.4.2
     hooks:

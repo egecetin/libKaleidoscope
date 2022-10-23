@@ -11,7 +11,7 @@ int readImage(const char *path, ImageData *img)
 
 	FILE *fptr = NULL;
 	int width = 0, height = 0;
-	unsigned long imgSize = 0;
+	long imgSize = 0;
 	unsigned char nComponent = 3, *compImg = NULL, *decompImg = NULL;
 	tjhandle jpegDecompressor = NULL;
 
