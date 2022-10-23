@@ -5,12 +5,21 @@ file(GLOB KaleidoscopeSources
     ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c
     ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c)
 
-# Thirdparty libraries
-add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo")
+set(CMAKE_DEBUG_POSTFIX d)
 
-# Project files
-include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
+option(ENABLE_TESTS "Enables unit testing" OFF)
+option(ENABLE_CMD_TOOL "Enables command line tool" ON)
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+
+if (ENABLE_CMD_TOOL)
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo")
+    include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
+endif()
+
+if (ENABLE_TESTS)
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
+endif()
 
 # Compile
 add_library(kaleidoscope-static ${KaleidoscopeSources})

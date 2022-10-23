@@ -1,8 +1,5 @@
-name: Build and test
+name: "pre-commit"
 on: [push, pull_request]
-
-env:
-  BUILD_DIR: build
 
 jobs:
   pre-commit:
