@@ -10,11 +10,13 @@
 
 void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int width, int height)
 {
+	int idx, jdx;
+
 	// Very simple implementation of nearest neighbour interpolation
-	for (int idx = 1; idx < height - 1; ++idx)
+	for (idx = 1; idx < height - 1; ++idx)
 	{
 		int heightOffset = idx * width;
-		for (int jdx = 1; jdx < width - 1; ++jdx)
+		for (jdx = 1; jdx < width - 1; ++jdx)
 		{
 			TransformationInfo *ptrIn = &dataIn[heightOffset + jdx];
 			TransformationInfo *ptrOut = &dataOut[heightOffset + jdx];
@@ -73,10 +75,11 @@ void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int wi
 
 void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle)
 {
+	int idx;
 	double cosVal = cos(angle * M_PI / 180);
 	double sinVal = sin(angle * M_PI / 180);
 
-	for (int idx = 0; idx < width * height; ++idx)
+	for (idx = 0; idx < width * height; ++idx)
 	{
 		if (orgData[idx].dstLocation.x || orgData[idx].dstLocation.y)
 		{
@@ -99,6 +102,8 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 
 int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
 {
+	int idx, jdx;
+	unsigned long long ctr;
 	int retval = EXIT_FAILURE;
 
 	// Parameters of triangle
@@ -130,7 +135,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
 		goto cleanup;
 
-	for (int idx = heightStart; idx < heightEnd; ++idx)
+	for (idx = heightStart; idx < heightEnd; ++idx)
 	{
 		const int currentBaseLength = (int)((idx - heightStart) * tanVal);
 
@@ -142,7 +147,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 			continue;
 
 		TransformationInfo *ptr = &buffPtr1[idx * width];
-		for (int jdx = widthStart; jdx <= widthEnd; ++jdx)
+		for (jdx = widthStart; jdx <= widthEnd; ++jdx)
 		{
 			ptr[jdx].srcLocation.x = jdx;
 			ptr[jdx].srcLocation.y = idx;
@@ -154,7 +159,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	}
 
 	// Rotate all points and fix origin to left top
-	for (int idx = 0; idx < n; ++idx)
+	for (idx = 0; idx < n; ++idx)
 	{
 		double rotationAngle = idx * (360.0 / n);
 		rotatePoints(buffPtr2, buffPtr1, width, height, rotationAngle);
@@ -165,9 +170,9 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	// Reduction and set to points for handler
 	handler->nPoints = 0;
-	for (unsigned long long idx = 0; idx < nPixels; ++idx)
+	for (ctr = 0; ctr < nPixels; ++ctr)
 	{
-		TransformationInfo *ptr = &buffPtr1[idx];
+		TransformationInfo *ptr = &buffPtr1[ctr];
 		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
 			continue;
 
@@ -191,10 +196,12 @@ cleanup:
 
 void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
 {
+	unsigned long long idx;
+
 	// Dim image
-	for (unsigned long long idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
+	for (idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
 		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
-	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
+	for (idx = 0; idx < handler->nPoints; ++idx)
 	{
 		unsigned long long srcIdx = handler->pTransferFunc[idx].srcLocation.y * imgIn->width * imgIn->nComponents +
 									handler->pTransferFunc[idx].srcLocation.x * imgIn->nComponents;

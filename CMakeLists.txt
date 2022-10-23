@@ -19,7 +19,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 add_library(kaleidoscope-static STATIC ${KaleidoscopeSources})
 set_target_properties(
     kaleidoscope-static
-    PROPERTIES OUTPUT_NAME "kaleidoscope"
+    PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
     SOVERSION ${PROJECT_VERSION_MAJOR})
 
@@ -34,7 +34,7 @@ if(ENABLE_SHARED)
     add_library(kaleidoscope-shared SHARED ${KaleidoscopeSources})
     set_target_properties(
         kaleidoscope-shared
-        PROPERTIES OUTPUT_NAME "kaleidoscope"
+        PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
         VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
         SOVERSION ${PROJECT_VERSION_MAJOR})
 
