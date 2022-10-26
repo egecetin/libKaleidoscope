@@ -236,6 +236,8 @@ int initImageData(ImageData *img, int width, int height, int nComponents)
 void deInitImageData(ImageData *img)
 {
 	if (img)
+	{
 		free(img->data);
-	img->data = NULL;
+		img->data = NULL;
+	}
 }
