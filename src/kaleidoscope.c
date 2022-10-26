@@ -8,7 +8,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int width, int height)
+void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
 {
 	int idx, jdx;
 
@@ -100,40 +100,21 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 	}
 }
 
-int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
+int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)
 {
 	int idx, jdx;
-	unsigned long long ctr;
-	int retval = EXIT_FAILURE;
 
-	// Parameters of triangle
+	// Variables
 	const double topAngle = 360.0 / n;
 	const double tanVal = tan(topAngle / 2.0 * M_PI / 180.0); // tan(topAngle / 2) in radians
 	const int triangleHeight = (int)fmin(round(width / (2.0 * tanVal)), height - 1);
-
-	// Offsets
 	const int heightStart = (height - triangleHeight) / 2;
 	const int heightEnd = (height + triangleHeight) / 2;
 	const int scaleDownOffset = (int)(height * scaleDown / 2);
 
-	// Total number of pixels
-	const int nPixels = width * height;
-
-	// Init same size arrays for simplicity to determine target pixel coordinates
-	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
-
-	// Check parameters
-	if (!handler || n <= 2 || width <= 0 || height <= 0 || scaleDown < 0.0 || scaleDown > 1.0)
-		return retval;
-
-	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
-	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
-	if (!buffPtr1 || !buffPtr2)
-		goto cleanup;
-
 	// Ensure limits within image
 	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
-		goto cleanup;
+		return EXIT_FAILURE;
 
 	for (idx = heightStart; idx < heightEnd; ++idx)
 	{
@@ -146,7 +127,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		if (widthStart < 0 || widthStart > width || widthEnd < 0 || widthEnd > width)
 			continue;
 
-		TransformationInfo *ptr = &buffPtr1[idx * width];
+		TransformationInfo *ptr = &transformPtr[idx * width];
 		for (jdx = widthStart; jdx <= widthEnd; ++jdx)
 		{
 			ptr[jdx].srcLocation.x = jdx;
@@ -158,6 +139,30 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 		}
 	}
 
+	return EXIT_SUCCESS;
+}
+
+int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
+{
+	int idx, jdx;
+	unsigned long long ctr;
+
+	int retval = EXIT_FAILURE;
+	const int nPixels = width * height;
+	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
+
+	// Check parameters
+	if (!handler || n <= 2 || width <= 0 || height <= 0 || scaleDown < 0.0 || scaleDown > 1.0)
+		return retval;
+
+	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
+	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
+	if (!buffPtr1 || !buffPtr2)
+		goto cleanup;
+
+	if (sliceTriangle(buffPtr1, width, height, n, scaleDown))
+		goto cleanup;
+
 	// Rotate all points and fix origin to left top
 	for (idx = 0; idx < n; ++idx)
 	{
@@ -166,7 +171,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	}
 
 	// Fill rotation artifacts
-	interpolate(buffPtr2, buffPtr1, width, height);
+	interpolate(buffPtr1, buffPtr2, width, height);
 
 	// Reduction and set to points for handler
 	handler->nPoints = 0;
