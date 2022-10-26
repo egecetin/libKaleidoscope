@@ -58,5 +58,9 @@ if(ENABLE_CMD_TOOL)
 endif()
 
 if(ENABLE_TESTS)
+    include(CTest)
+    enable_testing()
+
+    add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/check")
     add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
 endif()
