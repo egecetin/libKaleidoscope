@@ -144,8 +144,7 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 
 int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
 {
-	int idx, jdx;
-	unsigned long long ctr;
+	int idx;
 
 	int retval = EXIT_FAILURE;
 	const int nPixels = width * height;
@@ -175,9 +174,9 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	// Reduction and set to points for handler
 	handler->nPoints = 0;
-	for (ctr = 0; ctr < nPixels; ++ctr)
+	for (idx = 0; idx < nPixels; ++idx)
 	{
-		TransformationInfo *ptr = &buffPtr1[ctr];
+		TransformationInfo *ptr = &buffPtr1[idx];
 		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
 			continue;
 
@@ -238,4 +237,5 @@ void deInitImageData(ImageData *img)
 {
 	if (img)
 		free(img->data);
+	img->data = NULL;
 }
