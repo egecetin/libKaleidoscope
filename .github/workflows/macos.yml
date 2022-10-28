@@ -1,9 +1,6 @@
 name: "MacOS"
 on: [push, pull_request]
 
-env:
-  BUILD_DIR: build
-
 jobs:
   macos:
     runs-on: macos-latest
@@ -12,8 +9,8 @@ jobs:
         with:
           submodules: recursive
       - name: Configure
-        run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTS=1 -DENABLE_CMD_TOOL=0 -S . -B $BUILD_DIR
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTS=1 -DENABLE_CMD_TOOL=0 -S . -B build
       - name: Build
-        run: cmake --build $BUILD_DIR --parallel
+        run: cmake --build build --parallel
       - name: Run Tests
-        run: ctest --test-dir $BUILD_DIR
+        run: ctest --test-dir build
