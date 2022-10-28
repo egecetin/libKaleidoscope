@@ -12,7 +12,7 @@ jobs:
         with:
           submodules: recursive
       - name: Configure
-        run: cmake -DCMAKE_BUILD_TYPE=Debug -S . -B $BUILD_DIR
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTS=1 -DENABLE_CMD_TOOL=0 -S . -B $BUILD_DIR
       - name: Build
         run: cmake --build $BUILD_DIR --parallel
       - name: Run Tests
