@@ -1,6 +1,6 @@
 #include <check.h>
-#include <readTestData.h>
 #include <kaleidoscope.h>
+#include <readTestData.h>
 #include <stdlib.h>
 
 START_TEST(Rotation)
