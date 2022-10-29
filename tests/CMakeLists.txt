@@ -7,35 +7,39 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/thirdparty/check/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-if(ENABLE_COVERAGE AND UNIX)
-    include(CodeCoverage)
+if(UNIX)
+    link_libraries(pthread)
 
-    add_compile_options(--coverage)
-    link_libraries(pthread gcov)
-    set(GCOVR_ADDITIONAL_ARGS "--exclude-throw-branches")
-    setup_target_for_coverage_gcovr_html(
-        NAME
-        coverage
-        EXECUTABLE
-        ctest -j
-        DEPENDENCIES
-        imageDataTest interpolationTest processingTest rotationTest slicingTest
-        EXCLUDE
-        "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
-        )
+    if(ENABLE_COVERAGE)
+        include(CodeCoverage)
 
-    setup_target_for_coverage_gcovr_xml(
-        NAME
-        coverage-xml
-        EXECUTABLE
-        ctest -j
-        DEPENDENCIES
-        imageDataTest interpolationTest processingTest rotationTest slicingTest
-        EXCLUDE
-        "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
-        "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
-        )
+        add_compile_options(--coverage)
+        link_libraries(gcov)
+        set(GCOVR_ADDITIONAL_ARGS "--exclude-throw-branches")
+        setup_target_for_coverage_gcovr_html(
+            NAME
+            coverage
+            EXECUTABLE
+            ctest -j
+            DEPENDENCIES
+            imageDataTest interpolationTest processingTest rotationTest slicingTest
+            EXCLUDE
+            "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
+            "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
+            )
+
+        setup_target_for_coverage_gcovr_xml(
+            NAME
+            coverage-xml
+            EXECUTABLE
+            ctest -j
+            DEPENDENCIES
+            imageDataTest interpolationTest processingTest rotationTest slicingTest
+            EXCLUDE
+            "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
+            "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
+            )
+    endif()
 endif()
 
 # Compile
