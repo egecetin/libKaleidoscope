@@ -19,7 +19,7 @@ jobs:
       - name: Configure
         run: cmake . -DKALEIDOSCOPE_ENABLE_DOCS=1
       - name: Generate Doxygen Documentation
-        run: doxygen Doxyfile
+        run: cmake --build . --target docs
       - name: Create .nojekyll (ensures pages with underscores work on gh pages)
         run: touch doc/html/.nojekyll
       - name: Deploy to GitHub Pages
