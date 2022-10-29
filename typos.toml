@@ -2,6 +2,7 @@
 extend-exclude = [
                     "build/",
                     "cmake/",
+                    "doc/html",
                     "thirdparty/",
                     "tests/data/",
                     "codespell-ignore-list.txt"
