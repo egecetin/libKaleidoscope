@@ -1,5 +1,9 @@
+# Files
+Doxyfile
+
 # Directories
 build
+.vs
 .vscode
 
 # Prerequisites

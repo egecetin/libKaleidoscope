@@ -3,14 +3,14 @@
 # Kaleidoscope Library
 A library to create kaleidoscope effect on images. You can build on all platforms using CMake.
 
-[![GitHub](https://img.shields.io/badge/Language-C-informational)]()
-[![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/pre-commit?label=pre-commit&logo=precommit&logoColor=white)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/CodeQL?label=CodeQL&logo=github)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Linux?label=Linux&logo=linux&logoColor=white)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/MacOS?label=MacOS&logo=apple&logoColor=white)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Windows?label=Windows&logo=windows&logoColor=white)]()
-[![codecov](https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)](https://codecov.io/gh/egecetin/libKaleidoscope)
+![GitHub](https://img.shields.io/badge/Language-C-informational)
+![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/pre-commit?label=pre-commit&logo=precommit&logoColor=white)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/CodeQL?label=CodeQL&logo=github)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Linux?label=Linux&logo=linux&logoColor=white)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/MacOS?label=MacOS&logo=apple&logoColor=white)
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Windows?label=Windows&logo=windows&logoColor=white)
+![codecov](https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)
 </div>
 
 ## Building
@@ -31,12 +31,7 @@ The library have a simple usage you only need three functions to use. Check the 
 - Processing image (Can be used multiple times if the input image has same dimensions): ```void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)```
 - Deinitialization of the transformation matrix: ```void deInitKaleidoscope(KaleidoscopeHandle *handler)```
 
-Alternatively you can directly use the command line program to create kaleidoscope effect!
-
-```./kaleidoscope <Input Image Path> <Output Image Path> <N> ```
-
-You can see an example below for ```N=8```
-
+Alternatively you can directly use the command line program to create kaleidoscope effect with ```./kaleidoscope <Input Image Path> <Output Image Path> <N>```. You can see an example below for ```N=8```
 <div align="center">
     <img src="tests/data/ac-synin.jpg" width="425"/> <img src="tests/data/ac-synin-out.jpg" width="425"/>
     <br>
