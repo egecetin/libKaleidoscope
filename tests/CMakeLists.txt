@@ -8,13 +8,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(UNIX)
-    link_libraries(pthread)
+    set(KALEIDOSCOPE_TEST_LIBS check pthread)
 
     if(ENABLE_COVERAGE)
         include(CodeCoverage)
 
         add_compile_options(--coverage)
-        link_libraries(gcov)
+        set(KALEIDOSCOPE_TEST_LIBS check pthread gcov)
         set(GCOVR_ADDITIONAL_ARGS "--exclude-throw-branches")
         setup_target_for_coverage_gcovr_html(
             NAME
