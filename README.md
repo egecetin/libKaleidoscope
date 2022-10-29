@@ -4,12 +4,13 @@
 A library to create kaleidoscope effect on images. You can build on all platforms using CMake.
 
 [![GitHub](https://img.shields.io/badge/Language-C-informational)]()
-[![GitHub](https://img.shields.io/github/license/egecetin/kaleidoscope)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/kaleidoscope/pre-commit?label=pre-commit&logo=precommit&logoColor=white)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/kaleidoscope/CodeQL?label=CodeQL&logo=github)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/kaleidoscope/Linux?label=Linux&logo=linux&logoColor=white)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/kaleidoscope/MacOS?label=MacOS&logo=apple&logoColor=white)]()
-[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/kaleidoscope/Windows?label=Windows&logo=windows&logoColor=white)]()
+[![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope)]()
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/pre-commit?label=pre-commit&logo=precommit&logoColor=white)]()
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/CodeQL?label=CodeQL&logo=github)]()
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Linux?label=Linux&logo=linux&logoColor=white)]()
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/MacOS?label=MacOS&logo=apple&logoColor=white)]()
+[![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Windows?label=Windows&logo=windows&logoColor=white)]()
+[![codecov](https://codecov.io/gh/egecetin/kaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)](https://codecov.io/gh/egecetin/kaleidoscope)
 </div>
 
 ## Building
