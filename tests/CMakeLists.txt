@@ -1,11 +1,15 @@
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../cmake")
+set(KALEIDOSCOPE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../src/kaleidoscope.c)
+set(KALEIDOSCOPE_TEST_LIBS check)
+
 # Includes
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/thirdparty/check/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(KALEIDOSCOPE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../src/kaleidoscope.c)
-set(KALEIDOSCOPE_TEST_LIBS check)
-if(UNIX)
+if(ENABLE_COVERAGE AND UNIX)
+    include(CodeCoverage)
+
     add_compile_options(--coverage)
     link_libraries(pthread gcov)
     set(GCOVR_ADDITIONAL_ARGS "--exclude-throw-branches")
@@ -17,8 +21,8 @@ if(UNIX)
         DEPENDENCIES
         imageDataTest interpolationTest processingTest rotationTest slicingTest
         EXCLUDE
-        "${PROJECT_SOURCE_DIR}/thirdparty/*"
-        "${PROJECT_SOURCE_DIR}/tests/*"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
         )
 
     setup_target_for_coverage_gcovr_xml(
@@ -29,8 +33,8 @@ if(UNIX)
         DEPENDENCIES
         imageDataTest interpolationTest processingTest rotationTest slicingTest
         EXCLUDE
-        "${PROJECT_SOURCE_DIR}/thirdparty/*"
-        "${PROJECT_SOURCE_DIR}/tests/*"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
+        "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
         )
 endif()
 
