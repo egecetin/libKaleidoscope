@@ -8,18 +8,20 @@ on:
 
 jobs:
   deploy:
-    - name: Checkout repository
-      uses: actions/checkout@v3
-      with:
-        submodules: "true"
-    - name: Install Doxygen
-      run: sudo apt-get install doxygen -y
-    - name: Generate Doxygen Documentation
-      run: doxygen Doxyfile
-    - name: Create .nojekyll (ensures pages with underscores work on gh pages)
-      run: touch docs/html/.nojekyll
-    - name: Deploy to GitHub Pages
-      uses: JamesIves/github-pages-deploy-action@v4
-      with:
-        branch: gh-pages
-        folder: docs/html
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v3
+        with:
+          submodules: "true"
+      - name: Install Doxygen
+        run: sudo apt-get install doxygen -y
+      - name: Generate Doxygen Documentation
+        run: doxygen Doxyfile
+      - name: Create .nojekyll (ensures pages with underscores work on gh pages)
+        run: touch docs/html/.nojekyll
+      - name: Deploy to GitHub Pages
+        uses: JamesIves/github-pages-deploy-action@v4
+        with:
+          branch: gh-pages
+          folder: docs/html
