@@ -21,9 +21,9 @@ jobs:
       - name: Generate Doxygen Documentation
         run: doxygen Doxyfile
       - name: Create .nojekyll (ensures pages with underscores work on gh pages)
-        run: touch docs/html/.nojekyll
+        run: touch doc/html/.nojekyll
       - name: Deploy to GitHub Pages
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages
-          folder: docs/html
+          folder: doc/html
