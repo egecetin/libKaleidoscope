@@ -3,6 +3,7 @@ Doxyfile
 
 # Directories
 build
+doc
 .vs
 .vscode
 
