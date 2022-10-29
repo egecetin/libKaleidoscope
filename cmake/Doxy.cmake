@@ -16,6 +16,18 @@ if(DOXYGEN_FOUND)
     WORKING_DIRECTORY ${CMAKE_BINARY_DIR}
     COMMENT "Generating API documentation with Doxygen"
     VERBATIM)
+
+  add_custom_command(
+    TARGET docs
+    POST_BUILD
+    COMMAND mkdir
+    -p
+    ${PROJECT_SOURCE_DIR}/doc/html/doc
+    COMMAND cp
+    -r
+    ${PROJECT_SOURCE_DIR}/doc/images
+    ${PROJECT_SOURCE_DIR}/doc/html/doc
+  )
 else()
   message("${BoldYellow}Doxygen need to be installed to generate the doxygen documentation!${ColourReset}")
 endif()
