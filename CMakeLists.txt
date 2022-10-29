@@ -5,9 +5,9 @@ project(kaleidoscope VERSION 1.0.0)
 set(CMAKE_DEBUG_POSTFIX d)
 
 option(ENABLE_SHARED "Enables shared libraries" OFF)
-option(ENABLE_TESTS "Enables unit testing" OFF)
-option(ENABLE_CMD_TOOL "Enables command line tool" ON)
-option(ENABLE_COVERAGE "Enables coverage report" OFF)
+option(KALEIDOSCOPE_ENABLE_TESTS "Enables unit testing" OFF)
+option(KALEIDOSCOPE_ENABLE_CMD_TOOL "Enables command line tool" ON)
+option(KALEIDOSCOPE_ENABLE_COVERAGE "Enables coverage report" OFF)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -42,7 +42,7 @@ if(ENABLE_SHARED)
     endif()
 endif()
 
-if(ENABLE_CMD_TOOL)
+if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
     add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo")
     include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
 
@@ -58,7 +58,7 @@ if(ENABLE_CMD_TOOL)
     endif()
 endif()
 
-if(ENABLE_TESTS)
+if(KALEIDOSCOPE_ENABLE_TESTS)
     include(CTest)
     enable_testing()
 

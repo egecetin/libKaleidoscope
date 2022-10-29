@@ -10,7 +10,7 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 if(UNIX)
     set(KALEIDOSCOPE_TEST_LIBS check pthread)
 
-    if(ENABLE_COVERAGE)
+    if(KALEIDOSCOPE_ENABLE_COVERAGE)
         include(CodeCoverage)
 
         add_compile_options(--coverage)
