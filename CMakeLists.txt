@@ -3,6 +3,7 @@ project(kaleidoscope VERSION 1.0.0)
 
 # Options
 set(CMAKE_DEBUG_POSTFIX d)
+set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
 option(ENABLE_SHARED "Enables shared libraries" OFF)
 option(ENABLE_TESTS "Enables unit testing" OFF)
@@ -58,6 +59,8 @@ if(ENABLE_CMD_TOOL)
 endif()
 
 if(ENABLE_TESTS)
+    include(CodeCoverage)
+
     include(CTest)
     enable_testing()
 

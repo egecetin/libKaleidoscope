@@ -3,17 +3,43 @@ include_directories(${CMAKE_CURRENT_BINARY_DIR}/thirdparty/check/src)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
-set(KALEIDOSCOPE_TEST_LIBS check kaleidoscope-static)
+set(KALEIDOSCOPE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../src/kaleidoscope.c)
+set(KALEIDOSCOPE_TEST_LIBS check)
 if(UNIX)
-    set(CMAKE_C_FLAGS "${CMAKE_C_FLAGS} -pthread")
+    add_compile_options(--coverage)
+    link_libraries(pthread gcov)
+    set(GCOVR_ADDITIONAL_ARGS "--exclude-throw-branches")
+    setup_target_for_coverage_gcovr_html(
+        NAME
+        coverage
+        EXECUTABLE
+        ctest -j
+        DEPENDENCIES
+        imageDataTest interpolationTest rotationTest slicingTest
+        EXCLUDE
+        "${PROJECT_SOURCE_DIR}/thirdparty/*"
+        "${PROJECT_SOURCE_DIR}/tests/*"
+        )
+
+    setup_target_for_coverage_gcovr_xml(
+        NAME
+        coverage-xml
+        EXECUTABLE
+        ctest -j
+        DEPENDENCIES
+        imageDataTest interpolationTest rotationTest slicingTest
+        EXCLUDE
+        "${PROJECT_SOURCE_DIR}/thirdparty/*"
+        "${PROJECT_SOURCE_DIR}/tests/*"
+        )
 endif()
 
 # Compile
-add_executable(imageDataTest ${CMAKE_CURRENT_SOURCE_DIR}/src/imageDataTest.c)
-add_executable(interpolationTest ${CMAKE_CURRENT_SOURCE_DIR}/src/interpolationTest.c)
+add_executable(imageDataTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/imageDataTest.c)
+add_executable(interpolationTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/interpolationTest.c)
 # add_executable(processingTest ${CMAKE_CURRENT_SOURCE_DIR}/src/processingTest.c)
-add_executable(rotationTest ${CMAKE_CURRENT_SOURCE_DIR}/src/rotationTest.c)
-add_executable(slicingTest ${CMAKE_CURRENT_SOURCE_DIR}/src/slicingTest.c)
+add_executable(rotationTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/rotationTest.c)
+add_executable(slicingTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/slicingTest.c)
 
 # Linker
 target_link_libraries(imageDataTest ${KALEIDOSCOPE_TEST_LIBS})
