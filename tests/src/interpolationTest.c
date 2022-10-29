@@ -5,15 +5,15 @@
 
 START_TEST(InterpolationTest)
 {
-	int width = 1024, height = 768;
+	int width = 1935, height = 1088;
 	TransformationInfo *inPtr = NULL, *outPtr = NULL, *expectedOutPtr = NULL;
-	char testDataInPath[] = "tests/data/interpolation_1024x768_InputData.bin";
-	char testDataExpectedPath[] = "tests/data/interpolation_1024x768_ExpectedData.bin";
+	char testDataInPath[] = "../../tests/data/interpolation_1935x1088_InputData.bin";
+	char testDataExpectedPath[] = "../../tests/data/interpolation_1935x1088_ExpectedData.bin";
 
 	// Init
-	inPtr = (TransformationInfo *)malloc(width * height * sizeof(TransformationInfo));
-	outPtr = (TransformationInfo *)malloc(width * height * sizeof(TransformationInfo));
-	expectedOutPtr = (TransformationInfo *)malloc(width * height * sizeof(TransformationInfo));
+	inPtr = (TransformationInfo *)calloc(width * height, sizeof(TransformationInfo));
+	outPtr = (TransformationInfo *)calloc(width * height, sizeof(TransformationInfo));
+	expectedOutPtr = (TransformationInfo *)calloc(width * height, sizeof(TransformationInfo));
 
 	ck_assert_ptr_nonnull(inPtr);
 	ck_assert_ptr_nonnull(outPtr);

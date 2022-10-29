@@ -170,6 +170,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	}
 
 	// Fill rotation artifacts
+	memset(buffPtr1, 0, width * height * sizeof(TransformationInfo));
 	interpolate(buffPtr1, buffPtr2, width, height);
 
 	// Reduction and set to points for handler
