@@ -33,7 +33,7 @@ The library have a simple usage you only need three functions to use. Check the 
 
 Alternatively you can directly use the command line program to create kaleidoscope effect with ```./kaleidoscope <Input Image Path> <Output Image Path> <N>```. You can see an example below for ```N=8```
 <div align="center">
-    <img src="tests/data/ac-synin.jpg" width="425"/> <img src="tests/data/ac-synin-out.jpg" width="425"/>
+    <img src="doc/images/ac-synin.jpg" width="425"/> <img src="doc/images/ac-synin-out.jpg" width="425"/>
     <br>
     <small>Image source: AC Valhalla</small>
 </div>
