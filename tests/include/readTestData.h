@@ -39,8 +39,8 @@ int writeTransformInfo(const char *path, TransformationInfo *dataPtr, unsigned l
 
 	for (idx = 0; idx < len; ++idx)
 	{
-		fprintf(fptr, "%d,%d,%d,%d\n", dataPtr[idx].srcLocation.x, dataPtr[idx].srcLocation.y, dataPtr[idx].dstLocation.x,
-				dataPtr[idx].dstLocation.y);
+		fprintf(fptr, "%d,%d,%d,%d\n", dataPtr[idx].srcLocation.x, dataPtr[idx].srcLocation.y,
+				dataPtr[idx].dstLocation.x, dataPtr[idx].dstLocation.y);
 	}
 
 	fclose(fptr);
