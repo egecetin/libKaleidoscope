@@ -14,12 +14,13 @@ int readTransformInfo(const char *path, TransformationInfo *dataPtr)
 	if ((fptr = fopen(path, "rb")) == NULL)
 		return -2;
 
-	while (fscanf(fptr, "%d%d%d%d\n", &val1, &val2, &val3, &val4) != EOF)
+	while (fscanf(fptr, "%d,%d,%d,%d\n", &val1, &val2, &val3, &val4) > 0)
 	{
 		dataPtr[ctr].srcLocation.x = val1;
 		dataPtr[ctr].srcLocation.y = val2;
 		dataPtr[ctr].dstLocation.x = val3;
 		dataPtr[ctr].dstLocation.y = val4;
+		++ctr;
 	}
 
 	fclose(fptr);
@@ -36,10 +37,10 @@ int writeTransformInfo(const char *path, TransformationInfo *dataPtr, unsigned l
 	if ((fptr = fopen(path, "wb")) == NULL)
 		return -2;
 
-	for (idx = 0; idx < len; ++len)
+	for (idx = 0; idx < len; ++idx)
 	{
-		fprintf(fptr, "%d%d%d%d", dataPtr[ctr].srcLocation.x, dataPtr[ctr].srcLocation.y, dataPtr[ctr].dstLocation.x,
-				dataPtr[ctr].dstLocation.y);
+		fprintf(fptr, "%d,%d,%d,%d\n", dataPtr[idx].srcLocation.x, dataPtr[idx].srcLocation.y, dataPtr[idx].dstLocation.x,
+				dataPtr[idx].dstLocation.y);
 	}
 
 	fclose(fptr);

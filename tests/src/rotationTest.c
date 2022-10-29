@@ -5,10 +5,10 @@
 
 START_TEST(Rotation)
 {
-	int width = 1024, height = 768;
+	int width = 1935, height = 1088;
 	TransformationInfo *inPtr = NULL, *outPtr = NULL, *expectedOutPtr = NULL;
-	char testDataInPath[] = "tests/data/rotation_1024x768_InputData.bin";
-	char testDataExpectedPath[] = "tests/data/rotation_1024x768_ExpectedData.bin";
+	char testDataInPath[] = "../../tests/data/rotation_1935x1088_InputData.bin";
+	char testDataExpectedPath[] = "../../tests/data/rotation_1935x1088_ExpectedData.bin";
 
 	// Init
 	inPtr = (TransformationInfo *)calloc(width * height, sizeof(TransformationInfo));
