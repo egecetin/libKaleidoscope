@@ -10,7 +10,7 @@ A library to create kaleidoscope effect on images. You can build on all platform
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Linux?label=Linux&logo=linux&logoColor=white)]()
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/MacOS?label=MacOS&logo=apple&logoColor=white)]()
 [![GitHub Workflow Status](https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Windows?label=Windows&logo=windows&logoColor=white)]()
-[![codecov](https://codecov.io/gh/egecetin/kaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)](https://codecov.io/gh/egecetin/kaleidoscope)
+[![codecov](https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)](https://codecov.io/gh/egecetin/libKaleidoscope)
 </div>
 
 ## Building
