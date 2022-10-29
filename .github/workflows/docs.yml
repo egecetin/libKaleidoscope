@@ -16,6 +16,8 @@ jobs:
           submodules: "true"
       - name: Install Doxygen
         run: sudo apt-get install doxygen -y
+      - name: Configure
+        run: cmake . -DKALEIDOSCOPE_ENABLE_DOCS=1
       - name: Generate Doxygen Documentation
         run: doxygen Doxyfile
       - name: Create .nojekyll (ensures pages with underscores work on gh pages)
