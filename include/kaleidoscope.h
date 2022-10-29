@@ -46,6 +46,36 @@ struct KaleidoscopeHandle_t
 typedef struct KaleidoscopeHandle_t KaleidoscopeHandle;
 
 /**
+ * @brief A simple interpolation function. Internal use only
+ * @param[out] dataOut Output (interpolated) binary image
+ * @param[in] dataIn Input binary image
+ * @param[in] width Width of input image
+ * @param[in] height Height of input image
+ */
+void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height);
+
+/**
+ * @brief Rotates the coordinates of sliced triangle. Internal use only
+ * @param[out] outData Rotated data
+ * @param[in] orgData Sliced data coordinates
+ * @param[in] width Width of input image
+ * @param[in] height Height of input image
+ * @param[in] angle Top angle of sliced triangle
+ */
+void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle);
+
+/**
+ * @brief Slices a suitable triangle from image
+ * @param[out] transformPtr Sliced triangle coordinates
+ * @param[in] width Width of input image
+ * @param[in] height Height of input image
+ * @param[in] n Number of images for effect
+ * @param[in] scaleDown Scale down ratio to shrink image
+ * @return int 0 on success, -1 otherwise
+ */
+int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown);
+
+/**
  * @brief Initializes kaleidoscope handler
  * @param[in, out] handler Kaleidoscope effect handler
  * @param[in] n Number of images for effect

@@ -8,13 +8,15 @@
 #include <stdlib.h>
 #include <string.h>
 
-void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int width, int height)
+void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
 {
+	int idx, jdx;
+
 	// Very simple implementation of nearest neighbour interpolation
-	for (int idx = 1; idx < height - 1; ++idx)
+	for (idx = 1; idx < height - 1; ++idx)
 	{
 		int heightOffset = idx * width;
-		for (int jdx = 1; jdx < width - 1; ++jdx)
+		for (jdx = 1; jdx < width - 1; ++jdx)
 		{
 			TransformationInfo *ptrIn = &dataIn[heightOffset + jdx];
 			TransformationInfo *ptrOut = &dataOut[heightOffset + jdx];
@@ -73,10 +75,11 @@ void interpolate(TransformationInfo *dataIn, TransformationInfo *dataOut, int wi
 
 void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle)
 {
+	int idx;
 	double cosVal = cos(angle * M_PI / 180);
 	double sinVal = sin(angle * M_PI / 180);
 
-	for (int idx = 0; idx < width * height; ++idx)
+	for (idx = 0; idx < width * height; ++idx)
 	{
 		if (orgData[idx].dstLocation.x || orgData[idx].dstLocation.y)
 		{
@@ -97,24 +100,54 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 	}
 }
 
-int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
+int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)
 {
-	int retval = EXIT_FAILURE;
+	int idx, jdx;
 
-	// Parameters of triangle
+	// Variables
 	const double topAngle = 360.0 / n;
 	const double tanVal = tan(topAngle / 2.0 * M_PI / 180.0); // tan(topAngle / 2) in radians
 	const int triangleHeight = (int)fmin(round(width / (2.0 * tanVal)), height - 1);
-
-	// Offsets
 	const int heightStart = (height - triangleHeight) / 2;
 	const int heightEnd = (height + triangleHeight) / 2;
 	const int scaleDownOffset = (int)(height * scaleDown / 2);
 
-	// Total number of pixels
-	const int nPixels = width * height;
+	// Ensure limits within image
+	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
+		return EXIT_FAILURE;
 
-	// Init same size arrays for simplicity to determine target pixel coordinates
+	for (idx = heightStart; idx < heightEnd; ++idx)
+	{
+		const int currentBaseLength = (int)((idx - heightStart) * tanVal);
+
+		const int widthStart = (width / 2 - currentBaseLength);
+		const int widthEnd = (width / 2 + currentBaseLength);
+
+		// Ensure limits within image
+		if (widthStart < 0 || widthStart > width || widthEnd < 0 || widthEnd > width)
+			continue;
+
+		TransformationInfo *ptr = &transformPtr[idx * width];
+		for (jdx = widthStart; jdx <= widthEnd; ++jdx)
+		{
+			ptr[jdx].srcLocation.x = jdx;
+			ptr[jdx].srcLocation.y = idx;
+
+			// Calculate coordinates respect to center to prepare rotating
+			ptr[jdx].dstLocation.x = (int)((jdx - width / 2) * scaleDown);
+			ptr[jdx].dstLocation.y = (int)((idx - heightStart - height / 2) * scaleDown + scaleDownOffset);
+		}
+	}
+
+	return EXIT_SUCCESS;
+}
+
+int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
+{
+	int idx;
+
+	int retval = EXIT_FAILURE;
+	const int nPixels = width * height;
 	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
 
 	// Check parameters
@@ -126,46 +159,23 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	if (!buffPtr1 || !buffPtr2)
 		goto cleanup;
 
-	// Ensure limits within image
-	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
+	if (sliceTriangle(buffPtr1, width, height, n, scaleDown))
 		goto cleanup;
 
-	for (int idx = heightStart; idx < heightEnd; ++idx)
-	{
-		const int currentBaseLength = (int)((idx - heightStart) * tanVal);
-
-		const int widthStart = (width / 2 - currentBaseLength);
-		const int widthEnd = (width / 2 + currentBaseLength);
-
-		// Ensure limits within image
-		if (widthStart < 0 || widthStart > width || widthEnd < 0 || widthEnd > width)
-			continue;
-
-		TransformationInfo *ptr = &buffPtr1[idx * width];
-		for (int jdx = widthStart; jdx <= widthEnd; ++jdx)
-		{
-			ptr[jdx].srcLocation.x = jdx;
-			ptr[jdx].srcLocation.y = idx;
-
-			// Calculate coordinates respect to center to prepare rotating
-			ptr[jdx].dstLocation.x = (int)((jdx - width / 2) * scaleDown);
-			ptr[jdx].dstLocation.y = (int)((idx - heightStart - height / 2) * scaleDown + scaleDownOffset);
-		}
-	}
-
 	// Rotate all points and fix origin to left top
-	for (int idx = 0; idx < n; ++idx)
+	for (idx = 0; idx < n; ++idx)
 	{
 		double rotationAngle = idx * (360.0 / n);
 		rotatePoints(buffPtr2, buffPtr1, width, height, rotationAngle);
 	}
 
 	// Fill rotation artifacts
-	interpolate(buffPtr2, buffPtr1, width, height);
+	memset(buffPtr1, 0, width * height * sizeof(TransformationInfo));
+	interpolate(buffPtr1, buffPtr2, width, height);
 
 	// Reduction and set to points for handler
 	handler->nPoints = 0;
-	for (unsigned long long idx = 0; idx < nPixels; ++idx)
+	for (idx = 0; idx < nPixels; ++idx)
 	{
 		TransformationInfo *ptr = &buffPtr1[idx];
 		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
@@ -191,10 +201,12 @@ cleanup:
 
 void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
 {
+	unsigned long long idx;
+
 	// Dim image
-	for (unsigned long long idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
+	for (idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
 		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
-	for (unsigned long long idx = 0; idx < handler->nPoints; ++idx)
+	for (idx = 0; idx < handler->nPoints; ++idx)
 	{
 		unsigned long long srcIdx = handler->pTransferFunc[idx].srcLocation.y * imgIn->width * imgIn->nComponents +
 									handler->pTransferFunc[idx].srcLocation.x * imgIn->nComponents;
@@ -212,7 +224,7 @@ void deInitKaleidoscope(KaleidoscopeHandle *handler)
 
 int initImageData(ImageData *img, int width, int height, int nComponents)
 {
-	img->data = (unsigned char *)malloc(width * height * nComponents);
+	img->data = (unsigned char *)malloc((size_t)width * height * nComponents);
 	if (!img->data)
 		return EXIT_FAILURE;
 
@@ -225,5 +237,8 @@ int initImageData(ImageData *img, int width, int height, int nComponents)
 void deInitImageData(ImageData *img)
 {
 	if (img)
+	{
 		free(img->data);
+		img->data = NULL;
+	}
 }

@@ -1,0 +1,16 @@
+name: "Linux"
+on: [push, pull_request]
+
+jobs:
+  linux:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v3
+        with:
+          submodules: recursive
+      - name: Configure
+        run: cmake -DCMAKE_BUILD_TYPE=Debug -DENABLE_TESTS=1 -DENABLE_CMD_TOOL=0 -S . -B build
+      - name: Build
+        run: cmake --build build --parallel
+      - name: Run Tests
+        run: ctest --test-dir build
