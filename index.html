@@ -76,10 +76,10 @@ Building</h2>
 <div class="line">cmake --build .</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
 Usage</h2>
-<p>The library have a simple usage you only need three functions to use. Check the sample usage at <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code></p>
+<p>The library has a simple usage and you need only three functions to use it. Check the sample usage at <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code></p>
 <ul>
 <li>Initialization of the transformation matrix: <code>int <a class="el" href="kaleidoscope_8h.html#a1bfe6040ff853f26464e66f113f04c4b" title="Initializes kaleidoscope handler.">initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)</a></code></li>
-<li>Processing image (Can be used multiple times if the input image has same dimensions): <code>void <a class="el" href="kaleidoscope_8h.html#a898cae6ef6ca793efb0f45b857d839f3" title="Applies kaleidoscope effect to image.">processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)</a></code></li>
+<li>Processing image (Can be used multiple times if the input images have same dimensions): <code>void <a class="el" href="kaleidoscope_8h.html#a898cae6ef6ca793efb0f45b857d839f3" title="Applies kaleidoscope effect to image.">processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)</a></code></li>
 <li>Deinitialization of the transformation matrix: <code>void <a class="el" href="kaleidoscope_8h.html#af94426aef969fbc479f07359b36a3bea" title="Deinitializes kaleidoscope handler.">deInitKaleidoscope(KaleidoscopeHandle *handler)</a></code></li>
 </ul>
 <p>Alternatively you can directly use the command line program to create kaleidoscope effect with <code>./kaleidoscope &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;</code>. You can see an example below for <code>N=8</code> </p><div align="center"> <img src="doc/images/ac-synin.jpg" alt="" width="425" class="inline"/> <img src="doc/images/ac-synin-out.jpg" alt="" width="425" class="inline"/> <br  />
@@ -92,7 +92,7 @@ Benchmark</h2>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Oct 29 2022 20:20:24 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Oct 30 2022 08:06:24 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
