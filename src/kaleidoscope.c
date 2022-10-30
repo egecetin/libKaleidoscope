@@ -204,7 +204,7 @@ void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn
 	unsigned long long idx;
 
 	// Dim image
-	for (idx = 0; idx < imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
+	for (idx = 0; idx < (unsigned long long)imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
 		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
 	for (idx = 0; idx < handler->nPoints; ++idx)
 	{
@@ -224,7 +224,7 @@ void deInitKaleidoscope(KaleidoscopeHandle *handler)
 
 int initImageData(ImageData *img, int width, int height, int nComponents)
 {
-	img->data = (unsigned char *)malloc((size_t)width * height * nComponents);
+	img->data = (unsigned char *)malloc((unsigned long long)width * height * nComponents);
 	if (!img->data)
 		return EXIT_FAILURE;
 

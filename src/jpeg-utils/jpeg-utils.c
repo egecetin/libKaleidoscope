@@ -40,7 +40,7 @@ int readImage(const char *path, ImageData *img)
 	retval = tjDecompressHeader(jpegDecompressor, compImg, imgSize, &width, &height);
 	if (retval < 0)
 		goto cleanup;
-	decompImg = (unsigned char *)malloc((size_t)width * height * nComponent * sizeof(unsigned char));
+	decompImg = (unsigned char *)malloc((unsigned long long)width * height * nComponent * sizeof(unsigned char));
 	if (!decompImg)
 		goto cleanup;
 	retval = tjDecompress(jpegDecompressor, compImg, imgSize, decompImg, width, 0, height, nComponent, TJFLAG_FASTDCT);
