@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -85,14 +92,22 @@ Usage</h2>
 <p>Alternatively you can directly use the command line program to create kaleidoscope effect with <code>./kaleidoscope-cmd &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;</code>. You can see an example below for <code>N=8</code> </p><div align="center"> <img src="doc/images/ac-synin.jpg" alt="" width="425" class="inline"/> <img src="doc/images/ac-synin-out.jpg" alt="" width="425" class="inline"/> <br  />
  <small>Image source: AC Valhalla</small> </div><h2><a class="anchor" id="autotoc_md3"></a>
 Benchmark</h2>
-<p>It is really fast! On a Intel i7-11800H CPU it achieves ~135 FPS for a Full HD (1920 x 1080) image on single thread</p>
+<p>It is really fast! On a Intel i7-11800H CPU it achieves,</p>
+<ul>
+<li>~65 FPS for 4K UHD (3840 x 2160)</li>
+<li>~265 FPS for Full HD (1920 x 1080)</li>
+<li>~640 FPS for 720p (1280 x 720)</li>
+<li>~1350 FPS for 576p (720 x 576)</li>
+</ul>
+<p>resolution images. The performance estimation can be seen at the below</p>
+<div align="center"> &lt;picture&gt; &lt;source media="(prefers-color-scheme: dark)" srcset="doc/images/performance-white.png"&gt; <img src="doc/images/performance-black.png" alt="" width="850" class="inline"/> &lt;/picture&gt; </div><p>$$ FPS = a~e^{b~nPixels}+c~e^{d~nPixels} \text{ where } a = 2492 \text{, } b = -2.165~10^{-6} \text{, } c = 364.9 \text{, } d = -2.08~10^{-7} $$</p>
 <p>If you want to benchmark code on your system make sure you configured with <code>-DCMAKE_BUILD_TYPE=Release</code> and use this command,</p>
 <p><code>./kaleidoscope-cmd &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt; &lt;Number of loop&gt;</code> </p>
 </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 30 2022 08:54:52 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Oct 30 2022 20:48:49 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

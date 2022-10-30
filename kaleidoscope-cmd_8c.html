@@ -12,6 +12,13 @@
 <link href="search/search.css" rel="stylesheet" type="text/css"/>
 <script type="text/javascript" src="search/searchdata.js"></script>
 <script type="text/javascript" src="search/search.js"></script>
+<script type="text/x-mathjax-config">
+  MathJax.Hub.Config({
+    extensions: ["tex2jax.js"],
+    jax: ["input/TeX","output/HTML-CSS"],
+});
+</script>
+<script type="text/javascript" async="async" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js"></script>
 <link href="doxygen.css" rel="stylesheet" type="text/css" />
 </head>
 <body>
@@ -188,10 +195,10 @@ Functions</h2></td></tr>
 <div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;    <span class="keywordflow">return</span> retval;</div>
 <div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;}</div>
 <div class="ttc" id="akaleidoscope_8c_html_a1bfe6040ff853f26464e66f113f04c4b"><div class="ttname"><a href="kaleidoscope_8c.html#a1bfe6040ff853f26464e66f113f04c4b">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00145">kaleidoscope.c:145</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a74d1792c922d9293ce29585d7ed98aa0"><div class="ttname"><a href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a></div><div class="ttdeci">int initImageData(ImageData *img, int width, int height, int nComponents)</div><div class="ttdoc">Allocates memory for image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00225">kaleidoscope.c:225</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a74d1792c922d9293ce29585d7ed98aa0"><div class="ttname"><a href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a></div><div class="ttdeci">int initImageData(ImageData *img, int width, int height, int nComponents)</div><div class="ttdoc">Allocates memory for image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00233">kaleidoscope.c:233</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a898cae6ef6ca793efb0f45b857d839f3"><div class="ttname"><a href="kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00202">kaleidoscope.c:202</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a8ca98701abc68afad444ae367e208d43"><div class="ttname"><a href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a></div><div class="ttdeci">void deInitImageData(ImageData *img)</div><div class="ttdoc">Free memory allocated by read image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00237">kaleidoscope.c:237</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00219">kaleidoscope.c:219</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a8ca98701abc68afad444ae367e208d43"><div class="ttname"><a href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a></div><div class="ttdeci">void deInitImageData(ImageData *img)</div><div class="ttdoc">Free memory allocated by read image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00245">kaleidoscope.c:245</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00227">kaleidoscope.c:227</a></div></div>
 <div class="ttc" id="astructImageData__t_html"><div class="ttname"><a href="structImageData__t.html">ImageData_t</a></div><div class="ttdoc">Data struct for images.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00007">kaleidoscope.h:8</a></div></div>
 <div class="ttc" id="astructImageData__t_html_a14d490ab06ebbcb2ec5abfc5723813cc"><div class="ttname"><a href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">ImageData_t::nComponents</a></div><div class="ttdeci">unsigned char nComponents</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00011">kaleidoscope.h:11</a></div></div>
 <div class="ttc" id="astructImageData__t_html_a94eaf5474b59f6b6d65f4989b9f600ed"><div class="ttname"><a href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">ImageData_t::width</a></div><div class="ttdeci">int width</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00009">kaleidoscope.h:9</a></div></div>
@@ -203,7 +210,7 @@ Functions</h2></td></tr>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sun Oct 30 2022 08:54:52 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Oct 30 2022 20:48:49 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
