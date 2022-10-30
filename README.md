@@ -40,7 +40,23 @@ Alternatively you can directly use the command line program to create kaleidosco
 
 ## Benchmark
 
-It is really fast! On a Intel i7-11800H CPU it achieves ~135 FPS for a Full HD (1920 x 1080) image on single thread
+It is really fast! On a Intel i7-11800H CPU it achieves,
+
+- ~65 FPS for 4K UHD (3840 x 2160)
+- ~265 FPS for Full HD (1920 x 1080)
+- ~640 FPS for 720p (1280 x 720)
+- ~1350 FPS for 576p (720 x 576)
+
+resolution images. The performance estimation can be seen at the below
+
+<div align="center">
+    <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="doc/images/performance-white.png"/>
+    <img src="doc/images/performance-black.png" alt="" width="850"/>
+    </picture>
+</div>
+
+$$ FPS = a~e^{b~nPixels}+c~e^{d~nPixels} \text{  where } a = 2492 \text{, } b = -2.165~10^{-6} \text{, } c = 364.9 \text{, } d = -2.08~10^{-7} $$
 
 If you want to benchmark code on your system make sure you configured with ```-DCMAKE_BUILD_TYPE=Release``` and use this command,
 

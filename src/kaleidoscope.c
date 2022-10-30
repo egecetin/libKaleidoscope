@@ -202,17 +202,25 @@ cleanup:
 void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
 {
 	unsigned long long idx;
+	const unsigned long long multiplier1 = imgIn->nComponents;
+	const unsigned long long multiplier2 = imgIn->width * imgIn->nComponents;
+	const unsigned long long nPixels = (unsigned long long)imgIn->width * imgIn->height * imgIn->nComponents;
+
+	unsigned char *srcPtr = imgIn->data;
+	unsigned char *destPtr = imgOut->data;
+	TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
 
 	// Dim image
-	for (idx = 0; idx < (unsigned long long)imgIn->width * imgIn->height * imgIn->nComponents; ++idx)
-		imgOut->data[idx] = (unsigned char)(imgIn->data[idx] * k);
+	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr)
+		*destPtr = (unsigned char)((*srcPtr) * k);
 	for (idx = 0; idx < handler->nPoints; ++idx)
 	{
-		unsigned long long srcIdx = handler->pTransferFunc[idx].srcLocation.y * imgIn->width * imgIn->nComponents +
-									handler->pTransferFunc[idx].srcLocation.x * imgIn->nComponents;
-		unsigned long long dstIdx = handler->pTransferFunc[idx].dstLocation.y * imgIn->width * imgIn->nComponents +
-									handler->pTransferFunc[idx].dstLocation.x * imgIn->nComponents;
-		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), imgIn->nComponents);
+		unsigned long long srcIdx =
+			ptrTransform->srcLocation.y * multiplier2 + ptrTransform->srcLocation.x * multiplier1;
+		unsigned long long dstIdx =
+			ptrTransform->dstLocation.y * multiplier2 + ptrTransform->dstLocation.x * multiplier1;
+		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), multiplier1);
+		++ptrTransform;
 	}
 }
 
