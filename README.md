@@ -19,8 +19,8 @@ Use the following commands,
 
 ```
 mkdir build && cd build
-cmake ..
-cmake --build .
+cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . --parallel
 ```
 
 ## Usage
@@ -31,7 +31,7 @@ The library has a simple usage and you need only three functions to use it. Chec
 - Processing image (Can be used multiple times if the input images have same dimensions): ```void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)```
 - Deinitialization of the transformation matrix: ```void deInitKaleidoscope(KaleidoscopeHandle *handler)```
 
-Alternatively you can directly use the command line program to create kaleidoscope effect with ```./kaleidoscope <Input Image Path> <Output Image Path> <N>```. You can see an example below for ```N=8```
+Alternatively you can directly use the command line program to create kaleidoscope effect with ```./kaleidoscope-cmd <Input Image Path> <Output Image Path> <N>```. You can see an example below for ```N=8```
 <div align="center">
     <img src="doc/images/ac-synin.jpg" width="425"/> <img src="doc/images/ac-synin-out.jpg" width="425"/>
     <br>
@@ -42,6 +42,6 @@ Alternatively you can directly use the command line program to create kaleidosco
 
 It is really fast! On a Intel i7-11800H CPU it achieves ~135 FPS for a Full HD (1920 x 1080) image on single thread
 
-If you want to benchmark code on your system use this command,
+If you want to benchmark code on your system make sure you configured with ```-DCMAKE_BUILD_TYPE=Release``` and use this command,
 
-```./kaleidoscope <Input Image Path> <Output Image Path> <N> <Number of loop>```
+```./kaleidoscope-cmd <Input Image Path> <Output Image Path> <N> <Number of loop>```
