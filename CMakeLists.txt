@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(kaleidoscope VERSION 1.0.0)
+project(kaleidoscope VERSION 1.1.0)
 
 # Options
 set(CMAKE_DEBUG_POSTFIX d)
@@ -21,10 +21,7 @@ set_target_properties(
   VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
   SOVERSION ${PROJECT_VERSION_MAJOR})
 
-if(CMAKE_C_COMPILER_ID MATCHES "GNU"
-    OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
-    OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-    OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
   target_link_libraries(kaleidoscope-static m)
 endif()
 
@@ -36,10 +33,7 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
     SOVERSION ${PROJECT_VERSION_MAJOR})
 
-  if(CMAKE_C_COMPILER_ID MATCHES "GNU"
-    OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
-    OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-    OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+  if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
     target_link_libraries(kaleidoscope-static m)
   endif()
 endif()
@@ -52,10 +46,7 @@ if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
                   ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c
                   ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c)
   target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static)
-  if(CMAKE_C_COMPILER_ID MATCHES "GNU"
-    OR CMAKE_CXX_COMPILER_ID MATCHES "GNU"
-    OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang"
-    OR CMAKE_CXX_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
+  if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
     target_link_libraries(kaleidoscope-cmd m)
   endif()
 endif()
