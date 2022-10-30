@@ -16,16 +16,16 @@ for idx=1:length(y)
     plot([x(idx) x(idx)], [0 y(idx)], 'r--', 'LineWidth', 2);
 end
 
-legend({'Measurements', 'Estimation'});
-xlabel('Resolution', 'FontWeight', 'bold');
+legend({'Measurements', 'Estimation'}, 'FontSize', 17);
+xlabel('Resolution', 'FontWeight', 'bold', 'FontSize', 17);
 ylabel('FPS', 'FontWeight', 'bold');
-title('Performance');
+title('Performance', 'FontSize', 17);
 xticks([720*576 1280*720 1920*1080 3840*2160 7680*4320])
 xticklabels({'576p', '720p', '1080p', '4K UHD', '8K UHD'})
 yticks([60 120 240 480 960 1920])
 yticklabels({'60', '120', '240', '480', '960', '1920'})
 set(gca,'linewidth',2)
-set(get(gca, 'XAxis'), 'FontWeight', 'bold');
-set(get(gca, 'YAxis'), 'FontWeight', 'bold');
+set(get(gca, 'XAxis'), 'FontWeight', 'bold', 'FontSize', 17);
+set(get(gca, 'YAxis'), 'FontWeight', 'bold', 'FontSize', 17);
 
 saveas(gcf, 'performance.png');
