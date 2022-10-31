@@ -73,15 +73,14 @@ $(function() {
 <div class="title">kaleidoscope Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> </p><div align="center"></div><div align="center"></div><h1><a class="anchor" id="autotoc_md0"></a>
-Kaleidoscope Library</h1>
-<div align="center">A library to create kaleidoscope effect on images. You can build on all platforms using CMake.</div><div align="center"><img src="https://img.shields.io/badge/Language-C-informational" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/license/egecetin/libKaleidoscope" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/pre-commit?label=pre-commit&amp;logo=precommit&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/CodeQL?label=CodeQL&amp;logo=github" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Linux?label=Linux&amp;logo=linux&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/MacOS?label=MacOS&amp;logo=apple&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Windows?label=Windows&amp;logo=windows&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH" alt="codecov" style="pointer-events: none;" class="inline"/> </div><h2><a class="anchor" id="autotoc_md1"></a>
+<div class="textblock"><p><a class="anchor" id="md_README"></a> </p><div align="center"></div><div align="center"> <img src="doc/images/logo-black.png" alt="" width="850" class="inline"/>  <br  />
+</div><div align="center">A library to create kaleidoscope effect on images. You can build on all platforms using CMake.</div><div align="center"><img src="https://img.shields.io/badge/Language-C-informational" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/license/egecetin/libKaleidoscope" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/pre-commit?label=pre-commit&amp;logo=precommit&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/CodeQL?label=CodeQL&amp;logo=github" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Linux?label=Linux&amp;logo=linux&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/MacOS?label=MacOS&amp;logo=apple&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/workflow/status/egecetin/libKaleidoscope/Windows?label=Windows&amp;logo=windows&amp;logoColor=white" alt="GitHub Workflow Status" class="inline"/> <img src="https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH" alt="codecov" style="pointer-events: none;" class="inline"/> </div><h2><a class="anchor" id="autotoc_md0"></a>
 Building</h2>
 <p>Use the following commands,</p>
 <div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake -DCMAKE_BUILD_TYPE=Release ..</div>
 <div class="line">cmake --build . --parallel</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1"></a>
 Usage</h2>
 <p>The library has a simple usage and you need only three functions to use it. Check the sample usage at <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code></p>
 <ul>
@@ -90,7 +89,7 @@ Usage</h2>
 <li>Deinitialization of the transformation matrix: <code>void <a class="el" href="kaleidoscope_8h.html#af94426aef969fbc479f07359b36a3bea" title="Deinitializes kaleidoscope handler.">deInitKaleidoscope(KaleidoscopeHandle *handler)</a></code></li>
 </ul>
 <p>Alternatively you can directly use the command line program to create kaleidoscope effect with <code>./kaleidoscope-cmd &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;</code>. You can see an example below for <code>N=8</code> </p><div align="center"> <img src="doc/images/ac-synin.jpg" alt="" width="425" class="inline"/> <img src="doc/images/ac-synin-out.jpg" alt="" width="425" class="inline"/> <br  />
- <small>Image source: AC Valhalla</small> </div><h2><a class="anchor" id="autotoc_md3"></a>
+ <small>Image source: AC Valhalla</small> </div><h2><a class="anchor" id="autotoc_md2"></a>
 Benchmark</h2>
 <p>It is really fast! On a Intel i7-11800H CPU it achieves,</p>
 <ul>
@@ -107,7 +106,7 @@ Benchmark</h2>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Mon Oct 31 2022 17:40:21 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Mon Oct 31 2022 18:17:31 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
