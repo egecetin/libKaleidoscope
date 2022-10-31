@@ -27,6 +27,14 @@ if(DOXYGEN_FOUND)
     -r
     ${PROJECT_SOURCE_DIR}/doc/images
     ${PROJECT_SOURCE_DIR}/doc/html/doc
+    COMMAND sed
+    -i
+    "'s|&lt;picture&gt; &lt;source media=\"(prefers-color-scheme: dark)\" srcset=\"doc/images/performance-white.png\"&gt;||g'"
+    ${PROJECT_SOURCE_DIR}/doc/html/index.html
+    COMMAND sed
+    -i
+    "\"s|&lt;/picture&gt;||g\""
+    ${PROJECT_SOURCE_DIR}/doc/html/index.html
   )
 else()
   message("${BoldYellow}Doxygen need to be installed to generate the doxygen documentation!${ColourReset}")
