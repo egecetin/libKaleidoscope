@@ -33,6 +33,10 @@ if(DOXYGEN_FOUND)
     ${PROJECT_SOURCE_DIR}/doc/html/index.html
     COMMAND sed
     -i
+    "'s|&lt;picture&gt; &lt;source media=\"(prefers-color-scheme: dark)\" srcset=\"doc/images/logo-white.png\"&gt;||g'"
+    ${PROJECT_SOURCE_DIR}/doc/html/index.html
+    COMMAND sed
+    -i
     "\"s|&lt;/picture&gt;||g\""
     ${PROJECT_SOURCE_DIR}/doc/html/index.html
   )

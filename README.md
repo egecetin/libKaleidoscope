@@ -1,6 +1,11 @@
 <div align="center">
 
-# Kaleidoscope Library
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="doc/images/logo-white.png"/>
+<img src="doc/images/logo-black.png" alt="" width="850"/>
+</picture>
+<br>
+
 A library to create kaleidoscope effect on images. You can build on all platforms using CMake.
 
 ![GitHub](https://img.shields.io/badge/Language-C-informational)
