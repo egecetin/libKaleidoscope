@@ -61,9 +61,9 @@ resolution images. The performance estimation can be seen at the below
     </picture>
 </div>
 
-$$ FPS = a~e^{b~nPixels}+c~e^{d~nPixels} $$
+$$ FPS = a\text{ }e^{b\text{ }nPixels}+c\text{ }e^{d\text{ }nPixels} $$
 
-$$ a = 2492 \text{, } b = -2.165~10^{-6} \text{, } c = 364.9 \text{, } d = -2.08~10^{-7} $$
+$$ a = 2492 \text{, } b = -2.165\text{ }10^{-6} \text{, } c = 364.9 \text{, } d = -2.08\text{ }10^{-7} $$
 
 If you want to benchmark code on your system make sure you configured with ```-DCMAKE_BUILD_TYPE=Release``` and use this command,
 
