@@ -213,14 +213,13 @@ void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn
 	// Dim image
 	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr)
 		*destPtr = (unsigned char)((*srcPtr) * k);
-	for (idx = 0; idx < handler->nPoints; ++idx)
+	for (idx = 0; idx < handler->nPoints; ++idx, ++ptrTransform)
 	{
 		unsigned long long srcIdx =
 			ptrTransform->srcLocation.y * multiplier2 + ptrTransform->srcLocation.x * multiplier1;
 		unsigned long long dstIdx =
 			ptrTransform->dstLocation.y * multiplier2 + ptrTransform->dstLocation.x * multiplier1;
 		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), multiplier1);
-		++ptrTransform;
 	}
 }
 
