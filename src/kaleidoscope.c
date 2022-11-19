@@ -114,10 +114,10 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 	const int scaleDownOffset = (int)(height * scaleDown / 2);
 
 	// Ensure limits within image
-	assert(heightStart > 0);
-	assert(heightStart < height);
-	assert(heightEnd > 0);
-	assert(heightEnd < height);
+	assert(heightStart >= 0);
+	assert(heightStart <= height);
+	assert(heightEnd >= 0);
+	assert(heightEnd <= height);
 
 	for (idx = heightStart; idx < heightEnd; ++idx)
 	{
