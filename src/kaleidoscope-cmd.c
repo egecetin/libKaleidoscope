@@ -20,11 +20,12 @@ int main(int argc, char *argv[])
 	// Parse inputs
 	if (argc < 4)
 	{
-		printf("Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N>\n");
-		printf("Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N> <Dim constant> <Scale factor>\n");
+		fprintf(stderr, "Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N>\n");
+		fprintf(stderr,
+				"Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N> <Dim constant> <Scale factor>\n");
 		return retval;
 	}
-	printf("Start...\n");
+	fprintf(stderr, "Start...\n");
 
 	path = argv[1];
 	outPath = argv[2];
@@ -40,20 +41,32 @@ int main(int argc, char *argv[])
 		scaleDown = atof(argv[5]);
 	}
 
+	// Check inputs
+	if (n <= 2)
+	{
+		fprintf(stderr, "n should be greater than 2");
+		return EXIT_FAILURE;
+	}
+	if (scaleDown < 0.0 || scaleDown > 1.0)
+	{
+		fprintf(stderr, "Scale factor should be between 0.0 and 1.0");
+		return EXIT_FAILURE;
+	}
+
 	// Process
-	printf("Reading %s ... ", path);
+	fprintf(stderr, "Reading %s ... ", path);
 	if ((retval = readImage(path, &imgData)))
 		return retval;
-	printf(" %d\n", !retval);
+	fprintf(stderr, " %d\n", !retval);
 
-	printf("Initializing ... ");
+	fprintf(stderr, "Initializing ... ");
 	if (initImageData(&outData, imgData.width, imgData.height, imgData.nComponents))
 		return EXIT_FAILURE;
 	if ((retval = initKaleidoscope(&handler, n, imgData.width, imgData.height, scaleDown)))
 		return retval;
-	printf(" %d\n", !retval);
+	fprintf(stderr, " %d\n", !retval);
 
-	printf("Processing ...");
+	fprintf(stderr, "Processing ...");
 	startTime = (float)clock() / CLOCKS_PER_SEC;
 	for (ctr = 0; ctr < maxCtr; ++ctr)
 	{
@@ -62,21 +75,21 @@ int main(int argc, char *argv[])
 			break;
 	}
 	endTime = (float)clock() / CLOCKS_PER_SEC;
-	printf(" 1\n");
+	fprintf(stderr, " 1\n");
 
 	if (benchmark)
-		printf("FPS %5.3f\n", 1 / ((endTime - startTime) / maxCtr));
+		fprintf(stderr, "FPS %5.3f\n", 1 / ((endTime - startTime) / maxCtr));
 
-	printf("Saving %s... ", outPath);
+	fprintf(stderr, "Saving %s... ", outPath);
 	if ((retval = saveImage(outPath, &outData, TJPF_RGB, TJSAMP_444, 90)))
 		return retval;
-	printf(" %d\n", !retval);
+	fprintf(stderr, " %d\n", !retval);
 
 	deInitImageData(&imgData);
 	deInitImageData(&outData);
 	deInitKaleidoscope(&handler);
 
-	printf("Done...\n");
+	fprintf(stderr, "Done...\n");
 
 	return retval;
 }

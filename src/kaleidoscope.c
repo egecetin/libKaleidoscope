@@ -3,6 +3,7 @@
 #ifdef WIN32
 #define _USE_MATH_DEFINES
 #endif
+#include <assert.h>
 #include <math.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -113,8 +114,10 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 	const int scaleDownOffset = (int)(height * scaleDown / 2);
 
 	// Ensure limits within image
-	if (heightStart < 0 || heightStart > height || heightEnd < 0 || heightEnd > height)
-		return EXIT_FAILURE;
+	assert(heightStart >= 0);
+	assert(heightStart <= height);
+	assert(heightEnd >= 0);
+	assert(heightEnd <= height);
 
 	for (idx = heightStart; idx < heightEnd; ++idx)
 	{
@@ -151,8 +154,12 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
 
 	// Check parameters
-	if (!handler || n <= 2 || width <= 0 || height <= 0 || scaleDown < 0.0 || scaleDown > 1.0)
-		return retval;
+	assert(handler);
+	assert(n > 2);
+	assert(width > 0);
+	assert(height > 0);
+	assert(scaleDown > 0.0);
+	assert(scaleDown < 1.0);
 
 	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
