@@ -1,5 +1,6 @@
 #include "jpeg-utils/jpeg-utils.h"
 
+#include <assert.h>
 #include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
@@ -16,8 +17,8 @@ int readImage(const char *path, ImageData *img)
 	tjhandle jpegDecompressor = NULL;
 
 	// Check inputs
-	if (!path || !img)
-		return EXIT_FAILURE;
+	assert(path);
+	assert(img);
 
 	// Find file and get size
 	if ((fptr = fopen(path, "rb")) == NULL)
@@ -75,8 +76,8 @@ int saveImage(const char *path, ImageData *img, enum TJPF pixelFormat, enum TJSA
 	tjhandle jpegCompressor = NULL;
 
 	// Check inputs
-	if (!path || !img)
-		return EXIT_FAILURE;
+	assert(path);
+	assert(img);
 
 	// Compress
 	jpegCompressor = tjInitCompress();
