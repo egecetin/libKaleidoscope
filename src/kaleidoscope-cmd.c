@@ -21,7 +21,8 @@ int main(int argc, char *argv[])
 	if (argc < 4)
 	{
 		fprintf(stderr, "Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N>\n");
-		fprintf(stderr, "Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N> <Dim constant> <Scale factor>\n");
+		fprintf(stderr,
+				"Usage ./kaleidoscope <Input Image Path> <Output Image Path> <N> <Dim constant> <Scale factor>\n");
 		return retval;
 	}
 	fprintf(stderr, "Start...\n");
