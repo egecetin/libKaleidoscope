@@ -95,6 +95,8 @@ int saveImage(const char *path, ImageData *img, enum TJPF pixelFormat, enum TJSA
 		goto cleanup;
 	if (fwrite(compImg, outSize, 1, fptr) < 1)
 		goto cleanup;
+	if (fflush(fptr))
+		goto cleanup;
 
 	retval = EXIT_SUCCESS;
 
