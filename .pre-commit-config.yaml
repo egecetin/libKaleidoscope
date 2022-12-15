@@ -2,7 +2,7 @@ exclude: '.*\.(m)'
 fail_fast: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.3.0
+    rev: v4.4.0
     hooks:
       - id: trailing-whitespace
       - id: check-case-conflict
@@ -28,7 +28,7 @@ repos:
       - id: codespell
         pass_filenames: false
   - repo: https://github.com/crate-ci/typos
-    rev: typos-dict-v0.9.8
+    rev: typos-dict-v0.9.13
     hooks:
       - id: typos
         pass_filenames: false
