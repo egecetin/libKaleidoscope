@@ -9,6 +9,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+inline int compare(const void *lhsPtr, const void *rhsPtr)
+{
+	TransformationInfo *lhs = (TransformationInfo *)lhsPtr;
+	TransformationInfo *rhs = (TransformationInfo *)rhsPtr;
+	return lhs->dstOffset - rhs->dstOffset;
+}
+
 void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
 {
 	int idx, jdx;
@@ -147,7 +154,7 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 
 int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)
 {
-	int idx;
+	int idx, jdx;
 
 	int retval = EXIT_FAILURE;
 	const int nPixels = width * height;
@@ -196,6 +203,21 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 			ptr->dstLocation.x * nComponents + ptr->dstLocation.y * width * nComponents;
 		++(handler->nPoints);
 	}
+
+	// Sort
+	qsort(buffPtr1, handler->nPoints, sizeof(TransformationInfo), compare);
+
+	// Deduplicate
+	jdx = 0;
+	for (idx = 1; idx < handler->nPoints; ++idx)
+	{
+		if (compare(&buffPtr1[jdx], &buffPtr1[idx]))
+		{
+			buffPtr1[jdx] = buffPtr1[idx];
+			++jdx;
+		}
+	}
+	handler->nPoints = jdx;
 
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
 	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
