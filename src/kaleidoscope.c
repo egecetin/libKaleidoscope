@@ -9,7 +9,7 @@
 #include <stdlib.h>
 #include <string.h>
 
-inline int compare(const void *lhsPtr, const void *rhsPtr)
+int compare(const void *lhsPtr, const void *rhsPtr)
 {
 	TransformationInfo *lhs = (TransformationInfo *)lhsPtr;
 	TransformationInfo *rhs = (TransformationInfo *)rhsPtr;
