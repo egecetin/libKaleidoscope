@@ -28,10 +28,14 @@ typedef struct Point2D_t Point2D;
  */
 struct TransformationInfo_t
 {
-	// Location from source image
+	/// Location from source image
 	Point2D srcLocation;
-	// Location to destination image
+	/// Location to destination image
 	Point2D dstLocation;
+	/// Offset from source image
+	unsigned long long srcOffset;
+	/// Offset from destination image
+	unsigned long long dstOffset;
 };
 typedef struct TransformationInfo_t TransformationInfo;
 
@@ -81,10 +85,11 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
  * @param[in] n Number of images for effect
  * @param[in] width Image width
  * @param[in] height Image height
+ * @param[in] nComponents Number of image components (eg 3 for RGB)
  * @param[in] scaleDown Scale down ratio to shrink image. Must be between 0.0 and 1.0
  * @return int 0 on success, negative otherwise
  */
-int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown);
+int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown);
 
 /**
  * @brief Applies kaleidoscope effect to image

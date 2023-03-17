@@ -62,7 +62,7 @@ int main(int argc, char *argv[])
 	fprintf(stderr, "Initializing ... ");
 	if (initImageData(&outData, imgData.width, imgData.height, imgData.nComponents))
 		return EXIT_FAILURE;
-	if ((retval = initKaleidoscope(&handler, n, imgData.width, imgData.height, scaleDown)))
+	if ((retval = initKaleidoscope(&handler, n, imgData.width, imgData.height, imgData.nComponents, scaleDown)))
 		return retval;
 	fprintf(stderr, " %d\n", !retval);
 

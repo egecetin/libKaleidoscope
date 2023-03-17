@@ -32,7 +32,7 @@ START_TEST(Processing)
 	ck_assert_int_lt(0, fread(expectedData.data, width * height * nComponents, 1, fExpected));
 
 	// Process
-	ck_assert_int_eq(0, initKaleidoscope(&handler, n, width, height, scaleDown));
+	ck_assert_int_eq(0, initKaleidoscope(&handler, n, width, height, nComponents, scaleDown));
 	processKaleidoscope(&handler, k, &inData, &outData);
 
 	// Check

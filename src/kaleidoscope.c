@@ -9,6 +9,13 @@
 #include <stdlib.h>
 #include <string.h>
 
+int compare(const void *lhsPtr, const void *rhsPtr)
+{
+	TransformationInfo *lhs = (TransformationInfo *)lhsPtr;
+	TransformationInfo *rhs = (TransformationInfo *)rhsPtr;
+	return lhs->dstOffset - rhs->dstOffset;
+}
+
 void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
 {
 	int idx, jdx;
@@ -145,9 +152,9 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 	return EXIT_SUCCESS;
 }
 
-int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)
+int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)
 {
-	int idx;
+	int idx, jdx;
 
 	int retval = EXIT_FAILURE;
 	const int nPixels = width * height;
@@ -158,6 +165,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	assert(n > 2);
 	assert(width > 0);
 	assert(height > 0);
+	assert(nComponents > 0);
 	assert(scaleDown > 0.0);
 	assert(scaleDown < 1.0);
 
@@ -180,7 +188,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	memset(buffPtr1, 0, sizeof(TransformationInfo) * width * height);
 	interpolate(buffPtr1, buffPtr2, width, height);
 
-	// Reduction and set to points for handler
+	// Remove zeros and set to points for handler
 	handler->nPoints = 0;
 	for (idx = 0; idx < nPixels; ++idx)
 	{
@@ -189,8 +197,27 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 			continue;
 
 		buffPtr1[handler->nPoints] = *ptr;
+		buffPtr1[handler->nPoints].srcOffset =
+			ptr->srcLocation.x * nComponents + ptr->srcLocation.y * width * nComponents;
+		buffPtr1[handler->nPoints].dstOffset =
+			ptr->dstLocation.x * nComponents + ptr->dstLocation.y * width * nComponents;
 		++(handler->nPoints);
 	}
+
+	// Sort
+	qsort(buffPtr1, handler->nPoints, sizeof(TransformationInfo), compare);
+
+	// Deduplicate
+	jdx = 0;
+	for (idx = 1; idx < handler->nPoints; ++idx)
+	{
+		if (compare(&buffPtr1[jdx], &buffPtr1[idx]))
+		{
+			buffPtr1[jdx] = buffPtr1[idx];
+			++jdx;
+		}
+	}
+	handler->nPoints = jdx;
 
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
 	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
@@ -209,25 +236,17 @@ cleanup:
 void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
 {
 	unsigned long long idx;
-	const unsigned long long multiplier1 = imgIn->nComponents;
-	const unsigned long long multiplier2 = imgIn->width * imgIn->nComponents;
+	const unsigned long long nComponents = imgIn->nComponents;
 	const unsigned long long nPixels = (unsigned long long)imgIn->width * imgIn->height * imgIn->nComponents;
 
 	unsigned char *srcPtr = imgIn->data;
 	unsigned char *destPtr = imgOut->data;
 	TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
 
-	// Dim image
-	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr)
+	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr) // Dim image
 		*destPtr = (unsigned char)((*srcPtr) * k);
-	for (idx = 0; idx < handler->nPoints; ++idx, ++ptrTransform)
-	{
-		unsigned long long srcIdx =
-			ptrTransform->srcLocation.y * multiplier2 + ptrTransform->srcLocation.x * multiplier1;
-		unsigned long long dstIdx =
-			ptrTransform->dstLocation.y * multiplier2 + ptrTransform->dstLocation.x * multiplier1;
-		memcpy(&(imgOut->data[dstIdx]), &(imgIn->data[srcIdx]), multiplier1);
-	}
+	for (idx = 0; idx < handler->nPoints; ++idx, ++ptrTransform) // Merge
+		memcpy(&(imgOut->data[ptrTransform->dstOffset]), &(imgIn->data[ptrTransform->srcOffset]), nComponents);
 }
 
 void deInitKaleidoscope(KaleidoscopeHandle *handler)
