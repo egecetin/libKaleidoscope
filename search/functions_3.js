@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['processkaleidoscope_45',['processKaleidoscope',['../kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a898cae6ef6ca793efb0f45b857d839f3',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut):&#160;kaleidoscope.c']]]
+  ['main_48',['main',['../kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'kaleidoscope-cmd.c']]]
 ];

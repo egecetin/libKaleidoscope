@@ -1,5 +1,7 @@
 var searchData=
 [
-  ['readme_2emd_22',['README.md',['../README_8md.html',1,'']]],
-  ['rotatepoints_23',['rotatePoints',['../kaleidoscope_8c.html#a9e987dfda8c7f6030f43a35ec5742c1b',1,'rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a9e987dfda8c7f6030f43a35ec5742c1b',1,'rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle):&#160;kaleidoscope.c']]]
+  ['point2d_20',['Point2D',['../kaleidoscope_8h.html#aeacb4acd0378c0e7c4a26c61fa07e291',1,'kaleidoscope.h']]],
+  ['point2d_5ft_21',['Point2D_t',['../structPoint2D__t.html',1,'']]],
+  ['processkaleidoscope_22',['processKaleidoscope',['../kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a898cae6ef6ca793efb0f45b857d839f3',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut):&#160;kaleidoscope.c']]],
+  ['ptransferfunc_23',['pTransferFunc',['../structKaleidoscopeHandle__t.html#a61efeb0933f38b0ce1963f17c171bf1e',1,'KaleidoscopeHandle_t']]]
 ];

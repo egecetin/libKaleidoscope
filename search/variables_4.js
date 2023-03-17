@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['srclocation_54',['srcLocation',['../structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8',1,'TransformationInfo_t']]]
+  ['srclocation_59',['srcLocation',['../structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8',1,'TransformationInfo_t']]],
+  ['srcoffset_60',['srcOffset',['../structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5',1,'TransformationInfo_t']]]
 ];

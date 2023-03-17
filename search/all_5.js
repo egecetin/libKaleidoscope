@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['ncomponents_16',['nComponents',['../structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc',1,'ImageData_t']]],
-  ['npoints_17',['nPoints',['../structKaleidoscopeHandle__t.html#a47925f2b1a4806e8449e661919c79d73',1,'KaleidoscopeHandle_t']]]
+  ['main_17',['main',['../kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'kaleidoscope-cmd.c']]]
 ];
