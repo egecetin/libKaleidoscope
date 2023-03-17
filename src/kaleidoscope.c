@@ -181,7 +181,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	memset(buffPtr1, 0, sizeof(TransformationInfo) * width * height);
 	interpolate(buffPtr1, buffPtr2, width, height);
 
-	// Reduction and set to points for handler
+	// Remove zeros and set to points for handler
 	handler->nPoints = 0;
 	for (idx = 0; idx < nPixels; ++idx)
 	{
