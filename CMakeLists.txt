@@ -69,8 +69,8 @@ if(KALEIDOSCOPE_ENABLE_TESTS)
   include(CTest)
   enable_testing()
 
-  add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/check")
-  add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/check EXCLUDE_FROM_ALL)
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests EXCLUDE_FROM_ALL)
 endif()
 
 if(KALEIDOSCOPE_ENABLE_PACKAGE)
