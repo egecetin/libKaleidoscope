@@ -51,6 +51,9 @@ if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
                   ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c
                   ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c)
   target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static)
+  set_target_properties(
+    kaleidoscope-cmd
+    PROPERTIES OUTPUT_NAME "kaleidoscope")
   install(TARGETS kaleidoscope-cmd)
 
   if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
