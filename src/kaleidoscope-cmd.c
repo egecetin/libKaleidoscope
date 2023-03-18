@@ -17,6 +17,8 @@ int main(int argc, char *argv[])
 	KaleidoscopeHandle handler;
 	ImageData imgData, outData;
 
+	fprintf(stderr, "Kaleidoscope Library %s\n", getKaleidoscopeLibraryInfo());
+
 	// Parse inputs
 	if (argc < 4)
 	{

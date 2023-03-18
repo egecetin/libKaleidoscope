@@ -13,6 +13,7 @@ option(KALEIDOSCOPE_ENABLE_COVERAGE "Enables coverage report" OFF)
 option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
+include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
 # Targets
 add_library(kaleidoscope-static STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c)
@@ -95,3 +96,5 @@ if(KALEIDOSCOPE_ENABLE_PACKAGE)
   endif()
   include(CPack)
 endif()
+
+configure_file(kaleidoscope-config.h.in "kaleidoscope-config.h")

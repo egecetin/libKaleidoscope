@@ -50,6 +50,26 @@ struct KaleidoscopeHandle_t
 typedef struct KaleidoscopeHandle_t KaleidoscopeHandle;
 
 /**
+ * @brief Get the Kaleidoscope Library version as integer
+ * @param major Major number
+ * @param minor Minor number
+ * @param patch Patch number
+ */
+void getKaleidoscopeVersion(int *major, int *minor, int *patch);
+
+/**
+ * @brief Get the Kaleidoscope Library version as string
+ * @return char* Library version
+ */
+char* getKaleidoscopeVersionString();
+
+/**
+ * @brief Get the Kaleidoscope Library info as string
+ * @return char* Library information
+ */
+char* getKaleidoscopeLibraryInfo();
+
+/**
  * @brief A simple interpolation function. Internal use only
  * @param[out] dataOut Output (interpolated) binary image
  * @param[in] dataIn Input binary image

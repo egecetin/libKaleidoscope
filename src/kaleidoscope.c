@@ -1,4 +1,5 @@
 #include "kaleidoscope.h"
+#include "kaleidoscope-config.h"
 
 #ifdef WIN32
 #define _USE_MATH_DEFINES
@@ -8,6 +9,49 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <string.h>
+
+void getKaleidoscopeVersion(int *major, int *minor, int *patch)
+{
+	if(major && minor && patch)
+	{
+		*major = PROJECT_MAJOR_VERSION;
+		*minor = PROJECT_MINOR_VERSION;
+		*patch = PROJECT_PATCH_VERSION;
+	}
+}
+
+char* getKaleidoscopeVersionString()
+{
+	static char info[sizeof(PROJECT_VERSION)];
+	strncpy(info, PROJECT_VERSION, sizeof(PROJECT_VERSION));
+	return info;
+}
+
+char* getKaleidoscopeLibraryInfo()
+{
+	int offset = 0;
+	static char info[125];
+
+	strncpy(info, PROJECT_VERSION, sizeof(PROJECT_VERSION));
+	offset += sizeof(PROJECT_VERSION);
+	memset(&info[offset - 1], 32, 1);
+	strncpy(&info[offset], COMPILER_NAME, sizeof(COMPILER_NAME));
+	offset += sizeof(COMPILER_NAME);
+	memset(&info[offset - 1], 32, 1);
+	strncpy(&info[offset], COMPILER_VERSION, sizeof(COMPILER_VERSION));
+	offset += sizeof(COMPILER_VERSION);
+	memset(&info[offset - 1], 32, 1);
+	strncpy(&info[offset], BUILD_TYPE, sizeof(BUILD_TYPE));
+	offset += sizeof(BUILD_TYPE);
+	memset(&info[offset - 1], 32, 1);
+	strncpy(&info[offset], PROJECT_BUILD_DATE, sizeof(PROJECT_BUILD_DATE));
+	offset += sizeof(PROJECT_BUILD_DATE);
+	memset(&info[offset - 1], 32, 1);
+	strncpy(&info[offset], PROJECT_BUILD_TIME, sizeof(PROJECT_BUILD_TIME));
+	offset += sizeof(PROJECT_BUILD_TIME);
+
+	return info;
+}
 
 int compare(const void *lhsPtr, const void *rhsPtr)
 {
