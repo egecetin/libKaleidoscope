@@ -1,8 +1,4 @@
 var searchData=
 [
-  ['imagedata_7',['ImageData',['../kaleidoscope_8h.html#a0b773eb4281ad4e7070264033eeb0b4b',1,'kaleidoscope.h']]],
-  ['imagedata_5ft_8',['ImageData_t',['../structImageData__t.html',1,'']]],
-  ['initimagedata_9',['initImageData',['../kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0',1,'initImageData(ImageData *img, int width, int height, int nComponents):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a74d1792c922d9293ce29585d7ed98aa0',1,'initImageData(ImageData *img, int width, int height, int nComponents):&#160;kaleidoscope.c']]],
-  ['initkaleidoscope_10',['initKaleidoscope',['../kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60',1,'initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a45ab95b9a94f3dddf8c1932b7a2a2b60',1,'initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown):&#160;kaleidoscope.c']]],
-  ['interpolate_11',['interpolate',['../kaleidoscope_8c.html#a6536dd078a2b0423d1ca626aa74559e4',1,'interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a6536dd078a2b0423d1ca626aa74559e4',1,'interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height):&#160;kaleidoscope.c']]]
+  ['height_9',['height',['../structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2',1,'ImageData_t']]]
 ];

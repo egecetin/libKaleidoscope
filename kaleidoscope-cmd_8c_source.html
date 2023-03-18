@@ -96,88 +96,91 @@ $(function() {
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> handler;</div>
 <div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="structImageData__t.html">ImageData</a> imgData, outData;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
-<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    <span class="comment">// Parse inputs</span></div>
-<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160;    <span class="keywordflow">if</span> (argc &lt; 4)</div>
-<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    {</div>
-<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;Usage ./kaleidoscope &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;\n&quot;</span>);</div>
-<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;        fprintf(stderr,</div>
-<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;                <span class="stringliteral">&quot;Usage ./kaleidoscope &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt; &lt;Dim constant&gt; &lt;Scale factor&gt;\n&quot;</span>);</div>
-<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        <span class="keywordflow">return</span> retval;</div>
-<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;    }</div>
-<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Start...\n&quot;</span>);</div>
-<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160; </div>
-<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    path = argv[1];</div>
-<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160;    outPath = argv[2];</div>
-<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    n = atoi(argv[3]);</div>
-<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    <span class="keywordflow">if</span> (argc == 5)</div>
-<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    {</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;        benchmark = 1;</div>
-<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        maxCtr = atoll(argv[4]);</div>
-<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;    }</div>
-<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;    <span class="keywordflow">if</span> (argc == 6)</div>
-<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    {</div>
-<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;        k = atof(argv[4]);</div>
-<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;        scaleDown = atof(argv[5]);</div>
-<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;    }</div>
-<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160; </div>
-<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    <span class="comment">// Check inputs</span></div>
-<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160;    <span class="keywordflow">if</span> (n &lt;= 2)</div>
-<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    {</div>
-<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;n should be greater than 2&quot;</span>);</div>
-<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
-<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;    }</div>
-<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;    <span class="keywordflow">if</span> (scaleDown &lt; 0.0 || scaleDown &gt; 1.0)</div>
-<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    {</div>
-<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;Scale factor should be between 0.0 and 1.0&quot;</span>);</div>
-<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
-<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;    }</div>
-<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160; </div>
-<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    <span class="comment">// Process</span></div>
-<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Reading %s ... &quot;</span>, path);</div>
-<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="keywordflow">if</span> ((retval = readImage(path, &amp;imgData)))</div>
-<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;        <span class="keywordflow">return</span> retval;</div>
-<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
-<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160; </div>
-<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Initializing ... &quot;</span>);</div>
-<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a>(&amp;outData, imgData.<a class="code" href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">width</a>, imgData.<a class="code" href="structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2">height</a>, imgData.<a class="code" href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">nComponents</a>))</div>
-<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> ((retval = <a class="code" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(&amp;handler, n, imgData.<a class="code" href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">width</a>, imgData.<a class="code" href="structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2">height</a>, imgData.<a class="code" href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">nComponents</a>, scaleDown)))</div>
-<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> retval;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
-<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160; </div>
-<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Processing ...&quot;</span>);</div>
-<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160;    startTime = (float)clock() / CLOCKS_PER_SEC;</div>
-<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    <span class="keywordflow">for</span> (ctr = 0; ctr &lt; maxCtr; ++ctr)</div>
-<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    {</div>
-<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;        <a class="code" href="kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3">processKaleidoscope</a>(&amp;handler, k, &amp;imgData, &amp;outData);</div>
-<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;        <span class="keywordflow">if</span> (!benchmark)</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;            <span class="keywordflow">break</span>;</div>
-<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;    }</div>
-<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;    endTime = (float)clock() / CLOCKS_PER_SEC;</div>
-<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; 1\n&quot;</span>);</div>
-<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160; </div>
-<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    <span class="keywordflow">if</span> (benchmark)</div>
-<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;FPS %5.3f\n&quot;</span>, 1 / ((endTime - startTime) / maxCtr));</div>
-<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160; </div>
-<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Saving %s... &quot;</span>, outPath);</div>
-<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160;    <span class="keywordflow">if</span> ((retval = saveImage(outPath, &amp;outData, TJPF_RGB, TJSAMP_444, 90)))</div>
-<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;        <span class="keywordflow">return</span> retval;</div>
-<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
-<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160; </div>
-<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    <a class="code" href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a>(&amp;imgData);</div>
-<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160;    <a class="code" href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a>(&amp;outData);</div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(&amp;handler);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160; </div>
-<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Done...\n&quot;</span>);</div>
+<div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Kaleidoscope Library %s\n&quot;</span>, <a class="code" href="kaleidoscope_8c.html#a2d8801a2d0569fc6a6ace951fde5b8a6">getKaleidoscopeLibraryInfo</a>());</div>
+<div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
+<div class="line"><a name="l00022"></a><span class="lineno">   22</span>&#160;    <span class="comment">// Parse inputs</span></div>
+<div class="line"><a name="l00023"></a><span class="lineno">   23</span>&#160;    <span class="keywordflow">if</span> (argc &lt; 4)</div>
+<div class="line"><a name="l00024"></a><span class="lineno">   24</span>&#160;    {</div>
+<div class="line"><a name="l00025"></a><span class="lineno">   25</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;Usage ./kaleidoscope &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;\n&quot;</span>);</div>
+<div class="line"><a name="l00026"></a><span class="lineno">   26</span>&#160;        fprintf(stderr,</div>
+<div class="line"><a name="l00027"></a><span class="lineno">   27</span>&#160;                <span class="stringliteral">&quot;Usage ./kaleidoscope &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt; &lt;Dim constant&gt; &lt;Scale factor&gt;\n&quot;</span>);</div>
+<div class="line"><a name="l00028"></a><span class="lineno">   28</span>&#160;        <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a name="l00029"></a><span class="lineno">   29</span>&#160;    }</div>
+<div class="line"><a name="l00030"></a><span class="lineno">   30</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Start...\n&quot;</span>);</div>
+<div class="line"><a name="l00031"></a><span class="lineno">   31</span>&#160; </div>
+<div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;    path = argv[1];</div>
+<div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;    outPath = argv[2];</div>
+<div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;    n = atoi(argv[3]);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;    <span class="keywordflow">if</span> (argc == 5)</div>
+<div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;    {</div>
+<div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160;        benchmark = 1;</div>
+<div class="line"><a name="l00038"></a><span class="lineno">   38</span>&#160;        maxCtr = atoll(argv[4]);</div>
+<div class="line"><a name="l00039"></a><span class="lineno">   39</span>&#160;    }</div>
+<div class="line"><a name="l00040"></a><span class="lineno">   40</span>&#160;    <span class="keywordflow">if</span> (argc == 6)</div>
+<div class="line"><a name="l00041"></a><span class="lineno">   41</span>&#160;    {</div>
+<div class="line"><a name="l00042"></a><span class="lineno">   42</span>&#160;        k = atof(argv[4]);</div>
+<div class="line"><a name="l00043"></a><span class="lineno">   43</span>&#160;        scaleDown = atof(argv[5]);</div>
+<div class="line"><a name="l00044"></a><span class="lineno">   44</span>&#160;    }</div>
+<div class="line"><a name="l00045"></a><span class="lineno">   45</span>&#160; </div>
+<div class="line"><a name="l00046"></a><span class="lineno">   46</span>&#160;    <span class="comment">// Check inputs</span></div>
+<div class="line"><a name="l00047"></a><span class="lineno">   47</span>&#160;    <span class="keywordflow">if</span> (n &lt;= 2)</div>
+<div class="line"><a name="l00048"></a><span class="lineno">   48</span>&#160;    {</div>
+<div class="line"><a name="l00049"></a><span class="lineno">   49</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;n should be greater than 2&quot;</span>);</div>
+<div class="line"><a name="l00050"></a><span class="lineno">   50</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><a name="l00051"></a><span class="lineno">   51</span>&#160;    }</div>
+<div class="line"><a name="l00052"></a><span class="lineno">   52</span>&#160;    <span class="keywordflow">if</span> (scaleDown &lt; 0.0 || scaleDown &gt; 1.0)</div>
+<div class="line"><a name="l00053"></a><span class="lineno">   53</span>&#160;    {</div>
+<div class="line"><a name="l00054"></a><span class="lineno">   54</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;Scale factor should be between 0.0 and 1.0&quot;</span>);</div>
+<div class="line"><a name="l00055"></a><span class="lineno">   55</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><a name="l00056"></a><span class="lineno">   56</span>&#160;    }</div>
+<div class="line"><a name="l00057"></a><span class="lineno">   57</span>&#160; </div>
+<div class="line"><a name="l00058"></a><span class="lineno">   58</span>&#160;    <span class="comment">// Process</span></div>
+<div class="line"><a name="l00059"></a><span class="lineno">   59</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Reading %s ... &quot;</span>, path);</div>
+<div class="line"><a name="l00060"></a><span class="lineno">   60</span>&#160;    <span class="keywordflow">if</span> ((retval = readImage(path, &amp;imgData)))</div>
+<div class="line"><a name="l00061"></a><span class="lineno">   61</span>&#160;        <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
+<div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
+<div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Initializing ... &quot;</span>);</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a>(&amp;outData, imgData.<a class="code" href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">width</a>, imgData.<a class="code" href="structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2">height</a>, imgData.<a class="code" href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">nComponents</a>))</div>
+<div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> ((retval = <a class="code" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(&amp;handler, n, imgData.<a class="code" href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">width</a>, imgData.<a class="code" href="structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2">height</a>, imgData.<a class="code" href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">nComponents</a>, scaleDown)))</div>
+<div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
+<div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
+<div class="line"><a name="l00071"></a><span class="lineno">   71</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Processing ...&quot;</span>);</div>
+<div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    startTime = (float)clock() / CLOCKS_PER_SEC;</div>
+<div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">for</span> (ctr = 0; ctr &lt; maxCtr; ++ctr)</div>
+<div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3">processKaleidoscope</a>(&amp;handler, k, &amp;imgData, &amp;outData);</div>
+<div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">if</span> (!benchmark)</div>
+<div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">break</span>;</div>
+<div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
+<div class="line"><a name="l00079"></a><span class="lineno">   79</span>&#160;    endTime = (float)clock() / CLOCKS_PER_SEC;</div>
+<div class="line"><a name="l00080"></a><span class="lineno">   80</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; 1\n&quot;</span>);</div>
+<div class="line"><a name="l00081"></a><span class="lineno">   81</span>&#160; </div>
+<div class="line"><a name="l00082"></a><span class="lineno">   82</span>&#160;    <span class="keywordflow">if</span> (benchmark)</div>
+<div class="line"><a name="l00083"></a><span class="lineno">   83</span>&#160;        fprintf(stderr, <span class="stringliteral">&quot;FPS %5.3f\n&quot;</span>, 1 / ((endTime - startTime) / maxCtr));</div>
+<div class="line"><a name="l00084"></a><span class="lineno">   84</span>&#160; </div>
+<div class="line"><a name="l00085"></a><span class="lineno">   85</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Saving %s... &quot;</span>, outPath);</div>
+<div class="line"><a name="l00086"></a><span class="lineno">   86</span>&#160;    <span class="keywordflow">if</span> ((retval = saveImage(outPath, &amp;outData, TJPF_RGB, TJSAMP_444, 90)))</div>
+<div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
+<div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a>(&amp;imgData);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a>(&amp;outData);</div>
+<div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(&amp;handler);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
-<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    <span class="keywordflow">return</span> retval;</div>
-<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160;}</div>
+<div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Done...\n&quot;</span>);</div>
+<div class="line"><a name="l00095"></a><span class="lineno">   95</span>&#160; </div>
+<div class="line"><a name="l00096"></a><span class="lineno">   96</span>&#160;    <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a name="l00097"></a><span class="lineno">   97</span>&#160;}</div>
 <div class="ttc" id="akaleidoscope-cmd_8c_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope-cmd_8c_source.html#l00008">kaleidoscope-cmd.c:8</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00155">kaleidoscope.c:155</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a74d1792c922d9293ce29585d7ed98aa0"><div class="ttname"><a href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a></div><div class="ttdeci">int initImageData(ImageData *img, int width, int height, int nComponents)</div><div class="ttdoc">Allocates memory for image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00258">kaleidoscope.c:258</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a898cae6ef6ca793efb0f45b857d839f3"><div class="ttname"><a href="kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00236">kaleidoscope.c:236</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a8ca98701abc68afad444ae367e208d43"><div class="ttname"><a href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a></div><div class="ttdeci">void deInitImageData(ImageData *img)</div><div class="ttdoc">Free memory allocated by read image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00270">kaleidoscope.c:270</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00252">kaleidoscope.c:252</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a2d8801a2d0569fc6a6ace951fde5b8a6"><div class="ttname"><a href="kaleidoscope_8c.html#a2d8801a2d0569fc6a6ace951fde5b8a6">getKaleidoscopeLibraryInfo</a></div><div class="ttdeci">char * getKaleidoscopeLibraryInfo()</div><div class="ttdoc">Get the Kaleidoscope Library info as string.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00030">kaleidoscope.c:30</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00199">kaleidoscope.c:199</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a74d1792c922d9293ce29585d7ed98aa0"><div class="ttname"><a href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a></div><div class="ttdeci">int initImageData(ImageData *img, int width, int height, int nComponents)</div><div class="ttdoc">Allocates memory for image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00302">kaleidoscope.c:302</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a898cae6ef6ca793efb0f45b857d839f3"><div class="ttname"><a href="kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00280">kaleidoscope.c:280</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a8ca98701abc68afad444ae367e208d43"><div class="ttname"><a href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a></div><div class="ttdeci">void deInitImageData(ImageData *img)</div><div class="ttdoc">Free memory allocated by read image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00314">kaleidoscope.c:314</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00296">kaleidoscope.c:296</a></div></div>
 <div class="ttc" id="akaleidoscope_8h_html"><div class="ttname"><a href="kaleidoscope_8h.html">kaleidoscope.h</a></div></div>
 <div class="ttc" id="astructImageData__t_html"><div class="ttname"><a href="structImageData__t.html">ImageData_t</a></div><div class="ttdoc">Data struct for images.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00007">kaleidoscope.h:8</a></div></div>
 <div class="ttc" id="astructImageData__t_html_a14d490ab06ebbcb2ec5abfc5723813cc"><div class="ttname"><a href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">ImageData_t::nComponents</a></div><div class="ttdeci">unsigned char nComponents</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00011">kaleidoscope.h:11</a></div></div>
@@ -187,7 +190,7 @@ $(function() {
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 18 2023 16:30:27 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat Mar 18 2023 17:12:49 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

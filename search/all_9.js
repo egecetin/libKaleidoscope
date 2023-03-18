@@ -1,6 +1,5 @@
 var searchData=
 [
-  ['slicetriangle_26',['sliceTriangle',['../kaleidoscope_8c.html#af4d2cb7fd0363406ec3b4e4b7d8692c4',1,'sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#af4d2cb7fd0363406ec3b4e4b7d8692c4',1,'sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown):&#160;kaleidoscope.c']]],
-  ['srclocation_27',['srcLocation',['../structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8',1,'TransformationInfo_t']]],
-  ['srcoffset_28',['srcOffset',['../structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5',1,'TransformationInfo_t']]]
+  ['readme_2emd_27',['README.md',['../README_8md.html',1,'']]],
+  ['rotatepoints_28',['rotatePoints',['../kaleidoscope_8c.html#a9e987dfda8c7f6030f43a35ec5742c1b',1,'rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a9e987dfda8c7f6030f43a35ec5742c1b',1,'rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle):&#160;kaleidoscope.c']]]
 ];

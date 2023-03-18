@@ -1,4 +1,6 @@
 var searchData=
 [
-  ['main_48',['main',['../kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'kaleidoscope-cmd.c']]]
+  ['initimagedata_51',['initImageData',['../kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0',1,'initImageData(ImageData *img, int width, int height, int nComponents):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a74d1792c922d9293ce29585d7ed98aa0',1,'initImageData(ImageData *img, int width, int height, int nComponents):&#160;kaleidoscope.c']]],
+  ['initkaleidoscope_52',['initKaleidoscope',['../kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60',1,'initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a45ab95b9a94f3dddf8c1932b7a2a2b60',1,'initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown):&#160;kaleidoscope.c']]],
+  ['interpolate_53',['interpolate',['../kaleidoscope_8c.html#a6536dd078a2b0423d1ca626aa74559e4',1,'interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a6536dd078a2b0423d1ca626aa74559e4',1,'interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height):&#160;kaleidoscope.c']]]
 ];

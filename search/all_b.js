@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['width_31',['width',['../structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed',1,'ImageData_t']]]
+  ['transformationinfo_32',['TransformationInfo',['../kaleidoscope_8h.html#a103d4848afd54ba6d4444499f87d4544',1,'kaleidoscope.h']]],
+  ['transformationinfo_5ft_33',['TransformationInfo_t',['../structTransformationInfo__t.html',1,'']]]
 ];
