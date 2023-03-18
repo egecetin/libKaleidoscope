@@ -12,9 +12,7 @@ A library to create kaleidoscope effect on images. You can build on all platform
 ![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&label=pre-commit&logo=precommit&logoColor=white)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/linux.yml?branch=master&label=Linux&logo=linux&logoColor=white)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/macos.yml?branch=master&label=MacOS&logo=apple&logoColor=white)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/windows.yml?branch=master&label=Windows&logo=windows&logoColor=white)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white)
 ![codecov](https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)
 </div>
 

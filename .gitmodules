@@ -1,6 +1,6 @@
 [submodule "thirdparty/libjpeg-turbo"]
 	path = thirdparty/libjpeg-turbo
-	url = https://github.com/libjpeg-turbo/libjpeg-turbo.git
+	url = https://github.com/egecetin/libjpeg-turbo.git
 [submodule "thirdparty/check"]
 	path = thirdparty/check
 	url = https://github.com/libcheck/check.git
