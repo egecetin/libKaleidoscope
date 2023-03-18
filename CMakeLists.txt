@@ -5,11 +5,12 @@ project(kaleidoscope VERSION 2.0.0)
 set(CMAKE_DEBUG_POSTFIX d)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
 
-option(KALEIDOSCOPE_ENABLE_SHARED "Enables shared libraries" OFF)
+option(KALEIDOSCOPE_ENABLE_SHARED "Enables shared libraries" ON)
 option(KALEIDOSCOPE_ENABLE_DOCS "Enables doxygen documentation" OFF)
 option(KALEIDOSCOPE_ENABLE_TESTS "Enables unit testing" OFF)
 option(KALEIDOSCOPE_ENABLE_CMD_TOOL "Enables command line tool" ON)
 option(KALEIDOSCOPE_ENABLE_COVERAGE "Enables coverage report" OFF)
+option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
@@ -18,8 +19,10 @@ add_library(kaleidoscope-static STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidosc
 set_target_properties(
   kaleidoscope-static
   PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
+  PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
   VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
   SOVERSION ${PROJECT_VERSION_MAJOR})
+install(TARGETS kaleidoscope-static)
 
 if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
   target_link_libraries(kaleidoscope-static m)
@@ -30,8 +33,10 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
   set_target_properties(
     kaleidoscope-shared
     PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
+    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
     SOVERSION ${PROJECT_VERSION_MAJOR})
+  install(TARGETS kaleidoscope-shared)
 
   if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
     target_link_libraries(kaleidoscope-static m)
@@ -39,13 +44,15 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
 endif()
 
 if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
-  add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo")
+  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo EXCLUDE_FROM_ALL)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
 
   add_executable(kaleidoscope-cmd
                   ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c
                   ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c)
   target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static)
+  install(TARGETS kaleidoscope-cmd)
+
   if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
     target_link_libraries(kaleidoscope-cmd m)
   endif()
@@ -61,4 +68,19 @@ if(KALEIDOSCOPE_ENABLE_TESTS)
 
   add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/check")
   add_subdirectory("${CMAKE_CURRENT_SOURCE_DIR}/tests")
+endif()
+
+if(KALEIDOSCOPE_ENABLE_PACKAGE)
+  set(CPACK_PACKAGE_VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
+  set(CPACK_PACKAGE_NAME "kaleidoscope")
+  set(CPACK_PACKAGE_RELEASE ${PROJECT_VERSION_PATCH})
+  set(CPACK_PACKAGING_INSTALL_PREFIX ${CMAKE_INSTALL_PREFIX})
+  set(CPACK_PACKAGE_FILE_NAME "${CPACK_PACKAGE_NAME}-${CPACK_PACKAGE_VERSION}.${CMAKE_SYSTEM_PROCESSOR}")
+  set(CPACK_OUTPUT_FILE_PREFIX ${CMAKE_CURRENT_BINARY_DIR}/dist)
+  set(CPACK_PACKAGE_MAINTAINER "egecetin")
+  set(CPACK_PACKAGE_DESCRIPTION_SUMMARY "A library to create kaleidoscope effect on images")
+  set(CPACK_RESOURCE_FILE_LICENSE ${PROJECT_SOURCE_DIR}/LICENSE)
+  set(CPACK_RESOURCE_FILE_README ${PROJECT_SOURCE_DIR}/README.md)
+  set(CPACK_PACKAGE_CONTACT "egecetin@hotmail.com.tr")
+  include(CPack)
 endif()
