@@ -61,13 +61,13 @@ void getKaleidoscopeVersion(int *major, int *minor, int *patch);
  * @brief Get the Kaleidoscope Library version as string
  * @return char* Library version
  */
-char* getKaleidoscopeVersionString();
+char *getKaleidoscopeVersionString();
 
 /**
  * @brief Get the Kaleidoscope Library info as string
  * @return char* Library information
  */
-char* getKaleidoscopeLibraryInfo();
+char *getKaleidoscopeLibraryInfo();
 
 /**
  * @brief A simple interpolation function. Internal use only

@@ -12,7 +12,7 @@
 
 void getKaleidoscopeVersion(int *major, int *minor, int *patch)
 {
-	if(major && minor && patch)
+	if (major && minor && patch)
 	{
 		*major = PROJECT_MAJOR_VERSION;
 		*minor = PROJECT_MINOR_VERSION;
@@ -20,14 +20,14 @@ void getKaleidoscopeVersion(int *major, int *minor, int *patch)
 	}
 }
 
-char* getKaleidoscopeVersionString()
+char *getKaleidoscopeVersionString()
 {
 	static char info[sizeof(PROJECT_VERSION)];
 	strncpy(info, PROJECT_VERSION, sizeof(PROJECT_VERSION));
 	return info;
 }
 
-char* getKaleidoscopeLibraryInfo()
+char *getKaleidoscopeLibraryInfo()
 {
 	int offset = 0;
 	static char info[125];
@@ -48,7 +48,7 @@ char* getKaleidoscopeLibraryInfo()
 	offset += sizeof(PROJECT_BUILD_DATE);
 	memset(&info[offset - 1], 32, 1);
 	strncpy(&info[offset], PROJECT_BUILD_TIME, sizeof(PROJECT_BUILD_TIME));
-	offset += sizeof(PROJECT_BUILD_TIME);
+	// offset += sizeof(PROJECT_BUILD_TIME);
 
 	return info;
 }
