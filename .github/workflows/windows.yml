@@ -13,7 +13,7 @@ jobs:
       - name: Build
         run: cmake --build build --parallel --target package
       - name: Run Tests
-        run: ctest --test-dir build --build-config Release
+        run: ctest --test-dir build
       - uses: actions/upload-artifact@v3
         with:
           path: build/dist/*
