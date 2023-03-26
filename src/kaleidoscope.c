@@ -49,7 +49,20 @@ char *getKaleidoscopeLibraryInfo()
 	offset += sizeof(PROJECT_BUILD_DATE);
 	memset(&info[offset - 1], 32, 1);
 	strncpy(&info[offset], PROJECT_BUILD_TIME, sizeof(PROJECT_BUILD_TIME));
-	// offset += sizeof(PROJECT_BUILD_TIME);
+	offset += sizeof(PROJECT_BUILD_TIME);
+	memset(&info[offset - 1], 32, 1);
+#ifdef KALEIDOSCOPE_ENABLE_CUDA
+	strncpy(&info[offset], "with CUDA", sizeof("with CUDA"));
+	offset += sizeof("with CUDA");
+	memset(&info[offset - 1], 32, 1);
+	strncpy(&info[offset], CUDA_COMPILER_VERSION, sizeof(CUDA_COMPILER_VERSION));
+	offset += sizeof(CUDA_COMPILER_VERSION);
+	memset(&info[offset - 1], 32, 1);
+#else
+	strncpy(&info[offset], "without CUDA", sizeof("without CUDA"));
+	offset += sizeof("without CUDA");
+	memset(&info[offset - 1], 32, 1);
+#endif
 
 	return info;
 }

@@ -1,4 +1,4 @@
-cmake_minimum_required(VERSION 3.12)
+cmake_minimum_required(VERSION 3.18)
 project(kaleidoscope VERSION 2.0.0)
 
 # Options
@@ -14,7 +14,7 @@ option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
 option(KALEIDOSCOPE_ENABLE_CUDA "Enables CUDA backend" OFF)
 
 if(KALEIDOSCOPE_ENABLE_CUDA)
-  find_package(CUDA)
+  find_package(CUDAToolkit)
 endif()
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
@@ -27,6 +27,7 @@ set_target_properties(
   PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
   PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
   PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope-definitions.h
+  PUBLIC_HEADER ${CMAKE_CURRENT_BINARY_DIR}/include/kaleidoscope-config.h
   VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
   SOVERSION ${PROJECT_VERSION_MAJOR})
 install(TARGETS kaleidoscope-static)
@@ -42,6 +43,7 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
     PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
     PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
     PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope-definitions.h
+    PUBLIC_HEADER ${CMAKE_CURRENT_BINARY_DIR}/include/kaleidoscope-config.h
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
     SOVERSION ${PROJECT_VERSION_MAJOR})
   install(TARGETS kaleidoscope-shared)
@@ -49,28 +51,29 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
   if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
     target_link_libraries(kaleidoscope-static m)
   endif()
+
+  if(NOT CUDAToolkit_FOUND)
+    message(STATUS "CUDA not found. Disabling GPU support (KALEIDOSCOPE_ENABLE_CUDA = 0)")
+    set(KALEIDOSCOPE_ENABLE_CUDA 0)
+  else()
+    message(STATUS "CUDA found enabling GPU support (KALEIDOSCOPE_ENABLE_CUDA = 1)")
+    enable_language(CUDA)
+    add_library(kaleidoscope-cuda STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.cu)
+    target_link_libraries(kaleidoscope-cuda kaleidoscope-static)
+    set_target_properties(
+      kaleidoscope-cuda
+      PROPERTIES OUTPUT_NAME "kaleidoscope-cuda" CUDA_ARCHITECTURES OFF
+      PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
+      PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope-definitions.h
+      PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope-cuda.hpp
+      PUBLIC_HEADER ${CMAKE_CURRENT_BINARY_DIR}/include/kaleidoscope-config.h
+      VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
+      SOVERSION ${PROJECT_VERSION_MAJOR})
+    install(TARGETS kaleidoscope-cuda)
+  endif()
 endif()
 
-if(NOT CUDA_FOUND)
-  message(STATUS "CUDA not found. Disabling GPU support (KALEIDOSCOPE_ENABLE_CUDA = 0)")
-  set(KALEIDOSCOPE_ENABLE_CUDA 0)
-else()
-  message(STATUS "CUDA found enabling GPU support (KALEIDOSCOPE_ENABLE_CUDA = 1)")
-  enable_language(CUDA)
-  add_library(kaleidoscope-cuda STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.cu)
-  target_link_libraries(kaleidoscope-cuda kaleidoscope-static)
-  set_target_properties(
-    kaleidoscope-cuda
-    PROPERTIES OUTPUT_NAME "kaleidoscope-cuda"
-    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
-    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope-cuda.hpp
-    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope-definitions.h
-    VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
-    SOVERSION ${PROJECT_VERSION_MAJOR})
-  install(TARGETS kaleidoscope-cuda)
-endif()
-
-if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
+if(KALEIDOSCOPE_ENABLE_CMD_TOOL AND KALEIDOSCOPE_ENABLE_SHARED)
   add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo EXCLUDE_FROM_ALL)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
 
@@ -87,17 +90,17 @@ if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
     target_link_libraries(kaleidoscope-cmd m)
   endif()
 
-  if(NOT CUDA_FOUND)
-    message(STATUS "CUDA not found. Command line tool for CUDA backend disabling")
+  if(NOT CUDAToolkit_FOUND)
+    message(STATUS "CUDA not found. Disabling command line tool for CUDA backend")
   else()
-    message(STATUS "CUDA found. Command line tool for CUDA backend enabling")
+    message(STATUS "CUDA found. Enabling command line tool for CUDA backend")
     add_executable(kaleidoscope-cmd-cuda
       ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd-cuda.cpp
       ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c)
     target_link_libraries(kaleidoscope-cmd-cuda kaleidoscope-cuda turbojpeg-static)
     set_target_properties(
       kaleidoscope-cmd-cuda
-      PROPERTIES OUTPUT_NAME "kaleidoscope-cuda")
+      PROPERTIES OUTPUT_NAME "kaleidoscope-cuda" CUDA_ARCHITECTURES OFF)
     install(TARGETS kaleidoscope-cmd-cuda)
   endif()
 endif()

@@ -5,9 +5,9 @@
 
 /**
  * @brief Get the Kaleidoscope Library version as integer
- * @param major Major number
- * @param minor Minor number
- * @param patch Patch number
+ * @param[out] major Major number
+ * @param[out] minor Minor number
+ * @param[out] patch Patch number
  */
 void getKaleidoscopeVersion(int *major, int *minor, int *patch);
 

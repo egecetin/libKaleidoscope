@@ -46,6 +46,7 @@ struct KaleidoscopeHandle_t
 	unsigned long long nPoints;
 	/// Transformation info
 	TransformationInfo *pTransferFunc;
+#ifdef KALEIDOSCOPE_ENABLE_CUDA
 	/// Calculated block size for dim operation on GPU
 	int blockSizeDim;
 	/// Calculated grid size for dim operation on GPU
@@ -54,6 +55,7 @@ struct KaleidoscopeHandle_t
 	int blockSizeTransform;
 	/// Calculated grid size for transform itself on GPU
 	int gridSizeTransform;
+#endif // KALEIDOSCOPE_ENABLE_CUDA
 };
 typedef struct KaleidoscopeHandle_t KaleidoscopeHandle;
 
