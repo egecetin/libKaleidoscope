@@ -70,12 +70,12 @@ char *getKaleidoscopeLibraryInfo()
 
 int compare(const void *lhsPtr, const void *rhsPtr)
 {
-	TransformationInfo *lhs = (TransformationInfo *)lhsPtr;
-	TransformationInfo *rhs = (TransformationInfo *)rhsPtr;
+	struct TransformationInfo_t *lhs = (struct TransformationInfo_t *)lhsPtr;
+	struct TransformationInfo_t *rhs = (struct TransformationInfo_t *)rhsPtr;
 	return lhs->dstOffset - rhs->dstOffset;
 }
 
-void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
+void interpolate(struct TransformationInfo_t *dataOut, struct TransformationInfo_t *dataIn, int width, int height)
 {
 	int idx, jdx;
 
@@ -85,8 +85,8 @@ void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int wi
 		int heightOffset = idx * width;
 		for (jdx = 1; jdx < width - 1; ++jdx)
 		{
-			TransformationInfo *ptrIn = &dataIn[heightOffset + jdx];
-			TransformationInfo *ptrOut = &dataOut[heightOffset + jdx];
+			struct TransformationInfo_t *ptrIn = &dataIn[heightOffset + jdx];
+			struct TransformationInfo_t *ptrOut = &dataOut[heightOffset + jdx];
 			if (!(ptrIn->dstLocation.x) && !(ptrIn->dstLocation.y))
 			{
 				ptrOut->dstLocation.x = jdx;
@@ -132,7 +132,7 @@ void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int wi
 					ptrOut->srcLocation.y = (ptrIn + width + 1)->srcLocation.y + 1;
 				}
 				else
-					memset(ptrOut, 0, sizeof(TransformationInfo));
+					memset(ptrOut, 0, sizeof(struct TransformationInfo_t));
 			}
 			else
 				*ptrOut = *ptrIn;
@@ -140,7 +140,7 @@ void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int wi
 	}
 }
 
-void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle)
+void rotatePoints(struct TransformationInfo_t *outData, struct TransformationInfo_t *orgData, int width, int height, double angle)
 {
 	int idx;
 	double cosVal = cos(angle * M_PI / 180);
@@ -167,7 +167,7 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 	}
 }
 
-int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)
+int sliceTriangle(struct TransformationInfo_t *transformPtr, int width, int height, int n, double scaleDown)
 {
 	int idx, jdx;
 
@@ -196,7 +196,7 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 		if (widthStart < 0 || widthStart > width || widthEnd < 0 || widthEnd > width)
 			continue;
 
-		TransformationInfo *ptr = &transformPtr[idx * width];
+		struct TransformationInfo_t *ptr = &transformPtr[idx * width];
 		for (jdx = widthStart; jdx <= widthEnd; ++jdx)
 		{
 			ptr[jdx].srcLocation.x = jdx;
@@ -211,14 +211,14 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 	return EXIT_SUCCESS;
 }
 
-int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, int height, int nComponents,
+int initKaleidoscope(struct KaleidoscopeHandler_t *handler, double k, int n, int width, int height, int nComponents,
 					 double scaleDown)
 {
 	int idx, jdx;
 
 	int retval = EXIT_FAILURE;
 	const int nPixels = width * height;
-	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
+	struct TransformationInfo_t *buffPtr1 = NULL, *buffPtr2 = NULL;
 
 	// Check parameters
 	assert(handler);
@@ -236,8 +236,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, in
 	handler->nComponents = nComponents;
 	handler->k = k;
 
-	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
-	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
+	buffPtr1 = (struct TransformationInfo_t *)calloc(nPixels, sizeof(struct TransformationInfo_t));
+	buffPtr2 = (struct TransformationInfo_t *)calloc(nPixels, sizeof(struct TransformationInfo_t));
 	if (!buffPtr1 || !buffPtr2)
 		goto cleanup;
 
@@ -252,14 +252,14 @@ int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, in
 	}
 
 	// Fill rotation artifacts
-	memset(buffPtr1, 0, sizeof(TransformationInfo) * width * height);
+	memset(buffPtr1, 0, sizeof(struct TransformationInfo_t) * width * height);
 	interpolate(buffPtr1, buffPtr2, width, height);
 
 	// Remove zeros and set to points for handler
 	handler->nPoints = 0;
 	for (idx = 0; idx < nPixels; ++idx)
 	{
-		TransformationInfo *ptr = &buffPtr1[idx];
+		struct TransformationInfo_t *ptr = &buffPtr1[idx];
 		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
 			continue;
 
@@ -272,7 +272,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, in
 	}
 
 	// Sort
-	qsort(buffPtr1, handler->nPoints, sizeof(TransformationInfo), compare);
+	qsort(buffPtr1, handler->nPoints, sizeof(struct TransformationInfo_t), compare);
 
 	// Deduplicate
 	jdx = 0;
@@ -286,8 +286,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, in
 	}
 	handler->nPoints = jdx;
 
-	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
-	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
+	handler->pTransferFunc = (struct TransformationInfo_t *)malloc(handler->nPoints * sizeof(struct TransformationInfo_t));
+	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(struct TransformationInfo_t));
 	retval = EXIT_SUCCESS;
 
 cleanup:
@@ -300,14 +300,14 @@ cleanup:
 	return retval;
 }
 
-void processKaleidoscope(KaleidoscopeHandle *handler, unsigned char *imgIn, unsigned char *imgOut)
+void processKaleidoscope(struct KaleidoscopeHandler_t *handler, unsigned char *imgIn, unsigned char *imgOut)
 {
 	unsigned long long idx;
 	const unsigned long long nPixels = (unsigned long long)handler->width * handler->height * handler->nComponents;
 
 	unsigned char *srcPtr = imgIn;
 	unsigned char *destPtr = imgOut;
-	TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
+	struct TransformationInfo_t *ptrTransform = &(handler->pTransferFunc[0]);
 
 	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr) // Dim image
 		*destPtr = (unsigned char)((*srcPtr) * handler->k);
@@ -315,7 +315,7 @@ void processKaleidoscope(KaleidoscopeHandle *handler, unsigned char *imgIn, unsi
 		memcpy(&(imgOut[ptrTransform->dstOffset]), &(imgIn[ptrTransform->srcOffset]), handler->nComponents);
 }
 
-void deInitKaleidoscope(KaleidoscopeHandle *handler)
+void deInitKaleidoscope(struct KaleidoscopeHandler_t *handler)
 {
 	if (handler)
 		free(handler->pTransferFunc);

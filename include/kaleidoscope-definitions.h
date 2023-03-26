@@ -11,7 +11,6 @@ struct Point2D_t
 	int x;
 	int y;
 };
-typedef struct Point2D_t Point2D;
 
 /**
  * @brief Data struct for transformation information
@@ -19,20 +18,19 @@ typedef struct Point2D_t Point2D;
 struct TransformationInfo_t
 {
 	/// Location from source image
-	Point2D srcLocation;
+	struct Point2D_t srcLocation;
 	/// Location to destination image
-	Point2D dstLocation;
+	struct Point2D_t dstLocation;
 	/// Offset from source image
 	unsigned long long srcOffset;
 	/// Offset from destination image
 	unsigned long long dstOffset;
 };
-typedef struct TransformationInfo_t TransformationInfo;
 
 /**
  * @brief Struct for kaleidoscope effect generator
  */
-struct KaleidoscopeHandle_t
+struct KaleidoscopeHandler_t
 {
 	/// Dim constant
 	double k;
@@ -45,18 +43,7 @@ struct KaleidoscopeHandle_t
 	/// Total number of points of transfer function
 	unsigned long long nPoints;
 	/// Transformation info
-	TransformationInfo *pTransferFunc;
-#ifdef KALEIDOSCOPE_ENABLE_CUDA
-	/// Calculated block size for dim operation on GPU
-	int blockSizeDim;
-	/// Calculated grid size for dim operation on GPU
-	int gridSizeDim;
-	/// Calculated block size for transform itself on GPU
-	int blockSizeTransform;
-	/// Calculated grid size for transform itself on GPU
-	int gridSizeTransform;
-#endif // KALEIDOSCOPE_ENABLE_CUDA
+	struct TransformationInfo_t *pTransferFunc;
 };
-typedef struct KaleidoscopeHandle_t KaleidoscopeHandle;
 
 #endif // _KALEIDOSCOPE_DEFINITIONS_H_

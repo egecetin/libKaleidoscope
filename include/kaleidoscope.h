@@ -30,7 +30,7 @@ char *getKaleidoscopeLibraryInfo();
  * @param[in] width Width of input image
  * @param[in] height Height of input image
  */
-void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height);
+void interpolate(struct TransformationInfo_t *dataOut, struct TransformationInfo_t *dataIn, int width, int height);
 
 /**
  * @brief Rotates the coordinates of sliced triangle. Internal use only
@@ -40,7 +40,7 @@ void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int wi
  * @param[in] height Height of input image
  * @param[in] angle Top angle of sliced triangle
  */
-void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle);
+void rotatePoints(struct TransformationInfo_t *outData, struct TransformationInfo_t *orgData, int width, int height, double angle);
 
 /**
  * @brief Slices a suitable triangle from image
@@ -51,7 +51,7 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
  * @param[in] scaleDown Scale down ratio to shrink image
  * @return int 0 on success, -1 otherwise
  */
-int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown);
+int sliceTriangle(struct TransformationInfo_t *transformPtr, int width, int height, int n, double scaleDown);
 
 /**
  * @brief Initializes kaleidoscope handler
@@ -64,7 +64,7 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
  * @param[in] scaleDown Scale down ratio to shrink image. Must be between 0.0 and 1.0
  * @return int 0 on success, negative otherwise
  */
-int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, int height, int nComponents,
+int initKaleidoscope(struct KaleidoscopeHandle_t *handler, double k, int n, int width, int height, int nComponents,
 					 double scaleDown);
 
 /**
@@ -73,12 +73,12 @@ int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, in
  * @param[in] imgIn Input image
  * @param[out] imgOut Output image
  */
-void processKaleidoscope(KaleidoscopeHandle *handler, unsigned char *imgIn, unsigned char *imgOut);
+void processKaleidoscope(struct KaleidoscopeHandle_t *handler, unsigned char *imgIn, unsigned char *imgOut);
 
 /**
  * @brief Deinitializes kaleidoscope handler
  * @param[in] handler Kaleidoscope effect handler
  */
-void deInitKaleidoscope(KaleidoscopeHandle *handler);
+void deInitKaleidoscope(struct KaleidoscopeHandle_t *handler);
 
 #endif // _KALEIDOSCOPE_H_
