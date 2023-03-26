@@ -64,7 +64,7 @@ int sliceTriangle(struct TransformationInfo_t *transformPtr, int width, int heig
  * @param[in] scaleDown Scale down ratio to shrink image. Must be between 0.0 and 1.0
  * @return int 0 on success, negative otherwise
  */
-int initKaleidoscope(struct KaleidoscopeHandle_t *handler, double k, int n, int width, int height, int nComponents,
+int initKaleidoscope(struct KaleidoscopeHandler_t *handler, double k, int n, int width, int height, int nComponents,
 					 double scaleDown);
 
 /**
@@ -73,12 +73,12 @@ int initKaleidoscope(struct KaleidoscopeHandle_t *handler, double k, int n, int 
  * @param[in] imgIn Input image
  * @param[out] imgOut Output image
  */
-void processKaleidoscope(struct KaleidoscopeHandle_t *handler, unsigned char *imgIn, unsigned char *imgOut);
+void processKaleidoscope(struct KaleidoscopeHandler_t *handler, unsigned char *imgIn, unsigned char *imgOut);
 
 /**
  * @brief Deinitializes kaleidoscope handler
  * @param[in] handler Kaleidoscope effect handler
  */
-void deInitKaleidoscope(struct KaleidoscopeHandle_t *handler);
+void deInitKaleidoscope(struct KaleidoscopeHandler_t *handler);
 
 #endif // _KALEIDOSCOPE_H_
