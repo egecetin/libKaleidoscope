@@ -11,7 +11,7 @@ START_TEST(Processing)
 	FILE *fIn = NULL, *fExpected = NULL;
 
 	KaleidoscopeHandle handler;
-	ImageData inData, outData, expectedData;
+	unsigned char *inData, *outData, *expectedData;
 
 	char pathIn[] = "../../tests/data/processing_1935x1088_InputData.bin";
 	char pathExpected[] = "../../tests/data/processing_1935x1088_ExpectedData.bin";
@@ -23,28 +23,33 @@ START_TEST(Processing)
 	ck_assert_ptr_nonnull(fIn);
 	ck_assert_ptr_nonnull(fExpected);
 
-	ck_assert_int_eq(0, initImageData(&inData, width, height, nComponents));
-	ck_assert_int_eq(0, initImageData(&outData, width, height, nComponents));
-	ck_assert_int_eq(0, initImageData(&expectedData, width, height, nComponents));
+	inData = (unsigned char *)calloc(width * height * nComponents * sizeof(unsigned char), 1);
+	outData = (unsigned char *)calloc(width * height * nComponents * sizeof(unsigned char), 1);
+	expectedData = (unsigned char *)calloc(width * height * nComponents * sizeof(unsigned char), 1);
+
+	ck_assert_ptr_nonnull(inData);
+	ck_assert_ptr_nonnull(outData);
+	ck_assert_ptr_nonnull(expectedData);
 
 	// Read data
-	ck_assert_int_lt(0, fread(inData.data, width * height * nComponents, 1, fIn));
-	ck_assert_int_lt(0, fread(expectedData.data, width * height * nComponents, 1, fExpected));
+	ck_assert_int_lt(0, fread(inData, width * height * nComponents, 1, fIn));
+	ck_assert_int_lt(0, fread(expectedData, width * height * nComponents, 1, fExpected));
 
 	// Process
-	ck_assert_int_eq(0, initKaleidoscope(&handler, n, width, height, nComponents, scaleDown));
-	processKaleidoscope(&handler, k, &inData, &outData);
+	ck_assert_int_eq(0, initKaleidoscope(&handler, k, n, width, height, nComponents, scaleDown));
+	processKaleidoscope(&handler, inData, outData);
 
 	// Check
-	ck_assert_mem_eq(expectedData.data, outData.data, width * height * nComponents);
+	ck_assert_mem_eq(expectedData, outData, width * height * nComponents);
 
 	// De-init
 	fclose(fIn);
 	fclose(fExpected);
 
-	deInitImageData(&inData);
-	deInitImageData(&outData);
-	deInitImageData(&expectedData);
+	free(inData);
+	free(outData);
+	free(expectedData);
+
 	deInitKaleidoscope(&handler);
 }
 END_TEST

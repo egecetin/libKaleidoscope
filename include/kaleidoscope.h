@@ -1,53 +1,7 @@
 #ifndef _KALEIDOSCOPE_H_
 #define _KALEIDOSCOPE_H_
 
-/**
- * @brief Data struct for images
- */
-struct ImageData_t
-{
-	int width;
-	int height;
-	unsigned char nComponents;
-	unsigned char *data;
-};
-typedef struct ImageData_t ImageData;
-
-/**
- * @brief Data struct for pixel locations
- */
-struct Point2D_t
-{
-	int x;
-	int y;
-};
-typedef struct Point2D_t Point2D;
-
-/**
- * @brief Data struct for transformation information
- */
-struct TransformationInfo_t
-{
-	/// Location from source image
-	Point2D srcLocation;
-	/// Location to destination image
-	Point2D dstLocation;
-	/// Offset from source image
-	unsigned long long srcOffset;
-	/// Offset from destination image
-	unsigned long long dstOffset;
-};
-typedef struct TransformationInfo_t TransformationInfo;
-
-/**
- * @brief Struct for kaleidoscope effect generator
- */
-struct KaleidoscopeHandle_t
-{
-	unsigned long long nPoints;
-	TransformationInfo *pTransferFunc;
-};
-typedef struct KaleidoscopeHandle_t KaleidoscopeHandle;
+#include "kaleidoscope-definitions.h"
 
 /**
  * @brief Get the Kaleidoscope Library version as integer
@@ -102,6 +56,7 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 /**
  * @brief Initializes kaleidoscope handler
  * @param[in, out] handler Kaleidoscope effect handler
+ * @param[in] k Variable to dim background. Should be between 0.0 and 1.0
  * @param[in] n Number of images for effect
  * @param[in] width Image width
  * @param[in] height Image height
@@ -109,37 +64,21 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
  * @param[in] scaleDown Scale down ratio to shrink image. Must be between 0.0 and 1.0
  * @return int 0 on success, negative otherwise
  */
-int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown);
+int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, int height, int nComponents,
+					 double scaleDown);
 
 /**
  * @brief Applies kaleidoscope effect to image
  * @param[in] handler Kaleidoscope effect handler
- * @param[in] k Variable to dim background. Should be between 0.0 and 1.0
  * @param[in] imgIn Input image
  * @param[out] imgOut Output image
  */
-void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut);
+void processKaleidoscope(KaleidoscopeHandle *handler, unsigned char *imgIn, unsigned char *imgOut);
 
 /**
  * @brief Deinitializes kaleidoscope handler
  * @param[in] handler Kaleidoscope effect handler
  */
 void deInitKaleidoscope(KaleidoscopeHandle *handler);
-
-/**
- * @brief Allocates memory for image
- * @param[in] img Image data
- * @param[in] width Width of image
- * @param[in] height Height of image
- * @param[in] nComponents Number of components
- * @return int Returns 0 on success
- */
-int initImageData(ImageData *img, int width, int height, int nComponents);
-
-/**
- * @brief Free memory allocated by read image
- * @param[in] img Image data
- */
-void deInitImageData(ImageData *img);
 
 #endif // _KALEIDOSCOPE_H_

@@ -10,6 +10,7 @@
 #include <stdlib.h>
 #include <string.h>
 
+// GCOVR_EXCL_START
 void getKaleidoscopeVersion(int *major, int *minor, int *patch)
 {
 	if (major && minor && patch)
@@ -52,6 +53,7 @@ char *getKaleidoscopeLibraryInfo()
 
 	return info;
 }
+// GCOVR_EXCL_STOP
 
 int compare(const void *lhsPtr, const void *rhsPtr)
 {
@@ -196,7 +198,8 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 	return EXIT_SUCCESS;
 }
 
-int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)
+int initKaleidoscope(KaleidoscopeHandle *handler, double k, int n, int width, int height, int nComponents,
+					 double scaleDown)
 {
 	int idx, jdx;
 
@@ -212,6 +215,13 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	assert(nComponents > 0);
 	assert(scaleDown > 0.0);
 	assert(scaleDown < 1.0);
+	assert(k >= 0.0);
+	assert(k <= 1.0);
+
+	handler->width = width;
+	handler->height = height;
+	handler->nComponents = nComponents;
+	handler->k = k;
 
 	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
@@ -277,45 +287,23 @@ cleanup:
 	return retval;
 }
 
-void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)
+void processKaleidoscope(KaleidoscopeHandle *handler, unsigned char *imgIn, unsigned char *imgOut)
 {
 	unsigned long long idx;
-	const unsigned long long nComponents = imgIn->nComponents;
-	const unsigned long long nPixels = (unsigned long long)imgIn->width * imgIn->height * imgIn->nComponents;
+	const unsigned long long nPixels = (unsigned long long)handler->width * handler->height * handler->nComponents;
 
-	unsigned char *srcPtr = imgIn->data;
-	unsigned char *destPtr = imgOut->data;
+	unsigned char *srcPtr = imgIn;
+	unsigned char *destPtr = imgOut;
 	TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
 
 	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr) // Dim image
-		*destPtr = (unsigned char)((*srcPtr) * k);
+		*destPtr = (unsigned char)((*srcPtr) * handler->k);
 	for (idx = 0; idx < handler->nPoints; ++idx, ++ptrTransform) // Merge
-		memcpy(&(imgOut->data[ptrTransform->dstOffset]), &(imgIn->data[ptrTransform->srcOffset]), nComponents);
+		memcpy(&(imgOut[ptrTransform->dstOffset]), &(imgIn[ptrTransform->srcOffset]), handler->nComponents);
 }
 
 void deInitKaleidoscope(KaleidoscopeHandle *handler)
 {
 	if (handler)
 		free(handler->pTransferFunc);
-}
-
-int initImageData(ImageData *img, int width, int height, int nComponents)
-{
-	img->data = (unsigned char *)malloc((unsigned long long)width * height * nComponents);
-	if (!img->data)
-		return EXIT_FAILURE;
-
-	img->height = height;
-	img->nComponents = nComponents;
-	img->width = width;
-	return EXIT_SUCCESS;
-}
-
-void deInitImageData(ImageData *img)
-{
-	if (img)
-	{
-		free(img->data);
-		img->data = NULL;
-	}
 }

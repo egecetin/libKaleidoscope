@@ -1,9 +1,13 @@
-#include "jpeg-utils/jpeg-utils.h"
-#include "kaleidoscope.h"
+#include <cstdio>
+#include <cstdlib>
+#include <ctime>
 
-#include <stdio.h>
-#include <stdlib.h>
-#include <time.h>
+#include "kaleidoscope-cuda.hpp"
+
+extern "C"
+{
+#include "jpeg-utils/jpeg-utils.h"
+}
 
 int main(int argc, char *argv[])
 {
@@ -16,6 +20,8 @@ int main(int argc, char *argv[])
 
 	KaleidoscopeHandle handler;
 	ImageData imgData, outData;
+	uint8_t *imgCuda, *outCuda;
+	cudaStream_t stream;
 
 	fprintf(stderr, "Kaleidoscope Library %s\n", getKaleidoscopeLibraryInfo());
 
@@ -64,15 +70,19 @@ int main(int argc, char *argv[])
 	fprintf(stderr, "Initializing ... ");
 	if (initImageData(&outData, imgData.width, imgData.height, imgData.nComponents))
 		return EXIT_FAILURE;
-	if ((retval = initKaleidoscope(&handler, k, n, imgData.width, imgData.height, imgData.nComponents, scaleDown)))
-		return retval;
-	fprintf(stderr, " %d\n", !retval);
+	cudaStreamCreateWithFlags(&stream, cudaStreamNonBlocking);
+	initKaleidoscopeCuda(&handler, k, n, imgData.width, imgData.height, imgData.nComponents, scaleDown, stream);
+
+	initDeviceMemory(&imgCuda, sizeof(uint8_t) * imgData.width * imgData.height * imgData.nComponents, stream);
+	initDeviceMemory(&outCuda, sizeof(uint8_t) * imgData.width * imgData.height * imgData.nComponents, stream);
+	uploadToDeviceImageData(imgData.data, imgCuda,
+							sizeof(uint8_t) * imgData.width * imgData.height * imgData.nComponents, stream);
 
 	fprintf(stderr, "Processing ...");
 	startTime = (float)clock() / CLOCKS_PER_SEC;
 	for (ctr = 0; ctr < maxCtr; ++ctr)
 	{
-		processKaleidoscope(&handler, imgData.data, outData.data);
+		processKaleidoscopeCuda(&handler, imgCuda, outCuda, stream);
 		if (!benchmark)
 			break;
 	}
@@ -83,13 +93,15 @@ int main(int argc, char *argv[])
 		fprintf(stderr, "FPS %5.3f\n", 1 / ((endTime - startTime) / maxCtr));
 
 	fprintf(stderr, "Saving %s... ", outPath);
+	downloadFromDeviceImageData(outCuda, outData.data,
+								sizeof(uint8_t) * imgData.width * imgData.height * imgData.nComponents, stream);
 	if ((retval = saveImage(outPath, &outData, TJPF_RGB, TJSAMP_444, 90)))
 		return retval;
 	fprintf(stderr, " %d\n", !retval);
 
 	deInitImageData(&imgData);
 	deInitImageData(&outData);
-	deInitKaleidoscope(&handler);
+	deInitKaleidoscopeCuda(&handler, stream);
 
 	fprintf(stderr, "Done...\n");
 
