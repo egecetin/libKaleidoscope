@@ -45,7 +45,7 @@ class KaleidoscopeHandler
 	 * @return true If successful
 	 * @return false otherwise
 	 */
-	bool processImage(std::unique_ptr<uint8_t> inImgData, std::unique_ptr<uint8_t> outImgData, void *pStream = nullptr);
+	bool processImage(uint8_t* inImgData, uint8_t* outImgData, void *pStream = nullptr);
 
 	/**
 	 * @brief Destroys the Kaleidoscope Handler object
@@ -71,6 +71,6 @@ class KaleidoscopeHandler
 	 * @return char* Library information
 	 */
 	static std::string getKaleidoscopeLibraryInfo();
-}
+};
 
 #endif // _KALEIDOSCOPE_DEFINITIONS_HPP_

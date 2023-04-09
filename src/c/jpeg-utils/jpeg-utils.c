@@ -1,4 +1,4 @@
-#include <jpeg-utils/jpeg-utils.h>
+#include <c/jpeg-utils/jpeg-utils.h>
 
 #include <assert.h>
 #include <inttypes.h>

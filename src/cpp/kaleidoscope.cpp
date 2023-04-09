@@ -15,16 +15,13 @@ KaleidoscopeHandler::KaleidoscopeHandler(double k, int n, int width, int height,
 		throw std::runtime_error("Cant init kaleidoscope handler");
 }
 
-bool KaleidoscopeHandler::processImage(std::unique_ptr<uint8_t> inImgData, std::unique_ptr<uint8_t> outImgData,
-									   void *pStream)
+bool KaleidoscopeHandler::processImage(uint8_t *inImgData, uint8_t *outImgData, void *pStream)
 {
-	processKaleidoscope(&transformData, inImgData.get(), outImgData.get());
+	processKaleidoscope(&transformData, inImgData, outImgData);
+	return true;
 }
 
-KaleidoscopeHandler::~KaleidoscopeHandler()
-{
-	deInitKaleidoscope(&transformData);
-}
+KaleidoscopeHandler::~KaleidoscopeHandler() { deInitKaleidoscope(&transformData); }
 
 void KaleidoscopeHandler::getKaleidoscopeVersion(int &major, int &minor, int &patch)
 {
@@ -37,9 +34,9 @@ std::string KaleidoscopeHandler::getKaleidoscopeVersionString() { return PROJECT
 
 std::string KaleidoscopeHandler::getKaleidoscopeLibraryInfo()
 {
-	std::string info = std::string(PROJECT_VERSION) + " " + C_COMPILER_NAME + " " + C_COMPILER_VERSION + " " + CXX_COMPILER_NAME +
-					   " " + CXX_COMPILER_VERSION + " " + BUILD_TYPE + " " + PROJECT_BUILD_DATE + " " +
-					   PROJECT_BUILD_TIME + " ";
+	std::string info = std::string(PROJECT_VERSION) + " " + C_COMPILER_NAME + " " + C_COMPILER_VERSION + " " +
+					   CXX_COMPILER_NAME + " " + CXX_COMPILER_VERSION + " " + BUILD_TYPE + " " + PROJECT_BUILD_DATE +
+					   " " + PROJECT_BUILD_TIME + " ";
 #ifdef KALEIDOSCOPE_ENABLE_CUDA
 	info = info + " with CUDA " + CUDA_COMPILER_VERSION;
 #else
