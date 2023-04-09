@@ -1,19 +1,19 @@
 #include <check.h>
-#include <kaleidoscope.h>
+#include <c/kaleidoscope.h>
 #include <readTestData.h>
 #include <stdlib.h>
 
 START_TEST(Rotation)
 {
 	int width = 1935, height = 1088;
-	TransformationInfo *inPtr = NULL, *outPtr = NULL, *expectedOutPtr = NULL;
+	struct TransformationInfo_t *inPtr = NULL, *outPtr = NULL, *expectedOutPtr = NULL;
 	char testDataInPath[] = "../../tests/data/rotation_1935x1088_InputData.bin";
 	char testDataExpectedPath[] = "../../tests/data/rotation_1935x1088_ExpectedData.bin";
 
 	// Init
-	inPtr = (TransformationInfo *)calloc(width * height, sizeof(TransformationInfo));
-	outPtr = (TransformationInfo *)calloc(width * height, sizeof(TransformationInfo));
-	expectedOutPtr = (TransformationInfo *)calloc(width * height, sizeof(TransformationInfo));
+	inPtr = (struct TransformationInfo_t *)calloc(width * height, sizeof(struct TransformationInfo_t));
+	outPtr = (struct TransformationInfo_t *)calloc(width * height, sizeof(struct TransformationInfo_t));
+	expectedOutPtr = (struct TransformationInfo_t *)calloc(width * height, sizeof(struct TransformationInfo_t));
 
 	ck_assert_ptr_nonnull(inPtr);
 	ck_assert_ptr_nonnull(outPtr);
@@ -31,7 +31,7 @@ START_TEST(Rotation)
 	rotatePoints(outPtr, inPtr, width, height, 240);
 	rotatePoints(outPtr, inPtr, width, height, 300);
 
-	ck_assert_mem_eq(outPtr, expectedOutPtr, width * height * sizeof(TransformationInfo));
+	ck_assert_mem_eq(outPtr, expectedOutPtr, width * height * sizeof(struct TransformationInfo_t));
 
 	// De-init
 	free(inPtr);

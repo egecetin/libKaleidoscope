@@ -1,5 +1,5 @@
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../cmake")
-set(KALEIDOSCOPE_TEST_LIBS check kaleidoscope-static)
+set(KALEIDOSCOPE_TEST_LIBS check kaleidoscope-static-c)
 
 # Includes
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/thirdparty/check/src)

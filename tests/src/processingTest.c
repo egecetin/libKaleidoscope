@@ -1,5 +1,5 @@
 #include <check.h>
-#include <kaleidoscope.h>
+#include <c/kaleidoscope.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -10,7 +10,7 @@ START_TEST(Processing)
 	int n = 6, width = 1935, height = 1088, nComponents = 3;
 	FILE *fIn = NULL, *fExpected = NULL;
 
-	KaleidoscopeHandle handler;
+	struct KaleidoscopeHandler_t handler;
 	unsigned char *inData, *outData, *expectedData;
 
 	char pathIn[] = "../../tests/data/processing_1935x1088_InputData.bin";

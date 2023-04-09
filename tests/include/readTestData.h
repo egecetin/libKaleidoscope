@@ -1,10 +1,10 @@
 #ifndef _READTESTDATA_H_
 #define _READTESTDATA_H_
 
-#include <kaleidoscope.h>
+#include <c/kaleidoscope.h>
 #include <stdio.h>
 
-int readTransformInfo(const char *path, TransformationInfo *dataPtr)
+int readTransformInfo(const char *path, struct TransformationInfo_t *dataPtr)
 {
 	FILE *fptr = NULL;
 	int ctr = 0, val1, val2, val3, val4;
@@ -27,7 +27,7 @@ int readTransformInfo(const char *path, TransformationInfo *dataPtr)
 	return ctr;
 }
 
-int writeTransformInfo(const char *path, TransformationInfo *dataPtr, unsigned long long len)
+int writeTransformInfo(const char *path, struct TransformationInfo_t *dataPtr, unsigned long long len)
 {
 	int idx = 0;
 	FILE *fptr = NULL;
