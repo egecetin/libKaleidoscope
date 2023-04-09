@@ -1,5 +1,5 @@
-#include "kaleidoscope.h"
-#include "kaleidoscope-config.h"
+#include <c/kaleidoscope.h>
+#include <kaleidoscope-config.h>
 
 #ifdef WIN32
 #define _USE_MATH_DEFINES
@@ -36,11 +36,11 @@ char *getKaleidoscopeLibraryInfo()
 	strncpy(info, PROJECT_VERSION, sizeof(PROJECT_VERSION));
 	offset += sizeof(PROJECT_VERSION);
 	memset(&info[offset - 1], 32, 1);
-	strncpy(&info[offset], COMPILER_NAME, sizeof(COMPILER_NAME));
-	offset += sizeof(COMPILER_NAME);
+	strncpy(&info[offset], C_COMPILER_NAME, sizeof(C_COMPILER_NAME));
+	offset += sizeof(C_COMPILER_NAME);
 	memset(&info[offset - 1], 32, 1);
-	strncpy(&info[offset], COMPILER_VERSION, sizeof(COMPILER_VERSION));
-	offset += sizeof(COMPILER_VERSION);
+	strncpy(&info[offset], C_COMPILER_VERSION, sizeof(C_COMPILER_VERSION));
+	offset += sizeof(C_COMPILER_VERSION);
 	memset(&info[offset - 1], 32, 1);
 	strncpy(&info[offset], BUILD_TYPE, sizeof(BUILD_TYPE));
 	offset += sizeof(BUILD_TYPE);
@@ -51,18 +51,6 @@ char *getKaleidoscopeLibraryInfo()
 	strncpy(&info[offset], PROJECT_BUILD_TIME, sizeof(PROJECT_BUILD_TIME));
 	offset += sizeof(PROJECT_BUILD_TIME);
 	memset(&info[offset - 1], 32, 1);
-#ifdef KALEIDOSCOPE_ENABLE_CUDA
-	strncpy(&info[offset], "with CUDA", sizeof("with CUDA"));
-	offset += sizeof("with CUDA");
-	memset(&info[offset - 1], 32, 1);
-	strncpy(&info[offset], CUDA_COMPILER_VERSION, sizeof(CUDA_COMPILER_VERSION));
-	offset += sizeof(CUDA_COMPILER_VERSION);
-	memset(&info[offset - 1], 32, 1);
-#else
-	strncpy(&info[offset], "without CUDA", sizeof("without CUDA"));
-	offset += sizeof("without CUDA");
-	memset(&info[offset - 1], 32, 1);
-#endif
 
 	return info;
 }

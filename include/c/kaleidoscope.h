@@ -1,7 +1,7 @@
 #ifndef _KALEIDOSCOPE_H_
 #define _KALEIDOSCOPE_H_
 
-#include "kaleidoscope-definitions.h"
+#include <c/kaleidoscope-definitions.h>
 
 /**
  * @brief Get the Kaleidoscope Library version as integer

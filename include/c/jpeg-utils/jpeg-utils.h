@@ -1,8 +1,6 @@
 #ifndef _JPEG_UTILS_H_
 #define _JPEG_UTILS_H_
 
-#include "kaleidoscope.h"
-
 #include <turbojpeg.h>
 
 /**

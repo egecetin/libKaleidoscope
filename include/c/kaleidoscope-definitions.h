@@ -1,8 +1,6 @@
 #ifndef _KALEIDOSCOPE_DEFINITIONS_H_
 #define _KALEIDOSCOPE_DEFINITIONS_H_
 
-#include "kaleidoscope-config.h"
-
 /**
  * @brief Data struct for pixel locations
  */
