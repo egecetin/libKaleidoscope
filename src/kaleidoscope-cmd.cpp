@@ -202,6 +202,8 @@ int main(int argc, char *argv[])
 
 	// Read image and prepare memory
 	std::cout << "Reading " << inPath << " ..." << std::endl;
+	inImgData = std::make_unique<ImageData>();
+	outImgData = std::make_unique<ImageData>();
 	if ((retval = readImage(inPath.c_str(), inImgData.get())))
 		return retval;
 
