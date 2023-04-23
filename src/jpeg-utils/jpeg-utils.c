@@ -1,7 +1,6 @@
 #include "jpeg-utils/jpeg-utils.h"
 
 #include <assert.h>
-#include <inttypes.h>
 #include <stdio.h>
 #include <stdlib.h>
 
@@ -106,4 +105,25 @@ cleanup:
 	tjFree(compImg);
 
 	return retval;
+}
+
+int initImageData(ImageData *img, int width, int height, int nComponents)
+{
+	img->data = (unsigned char *)malloc((unsigned long long)width * height * nComponents);
+	if (!img->data)
+		return EXIT_FAILURE;
+
+	img->height = height;
+	img->nComponents = nComponents;
+	img->width = width;
+	return EXIT_SUCCESS;
+}
+
+void deInitImageData(ImageData *img)
+{
+	if (img)
+	{
+		free(img->data);
+		img->data = NULL;
+	}
 }

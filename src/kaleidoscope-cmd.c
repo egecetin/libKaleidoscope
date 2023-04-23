@@ -72,7 +72,7 @@ int main(int argc, char *argv[])
 	startTime = (float)clock() / CLOCKS_PER_SEC;
 	for (ctr = 0; ctr < maxCtr; ++ctr)
 	{
-		processKaleidoscope(&handler, k, &imgData, &outData);
+		processKaleidoscope(&handler, k, imgData.data, outData.data);
 		if (!benchmark)
 			break;
 	}

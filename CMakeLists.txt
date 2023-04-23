@@ -86,7 +86,6 @@ if(KALEIDOSCOPE_ENABLE_PACKAGE)
   set(CPACK_RESOURCE_FILE_README ${PROJECT_SOURCE_DIR}/README.md)
   set(CPACK_PACKAGE_CONTACT "egecetin@hotmail.com.tr")
 
-
   if(APPLE)
     set(CPACK_GENERATOR "DragNDrop")
   elseif(UNIX)

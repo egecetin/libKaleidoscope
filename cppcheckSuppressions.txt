@@ -1,4 +1,2 @@
 *:thirdparty/*
 missingInclude:*
-unusedStructMember:include/kaleidoscope.h:21
-unusedStructMember:include/kaleidoscope.h:22
