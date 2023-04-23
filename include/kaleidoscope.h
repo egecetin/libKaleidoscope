@@ -2,23 +2,13 @@
 #define _KALEIDOSCOPE_H_
 
 /**
- * @brief Data struct for images
- */
-struct ImageData_t
-{
-	int width;
-	int height;
-	unsigned char nComponents;
-	unsigned char *data;
-};
-typedef struct ImageData_t ImageData;
-
-/**
  * @brief Data struct for pixel locations
  */
 struct Point2D_t
 {
+	// cppcheck-suppress unusedStructMember
 	int x;
+	// cppcheck-suppress unusedStructMember
 	int y;
 };
 typedef struct Point2D_t Point2D;
@@ -44,16 +34,24 @@ typedef struct TransformationInfo_t TransformationInfo;
  */
 struct KaleidoscopeHandle_t
 {
+	/// Image width
+	int width;
+	/// Image height
+	int height;
+	/// Number of components (eg 3 for RGB)
+	unsigned char nComponents;
+	/// Total number of points of transfer function
 	unsigned long long nPoints;
-	TransformationInfo *pTransferFunc;
+	/// Transformation info
+	struct TransformationInfo_t *pTransferFunc;
 };
 typedef struct KaleidoscopeHandle_t KaleidoscopeHandle;
 
 /**
  * @brief Get the Kaleidoscope Library version as integer
- * @param major Major number
- * @param minor Minor number
- * @param patch Patch number
+ * @param[in, out] major Major number
+ * @param[in, out] minor Minor number
+ * @param[in, out] patch Patch number
  */
 void getKaleidoscopeVersion(int *major, int *minor, int *patch);
 
@@ -118,28 +116,12 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
  * @param[in] imgIn Input image
  * @param[out] imgOut Output image
  */
-void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut);
+void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut);
 
 /**
  * @brief Deinitializes kaleidoscope handler
  * @param[in] handler Kaleidoscope effect handler
  */
 void deInitKaleidoscope(KaleidoscopeHandle *handler);
-
-/**
- * @brief Allocates memory for image
- * @param[in] img Image data
- * @param[in] width Width of image
- * @param[in] height Height of image
- * @param[in] nComponents Number of components
- * @return int Returns 0 on success
- */
-int initImageData(ImageData *img, int width, int height, int nComponents);
-
-/**
- * @brief Free memory allocated by read image
- * @param[in] img Image data
- */
-void deInitImageData(ImageData *img);
 
 #endif // _KALEIDOSCOPE_H_

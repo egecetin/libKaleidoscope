@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(kaleidoscope VERSION 1.2.0)
+project(kaleidoscope VERSION 1.3.0)
 
 # Options
 set(CMAKE_DEBUG_POSTFIX d)
@@ -85,7 +85,6 @@ if(KALEIDOSCOPE_ENABLE_PACKAGE)
   set(CPACK_RESOURCE_FILE_LICENSE ${PROJECT_SOURCE_DIR}/LICENSE)
   set(CPACK_RESOURCE_FILE_README ${PROJECT_SOURCE_DIR}/README.md)
   set(CPACK_PACKAGE_CONTACT "egecetin@hotmail.com.tr")
-
 
   if(APPLE)
     set(CPACK_GENERATOR "DragNDrop")
