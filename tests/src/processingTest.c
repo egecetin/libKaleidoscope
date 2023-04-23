@@ -45,6 +45,10 @@ START_TEST(Processing)
 	deInitKaleidoscope(&handler);
 	handler.pTransferFunc = NULL;
 	deInitKaleidoscope(&handler);
+
+	free(inData);
+	free(outData);
+	free(expectedData);
 }
 END_TEST
 
