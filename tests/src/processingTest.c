@@ -43,6 +43,7 @@ START_TEST(Processing)
 	fclose(fExpected);
 
 	deInitKaleidoscope(&handler);
+	handler.pTransferFunc = NULL;
 	deInitKaleidoscope(&handler);
 }
 END_TEST
