@@ -22,7 +22,7 @@ if(UNIX)
             EXECUTABLE
             ctest -j
             DEPENDENCIES
-            interpolationTest processingTest rotationTest slicingTest
+            interpolationTest processingTest rotationTest slicingTest versionTest
             EXCLUDE
             "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
             "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
@@ -34,7 +34,7 @@ if(UNIX)
             EXECUTABLE
             ctest -j
             DEPENDENCIES
-            interpolationTest processingTest rotationTest slicingTest
+            interpolationTest processingTest rotationTest slicingTest versionTest
             EXCLUDE
             "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
             "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
@@ -47,15 +47,18 @@ add_executable(interpolationTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_
 add_executable(processingTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/processingTest.c)
 add_executable(rotationTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/rotationTest.c)
 add_executable(slicingTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/slicingTest.c)
+add_executable(versionTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/versionTest.c)
 
 # Linker
 target_link_libraries(interpolationTest ${KALEIDOSCOPE_TEST_LIBS})
 target_link_libraries(processingTest ${KALEIDOSCOPE_TEST_LIBS})
 target_link_libraries(rotationTest ${KALEIDOSCOPE_TEST_LIBS})
 target_link_libraries(slicingTest ${KALEIDOSCOPE_TEST_LIBS})
+target_link_libraries(versionTest ${KALEIDOSCOPE_TEST_LIBS})
 
 # Enum tests
 add_test(NAME interpolationTest COMMAND interpolationTest)
 add_test(NAME processingTest COMMAND processingTest)
 add_test(NAME rotationTest COMMAND rotationTest)
 add_test(NAME slicingTest COMMAND slicingTest)
+add_test(NAME versionTest COMMAND versionTest)
