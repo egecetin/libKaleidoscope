@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['height_61',['height',['../structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2',1,'ImageData_t']]]
+  ['height_52',['height',['../structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4',1,'KaleidoscopeHandle_t']]]
 ];

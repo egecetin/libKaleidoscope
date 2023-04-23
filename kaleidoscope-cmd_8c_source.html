@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">kaleidoscope
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.3.0</span>
    </div>
   </td>
  </tr>
@@ -94,7 +94,7 @@ $(function() {
 <div class="line"><a name="l00015"></a><span class="lineno">   15</span>&#160;    <span class="keywordtype">double</span> startTime, endTime;</div>
 <div class="line"><a name="l00016"></a><span class="lineno">   16</span>&#160; </div>
 <div class="line"><a name="l00017"></a><span class="lineno">   17</span>&#160;    <a class="code" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> handler;</div>
-<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    <a class="code" href="structImageData__t.html">ImageData</a> imgData, outData;</div>
+<div class="line"><a name="l00018"></a><span class="lineno">   18</span>&#160;    ImageData imgData, outData;</div>
 <div class="line"><a name="l00019"></a><span class="lineno">   19</span>&#160; </div>
 <div class="line"><a name="l00020"></a><span class="lineno">   20</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Kaleidoscope Library %s\n&quot;</span>, <a class="code" href="kaleidoscope_8c.html#a2d8801a2d0569fc6a6ace951fde5b8a6">getKaleidoscopeLibraryInfo</a>());</div>
 <div class="line"><a name="l00021"></a><span class="lineno">   21</span>&#160; </div>
@@ -141,9 +141,9 @@ $(function() {
 <div class="line"><a name="l00062"></a><span class="lineno">   62</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
 <div class="line"><a name="l00063"></a><span class="lineno">   63</span>&#160; </div>
 <div class="line"><a name="l00064"></a><span class="lineno">   64</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Initializing ... &quot;</span>);</div>
-<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (<a class="code" href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a>(&amp;outData, imgData.<a class="code" href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">width</a>, imgData.<a class="code" href="structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2">height</a>, imgData.<a class="code" href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">nComponents</a>))</div>
+<div class="line"><a name="l00065"></a><span class="lineno">   65</span>&#160;    <span class="keywordflow">if</span> (initImageData(&amp;outData, imgData.width, imgData.height, imgData.nComponents))</div>
 <div class="line"><a name="l00066"></a><span class="lineno">   66</span>&#160;        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
-<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> ((retval = <a class="code" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(&amp;handler, n, imgData.<a class="code" href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">width</a>, imgData.<a class="code" href="structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2">height</a>, imgData.<a class="code" href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">nComponents</a>, scaleDown)))</div>
+<div class="line"><a name="l00067"></a><span class="lineno">   67</span>&#160;    <span class="keywordflow">if</span> ((retval = <a class="code" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(&amp;handler, n, imgData.<a class="code" href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">width</a>, imgData.height, imgData.nComponents, scaleDown)))</div>
 <div class="line"><a name="l00068"></a><span class="lineno">   68</span>&#160;        <span class="keywordflow">return</span> retval;</div>
 <div class="line"><a name="l00069"></a><span class="lineno">   69</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
 <div class="line"><a name="l00070"></a><span class="lineno">   70</span>&#160; </div>
@@ -151,7 +151,7 @@ $(function() {
 <div class="line"><a name="l00072"></a><span class="lineno">   72</span>&#160;    startTime = (float)clock() / CLOCKS_PER_SEC;</div>
 <div class="line"><a name="l00073"></a><span class="lineno">   73</span>&#160;    <span class="keywordflow">for</span> (ctr = 0; ctr &lt; maxCtr; ++ctr)</div>
 <div class="line"><a name="l00074"></a><span class="lineno">   74</span>&#160;    {</div>
-<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3">processKaleidoscope</a>(&amp;handler, k, &amp;imgData, &amp;outData);</div>
+<div class="line"><a name="l00075"></a><span class="lineno">   75</span>&#160;        <a class="code" href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a>(&amp;handler, k, imgData.data, outData.data);</div>
 <div class="line"><a name="l00076"></a><span class="lineno">   76</span>&#160;        <span class="keywordflow">if</span> (!benchmark)</div>
 <div class="line"><a name="l00077"></a><span class="lineno">   77</span>&#160;            <span class="keywordflow">break</span>;</div>
 <div class="line"><a name="l00078"></a><span class="lineno">   78</span>&#160;    }</div>
@@ -166,8 +166,8 @@ $(function() {
 <div class="line"><a name="l00087"></a><span class="lineno">   87</span>&#160;        <span class="keywordflow">return</span> retval;</div>
 <div class="line"><a name="l00088"></a><span class="lineno">   88</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot; %d\n&quot;</span>, !retval);</div>
 <div class="line"><a name="l00089"></a><span class="lineno">   89</span>&#160; </div>
-<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    <a class="code" href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a>(&amp;imgData);</div>
-<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    <a class="code" href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a>(&amp;outData);</div>
+<div class="line"><a name="l00090"></a><span class="lineno">   90</span>&#160;    deInitImageData(&amp;imgData);</div>
+<div class="line"><a name="l00091"></a><span class="lineno">   91</span>&#160;    deInitImageData(&amp;outData);</div>
 <div class="line"><a name="l00092"></a><span class="lineno">   92</span>&#160;    <a class="code" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(&amp;handler);</div>
 <div class="line"><a name="l00093"></a><span class="lineno">   93</span>&#160; </div>
 <div class="line"><a name="l00094"></a><span class="lineno">   94</span>&#160;    fprintf(stderr, <span class="stringliteral">&quot;Done...\n&quot;</span>);</div>
@@ -177,20 +177,15 @@ $(function() {
 <div class="ttc" id="akaleidoscope-cmd_8c_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope-cmd_8c_source.html#l00008">kaleidoscope-cmd.c:8</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a2d8801a2d0569fc6a6ace951fde5b8a6"><div class="ttname"><a href="kaleidoscope_8c.html#a2d8801a2d0569fc6a6ace951fde5b8a6">getKaleidoscopeLibraryInfo</a></div><div class="ttdeci">char * getKaleidoscopeLibraryInfo()</div><div class="ttdoc">Get the Kaleidoscope Library info as string.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00030">kaleidoscope.c:30</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00199">kaleidoscope.c:199</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a74d1792c922d9293ce29585d7ed98aa0"><div class="ttname"><a href="kaleidoscope_8c.html#a74d1792c922d9293ce29585d7ed98aa0">initImageData</a></div><div class="ttdeci">int initImageData(ImageData *img, int width, int height, int nComponents)</div><div class="ttdoc">Allocates memory for image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00302">kaleidoscope.c:302</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a898cae6ef6ca793efb0f45b857d839f3"><div class="ttname"><a href="kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00280">kaleidoscope.c:280</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a8ca98701abc68afad444ae367e208d43"><div class="ttname"><a href="kaleidoscope_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a></div><div class="ttdeci">void deInitImageData(ImageData *img)</div><div class="ttdoc">Free memory allocated by read image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00314">kaleidoscope.c:314</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00296">kaleidoscope.c:296</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00284">kaleidoscope.c:284</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00300">kaleidoscope.c:300</a></div></div>
 <div class="ttc" id="akaleidoscope_8h_html"><div class="ttname"><a href="kaleidoscope_8h.html">kaleidoscope.h</a></div></div>
-<div class="ttc" id="astructImageData__t_html"><div class="ttname"><a href="structImageData__t.html">ImageData_t</a></div><div class="ttdoc">Data struct for images.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00007">kaleidoscope.h:8</a></div></div>
-<div class="ttc" id="astructImageData__t_html_a14d490ab06ebbcb2ec5abfc5723813cc"><div class="ttname"><a href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">ImageData_t::nComponents</a></div><div class="ttdeci">unsigned char nComponents</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00011">kaleidoscope.h:11</a></div></div>
-<div class="ttc" id="astructImageData__t_html_a94eaf5474b59f6b6d65f4989b9f600ed"><div class="ttname"><a href="structImageData__t.html#a94eaf5474b59f6b6d65f4989b9f600ed">ImageData_t::width</a></div><div class="ttdeci">int width</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00009">kaleidoscope.h:9</a></div></div>
-<div class="ttc" id="astructImageData__t_html_ad1c3f71fbe73f783ed2468c1f0a5d6f2"><div class="ttname"><a href="structImageData__t.html#ad1c3f71fbe73f783ed2468c1f0a5d6f2">ImageData_t::height</a></div><div class="ttdeci">int height</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00010">kaleidoscope.h:10</a></div></div>
-<div class="ttc" id="astructKaleidoscopeHandle__t_html"><div class="ttname"><a href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle_t</a></div><div class="ttdoc">Struct for kaleidoscope effect generator.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00045">kaleidoscope.h:46</a></div></div>
+<div class="ttc" id="astructKaleidoscopeHandle__t_html"><div class="ttname"><a href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle_t</a></div><div class="ttdoc">Struct for kaleidoscope effect generator.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00035">kaleidoscope.h:36</a></div></div>
+<div class="ttc" id="astructKaleidoscopeHandle__t_html_a2051d622e9a73a60e2bdd0991865bb4e"><div class="ttname"><a href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">KaleidoscopeHandle_t::width</a></div><div class="ttdeci">int width</div><div class="ttdoc">Image width.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00038">kaleidoscope.h:38</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 15 2023 17:30:23 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 23 2023 17:31:37 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

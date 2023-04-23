@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">kaleidoscope
-   &#160;<span id="projectnumber">1.2.0</span>
+   &#160;<span id="projectnumber">1.3.0</span>
    </div>
   </td>
  </tr>
@@ -85,7 +85,7 @@ Usage</h2>
 <p>The library has a simple usage and you need only three functions to use it. Check the sample usage at <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code></p>
 <ul>
 <li>Initialization of the transformation matrix: <code>int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)</code></li>
-<li>Processing image (Can be used multiple times if the input images have same dimensions): <code>void <a class="el" href="kaleidoscope_8h.html#a898cae6ef6ca793efb0f45b857d839f3" title="Applies kaleidoscope effect to image.">processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut)</a></code></li>
+<li>Processing image (Can be used multiple times if the input images have same dimensions): <code>void <a class="el" href="kaleidoscope_8h.html#ab5b2988a55fb746fbe1fa80dc7b72df1" title="Applies kaleidoscope effect to image.">processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</a></code></li>
 <li>Deinitialization of the transformation matrix: <code>void <a class="el" href="kaleidoscope_8h.html#af94426aef969fbc479f07359b36a3bea" title="Deinitializes kaleidoscope handler.">deInitKaleidoscope(KaleidoscopeHandle *handler)</a></code></li>
 </ul>
 <p>Alternatively you can directly use the command line program to create kaleidoscope effect with <code>./kaleidoscope-cmd &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;</code>. You can see an example below for <code>N=8</code> </p><div align="center"> <img src="doc/images/ac-synin.jpg" alt="" width="425" class="inline"/> <img src="doc/images/ac-synin-out.jpg" alt="" width="425" class="inline"/> <br  />
@@ -107,7 +107,7 @@ Benchmark</h2>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Apr 15 2023 17:30:23 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Apr 23 2023 17:31:37 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>

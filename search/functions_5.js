@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['processkaleidoscope_55',['processKaleidoscope',['../kaleidoscope_8c.html#a898cae6ef6ca793efb0f45b857d839f3',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a898cae6ef6ca793efb0f45b857d839f3',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, ImageData *imgIn, ImageData *imgOut):&#160;kaleidoscope.c']]]
+  ['processkaleidoscope_47',['processKaleidoscope',['../kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#ab5b2988a55fb746fbe1fa80dc7b72df1',1,'processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut):&#160;kaleidoscope.c']]]
 ];
