@@ -8,13 +8,13 @@ include_directories(${CMAKE_CURRENT_SOURCE_DIR}/../include)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 
 if(UNIX)
-    set(KALEIDOSCOPE_TEST_LIBS check pthread)
+    list(APPEND KALEIDOSCOPE_TEST_LIBS pthread)
 
     if(KALEIDOSCOPE_ENABLE_COVERAGE)
         include(CodeCoverage)
 
         add_compile_options(--coverage)
-        set(KALEIDOSCOPE_TEST_LIBS check pthread gcov)
+        list(APPEND KALEIDOSCOPE_TEST_LIBS gcov)
         set(GCOVR_ADDITIONAL_ARGS "--exclude-throw-branches")
         setup_target_for_coverage_gcovr_html(
             NAME
@@ -22,7 +22,7 @@ if(UNIX)
             EXECUTABLE
             ctest -j
             DEPENDENCIES
-            imageDataTest interpolationTest processingTest rotationTest slicingTest
+            interpolationTest processingTest rotationTest slicingTest
             EXCLUDE
             "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
             "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
@@ -34,7 +34,7 @@ if(UNIX)
             EXECUTABLE
             ctest -j
             DEPENDENCIES
-            imageDataTest interpolationTest processingTest rotationTest slicingTest
+            interpolationTest processingTest rotationTest slicingTest
             EXCLUDE
             "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
             "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
