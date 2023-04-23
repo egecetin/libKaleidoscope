@@ -43,6 +43,7 @@ START_TEST(Processing)
 	fclose(fExpected);
 
 	deInitKaleidoscope(&handler);
+	deInitKaleidoscope(&handler);
 }
 END_TEST
 
