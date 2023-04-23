@@ -5,10 +5,25 @@
 START_TEST(VersionTest)
 {
 	int major = -1, minor = -1, patch = -1;
+	getKaleidoscopeVersion(NULL, &minor, &patch);
+	ck_assert_int_eq(major, -1);
+	ck_assert_int_eq(minor, -1);
+	ck_assert_int_eq(patch, -1);
+
+	getKaleidoscopeVersion(&major, NULL, &patch);
+	ck_assert_int_eq(major, -1);
+	ck_assert_int_eq(minor, -1);
+	ck_assert_int_eq(patch, -1);
+
+	getKaleidoscopeVersion(&major, &minor, NULL);
+	ck_assert_int_eq(major, -1);
+	ck_assert_int_eq(minor, -1);
+	ck_assert_int_eq(patch, -1);
+
 	getKaleidoscopeVersion(&major, &minor, &patch);
-    ck_assert_int_ne(major, -1);
-    ck_assert_int_ne(minor, -1);
-    ck_assert_int_ne(patch, -1);
+	ck_assert_int_ne(major, -1);
+	ck_assert_int_ne(minor, -1);
+	ck_assert_int_ne(patch, -1);
 
 	// Check version strings
 	ck_assert_ptr_nonnull(getKaleidoscopeVersionString());
