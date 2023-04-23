@@ -1,6 +1,5 @@
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${CMAKE_CURRENT_SOURCE_DIR}/../cmake")
-set(KALEIDOSCOPE_SOURCES ${CMAKE_CURRENT_SOURCE_DIR}/../src/kaleidoscope.c)
-set(KALEIDOSCOPE_TEST_LIBS check)
+set(KALEIDOSCOPE_TEST_LIBS check kaleidoscope-static)
 
 # Includes
 include_directories(${CMAKE_CURRENT_BINARY_DIR}/thirdparty/check/src)
@@ -43,11 +42,11 @@ if(UNIX)
 endif()
 
 # Compile
-add_executable(interpolationTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/interpolationTest.c)
-add_executable(processingTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/processingTest.c)
-add_executable(rotationTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/rotationTest.c)
-add_executable(slicingTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/slicingTest.c)
-add_executable(versionTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/versionTest.c)
+add_executable(interpolationTest ${CMAKE_CURRENT_SOURCE_DIR}/src/interpolationTest.c)
+add_executable(processingTest ${CMAKE_CURRENT_SOURCE_DIR}/src/processingTest.c)
+add_executable(rotationTest ${CMAKE_CURRENT_SOURCE_DIR}/src/rotationTest.c)
+add_executable(slicingTest ${CMAKE_CURRENT_SOURCE_DIR}/src/slicingTest.c)
+add_executable(versionTest ${CMAKE_CURRENT_SOURCE_DIR}/src/versionTest.c)
 
 # Linker
 target_link_libraries(interpolationTest ${KALEIDOSCOPE_TEST_LIBS})
