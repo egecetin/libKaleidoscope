@@ -15,15 +15,17 @@ option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
+file(GLOB KALEIDOSCOPE_HEADERS
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
+  ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.hpp)
+
 # Targets
 add_library(kaleidoscope-static STATIC ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c)
 set_target_properties(
   kaleidoscope-static
   PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
-  PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
-  PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.hpp
-  VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
-  SOVERSION ${PROJECT_VERSION_MAJOR})
+  PUBLIC_HEADER "${KALEIDOSCOPE_HEADERS}"
+  VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH})
 install(TARGETS kaleidoscope-static)
 
 if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
@@ -35,8 +37,7 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
   set_target_properties(
     kaleidoscope-shared
     PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
-    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
-    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.hpp
+    PUBLIC_HEADER "${KALEIDOSCOPE_HEADERS}"
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
     SOVERSION ${PROJECT_VERSION_MAJOR})
   install(TARGETS kaleidoscope-shared)
@@ -51,8 +52,8 @@ if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
 
   add_executable(kaleidoscope-cmd
-                  ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c
-                  ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c)
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope-cmd.c
+    ${CMAKE_CURRENT_SOURCE_DIR}/src/jpeg-utils/jpeg-utils.c)
   target_link_libraries(kaleidoscope-cmd kaleidoscope-static turbojpeg-static)
   set_target_properties(
     kaleidoscope-cmd
@@ -95,6 +96,7 @@ if(KALEIDOSCOPE_ENABLE_PACKAGE)
   elseif(WIN32)
     set(CPACK_GENERATOR "NSIS")
   endif()
+
   include(CPack)
 endif()
 
