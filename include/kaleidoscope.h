@@ -6,9 +6,7 @@
  */
 struct Point2D_t
 {
-	// cppcheck-suppress unusedStructMember
 	int x;
-	// cppcheck-suppress unusedStructMember
 	int y;
 };
 typedef struct Point2D_t Point2D;
