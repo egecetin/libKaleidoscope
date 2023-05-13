@@ -21,6 +21,7 @@ set_target_properties(
   kaleidoscope-static
   PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
   PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
+  PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.hpp
   VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
   SOVERSION ${PROJECT_VERSION_MAJOR})
 install(TARGETS kaleidoscope-static)
@@ -35,6 +36,7 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
     kaleidoscope-shared
     PROPERTIES OUTPUT_NAME "kaleidoscope" C_STANDARD 90
     PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h
+    PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.hpp
     VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
     SOVERSION ${PROJECT_VERSION_MAJOR})
   install(TARGETS kaleidoscope-shared)
