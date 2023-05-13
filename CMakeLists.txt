@@ -11,6 +11,7 @@ option(KALEIDOSCOPE_ENABLE_TESTS "Enables unit testing" OFF)
 option(KALEIDOSCOPE_ENABLE_CMD_TOOL "Enables command line tool" ON)
 option(KALEIDOSCOPE_ENABLE_COVERAGE "Enables coverage report" OFF)
 option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
+option(KALEIDOSCOPE_ENABLE_CUDA "Enables NVIDIA CUDA backend for library" OFF)
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -43,8 +44,26 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
   install(TARGETS kaleidoscope-shared)
 
   if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
-    target_link_libraries(kaleidoscope-static m)
+    target_link_libraries(kaleidoscope-shared m)
   endif()
+
+  if(KALEIDOSCOPE_ENABLE_CUDA)
+    enable_language(CUDA)
+
+    add_library(kaleidoscope-cuda-shared SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.cu)
+    set_target_properties(
+      kaleidoscope-cuda-shared
+      PROPERTIES OUTPUT_NAME "kaleidoscope-cuda" CUDA_ARCHITECTURES OFF
+      PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.cuh
+      VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
+      SOVERSION ${PROJECT_VERSION_MAJOR})
+    target_link_libraries(kaleidoscope-cuda-shared kaleidoscope-shared)
+
+    install(TARGETS kaleidoscope-cuda-shared)
+  endif()
+elseif(KALEIDOSCOPE_ENABLE_CUDA)
+  message(WARNING "CUDA backend requires shared libraries")
+  set(KALEIDOSCOPE_ENABLE_CUDA OFF)
 endif()
 
 if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
