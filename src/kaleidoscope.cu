@@ -1,33 +1,43 @@
 #include "kaleidoscope.cuh"
 
+#include <stdexcept>
+
+__device__ void dimImage(uint8_t *inImg, uint8_t *outImg, size_t nPoints, double k)
+{
+	size_t offset = threadIdx.x + blockIdx.x * blockDim.x;
+	if (offset < nPoints)
+		*(outImg + offset) = *(inImg + offset) * k;
+}
+
+__device__ void transformImage(uint8_t *inImg, uint8_t *outImg, int nComponents, TransformationInfo *info,
+								size_t nPoints)
+{
+	size_t offset = threadIdx.x + blockIdx.x * blockDim.x;
+	if (offset >= nPoints)
+		return;
+
+	TransformationInfo *infoPtr = info + offset;
+	for (int idx = 0; idx < nComponents; ++idx)
+		*(outImg + infoPtr->dstOffset + idx) = *(inImg + infoPtr->srcOffset + idx);
+}
+
+__global__ void _processImage(uint8_t *inImg, uint8_t *outImg, size_t nPixels, double dimConst, std::pair<int, int> dimSizes,
+								cudaStream_t stream)
+{
+	dimImage<<<dimSizes.second, dimSizes.first, 0, stream>>>(inImg, outImg, nPixels, dimConst);
+	// transformImage<<<transformSizes.second, transformSizes.first, 0, stream>>>(inImg, outImg,
+	// handler.nComponents, handler.pTransferFunc, handler.nPoints);
+}
+
 namespace kalos
 {
 	namespace cuda
 	{
-		__device__ void dimImage(uint8_t *inImg, uint8_t *outImg, size_t nPoints, double k)
-		{
-			size_t offset = threadIdx.x + blockIdx.x * blockDim.x;
-			if (offset < nPoints)
-				*(outImg + offset) = *(inImg + offset) * k;
-		}
-
-		__device__ void transformImage(uint8_t *inImg, uint8_t *outImg, int nComponents, TransformationInfo *info, size_t nPoints)
-		{
-			size_t offset = threadIdx.x + blockIdx.x * blockDim.x;
-			if (offset >= nPoints)
-				return;
-
-			TransformationInfo *infoPtr = info + offset;
-			for (int idx = 0; idx < nComponents; ++idx)
-				*(outImg + infoPtr->dstOffset + idx) = *(inImg + infoPtr->srcOffset + idx);
-		}
-
-		void Kaleidoscope::init(int nImage, int width, int height, int nComponents, double scaleDown, double dimConst,
-								cudaStream_t stream)
-			: k(dimConst)
+		Kaleidoscope::Kaleidoscope(int nImage, int width, int height, int nComponents, double scaleDown,
+								   double dimConst, cudaStream_t stream)
 		{
 			KaleidoscopeHandle handlerLocal;
-			if (initKaleidoscope(&handler, nImage, width, height, nComponents, scaleDown) != 0)
+			if (initKaleidoscope(&handlerLocal, nImage, width, height, nComponents, scaleDown) != 0)
 				throw std::runtime_error("Unknown error");
 
 			// Calculate kernel sizes
@@ -52,12 +62,10 @@ namespace kalos
 			deInitKaleidoscope(&handlerLocal);
 		}
 
-		__global__ void processImage(uint8_t *inImg, uint8_t *outImg, size_t nPixels, double dimConst,
-									 cudaStream_t stream)
+		void Kaleidoscope::processImage(uint8_t *inImg, uint8_t *outImg, size_t nPixels, double dimConst,
+										cudaStream_t stream)
 		{
-			dimImage<<<dimSizes.second, dimSize.first, 0, stream>>>(inImg, outImg, nPixels, dimConst);
-			// transformImage<<<transformSizes.second, transformSizes.first, 0, stream>>>(inImg, outImg, handler.nComponents,
-			// handler.pTransferFunc, handler.nPoints);
+			_processImage(inImg, outImg, nPixels, dimConst, dimSizes, stream);
 		}
 
 		Kaleidoscope::~Kaleidoscope() { cudaFree(handler.pTransferFunc); }
