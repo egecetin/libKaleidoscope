@@ -13,6 +13,8 @@ option(KALEIDOSCOPE_ENABLE_COVERAGE "Enables coverage report" OFF)
 option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
 option(KALEIDOSCOPE_ENABLE_CUDA "Enables NVIDIA CUDA backend for library" OFF)
 
+set(KALEIDOSCOPE_TARGET_CUDA_ARCH "50;52;61;62;70;72;75;80;86;87;89;90")
+
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
 
@@ -50,11 +52,11 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
   if(KALEIDOSCOPE_ENABLE_CUDA)
     enable_language(CUDA)
 
-    add_library(kaleidoscope-cuda-shared SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.cu)
+    add_library(kaleidoscope-cuda-shared SHARED ${CMAKE_CURRENT_SOURCE_DIR}/src/cuda/kaleidoscope.cu)
     set_target_properties(
       kaleidoscope-cuda-shared
-      PROPERTIES OUTPUT_NAME "kaleidoscope-cuda" CUDA_ARCHITECTURES OFF
-      PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.cuh
+      PROPERTIES OUTPUT_NAME "kaleidoscope-cuda" CUDA_ARCHITECTURES "${KALEIDOSCOPE_TARGET_CUDA_ARCH}"
+      PUBLIC_HEADER ${CMAKE_CURRENT_SOURCE_DIR}/include/cuda/kaleidoscope.cuh
       VERSION ${PROJECT_VERSION_MAJOR}.${PROJECT_VERSION_MINOR}.${PROJECT_VERSION_PATCH}
       SOVERSION ${PROJECT_VERSION_MAJOR})
     target_link_libraries(kaleidoscope-cuda-shared kaleidoscope-shared)
@@ -62,12 +64,12 @@ if(KALEIDOSCOPE_ENABLE_SHARED)
     install(TARGETS kaleidoscope-cuda-shared)
   endif()
 elseif(KALEIDOSCOPE_ENABLE_CUDA)
-  message(WARNING "CUDA backend requires shared libraries")
+  message(WARNING "CUDA backend requires shared libraries. Please enable both KALEIDOSCOPE_ENABLE_SHARED and KALEIDOSCOPE_ENABLE_CUDA")
   set(KALEIDOSCOPE_ENABLE_CUDA OFF)
 endif()
 
 if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo EXCLUDE_FROM_ALL)
+  add_subdirectory(thirdparty/libjpeg-turbo EXCLUDE_FROM_ALL)
   include_directories(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/libjpeg-turbo)
 
   add_executable(kaleidoscope-cmd
@@ -92,8 +94,7 @@ if(KALEIDOSCOPE_ENABLE_TESTS)
   include(CTest)
   enable_testing()
 
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/thirdparty/check EXCLUDE_FROM_ALL)
-  add_subdirectory(${CMAKE_CURRENT_SOURCE_DIR}/tests)
+  add_subdirectory(tests)
 endif()
 
 if(KALEIDOSCOPE_ENABLE_PACKAGE)

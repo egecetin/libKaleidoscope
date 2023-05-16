@@ -44,8 +44,6 @@ namespace kalos
 		 */
 		void processImage(uint8_t *inImg, uint8_t *outImg, size_t size, double dimConst)
 		{
-			if (size != handler.nPoints * handler.nComponents)
-				throw std::out_of_range("Size is not equal to initialized handler");
 			processKaleidoscope(&handler, dimConst, inImg, outImg);
 		}
 

@@ -1,16 +1,16 @@
-#include "kaleidoscope.cuh"
+#include "cuda/kaleidoscope.cuh"
 
 #include <stdexcept>
 
-__device__ void dimImage(uint8_t *inImg, uint8_t *outImg, size_t nPoints, double k)
+__global__ void dimImage(uint8_t *inImg, uint8_t *outImg, size_t nPoints, double k)
 {
 	size_t offset = threadIdx.x + blockIdx.x * blockDim.x;
 	if (offset < nPoints)
 		*(outImg + offset) = *(inImg + offset) * k;
 }
 
-__device__ void transformImage(uint8_t *inImg, uint8_t *outImg, int nComponents, TransformationInfo *info,
-								size_t nPoints)
+__global__ void transformImage(uint8_t *inImg, uint8_t *outImg, int nComponents, TransformationInfo *info,
+							   size_t nPoints)
 {
 	size_t offset = threadIdx.x + blockIdx.x * blockDim.x;
 	if (offset >= nPoints)
@@ -21,12 +21,13 @@ __device__ void transformImage(uint8_t *inImg, uint8_t *outImg, int nComponents,
 		*(outImg + infoPtr->dstOffset + idx) = *(inImg + infoPtr->srcOffset + idx);
 }
 
-__global__ void _processImage(uint8_t *inImg, uint8_t *outImg, size_t nPixels, double dimConst, std::pair<int, int> dimSizes,
-								cudaStream_t stream)
+__host__ void _processImage(uint8_t *inImg, uint8_t *outImg, size_t nPixels, double dimConst, int nComponents,
+							TransformationInfo *pFunc, size_t nFunc, std::pair<int, int> dimSizes,
+							std::pair<int, int> transformSizes, cudaStream_t stream)
 {
 	dimImage<<<dimSizes.second, dimSizes.first, 0, stream>>>(inImg, outImg, nPixels, dimConst);
-	// transformImage<<<transformSizes.second, transformSizes.first, 0, stream>>>(inImg, outImg,
-	// handler.nComponents, handler.pTransferFunc, handler.nPoints);
+	transformImage<<<transformSizes.second, transformSizes.first, 0, stream>>>(inImg, outImg, nComponents, pFunc,
+																			   nFunc);
 }
 
 namespace kalos
@@ -35,6 +36,7 @@ namespace kalos
 	{
 		Kaleidoscope::Kaleidoscope(int nImage, int width, int height, int nComponents, double scaleDown,
 								   double dimConst, cudaStream_t stream)
+			: k(dimConst)
 		{
 			KaleidoscopeHandle handlerLocal;
 			if (initKaleidoscope(&handlerLocal, nImage, width, height, nComponents, scaleDown) != 0)
@@ -44,10 +46,12 @@ namespace kalos
 			int blockSize = 0, minGridSize = 0;
 			size_t nPixel = width * height * nComponents;
 			cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, dimImage, 0, nPixel);
-			dimSizes = std::pair<int, int>(blockSize, (nPixel + blockSize - 1) / blockSize);
+			if (blockSize)
+				dimSizes = std::pair<int, int>(blockSize, (nPixel + blockSize - 1) / blockSize);
 
 			cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, transformImage, 0, handler.nPoints);
-			transformSizes = std::pair<int, int>(blockSize, (handler.nPoints + blockSize - 1) / blockSize);
+			if (blockSize)
+				transformSizes = std::pair<int, int>(blockSize, (handler.nPoints + blockSize - 1) / blockSize);
 
 			// Move transform information
 			handler.width = handlerLocal.width;
@@ -65,7 +69,8 @@ namespace kalos
 		void Kaleidoscope::processImage(uint8_t *inImg, uint8_t *outImg, size_t nPixels, double dimConst,
 										cudaStream_t stream)
 		{
-			_processImage(inImg, outImg, nPixels, dimConst, dimSizes, stream);
+			_processImage(inImg, outImg, nPixels, dimConst, handler.nComponents, handler.pTransferFunc, handler.nPoints,
+						  dimSizes, transformSizes, stream);
 		}
 
 		Kaleidoscope::~Kaleidoscope() { cudaFree(handler.pTransferFunc); }

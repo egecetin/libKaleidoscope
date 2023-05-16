@@ -1,12 +1,14 @@
 #pragma once
 
+#include <cstdint>
+#include <utility>
+
+#include <cuda_runtime.h>
+
 extern "C"
 {
 #include "kaleidoscope.h"
 }
-
-#include <cuda_runtime.h>
-#include <utility>
 
 namespace kalos
 {
