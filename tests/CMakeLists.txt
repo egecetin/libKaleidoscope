@@ -57,7 +57,7 @@ if(UNIX)
             EXECUTABLE
             ctest -j
             DEPENDENCIES
-            interpolationTest processingTest rotationTest slicingTest versionTest
+            "${KALEIDOSCOPE_TEST_TARGETS}"
             EXCLUDE
             "${CMAKE_CURRENT_SOURCE_DIR}/../thirdparty/*"
             "${CMAKE_CURRENT_SOURCE_DIR}/../tests/*"
@@ -73,6 +73,7 @@ target_link_libraries(slicingTest ${KALEIDOSCOPE_C_TEST_LIBS})
 target_link_libraries(versionTest ${KALEIDOSCOPE_C_TEST_LIBS})
 
 target_link_libraries(processingTestCpp ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-static)
+
 if(KALEIDOSCOPE_ENABLE_CUDA)
     target_link_libraries(processingTestCuda ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-cuda-shared)
 endif()
@@ -84,6 +85,7 @@ add_test(NAME rotationTest COMMAND rotationTest)
 add_test(NAME slicingTest COMMAND slicingTest)
 add_test(NAME versionTest COMMAND versionTest)
 add_test(NAME processingTestCpp COMMAND processingTestCpp)
+
 if(KALEIDOSCOPE_ENABLE_CUDA)
     add_test(NAME processingTestCuda COMMAND processingTestCuda)
 endif()
