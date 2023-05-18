@@ -36,7 +36,11 @@ TEST(CppTests, processingTestCuda)
     cudaMemcpy(outData.data(), deviceOutData, nPixel, cudaMemcpyDeviceToHost);
     cudaFree(deviceInData);
     cudaFree(deviceOutData);
-    
+
+	std::ofstream outFile("cudaOutput.dat", std::ios_base::binary);
+	outFile.write(reinterpret_cast<char *>(outData.data()), outData.size());
+	outFile.close();
+
     expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size());
 	ASSERT_TRUE(outData == expectedData);
 }
