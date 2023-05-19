@@ -25,7 +25,7 @@ TEST(CppTests, processingTestCuda)
 	ASSERT_TRUE(expectedFile.is_open());
 
 	ASSERT_TRUE(inFile.read(reinterpret_cast<char *>(inData.data()), inData.size()).good());
-	
+
     uint8_t *deviceInData = nullptr;
     uint8_t *deviceOutData = nullptr;
 
