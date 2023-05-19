@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['kaleidoscope_36',['Kaleidoscope',['../classKaleidoscope.html',1,'']]],
-  ['kaleidoscopehandle_5ft_37',['KaleidoscopeHandle_t',['../structKaleidoscopeHandle__t.html',1,'']]]
+  ['kaleidoscope_37',['Kaleidoscope',['../classkalos_1_1Kaleidoscope.html',1,'kalos']]],
+  ['kaleidoscopehandle_5ft_38',['KaleidoscopeHandle_t',['../structKaleidoscopeHandle__t.html',1,'']]]
 ];

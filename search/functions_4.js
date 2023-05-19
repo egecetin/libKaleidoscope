@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kaleidoscope_52',['Kaleidoscope',['../classKaleidoscope.html#ac8a51a2f9ee47cf67605b2655b297da3',1,'Kaleidoscope']]]
+  ['kaleidoscope_54',['Kaleidoscope',['../classkalos_1_1Kaleidoscope.html#ac244ab7153f5f124ba44805225b3faa5',1,'kalos::Kaleidoscope']]]
 ];

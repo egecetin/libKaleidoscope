@@ -74,11 +74,16 @@ $(function() {
 </div><!--header-->
 <div class="contents">
 <div class="textblock"><p><a class="anchor" id="md_README"></a> </p><div align="center"></div><div align="center"> <img src="doc/images/logo-black.png" alt="" width="850" class="inline"/>  <br  />
-</div><div align="center">A library to create kaleidoscope effect on images. You can build on all platforms using CMake.</div><div align="center"><img src="https://img.shields.io/badge/Language-C-informational?style=for-the-badge" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&amp;label=pre-commit&amp;logo=precommit&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&amp;label=CodeQL&amp;logo=github&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&amp;label=Build&amp;logo=github&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&amp;logoColor=white&amp;style=for-the-badge&amp;token=70EJQJRRBH" alt="Codecov" class="inline"/> </div><h2><a class="anchor" id="autotoc_md0"></a>
+</div><div align="center">A library to create kaleidoscope effect on images. You can build on all platforms using CMake.</div><div align="center"><img src="https://img.shields.io/badge/Language-C-informational?style=for-the-badge" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&amp;label=pre-commit&amp;logo=precommit&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&amp;label=CodeQL&amp;logo=github&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&amp;label=Build&amp;logo=github&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&amp;logoColor=white&amp;style=for-the-badge&amp;token=70EJQJRRBH" alt="Codecov" class="inline"/> <img src="https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&amp;style=for-the-badge" alt="Codacy grade" class="inline"/> </div><p>The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance.</p>
+<h2><a class="anchor" id="autotoc_md0"></a>
 Building</h2>
 <p>Use the following commands,</p>
 <div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake -DCMAKE_BUILD_TYPE=Release ..</div>
+<div class="line">cmake --build . --parallel</div>
+</div><!-- fragment --><p>If you want to enable CUDA backend (requires CUDA 11.4 or newer),</p>
+<div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
+<div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CUDA=ON ..</div>
 <div class="line">cmake --build . --parallel</div>
 </div><!-- fragment --><h2><a class="anchor" id="autotoc_md1"></a>
 Usage</h2>
@@ -107,7 +112,7 @@ Benchmark</h2>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Tue May 16 2023 13:47:17 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri May 19 2023 12:05:58 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
