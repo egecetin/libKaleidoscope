@@ -4,7 +4,9 @@ extend-exclude = [
                     "cmake/",
                     "doc/html",
                     "thirdparty/",
+                    "tests/check/",
                     "tests/data/",
+                    "tests/gtest/",
                     "codespell-ignore-list.txt"
                  ]
 

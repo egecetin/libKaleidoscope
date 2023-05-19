@@ -1,4 +1,4 @@
 [codespell]
-skip = ./typos-config.toml,./.git/*,./build/*,./cmake/*,./thirdparty/*,./tests/data/*,./doc/html
+skip = ./typos-config.toml,./.git/*,./build/*,./cmake/*,./thirdparty/*,./tests/data/*,./tests/gtest/*,./tests/check/*,./doc/html
 ignore-words = codespell-ignore-list.txt
 count =

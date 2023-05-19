@@ -2,5 +2,8 @@
 	path = thirdparty/libjpeg-turbo
 	url = https://github.com/egecetin/libjpeg-turbo.git
 [submodule "thirdparty/check"]
-	path = thirdparty/check
+	path = tests/check
 	url = https://github.com/libcheck/check.git
+[submodule "tests/gtest"]
+	path = tests/gtest
+	url = https://github.com/google/googletest.git
