@@ -72,7 +72,9 @@ target_link_libraries(rotationTest ${KALEIDOSCOPE_C_TEST_LIBS})
 target_link_libraries(slicingTest ${KALEIDOSCOPE_C_TEST_LIBS})
 target_link_libraries(versionTest ${KALEIDOSCOPE_C_TEST_LIBS})
 
-target_link_libraries(processingTestCpp ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-static)
+if(KALEIDOSCOPE_ENABLE_SHARED)
+    target_link_libraries(processingTestCpp ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-shared)
+endif()
 
 if(KALEIDOSCOPE_ENABLE_CUDA)
     target_link_libraries(processingTestCuda ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-cuda-shared)
