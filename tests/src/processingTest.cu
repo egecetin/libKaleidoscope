@@ -24,7 +24,7 @@ TEST(CppTests, processingTestCuda)
 	ASSERT_TRUE(inFile.is_open());
 	ASSERT_TRUE(expectedFile.is_open());
 
-	inFile.read(reinterpret_cast<char *>(inData.data()), inData.size());
+	ASSERT_TRUE(inFile.read(reinterpret_cast<char *>(inData.data()), inData.size()).good());
 
     uint8_t *deviceInData = nullptr;
     uint8_t *deviceOutData = nullptr;
@@ -46,6 +46,6 @@ TEST(CppTests, processingTestCuda)
 	outFile.write(reinterpret_cast<char *>(outData.data()), outData.size());
 	outFile.close();
 
-    expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size());
+    ASSERT_TRUE(expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size()).good());
 	ASSERT_TRUE(outData == expectedData);
 }
