@@ -35,7 +35,7 @@ namespace kalos
 	namespace cuda
 	{
 		Kaleidoscope::Kaleidoscope(int nImage, int width, int height, int nComponents, double scaleDown,
-								   double dimConst, cudaStream_t stream)
+								   double dimConst)
 			: k(dimConst)
 		{
 			KaleidoscopeHandle handlerLocal;
@@ -59,9 +59,9 @@ namespace kalos
 			handler.nComponents = handlerLocal.nComponents;
 			handler.nPoints = handlerLocal.nPoints;
 
-			cudaMallocAsync(&(handler.pTransferFunc), sizeof(TransformationInfo) * handlerLocal.nPoints, stream);
-			cudaMemcpyAsync(handler.pTransferFunc, handlerLocal.pTransferFunc,
-							sizeof(TransformationInfo) * handlerLocal.nPoints, cudaMemcpyHostToDevice, stream);
+			cudaMalloc(&(handler.pTransferFunc), sizeof(TransformationInfo) * handlerLocal.nPoints);
+			cudaMemcpy(handler.pTransferFunc, handlerLocal.pTransferFunc,
+							sizeof(TransformationInfo) * handlerLocal.nPoints, cudaMemcpyHostToDevice);
 
 			deInitKaleidoscope(&handlerLocal);
 		}

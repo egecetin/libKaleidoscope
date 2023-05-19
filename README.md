@@ -29,7 +29,7 @@ cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . --parallel
 ```
 
-If you want to enable CUDA backend (requires CUDA 11.4 or newer),
+If you want to enable CUDA backend,
 
 ```
 mkdir build && cd build

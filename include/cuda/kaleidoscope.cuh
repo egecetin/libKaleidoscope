@@ -35,10 +35,8 @@ namespace kalos
 			 * @param[in] nComponents Number of color components (eg 3 for RGB)
 			 * @param[in] scaleDown Scale down ratio to shrink image. Must be between 0.0 and 1.0
 			 * @param[in] dimConst Variable to dim background. Should be between 0.0 and 1.0
-			 * @param[in] stream CUDA stream
 			 */
-			Kaleidoscope(int nImage, int width, int height, int nComponents, double scaleDown, double dimConst,
-						 cudaStream_t stream = 0);
+			Kaleidoscope(int nImage, int width, int height, int nComponents, double scaleDown, double dimConst);
 
 			/**
 			 * @brief Creates kaleidoscope effect
