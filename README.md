@@ -13,9 +13,11 @@ A library to create kaleidoscope effect on images. You can build on all platform
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&label=pre-commit&logo=precommit&logoColor=white)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white)
-![codecov](https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)
-![Codacy grade](https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&style=for-the-badge)
+[![codecov](https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)](https://app.codecov.io/gh/egecetin/libKaleidoscope)
+[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982)](https://app.codacy.com/gh/egecetin/libKaleidoscope/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
 </div>
+
+The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance.
 
 ## Building
 
@@ -24,6 +26,14 @@ Use the following commands,
 ```
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
+cmake --build . --parallel
+```
+
+If you want to enable CUDA backend (requires CUDA 11.4 or newer),
+
+```
+mkdir build && cd build
+cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CUDA=ON ..
 cmake --build . --parallel
 ```
 
