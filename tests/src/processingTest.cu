@@ -42,10 +42,6 @@ TEST(CppTests, processingTestCuda)
     cudaFree(deviceInData);
     cudaFree(deviceOutData);
 
-	std::ofstream outFile("cudaOutput.dat", std::ios_base::binary);
-	outFile.write(reinterpret_cast<char *>(outData.data()), outData.size());
-	outFile.close();
-
     ASSERT_TRUE(expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size()).good());
 	ASSERT_TRUE(outData == expectedData);
 }
