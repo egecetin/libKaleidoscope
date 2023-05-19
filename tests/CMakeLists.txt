@@ -1,4 +1,4 @@
-set(gtest_force_shared_crt on CACHE)
+set(gtest_force_shared_crt ON CACHE BOOL "" FORCE)
 
 add_subdirectory(check EXCLUDE_FROM_ALL)
 add_subdirectory(gtest EXCLUDE_FROM_ALL)
