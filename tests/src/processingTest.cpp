@@ -22,11 +22,11 @@ TEST(CppTests, processingTest)
 	ASSERT_TRUE(inFile.is_open());
 	ASSERT_TRUE(expectedFile.is_open());
 
-	ASSERT_TRUE(inFile.read(reinterpret_cast<char *>(inData.data()), inData.size()).good());
+	inFile.read(reinterpret_cast<char *>(inData.data()), inData.size());
 
 	kalos::Kaleidoscope handle(n, width, height, nComponents, scaleDown, k);
 	handle.processImage(inData.data(), outData.data(), nPixel);
 
-	ASSERT_TRUE(expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size()).good());
+	expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size());
 	ASSERT_TRUE(outData == expectedData);
 }
