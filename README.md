@@ -8,13 +8,13 @@
 
 A library to create kaleidoscope effect on images. You can build on all platforms using CMake.
 
-![GitHub](https://img.shields.io/badge/Language-C-informational)
-![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&label=pre-commit&logo=precommit&logoColor=white)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white)
-[![codecov](https://codecov.io/gh/egecetin/libKaleidoscope/branch/master/graph/badge.svg?token=70EJQJRRBH)](https://app.codecov.io/gh/egecetin/libKaleidoscope)
-[![Codacy Badge](https://app.codacy.com/project/badge/Grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982)](https://app.codacy.com/gh/egecetin/libKaleidoscope/dashboard?utm_source=gh&utm_medium=referral&utm_content=&utm_campaign=Badge_grade)
+![GitHub](https://img.shields.io/badge/Language-C-informational?style=for-the-badge)
+![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&label=pre-commit&logo=precommit&logoColor=white&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github&style=for-the-badge)
+![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white&style=for-the-badge)
+![Codecov](https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&logoColor=white&style=for-the-badge&token=70EJQJRRBH)
+![Codacy grade](https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&style=for-the-badge)
 </div>
 
 The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance.
