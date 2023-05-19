@@ -11,8 +11,8 @@ TEST(CppTests, processingTest)
 	const double scaleDown = 0.45;
 	const int n = 6, width = 1935, height = 1088, nComponents = 3;
 
-	std::ifstream inFile("../../tests/data/processing_1935x1088_InputData.bin");
-	std::ifstream expectedFile("../../tests/data/processing_1935x1088_ExpectedData.bin");
+	std::ifstream inFile("../../tests/data/processing_1935x1088_InputData.bin", std::ios_base::binary);
+	std::ifstream expectedFile("../../tests/data/processing_1935x1088_ExpectedData.bin", std::ios_base::binary);
 
 	const size_t nPixel = width * height * nComponents;
 	static std::array<uint8_t, nPixel> inData{0};
