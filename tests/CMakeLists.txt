@@ -1,3 +1,5 @@
+set(gtest_force_shared_crt on)
+
 add_subdirectory(check EXCLUDE_FROM_ALL)
 add_subdirectory(gtest EXCLUDE_FROM_ALL)
 
