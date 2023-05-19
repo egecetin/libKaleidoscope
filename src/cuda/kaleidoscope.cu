@@ -49,9 +49,9 @@ namespace kalos
 			if (blockSize)
 				dimSizes = std::pair<int, int>(blockSize, (nPixel + blockSize - 1) / blockSize);
 
-			cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, transformImage, 0, handler.nPoints);
+			cudaOccupancyMaxPotentialBlockSize(&minGridSize, &blockSize, transformImage, 0, handlerLocal.nPoints);
 			if (blockSize)
-				transformSizes = std::pair<int, int>(blockSize, (handler.nPoints + blockSize - 1) / blockSize);
+				transformSizes = std::pair<int, int>(blockSize, (handlerLocal.nPoints + blockSize - 1) / blockSize);
 
 			// Move transform information
 			handler.width = handlerLocal.width;

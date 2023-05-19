@@ -7,6 +7,8 @@
 
 TEST(CppTests, processingTestCuda)
 {
+	cudaDeviceSetLimit(cudaLimitMallocHeapSize, 1 * 1024 * 1024 * 1024);
+
 	const double k = 0.30;
 	const double scaleDown = 0.45;
 	const int n = 6, width = 1935, height = 1088, nComponents = 3;
@@ -14,13 +16,16 @@ TEST(CppTests, processingTestCuda)
 	std::ifstream inFile("../../tests/data/processing_1935x1088_InputData.bin");
 	std::ifstream expectedFile("../../tests/data/processing_1935x1088_ExpectedData.bin");
 
-    const size_t nPixel = width * height * nComponents;
-	static std::array<uint8_t, nPixel> inData;
-	static std::array<uint8_t, nPixel> outData;
-	static std::array<uint8_t, nPixel> expectedData;
+	const size_t nPixel = width * height * nComponents;
+	static std::array<uint8_t, nPixel> inData{0};
+	static std::array<uint8_t, nPixel> outData{127};
+	static std::array<uint8_t, nPixel> expectedData{255};
 
-	inFile.read(reinterpret_cast<char *>(inData.data()), inData.size());
+	ASSERT_TRUE(inFile.is_open());
+	ASSERT_TRUE(expectedFile.is_open());
 
+	ASSERT_TRUE(inFile.read(reinterpret_cast<char *>(inData.data()), inData.size()).good());
+	
     uint8_t *deviceInData = nullptr;
     uint8_t *deviceOutData = nullptr;
 
@@ -41,6 +46,6 @@ TEST(CppTests, processingTestCuda)
 	outFile.write(reinterpret_cast<char *>(outData.data()), outData.size());
 	outFile.close();
 
-    expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size());
+    ASSERT_TRUE(expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size()).good());
 	ASSERT_TRUE(outData == expectedData);
 }

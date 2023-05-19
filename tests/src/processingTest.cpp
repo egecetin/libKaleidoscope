@@ -14,15 +14,19 @@ TEST(CppTests, processingTest)
 	std::ifstream inFile("../../tests/data/processing_1935x1088_InputData.bin");
 	std::ifstream expectedFile("../../tests/data/processing_1935x1088_ExpectedData.bin");
 
-	static std::array<uint8_t, width * height * nComponents> inData;
-	static std::array<uint8_t, width * height * nComponents> outData;
-	static std::array<uint8_t, width * height * nComponents> expectedData;
+	const size_t nPixel = width * height * nComponents;
+	static std::array<uint8_t, nPixel> inData{0};
+	static std::array<uint8_t, nPixel> outData{127};
+	static std::array<uint8_t, nPixel> expectedData{255};
 
-	inFile.read(reinterpret_cast<char *>(inData.data()), inData.size());
+	ASSERT_TRUE(inFile.is_open());
+	ASSERT_TRUE(expectedFile.is_open());
+
+	ASSERT_TRUE(inFile.read(reinterpret_cast<char *>(inData.data()), inData.size()).good());
 
 	kalos::Kaleidoscope handle(n, width, height, nComponents, scaleDown, k);
-	handle.processImage(inData.data(), outData.data(), width * height * nComponents);
+	handle.processImage(inData.data(), outData.data(), nPixel);
 
-	expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size());
+	ASSERT_TRUE(expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size()).good());
 	ASSERT_TRUE(outData == expectedData);
 }
