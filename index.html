@@ -85,7 +85,8 @@ Building</h2>
 <div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CUDA=ON ..</div>
 <div class="line">cmake --build . --parallel</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md1"></a>
+</div><!-- fragment --><p>There is no direct dependency for libjpeg-turbo inside from the library. It is just for test and demonstration purposes. If you don't want to install/compile just disable command line tool compilation with <code>-DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF</code></p>
+<h2><a class="anchor" id="autotoc_md1"></a>
 Usage</h2>
 <p>The library has a simple usage and you need only three functions to use it. Check the sample usage at <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code></p>
 <ul>
@@ -94,7 +95,43 @@ Usage</h2>
 <li>Deinitialization of the transformation matrix: <code>void <a class="el" href="kaleidoscope_8h.html#af94426aef969fbc479f07359b36a3bea" title="Deinitializes kaleidoscope handler.">deInitKaleidoscope(KaleidoscopeHandle *handler)</a></code></li>
 </ul>
 <p>Alternatively you can directly use the command line program to create kaleidoscope effect with <code>./kaleidoscope-cmd &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;</code>. You can see an example below for <code>N=8</code> </p><div align="center"> <img src="doc/images/ac-synin.jpg" alt="" width="425" class="inline"/> <img src="doc/images/ac-synin-out.jpg" alt="" width="425" class="inline"/> <br  />
- <small>Image source: AC Valhalla</small> </div><h2><a class="anchor" id="autotoc_md2"></a>
+ <small>Image source: AC Valhalla</small> </div><p>For C++ and CUDA usage check the unit tests at <code>tests/processingTest.cpp</code> and <code>tests/processingTest.cu</code>. It is very easy! Just include the header and construct the <code>Kaleidoscope</code> class from <code>kalos</code> namespace.</p>
+<ul>
+<li>For C++ header only binding,</li>
+</ul>
+<div class="fragment"><div class="line">#include &lt;kaleidoscope.hpp&gt;</div>
+<div class="line"> </div>
+<div class="line">int main()</div>
+<div class="line">{</div>
+<div class="line">    kalos::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);</div>
+<div class="line"> </div>
+<div class="line">    /* ... */</div>
+<div class="line"> </div>
+<div class="line">    handler.processImage(inData, outData, nPixel);</div>
+<div class="line"> </div>
+<div class="line">    /* ... */</div>
+<div class="line"> </div>
+<div class="line">    return 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><ul>
+<li>For CUDA backend,</li>
+</ul>
+<div class="fragment"><div class="line">#include &lt;cuda/kaleidoscope.cuh&gt;</div>
+<div class="line"> </div>
+<div class="line">int main()</div>
+<div class="line">{</div>
+<div class="line">    kalos::cuda::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);</div>
+<div class="line"> </div>
+<div class="line">    /* ... */</div>
+<div class="line"> </div>
+<div class="line">    // Make sure inData and outData is device allocated!</div>
+<div class="line">    handler.processImage(inData, outData, nPixel);</div>
+<div class="line"> </div>
+<div class="line">    /* ... */</div>
+<div class="line"> </div>
+<div class="line">    return 0;</div>
+<div class="line">}</div>
+</div><!-- fragment --><h2><a class="anchor" id="autotoc_md2"></a>
 Benchmark</h2>
 <p>It is really fast! On a Intel i7-11800H CPU it achieves,</p>
 <ul>
@@ -112,7 +149,7 @@ Benchmark</h2>
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Fri May 19 2023 15:17:44 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sat May 20 2023 10:52:55 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
