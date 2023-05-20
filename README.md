@@ -37,20 +37,63 @@ cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CUDA=ON ..
 cmake --build . --parallel
 ```
 
+There is no direct dependency for libjpeg-turbo inside from the library. It is just for test and demonstration purposes. If you don't want to install/compile just disable command line tool compilation with ``-DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF``
+
 ## Usage
 
-The library has a simple usage and you need only three functions to use it. Check the sample usage at ```src/kaleidoscope-cmd.c```
+The library has a simple usage and you need only three functions to use it. Check the sample usage at ``src/kaleidoscope-cmd.c``
 
-- Initialization of the transformation matrix: ```int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)```
-- Processing image (Can be used multiple times if the input images have same dimensions): ```void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)```
-- Deinitialization of the transformation matrix: ```void deInitKaleidoscope(KaleidoscopeHandle *handler)```
+- Initialization of the transformation matrix: ``int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)``
+- Processing image (Can be used multiple times if the input images have same dimensions): ``void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)``
+- Deinitialization of the transformation matrix: ``void deInitKaleidoscope(KaleidoscopeHandle *handler)``
 
-Alternatively you can directly use the command line program to create kaleidoscope effect with ```./kaleidoscope-cmd <Input Image Path> <Output Image Path> <N>```. You can see an example below for ```N=8```
+Alternatively you can directly use the command line program to create kaleidoscope effect with ``./kaleidoscope-cmd <Input Image Path> <Output Image Path> <N>``. You can see an example below for ``N=8``
 <div align="center">
     <img src="doc/images/ac-synin.jpg" width="425"/> <img src="doc/images/ac-synin-out.jpg" width="425"/>
     <br>
     <small>Image source: AC Valhalla</small>
 </div>
+
+For C++ and CUDA usage check the unit tests at ``tests/processingTest.cpp`` and ``tests/processingTest.cu``. It is very easy! Just include the header and construct the ``Kaleidoscope`` class from ``kalos`` namespace.
+
+- For C++ header only binding,
+
+```
+#include <kaleidoscope.hpp>
+
+int main()
+{
+    kalos::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);
+
+    /* ... */
+
+    handler.processImage(inData, outData, nPixel);
+
+    /* ... */
+
+    return 0;
+}
+```
+
+- For CUDA backend,
+
+```
+#include <cuda/kaleidoscope.cuh>
+
+int main()
+{
+    kalos::cuda::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);
+
+    /* ... */
+
+    // Make sure inData and outData is device allocated!
+    handler.processImage(inData, outData, nPixel);
+
+    /* ... */
+
+    return 0;
+}
+```
 
 ## Benchmark
 
