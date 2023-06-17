@@ -283,9 +283,9 @@ cleanup:
 
 void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)
 {
-	unsigned long long idx;
-	const unsigned long long nComponents = handler->nComponents;
-	const unsigned long long nPixels = (unsigned long long)handler->width * handler->height * handler->nComponents;
+	long long idx;
+	const long long nComponents = handler->nComponents;
+	const long long nPixels = (long long)handler->width * handler->height * handler->nComponents;
 
 	unsigned char *srcPtr = imgIn;
 	unsigned char *destPtr = imgOut;
