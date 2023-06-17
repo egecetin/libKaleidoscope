@@ -39,7 +39,7 @@ struct KaleidoscopeHandle_t
 	/// Number of components (eg 3 for RGB)
 	unsigned char nComponents;
 	/// Total number of points of transfer function
-	unsigned long long nPoints;
+	long long nPoints;
 	/// Transformation info
 	struct TransformationInfo_t *pTransferFunc;
 };
