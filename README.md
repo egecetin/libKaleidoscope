@@ -15,13 +15,21 @@ A library to create kaleidoscope effect on images. You can build on all platform
 ![Codecov](https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&logoColor=white&style=for-the-badge&token=70EJQJRRBH)
 ![Codacy grade](https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&style=for-the-badge)
 
-![C Badge](https://img.shields.io/badge/C-%23555555?style=for-the-badge)
-![C++ Badge](https://img.shields.io/badge/C%2B%2B-%23f34b7d?style=for-the-badge)
-![Python Badge](https://img.shields.io/badge/Python-%233572A5?style=for-the-badge)
-![CUDA Badge](https://img.shields.io/badge/CUDA-%233A4E3A?style=for-the-badge)
+
+![C Badge](https://img.shields.io/badge/C-%23555555?style=for-the-badge&logo=c&logoColor=white)
+![C++ Badge](https://img.shields.io/badge/C%2B%2B-%23f34b7d?style=for-the-badge&logo=cplusplus&logoColor=white)
+![Python Badge](https://img.shields.io/badge/Python-%233572A5?style=for-the-badge&logo=python&logoColor=white)
+![CUDA Badge](https://img.shields.io/badge/CUDA-%233A4E3A?style=for-the-badge&logo=nvidia&logoColor=white)
 </div>
 
 The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. You can download from python package from [PyPI](). It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance. Check for mathematical explanation of the kaleidoscope effect from my [webpage](https://egecetin.github.io/Projects/kaleidoscope)
+
+## Supported Languages
+
+- C : Main programming language
+- C++ : Header only binding for easier usage
+- Python : Bindings using Cython
+- CUDA : For GPU computing
 
 ## Building
 
