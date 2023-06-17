@@ -16,7 +16,7 @@ jobs:
         with:
           submodules: recursive
       - name: Install Cython
-        run: python3 -m pip install cython
+        run: python3 -m pip install cython wheel
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_TESTS=ON -DKALEIDOSCOPE_ENABLE_PACKAGE=ON -S . -B build
       - name: Build
