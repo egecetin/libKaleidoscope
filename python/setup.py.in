@@ -1,0 +1,33 @@
+from setuptools import setup
+
+from Cython.Build import cythonize
+
+setup(
+    name= "Kaleidoscope",
+    version= "@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@",
+    description= "A library to create kaleidoscope effect on images.",
+    long_description= "A library to create kaleidoscope effect on images written in C",
+    author= "egecetin",
+    author_email = "egecetin@hotmail.com.tr",
+    maintainer= "egecetin",
+    maintainer_email= "egecetin@hotmail.com.tr",
+    url= "https://egecetin.github.io/libKaleidoscope/",
+    download_url= "https://github.com/egecetin/libKaleidoscope/releases",
+    license= "MIT License",
+    keywords= ['image-processing', 'video-processing', 'image-manipulation', 'image-filtering', 'video-filtering'],
+    platforms= ['any'],
+    classifiers= [
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: MacOS',
+        'Operating System :: Microsoft',
+        'Operating System :: OS Independent',
+        'Operating System :: Unix',
+        'Programming Language :: C',
+        'Programming Language :: Cython',
+        'Topic :: Scientific/Engineering :: Image Processing'],
+    include_dirs = [
+        '${CMAKE_CURRENT_SOURCE_DIR}/include',
+        '${CMAKE_CURRENT_SOURCE_DIR}/src',
+        '${CMAKE_CURRENT_BINARY_DIR}'],
+    ext_modules=cythonize("kaleidoscope.pyx")
+    )
