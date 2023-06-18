@@ -32,7 +32,7 @@ namespace kalos
 			: k(dimConst)
 		{
 			if (initKaleidoscope(&handler, nImage, width, height, nComponents, scaleDown) != 0)
-				throw std::runtime_error("Unknown error");
+				throw std::runtime_error("Can't init kaleidoscope structure for these inputs");
 		}
 
 		/**
