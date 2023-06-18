@@ -1,11 +1,14 @@
 from setuptools import setup
 from Cython.Build import cythonize
 
+long_description = open("${CMAKE_CURRENT_SOURCE_DIR}/README-python.md").read()
+
 setup(
-    name= "Kaleidoscope",
+    name= "LibKaleidoscope",
     version= "@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@",
     description= "A library to create kaleidoscope effect on images.",
-    long_description= "A library to create kaleidoscope effect on images written in C",
+    long_description= long_description,
+    long_description_content_type= "text/markdown",
     author= "egecetin",
     author_email = "egecetin@hotmail.com.tr",
     maintainer= "egecetin",
@@ -24,6 +27,7 @@ setup(
         'Programming Language :: C',
         'Programming Language :: Cython',
         'Topic :: Scientific/Engineering :: Image Processing'],
+    options={'bdist_wheel':{'universal':True}},
     include_dirs = [
         '${CMAKE_CURRENT_SOURCE_DIR}/include',
         '${CMAKE_CURRENT_SOURCE_DIR}/src',

@@ -15,7 +15,7 @@ jobs:
       - uses: actions/checkout@v3
         with:
           submodules: recursive
-      - name: Install Cython
+      - name: Install Python Requirements
         run: python3 -m pip install cython wheel pytest build
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_TESTS=ON -DKALEIDOSCOPE_ENABLE_PACKAGE=ON -S . -B build
