@@ -28,6 +28,12 @@ The library is written in C language so you can use Foreign Function Interface (
 - Python : Bindings using Cython
 - CUDA : For GPU computing
 
+## Install for Python
+
+```
+pip install LibKaleidoscope
+```
+
 ## Building
 
 Use the following commands,
