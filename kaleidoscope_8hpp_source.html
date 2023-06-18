@@ -29,7 +29,7 @@
  <tr style="height: 56px;">
   <td id="projectalign" style="padding-left: 0.5em;">
    <div id="projectname">kaleidoscope
-   &#160;<span id="projectnumber">1.3.0</span>
+   &#160;<span id="projectnumber">1.3.1</span>
    </div>
   </td>
  </tr>
@@ -99,7 +99,7 @@ $(function() {
 <div class="line"><a name="l00032"></a><span class="lineno">   32</span>&#160;            : k(dimConst)</div>
 <div class="line"><a name="l00033"></a><span class="lineno">   33</span>&#160;        {</div>
 <div class="line"><a name="l00034"></a><span class="lineno">   34</span>&#160;            <span class="keywordflow">if</span> (<a class="code" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(&amp;handler, nImage, width, height, nComponents, scaleDown) != 0)</div>
-<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Unknown error&quot;</span>);</div>
+<div class="line"><a name="l00035"></a><span class="lineno">   35</span>&#160;                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Can&#39;t init kaleidoscope structure for these inputs&quot;</span>);</div>
 <div class="line"><a name="l00036"></a><span class="lineno">   36</span>&#160;        }</div>
 <div class="line"><a name="l00037"></a><span class="lineno">   37</span>&#160; </div>
 <div class="line"><a name="l00045"></a><span class="lineno"><a class="line" href="classkalos_1_1Kaleidoscope.html#aefe5f20972d4b8c8a5f24d066de78ada">   45</a></span>&#160;        <span class="keywordtype">void</span> <a class="code" href="classkalos_1_1Kaleidoscope.html#aefe5f20972d4b8c8a5f24d066de78ada">processImage</a>(uint8_t *inImg, uint8_t *outImg, <span class="keywordtype">size_t</span> size, <span class="keywordtype">double</span> dimConst)</div>
@@ -119,15 +119,15 @@ $(function() {
 <div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_ac244ab7153f5f124ba44805225b3faa5"><div class="ttname"><a href="classkalos_1_1Kaleidoscope.html#ac244ab7153f5f124ba44805225b3faa5">kalos::Kaleidoscope::Kaleidoscope</a></div><div class="ttdeci">Kaleidoscope(int nImage, int width, int height, int nComponents, double scaleDown, double dimConst)</div><div class="ttdoc">Construct a new Kaleidoscope object.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8hpp_source.html#l00031">kaleidoscope.hpp:31</a></div></div>
 <div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_aefe5f20972d4b8c8a5f24d066de78ada"><div class="ttname"><a href="classkalos_1_1Kaleidoscope.html#aefe5f20972d4b8c8a5f24d066de78ada">kalos::Kaleidoscope::processImage</a></div><div class="ttdeci">void processImage(uint8_t *inImg, uint8_t *outImg, size_t size, double dimConst)</div><div class="ttdoc">Creates kaleidoscope effect.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8hpp_source.html#l00045">kaleidoscope.hpp:45</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00199">kaleidoscope.c:199</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00284">kaleidoscope.c:284</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00300">kaleidoscope.c:300</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00288">kaleidoscope.c:288</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00304">kaleidoscope.c:304</a></div></div>
 <div class="ttc" id="akaleidoscope_8h_html"><div class="ttname"><a href="kaleidoscope_8h.html">kaleidoscope.h</a></div></div>
 <div class="ttc" id="anamespacekalos_html"><div class="ttname"><a href="namespacekalos.html">kalos</a></div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8hpp_source.html#l00010">kaleidoscope.hpp:11</a></div></div>
 <div class="ttc" id="astructKaleidoscopeHandle__t_html"><div class="ttname"><a href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle_t</a></div><div class="ttdoc">Struct for kaleidoscope effect generator.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00033">kaleidoscope.h:34</a></div></div>
 </div><!-- fragment --></div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Jun 17 2023 19:49:09 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Sun Jun 18 2023 17:20:41 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
