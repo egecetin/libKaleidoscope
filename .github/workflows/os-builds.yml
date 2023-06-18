@@ -29,7 +29,7 @@ jobs:
       - name: Build
         run: cmake --build build --parallel --config Release
       - name: Install python package
-        run: python3 -m pip install build/python/dist/*.whl
+        run: python3 -m pip install ${{matrix.wheel-path}}
       - name: Run Tests
         run: |
           ctest --output-on-failure --test-dir build/tests --build-config Release
