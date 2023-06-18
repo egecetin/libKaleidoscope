@@ -37,6 +37,8 @@ The library is written in C language so you can use Foreign Function Interface (
 pip install LibKaleidoscope
 ```
 
+Python users check python/python-test.py in GitHub for basic usage
+
 ## Building
 
 Use the following commands,
