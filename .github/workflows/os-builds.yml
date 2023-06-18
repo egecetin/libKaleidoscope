@@ -13,11 +13,11 @@ jobs:
         os-version: [ubuntu-22.04, windows-2022, macos-12]
         include:
           - os-version: ubuntu-22.04
-            wheel-path: build/python/dist/
+            wheel-path: ./build/python/dist/
           - os-version: windows-2022
-            wheel-path: build/Release/python/dist/
+            wheel-path: ./build/Release/python/dist/
           - os-version: macos-12
-            wheel-path: build/python/dist/
+            wheel-path: ./build/python/dist/
     steps:
       - uses: actions/checkout@v3
         with:
