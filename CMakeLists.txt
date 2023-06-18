@@ -138,3 +138,5 @@ if(KALEIDOSCOPE_ENABLE_PACKAGE)
 endif()
 
 configure_file(kaleidoscope-config.h.in "kaleidoscope-config.h")
+
+message(WARNING ${CMAKE_CURRENT_BINARY_DIR})
