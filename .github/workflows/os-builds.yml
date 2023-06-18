@@ -11,13 +11,7 @@ jobs:
     strategy:
       matrix:
         os-version: [ubuntu-22.04, windows-2022, macos-12]
-        include:
-          - os-version: ubuntu-22.04
-            wheel-path: ./build/python/dist/
-          - os-version: windows-2022
-            wheel-path: ./build/Release/python/dist/
-          - os-version: macos-12
-            wheel-path: ./build/python/dist/
+
     steps:
       - uses: actions/checkout@v3
         with:
@@ -29,7 +23,7 @@ jobs:
       - name: Build
         run: cmake --build build --parallel --config Release
       - name: Install python package
-        run: python3 -m pip install --find-links=${{matrix.wheel-path}} LibKaleidoscope
+        run: python3 -m pip install --find-links=./build/python/dist/ LibKaleidoscope
       - name: Run Tests
         run: |
           ctest --output-on-failure --test-dir build/tests --build-config Release
