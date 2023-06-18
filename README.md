@@ -23,7 +23,7 @@ A library to create kaleidoscope effect on images. You can build on all platform
 ![CUDA Badge](https://img.shields.io/badge/CUDA-%233A4E3A?style=for-the-badge&logo=nvidia&logoColor=white)
 </div>
 
-The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. You can download from python package from [PyPI](). It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance. Check for mathematical explanation of the kaleidoscope effect from my [webpage](https://egecetin.github.io/Projects/kaleidoscope)
+The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. You can download from python package from PyPI. It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance. Check for mathematical explanation of the kaleidoscope effect from my [webpage](https://egecetin.github.io/Projects/kaleidoscope)
 
 ## Supported Languages
 
