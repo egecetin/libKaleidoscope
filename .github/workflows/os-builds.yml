@@ -21,8 +21,12 @@ jobs:
         run: cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_TESTS=ON -DKALEIDOSCOPE_ENABLE_PACKAGE=ON -S . -B build
       - name: Build
         run: cmake --build build --parallel --config Release
+      - name: Install python package
+        run: python3 -m pip install build/python/dist/*.whl
       - name: Run Tests
-        run: ctest --output-on-failure --test-dir build/tests --build-config Release
+        run: |
+          ctest --output-on-failure --test-dir build/tests --build-config Release
+          pytest python/python-tests.py
       - name: Package
         run: cmake --build build --parallel --target package --config Release
       - uses: actions/upload-artifact@v3

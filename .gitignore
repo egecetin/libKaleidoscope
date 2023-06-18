@@ -4,8 +4,10 @@ Doxyfile
 # Directories
 build
 doc
+python/__pycache__
 .vs
 .vscode
+.pytest_cache
 
 # Prerequisites
 *.d
