@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(kaleidoscope VERSION 1.3.0)
+project(kaleidoscope VERSION 1.3.1)
 
 # Options
 set(CMAKE_DEBUG_POSTFIX d)
@@ -12,6 +12,7 @@ option(KALEIDOSCOPE_ENABLE_CMD_TOOL "Enables command line tool" ON)
 option(KALEIDOSCOPE_ENABLE_COVERAGE "Enables coverage report" OFF)
 option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
 option(KALEIDOSCOPE_ENABLE_CUDA "Enables NVIDIA CUDA backend for library" OFF)
+option(KALEIDOSCOPE_BUILD_PYTHON_BINDINGS "Enables to build of Python bindings" ON)
 
 set(KALEIDOSCOPE_TARGET_CUDA_ARCH "50;52;61;62;70;72;75;80;86;87;89;90")
 
@@ -84,6 +85,22 @@ if(KALEIDOSCOPE_ENABLE_CMD_TOOL)
   if(CMAKE_C_COMPILER_ID MATCHES "GNU" OR CMAKE_C_COMPILER_ID MATCHES "(Apple)?[Cc]lang")
     target_link_libraries(kaleidoscope-cmd m)
   endif()
+endif()
+
+if(KALEIDOSCOPE_BUILD_PYTHON_BINDINGS)
+  find_package(Python REQUIRED)
+  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/setup.py.in "${CMAKE_CURRENT_BINARY_DIR}/python/setup.py")
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/kaleidoscope.pxd ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/kaleidoscope.pyx ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/pyproject.toml ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+
+  add_custom_target(
+    python-bindings ALL
+    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python
+    COMMENT "Building Python wheel"
+    COMMAND python3 -m build
+  )
 endif()
 
 if(KALEIDOSCOPE_ENABLE_DOCS)

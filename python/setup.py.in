@@ -1,0 +1,36 @@
+from setuptools import setup
+from Cython.Build import cythonize
+
+long_description = open("${CMAKE_CURRENT_SOURCE_DIR}/README-python.md").read()
+
+setup(
+    name= "LibKaleidoscope",
+    version= "@PROJECT_VERSION_MAJOR@.@PROJECT_VERSION_MINOR@.@PROJECT_VERSION_PATCH@",
+    description= "A library to create kaleidoscope effect on images.",
+    long_description= long_description,
+    long_description_content_type= "text/markdown",
+    author= "egecetin",
+    author_email = "egecetin@hotmail.com.tr",
+    maintainer= "egecetin",
+    maintainer_email= "egecetin@hotmail.com.tr",
+    url= "https://egecetin.github.io/libKaleidoscope/",
+    download_url= "https://github.com/egecetin/libKaleidoscope/releases",
+    license= "MIT License",
+    keywords= ['image-processing', 'video-processing', 'image-manipulation', 'image-filtering', 'video-filtering'],
+    platforms= ['any'],
+    classifiers= [
+        'License :: OSI Approved :: MIT License',
+        'Operating System :: MacOS',
+        'Operating System :: Microsoft',
+        'Operating System :: OS Independent',
+        'Operating System :: Unix',
+        'Programming Language :: C',
+        'Programming Language :: Cython',
+        'Topic :: Scientific/Engineering :: Image Processing'],
+    options={'bdist_wheel':{'universal':True}},
+    include_dirs = [
+        '${CMAKE_CURRENT_SOURCE_DIR}/include',
+        '${CMAKE_CURRENT_SOURCE_DIR}/src',
+        '${CMAKE_CURRENT_BINARY_DIR}'],
+    ext_modules=cythonize(["${CMAKE_CURRENT_BINARY_DIR}/python/kaleidoscope.pyx"])
+    )

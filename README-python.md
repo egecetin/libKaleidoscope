@@ -1,9 +1,6 @@
 <div align="center">
 
-<picture>
-<source media="(prefers-color-scheme: dark)" srcset="doc/images/logo-white.png"/>
-<img src="doc/images/logo-black.png" alt="" width="850"/>
-</picture>
+<img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/logo-black.png" alt="" width="850"/>
 <br>
 
 A library to create kaleidoscope effect on images. You can build on all platforms using CMake.
@@ -12,6 +9,7 @@ A library to create kaleidoscope effect on images. You can build on all platform
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&label=pre-commit&logo=precommit&logoColor=white&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white&style=for-the-badge)
+
 ![Codecov](https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&logoColor=white&style=for-the-badge&token=70EJQJRRBH)
 ![Codacy grade](https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&style=for-the-badge)
 
@@ -69,9 +67,9 @@ The library has a simple usage and you need only three functions to use it. Chec
 
 Alternatively you can directly use the command line program to create kaleidoscope effect with ``./kaleidoscope-cmd <Input Image Path> <Output Image Path> <N>``. You can see an example below for ``N=8``
 <div align="center">
-    <img src="doc/images/ac-synin.jpg" width="425"/> <img src="doc/images/ac-synin-out.jpg" width="425"/>
+    <img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/ac-synin.jpg" width="425"/> <img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/ac-synin-out.jpg" width="425"/>
     <br>
-    <small>Image source: AC Valhalla</small>
+    Image source: AC Valhalla
 </div>
 
 For C++ and CUDA usage check the unit tests at ``tests/processingTest.cpp`` and ``tests/processingTest.cu``. It is very easy! Just include the header and construct the ``Kaleidoscope`` class from ``kalos`` namespace.
@@ -127,10 +125,7 @@ It is really fast! On a Intel i7-11800H CPU it achieves,
 resolution images. The performance estimation can be seen at the below
 
 <div align="center">
-    <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="doc/images/performance-white.png"/>
-    <img src="doc/images/performance-black.png" alt="" width="850"/>
-    </picture>
+    <img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/performance-black.png" alt="" width="850"/>
 </div>
 
 $$ FPS = a\text{ }e^{b\text{ }nPixels}+c\text{ }e^{d\text{ }nPixels} $$

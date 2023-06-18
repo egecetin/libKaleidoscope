@@ -20,11 +20,11 @@ add_executable(rotationTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/
 add_executable(slicingTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/slicingTest.c)
 add_executable(versionTest ${KALEIDOSCOPE_SOURCES} ${CMAKE_CURRENT_SOURCE_DIR}/src/versionTest.c)
 
-add_executable(processingTestCpp ${CMAKE_CURRENT_SOURCE_DIR}/src/processingTest.cpp)
+add_executable(cppTests ${CMAKE_CURRENT_SOURCE_DIR}/src/cppTest.cpp)
 
 list(APPEND KALEIDOSCOPE_C_TEST_LIBS check)
 list(APPEND KALEIDOSCOPE_CPP_TEST_LIBS gtest_main)
-list(APPEND KALEIDOSCOPE_TEST_TARGETS interpolationTest processingTest rotationTest slicingTest versionTest processingTestCpp)
+list(APPEND KALEIDOSCOPE_TEST_TARGETS interpolationTest processingTest rotationTest slicingTest versionTest cppTests)
 
 if(KALEIDOSCOPE_ENABLE_CUDA)
     add_executable(processingTestCuda ${CMAKE_CURRENT_SOURCE_DIR}/src/processingTest.cu)
@@ -74,7 +74,7 @@ target_link_libraries(rotationTest ${KALEIDOSCOPE_C_TEST_LIBS})
 target_link_libraries(slicingTest ${KALEIDOSCOPE_C_TEST_LIBS})
 target_link_libraries(versionTest ${KALEIDOSCOPE_C_TEST_LIBS})
 
-target_link_libraries(processingTestCpp ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-static)
+target_link_libraries(cppTests ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-static)
 
 if(KALEIDOSCOPE_ENABLE_CUDA)
     target_link_libraries(processingTestCuda ${KALEIDOSCOPE_CPP_TEST_LIBS} kaleidoscope-cuda-shared)
@@ -86,7 +86,7 @@ add_test(NAME processingTest COMMAND processingTest)
 add_test(NAME rotationTest COMMAND rotationTest)
 add_test(NAME slicingTest COMMAND slicingTest)
 add_test(NAME versionTest COMMAND versionTest)
-add_test(NAME processingTestCpp COMMAND processingTestCpp)
+add_test(NAME cppTests COMMAND cppTests)
 
 if(KALEIDOSCOPE_ENABLE_CUDA)
     add_test(NAME processingTestCuda COMMAND processingTestCuda)
