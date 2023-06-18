@@ -125,10 +125,7 @@ It is really fast! On a Intel i7-11800H CPU it achieves,
 resolution images. The performance estimation can be seen at the below
 
 <div align="center">
-    <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="doc/images/performance-white.png"/>
-    <img src="doc/images/performance-black.png" alt="" width="850"/>
-    </picture>
+    <img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/performance-black.png" alt="" width="850"/>
 </div>
 
 $$ FPS = a\text{ }e^{b\text{ }nPixels}+c\text{ }e^{d\text{ }nPixels} $$
