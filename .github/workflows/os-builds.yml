@@ -11,6 +11,13 @@ jobs:
     strategy:
       matrix:
         os-version: [ubuntu-22.04, windows-2022, macos-12]
+        include:
+          - os-version: ubuntu-22.04
+            wheel-path: build/python/dist/*.whl
+          - os-version: windows-2022
+            wheel-path: build/Release/python/dist/*.whl
+          - os-version: macos-12
+            wheel-path: build/python/dist/*.whl
     steps:
       - uses: actions/checkout@v3
         with:
