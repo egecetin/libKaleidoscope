@@ -205,7 +205,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
 
 	// Check parameters
-	if (handler == NULL || n <= 2 || width <= 0 || height <= 0 || nComponents <= 0 || scaleDown <= 0.0 || scaleDown >= 1.0)
+	if (handler == NULL || n <= 2 || width <= 0 || height <= 0 || nComponents <= 0 || scaleDown <= 0.0 ||
+		scaleDown >= 1.0)
 		return EXIT_FAILURE;
 
 	assert(handler);

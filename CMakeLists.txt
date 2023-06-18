@@ -99,7 +99,7 @@ if(KALEIDOSCOPE_BUILD_PYTHON_BINDINGS)
     python-bindings ALL
     WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python
     COMMENT "Building Python wheel"
-    COMMAND python3 setup.py bdist_wheel --universal
+    COMMAND python3 -m build
   )
 endif()
 
