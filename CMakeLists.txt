@@ -104,7 +104,6 @@ if(KALEIDOSCOPE_BUILD_PYTHON_BINDINGS)
 
   add_custom_target(
     python-bindings ALL
-    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "Building Python wheel"
     COMMAND python3 -m build ${CMAKE_CURRENT_BINARY_DIR}/python/ --sdist
   )
