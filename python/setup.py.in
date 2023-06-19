@@ -28,6 +28,5 @@ setup(
         'Programming Language :: Cython',
         'Topic :: Scientific/Engineering :: Image Processing'],
     options={'bdist_wheel':{'universal':True}},
-    include_dirs = ['build', 'include', 'src'],
     ext_modules=cythonize('kaleidoscope.pyx')
     )
