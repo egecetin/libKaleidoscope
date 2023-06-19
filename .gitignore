@@ -1,10 +1,16 @@
 # Files
 Doxyfile
+python/kaleidoscope.cpp
+python/setup.py
 
 # Directories
 build
 doc
 python/__pycache__
+python/dist
+python/include
+python/src
+python/LibKaleidoscope.egg-info
 .vs
 .vscode
 .pytest_cache

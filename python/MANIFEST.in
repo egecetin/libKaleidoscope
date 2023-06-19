@@ -1,0 +1,6 @@
+include src/kaleidoscope.c
+include include/kaleidoscope.hpp
+include include/kaleidoscope.h
+include python/kaleidoscope.pyx
+include python/kaleidoscope.pxd
+include ../build/kaleidoscope-config.h

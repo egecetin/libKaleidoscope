@@ -89,17 +89,13 @@ endif()
 
 if(KALEIDOSCOPE_BUILD_PYTHON_BINDINGS)
   find_package(Python REQUIRED)
-  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/setup.py.in "${CMAKE_CURRENT_BINARY_DIR}/python/setup.py")
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/kaleidoscope.pxd ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/kaleidoscope.pyx ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
-  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/pyproject.toml ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/setup.py.in "${CMAKE_CURRENT_SOURCE_DIR}/python/setup.py")
 
   add_custom_target(
     python-bindings ALL
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python
+    WORKING_DIRECTORY ${CMAKE_CURRENT_SOURCE_DIR}
     COMMENT "Building Python wheel"
-    COMMAND python3 -m build
+    COMMAND python3 -m build python/ --sdist
   )
 endif()
 
