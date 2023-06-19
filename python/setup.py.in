@@ -1,7 +1,7 @@
 from setuptools import setup
 from Cython.Build import cythonize
 
-long_description = open("${CMAKE_CURRENT_SOURCE_DIR}/README-python.md").read()
+long_description = open("README.md").read()
 
 setup(
     name= "LibKaleidoscope",
@@ -28,9 +28,5 @@ setup(
         'Programming Language :: Cython',
         'Topic :: Scientific/Engineering :: Image Processing'],
     options={'bdist_wheel':{'universal':True}},
-    include_dirs = [
-        '${CMAKE_CURRENT_SOURCE_DIR}/include',
-        '${CMAKE_CURRENT_SOURCE_DIR}/src',
-        '${CMAKE_CURRENT_BINARY_DIR}'],
-    ext_modules=cythonize(["${CMAKE_CURRENT_BINARY_DIR}/python/kaleidoscope.pyx"])
+    ext_modules=cythonize('kaleidoscope.pyx')
     )

@@ -1,0 +1,6 @@
+include kaleidoscope.c
+include kaleidoscope.hpp
+include kaleidoscope.h
+include kaleidoscope.pyx
+include kaleidoscope.pxd
+include kaleidoscope-config.h

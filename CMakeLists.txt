@@ -4,6 +4,7 @@ project(kaleidoscope VERSION 1.3.1)
 # Options
 set(CMAKE_DEBUG_POSTFIX d)
 set(CMAKE_MODULE_PATH ${CMAKE_MODULE_PATH} "${PROJECT_SOURCE_DIR}/cmake")
+set(KALEIDOSCOPE_TARGET_CUDA_ARCH "50;52;61;62;70;72;75;80;86;87;89;90")
 
 option(KALEIDOSCOPE_ENABLE_SHARED "Enables shared libraries" ON)
 option(KALEIDOSCOPE_ENABLE_DOCS "Enables doxygen documentation" OFF)
@@ -14,7 +15,7 @@ option(KALEIDOSCOPE_ENABLE_PACKAGE "Enables packaging for library" OFF)
 option(KALEIDOSCOPE_ENABLE_CUDA "Enables NVIDIA CUDA backend for library" OFF)
 option(KALEIDOSCOPE_BUILD_PYTHON_BINDINGS "Enables to build of Python bindings" ON)
 
-set(KALEIDOSCOPE_TARGET_CUDA_ARCH "50;52;61;62;70;72;75;80;86;87;89;90")
+configure_file(kaleidoscope-config.h.in "kaleidoscope-config.h")
 
 include_directories(${CMAKE_CURRENT_SOURCE_DIR}/include)
 include_directories(${CMAKE_CURRENT_BINARY_DIR})
@@ -89,17 +90,22 @@ endif()
 
 if(KALEIDOSCOPE_BUILD_PYTHON_BINDINGS)
   find_package(Python REQUIRED)
-  file(MAKE_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/setup.py.in "${CMAKE_CURRENT_BINARY_DIR}/python/setup.py")
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/kaleidoscope.pxd ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/kaleidoscope.pyx ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/MANIFEST.in ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
   configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/pyproject.toml ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/python-tests.py ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/python/README.md ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.hpp ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/include/kaleidoscope.h ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_SOURCE_DIR}/src/kaleidoscope.c ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
+  configure_file(${CMAKE_CURRENT_BINARY_DIR}/kaleidoscope-config.h ${CMAKE_CURRENT_BINARY_DIR}/python COPYONLY)
 
   add_custom_target(
     python-bindings ALL
-    WORKING_DIRECTORY ${CMAKE_CURRENT_BINARY_DIR}/python
     COMMENT "Building Python wheel"
-    COMMAND python3 -m build
+    COMMAND python3 -m build ${CMAKE_CURRENT_BINARY_DIR}/python/ --sdist
   )
 endif()
 
@@ -136,5 +142,3 @@ if(KALEIDOSCOPE_ENABLE_PACKAGE)
 
   include(CPack)
 endif()
-
-configure_file(kaleidoscope-config.h.in "kaleidoscope-config.h")

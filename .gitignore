@@ -4,7 +4,7 @@ Doxyfile
 # Directories
 build
 doc
-python/__pycache__
+__pycache__
 .vs
 .vscode
 .pytest_cache
