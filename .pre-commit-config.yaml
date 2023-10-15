@@ -2,7 +2,7 @@ exclude: '.*\.(m)'
 fail_fast: false
 repos:
   - repo: https://github.com/pre-commit/pre-commit-hooks
-    rev: v4.4.0
+    rev: v4.5.0
     hooks:
       - id: trailing-whitespace
       - id: check-case-conflict
@@ -28,12 +28,12 @@ repos:
       - id: cmakelint
         args: ['--linelength=120']
   - repo: https://github.com/codespell-project/codespell
-    rev: v2.2.5
+    rev: v2.2.6
     hooks:
       - id: codespell
         pass_filenames: false
   - repo: https://github.com/crate-ci/typos
-    rev: v1.16.11
+    rev: v1.16.19
     hooks:
       - id: typos
         pass_filenames: false
