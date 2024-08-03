@@ -117,6 +117,8 @@ if(KALEIDOSCOPE_ENABLE_TESTS)
   include(CTest)
   enable_testing()
 
+  add_compile_options(--coverage)
+  add_link_options(--coverage)
   add_subdirectory(tests)
 endif()
 
