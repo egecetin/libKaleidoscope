@@ -38,8 +38,6 @@ if(UNIX)
     if(KALEIDOSCOPE_ENABLE_COVERAGE)
         include(CodeCoverage)
 
-        add_compile_options(--coverage)
-        add_link_options(--coverage)
         set(GCOVR_ADDITIONAL_ARGS "--exclude-throw-branches")
         setup_target_for_coverage_gcovr_html(
             NAME
