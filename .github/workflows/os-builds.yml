@@ -14,7 +14,7 @@ jobs:
           - os-version: ubuntu-22.04
             venv-command: . .venv/bin/activate
           - os-version: windows-2022
-          - os-version: macos-14
+          - os-version: macos-13
             venv-command: . .venv/bin/activate
 
     steps:
