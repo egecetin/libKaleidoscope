@@ -13,7 +13,7 @@ jobs:
         os-version: [ubuntu-22.04, windows-2022, macos-14]
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Install Python Requirements
@@ -23,7 +23,9 @@ jobs:
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_TESTS=ON -DKALEIDOSCOPE_ENABLE_PACKAGE=ON -S . -B build
       - name: Build
-        run: cmake --build build --parallel --config Release
+        run: |
+          . .venv/bin/activate
+          cmake --build build --parallel --config Release
       - name: Install python package
         run: |
           . .venv/bin/activate
@@ -34,7 +36,9 @@ jobs:
           ctest --output-on-failure --test-dir build/tests --build-config Release
           pytest python/python-tests.py
       - name: Package
-        run: cmake --build build --parallel --target package --config Release
-      - uses: actions/upload-artifact@v3
+        run: |
+          . .venv/bin/activate
+          cmake --build build --parallel --target package --config Release
+      - uses: actions/upload-artifact@v4
         with:
           path: build/dist/*
