@@ -17,15 +17,20 @@ jobs:
         with:
           submodules: recursive
       - name: Install Python Requirements
-        run: python3 -m pip install cython wheel pytest build
+        run: |
+          python3 -m venv .venv && . .venv/bin/activate
+          python3 -m pip install cython wheel pytest build
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_TESTS=ON -DKALEIDOSCOPE_ENABLE_PACKAGE=ON -S . -B build
       - name: Build
         run: cmake --build build --parallel --config Release
       - name: Install python package
-        run: python3 -m pip install --find-links=./build/python/dist/ LibKaleidoscope
+        run: |
+          . .venv/bin/activate
+          python3 -m pip install --find-links=./build/python/dist/ LibKaleidoscope
       - name: Run Tests
         run: |
+          . .venv/bin/activate
           ctest --output-on-failure --test-dir build/tests --build-config Release
           pytest python/python-tests.py
       - name: Package
