@@ -47,4 +47,5 @@ jobs:
           cmake --build build --parallel --target package --config Release
       - uses: actions/upload-artifact@v4
         with:
+          name: ${{ matrix.os-version }}
           path: build/dist/*
