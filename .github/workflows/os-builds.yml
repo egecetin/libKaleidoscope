@@ -10,26 +10,42 @@ jobs:
     runs-on: ${{ matrix.os-version }}
     strategy:
       matrix:
-        os-version: [ubuntu-22.04, windows-2022, macos-12]
+        include:
+          - os-version: ubuntu-22.04
+            venv-command: . .venv/bin/activate
+          - os-version: windows-2022
+          - os-version: macos-13
+            venv-command: . .venv/bin/activate
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Install Python Requirements
-        run: python3 -m pip install cython wheel pytest build
+        run: |
+          python3 -m venv .venv
+          ${{ matrix.venv-command }}
+          python3 -m pip install cython wheel pytest build
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_TESTS=ON -DKALEIDOSCOPE_ENABLE_PACKAGE=ON -S . -B build
       - name: Build
-        run: cmake --build build --parallel --config Release
+        run: |
+          ${{ matrix.venv-command }}
+          cmake --build build --parallel --config Release
       - name: Install python package
-        run: python3 -m pip install --find-links=./build/python/dist/ LibKaleidoscope
+        run: |
+          ${{ matrix.venv-command }}
+          python3 -m pip install --find-links=./build/python/dist/ LibKaleidoscope
       - name: Run Tests
         run: |
+          ${{ matrix.venv-command }}
           ctest --output-on-failure --test-dir build/tests --build-config Release
           pytest python/python-tests.py
       - name: Package
-        run: cmake --build build --parallel --target package --config Release
-      - uses: actions/upload-artifact@v3
+        run: |
+          ${{ matrix.venv-command }}
+          cmake --build build --parallel --target package --config Release
+      - uses: actions/upload-artifact@v4
         with:
+          name: ${{ matrix.os-version }}
           path: build/dist/*
