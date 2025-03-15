@@ -1,2 +1,3 @@
 *:thirdparty/*
+*:tests/*
 missingInclude:*
