@@ -32,8 +32,3 @@ repos:
     hooks:
       - id: codespell
         pass_filenames: false
-  - repo: https://github.com/crate-ci/typos
-    rev: v1
-    hooks:
-      - id: typos
-        pass_filenames: false

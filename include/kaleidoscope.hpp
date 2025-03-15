@@ -5,6 +5,7 @@ extern "C"
 #include "kaleidoscope.h"
 }
 
+#include <cstdint>
 #include <stdexcept>
 
 namespace kalos
