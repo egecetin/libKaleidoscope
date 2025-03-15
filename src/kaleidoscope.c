@@ -55,8 +55,8 @@ char *getKaleidoscopeLibraryInfo()
 
 int compare(const void *lhsPtr, const void *rhsPtr)
 {
-	TransformationInfo *lhs = (TransformationInfo *)lhsPtr;
-	TransformationInfo *rhs = (TransformationInfo *)rhsPtr;
+	const TransformationInfo *lhs = (const TransformationInfo *)lhsPtr;
+	const TransformationInfo *rhs = (const TransformationInfo *)rhsPtr;
 	return lhs->dstOffset - rhs->dstOffset;
 }
 
