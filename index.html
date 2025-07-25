@@ -73,95 +73,234 @@ $(function() {
 <div class="title">kaleidoscope Documentation</div>  </div>
 </div><!--header-->
 <div class="contents">
-<div class="textblock"><p><a class="anchor" id="md_README"></a> </p><div align="center"></div><div align="center"> <img src="doc/images/logo-black.png" alt="" width="850" class="inline"/>  <br  />
-</div><div align="center">A library to create kaleidoscope effect on images. You can build on all platforms using CMake.</div><div align="center"><img src="https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&amp;label=pre-commit&amp;logo=precommit&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&amp;label=CodeQL&amp;logo=github&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&amp;label=Build&amp;logo=github&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&amp;logoColor=white&amp;style=for-the-badge&amp;token=70EJQJRRBH" alt="Codecov" class="inline"/> <img src="https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&amp;style=for-the-badge" alt="Codacy grade" class="inline"/></div><div align="center"><img src="https://img.shields.io/badge/C-%23555555?style=for-the-badge&amp;logo=c&amp;logoColor=white" alt="C Badge" class="inline"/> <img src="https://img.shields.io/badge/C%2B%2B-%23f34b7d?style=for-the-badge&amp;logo=cplusplus&amp;logoColor=white" alt="C++ Badge" class="inline"/> <img src="https://img.shields.io/badge/Python-%233572A5?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="Python Badge" class="inline"/> <img src="https://img.shields.io/badge/CUDA-%233A4E3A?style=for-the-badge&amp;logo=nvidia&amp;logoColor=white" alt="CUDA Badge" class="inline"/> </div><p>The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. You can download from python package from PyPI. It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance. Check for mathematical explanation of the kaleidoscope effect from my <a href="https://egecetin.github.io/Projects/kaleidoscope">webpage</a></p>
-<h2><a class="anchor" id="autotoc_md0"></a>
-Supported Languages</h2>
-<ul>
-<li>C : Main programming language</li>
-<li>C++ : Header only binding for easier usage</li>
-<li>Python : Bindings using Cython</li>
-<li>CUDA : For GPU computing</li>
-</ul>
-<h2><a class="anchor" id="autotoc_md1"></a>
-Install for Python</h2>
-<div class="fragment"><div class="line">pip install LibKaleidoscope</div>
-</div><!-- fragment --><p>Python users check python/python-test.py in GitHub for basic usage</p>
-<h2><a class="anchor" id="autotoc_md2"></a>
-Building</h2>
-<p>Use the following commands,</p>
-<div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
+<div class="textblock"><p><b>🔍 Click to see language details</b> <a class="anchor" id="md_README"></a> </p><div align="center"></div><div align="center"> <img src="doc/images/logo-black.png" alt="LibKaleidoscope" width="850" class="inline"/> </div><div align="center"><h3>🌈✨ Transform Images into Mesmerizing Kaleidoscope Art ✨🌈</h3>
+</div><div align="center"></div><div align="center"></div><div align="center"> <b>A blazingly fast, cross-platform library to create stunning kaleidoscope effects on images</b><br  />
+ <em>Built with ❤️ using C, C++, Python, and CUDA</em> </div><div align="center"></div><div align="center"><hr  />
+</div><div align="center"></div><h3><a class="anchor" id="autotoc_md1"></a>
+📊 &lt;strong&gt;Project Status&lt;/strong&gt;</h3>
+<div align="center"> <img src="https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge" alt="GitHub" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&amp;label=pre-commit&amp;logo=precommit&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&amp;label=CodeQL&amp;logo=github&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&amp;label=Build&amp;logo=github&amp;logoColor=white&amp;style=for-the-badge" alt="GitHub Workflow Status" class="inline"/> <img src="https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&amp;logoColor=white&amp;style=for-the-badge&amp;token=70EJQJRRBH" alt="Codecov" class="inline"/> <img src="https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&amp;style=for-the-badge" alt="Codacy grade" class="inline"/></div><div align="center"></div><h3><a class="anchor" id="autotoc_md2"></a>
+🛠️ &lt;strong&gt;Technology Stack&lt;/strong&gt;</h3>
+<div align="center"> <img src="https://img.shields.io/badge/C-%23555555?style=for-the-badge&amp;logo=c&amp;logoColor=white" alt="C Badge" class="inline"/> <img src="https://img.shields.io/badge/C%2B%2B-%23f34b7d?style=for-the-badge&amp;logo=cplusplus&amp;logoColor=white" alt="C++ Badge" class="inline"/> <img src="https://img.shields.io/badge/Python-%233572A5?style=for-the-badge&amp;logo=python&amp;logoColor=white" alt="Python Badge" class="inline"/> <img src="https://img.shields.io/badge/CUDA-%233A4E3A?style=for-the-badge&amp;logo=nvidia&amp;logoColor=white" alt="CUDA Badge" class="inline"/> <img src="https://img.shields.io/badge/CMake-%23008FBA?style=for-the-badge&amp;logo=cmake&amp;logoColor=white" alt="CMake Badge" class="inline"/></div><div align="center"></div><hr  />
+<h2><a class="anchor" id="autotoc_md4"></a>
+🎯 &lt;strong&gt;What is LibKaleidoscope?&lt;/strong&gt;</h2>
+<p>LibKaleidoscope is a <b>high-performance</b>, <b>cross-platform</b> library that transforms ordinary images into breathtaking kaleidoscope patterns. Written in C with FFI support, it offers seamless integration with multiple programming languages and includes GPU acceleration for ultimate performance.</p>
+<blockquote class="doxtable">
+<p>🔗 <b>Learn More</b>: Check out the <a href="https://egecetin.github.io/Projects/kaleidoscope">mathematical explanation</a> of the kaleidoscope effect! </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md5"></a>
+🌟 &lt;strong&gt;Key Features&lt;/strong&gt;</h2>
+<div align="center"></div><div align="center"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">🚀 <b>Performance</b>   </th><th class="markdownTableHeadCenter">🌐 <b>Multi-Language</b>   </th><th class="markdownTableHeadCenter">🎨 <b>Easy to Use</b>   </th><th class="markdownTableHeadCenter">⚡ <b>GPU Accelerated</b>    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter">Ultra-fast processing with optimized algorithms   </td><td class="markdownTableBodyCenter">C, C++, Python, CUDA support   </td><td class="markdownTableBodyCenter">Simple 3-function API   </td><td class="markdownTableBodyCenter">CUDA backend for maximum speed   </td></tr>
+</table>
+</div><div align="center"></div><hr  />
+<h2><a class="anchor" id="autotoc_md7"></a>
+🎭 &lt;strong&gt;Supported Languages&lt;/strong&gt;</h2>
+<p>&lt;details&gt;</p>
+<h3><a class="anchor" id="autotoc_md8"></a>
+🎯 &lt;strong&gt;Core Languages&lt;/strong&gt;</h3>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">Language   </th><th class="markdownTableHeadLeft">Purpose   </th><th class="markdownTableHeadLeft">Features    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><b>🔧 C</b>   </td><td class="markdownTableBodyLeft">Main programming language   </td><td class="markdownTableBodyLeft">Core library, maximum performance    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><b>⚡ C++</b>   </td><td class="markdownTableBodyLeft">Header-only binding   </td><td class="markdownTableBodyLeft">Easy integration, STL compatibility    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft"><b>🐍 Python</b>   </td><td class="markdownTableBodyLeft">Cython bindings   </td><td class="markdownTableBodyLeft">PyPI package, Pythonic interface    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft"><b>🚀 CUDA</b>   </td><td class="markdownTableBodyLeft">GPU computing   </td><td class="markdownTableBodyLeft">Parallel processing, extreme performance   </td></tr>
+</table>
+<p>&lt;/details&gt;</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md10"></a>
+📦 &lt;strong&gt;Quick Installation&lt;/strong&gt;</h2>
+<h3><a class="anchor" id="autotoc_md11"></a>
+🐍 &lt;strong&gt;Python Users (Recommended)&lt;/strong&gt;</h3>
+<div class="fragment"><div class="line"># 🎉 One-liner installation from PyPI</div>
+<div class="line">pip install LibKaleidoscope</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>💡 <b>Pro Tip</b>: Check <code>python/python-test.py</code> for example usage! </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md12"></a>
+&lt;/blockquote&gt;</h2>
+<h2><a class="anchor" id="autotoc_md13"></a>
+🛠️ &lt;strong&gt;Building from Source&lt;/strong&gt;</h2>
+<p>&lt;details&gt;</p>
+<p><b>🏗️ Standard Build</b> </p>
+<div class="fragment"><div class="line"># 🚀 Quick build commands</div>
+<div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake -DCMAKE_BUILD_TYPE=Release ..</div>
 <div class="line">cmake --build . --parallel</div>
-</div><!-- fragment --><p>If you want to enable CUDA backend,</p>
-<div class="fragment"><div class="line">mkdir build &amp;&amp; cd build</div>
+</div><!-- fragment --><p>&lt;/details&gt;</p>
+<p>&lt;details&gt;</p>
+<p><b>⚡ CUDA-Enabled Build</b> </p>
+<blockquote class="doxtable">
+<p>⚠️ <b>IMPORTANT</b>: CUDA Toolkit must be installed and available on your system before building with CUDA support. Download from <a href="https://developer.nvidia.com/cuda-downloads">NVIDIA Developer</a>. </p>
+</blockquote>
+<div class="fragment"><div class="line"># 🔥 GPU-accelerated build</div>
+<div class="line">mkdir build &amp;&amp; cd build</div>
 <div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CUDA=ON ..</div>
 <div class="line">cmake --build . --parallel</div>
-</div><!-- fragment --><p>There is no direct dependency for libjpeg-turbo inside from the library. It is just for test and demonstration purposes. If you don't want to install/compile just disable command line tool compilation with <code>-DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF</code></p>
-<h2><a class="anchor" id="autotoc_md3"></a>
-Usage</h2>
-<p>The library has a simple usage and you need only three functions to use it. Check the sample usage at <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code></p>
-<ul>
-<li>Initialization of the transformation matrix: <code>int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)</code></li>
-<li>Processing image (Can be used multiple times if the input images have same dimensions): <code>void <a class="el" href="kaleidoscope_8h.html#ab5b2988a55fb746fbe1fa80dc7b72df1" title="Applies kaleidoscope effect to image.">processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</a></code></li>
-<li>Deinitialization of the transformation matrix: <code>void <a class="el" href="kaleidoscope_8h.html#af94426aef969fbc479f07359b36a3bea" title="Deinitializes kaleidoscope handler.">deInitKaleidoscope(KaleidoscopeHandle *handler)</a></code></li>
-</ul>
-<p>Alternatively you can directly use the command line program to create kaleidoscope effect with <code>./kaleidoscope-cmd &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt;</code>. You can see an example below for <code>N=8</code> </p><div align="center"> <img src="doc/images/ac-synin.jpg" alt="" width="425" class="inline"/> <img src="doc/images/ac-synin-out.jpg" alt="" width="425" class="inline"/> <br  />
- <small>Image source: AC Valhalla</small> </div><p>For C++ and CUDA usage check the unit tests at <code>tests/processingTest.cpp</code> and <code>tests/processingTest.cu</code>. It is very easy! Just include the header and construct the <code>Kaleidoscope</code> class from <code>kalos</code> namespace.</p>
-<ul>
-<li>For C++ header only binding,</li>
-</ul>
-<div class="fragment"><div class="line">#include &lt;kaleidoscope.hpp&gt;</div>
+</div><!-- fragment --><p>&lt;/details&gt;</p>
+<p>&lt;details&gt;</p>
+<p><b>🔧 Custom Build Options</b> </p>
+<div class="fragment"><div class="line"># 🎛️ Disable command line tool (reduces dependencies)</div>
+<div class="line">cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF ..</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>📝 <b>Note</b>: The libjpeg-turbo dependency is only for testing and demo purposes </p>
+</blockquote>
+<p>&lt;/details&gt;</p>
+<hr  />
+<h2><a class="anchor" id="autotoc_md15"></a>
+🎯 &lt;strong&gt;Usage Guide&lt;/strong&gt;</h2>
+<h3><a class="anchor" id="autotoc_md16"></a>
+🎪 &lt;strong&gt;Simple 3-Step API&lt;/strong&gt;</h3>
+<p>LibKaleidoscope makes image transformation incredibly simple with just <b>3 functions</b>:</p>
+<div class="fragment"><div class="line">flowchart LR</div>
+<div class="line">    A[🎯 Initialize] --&gt; B[🎨 Process] --&gt; C[🧹 Cleanup]</div>
+<div class="line">    B --&gt; B</div>
+</div><!-- fragment --><p>&lt;details&gt;</p>
+<p><b>🔍 C API Reference</b> </p>
+<table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadCenter">Step   </th><th class="markdownTableHeadLeft">Function   </th><th class="markdownTableHeadLeft">Purpose    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><b>1️⃣</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60" title="Initializes kaleidoscope handler.">initKaleidoscope()</a></code>   </td><td class="markdownTableBodyLeft">Initialize transformation matrix    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyCenter"><b>2️⃣</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1" title="Applies kaleidoscope effect to image.">processKaleidoscope()</a></code>   </td><td class="markdownTableBodyLeft">Process images (reusable for same dimensions)    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyCenter"><b>3️⃣</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea" title="Deinitializes kaleidoscope handler.">deInitKaleidoscope()</a></code>   </td><td class="markdownTableBodyLeft">Clean up resources   </td></tr>
+</table>
+<div class="fragment"><div class="line"><span class="comment">// 🎯 Step 1: Initialize</span></div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(<a class="code" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">double</span> scaleDown);</div>
 <div class="line"> </div>
-<div class="line">int main()</div>
-<div class="line">{</div>
-<div class="line">    kalos::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);</div>
+<div class="line"><span class="comment">// 🎨 Step 2: Process (use multiple times)</span></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a>(<a class="code" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler, <span class="keywordtype">double</span> k, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgIn, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgOut);</div>
 <div class="line"> </div>
-<div class="line">    /* ... */</div>
+<div class="line"><span class="comment">// 🧹 Step 3: Cleanup</span></div>
+<div class="line"><span class="keywordtype">void</span> <a class="code" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(<a class="code" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler);</div>
+<div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00199">kaleidoscope.c:199</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00288">kaleidoscope.c:288</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8c_source.html#l00304">kaleidoscope.c:304</a></div></div>
+<div class="ttc" id="astructKaleidoscopeHandle__t_html"><div class="ttname"><a href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle_t</a></div><div class="ttdoc">Struct for kaleidoscope effect generator.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8h_source.html#l00033">kaleidoscope.h:34</a></div></div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>📚 <b>Example</b>: Check <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code> for complete usage </p>
+</blockquote>
+<p>&lt;/details&gt;</p>
+<h3><a class="anchor" id="autotoc_md17"></a>
+🖥️ &lt;strong&gt;Command Line Magic&lt;/strong&gt;</h3>
+<p>Transform images instantly with the command line tool:</p>
+<div class="fragment"><div class="line"># ✨ Create kaleidoscope effect (N=8 segments)</div>
+<div class="line">./kaleidoscope-cmd &lt;Input_Image&gt; &lt;Output_Image&gt; &lt;N&gt;</div>
+</div><!-- fragment --><h3><a class="anchor" id="autotoc_md18"></a>
+🎨 &lt;strong&gt;Visual Example&lt;/strong&gt;</h3>
+<div align="center"> <img src="doc/images/ac-synin.jpg" alt="" width="400" class="inline"/> ➡️ <img src="doc/images/ac-synin-out.jpg" alt="" width="400" class="inline"/> <br  />
+ <em>🎮 Original → Kaleidoscope (N=8)</em><br  />
+ <small>Image source: AC Valhalla</small> </div><hr  />
+<h3><a class="anchor" id="autotoc_md20"></a>
+💻 &lt;strong&gt;Programming Language Examples&lt;/strong&gt;</h3>
+<p>&lt;details&gt;</p>
+<p><b>⚡ C++ Header-Only Binding</b> </p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;<a class="code" href="kaleidoscope_8hpp.html">kaleidoscope.hpp</a>&gt;</span></div>
 <div class="line"> </div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>() {</div>
+<div class="line">    <span class="comment">// 🎯 One-line initialization with all parameters</span></div>
+<div class="line">    <a class="code" href="classkalos_1_1Kaleidoscope.html">kalos::Kaleidoscope</a> handler(n, width, height, nComponents, scaleDown, k);</div>
+<div class="line"> </div>
+<div class="line">    <span class="comment">// 🎨 Process your image data</span></div>
 <div class="line">    handler.processImage(inData, outData, nPixel);</div>
 <div class="line"> </div>
-<div class="line">    /* ... */</div>
-<div class="line"> </div>
-<div class="line">    return 0;</div>
+<div class="line">    <span class="comment">// 🧹 Automatic cleanup when handler goes out of scope</span></div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><ul>
-<li>For CUDA backend,</li>
-</ul>
-<div class="fragment"><div class="line">#include &lt;cuda/kaleidoscope.cuh&gt;</div>
+<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html"><div class="ttname"><a href="classkalos_1_1Kaleidoscope.html">kalos::Kaleidoscope</a></div><div class="ttdoc">Kaleidoscope effect generator.</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope_8hpp_source.html#l00016">kaleidoscope.hpp:17</a></div></div>
+<div class="ttc" id="akaleidoscope-cmd_8c_html_a0ddf1224851353fc92bfbff6f499fa97"><div class="ttname"><a href="kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a></div><div class="ttdeci">int main(int argc, char *argv[])</div><div class="ttdef"><b>Definition:</b> <a href="kaleidoscope-cmd_8c_source.html#l00008">kaleidoscope-cmd.c:8</a></div></div>
+<div class="ttc" id="akaleidoscope_8hpp_html"><div class="ttname"><a href="kaleidoscope_8hpp.html">kaleidoscope.hpp</a></div></div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>🚀 <b>Advantage</b>: RAII-style resource management, exception safety </p>
+</blockquote>
+<p>&lt;/details&gt;</p>
+<p>&lt;details&gt;</p>
+<p><b>🔥 CUDA GPU Backend</b> </p>
+<div class="fragment"><div class="line"><span class="preprocessor">#include &lt;cuda/kaleidoscope.cuh&gt;</span></div>
 <div class="line"> </div>
-<div class="line">int main()</div>
-<div class="line">{</div>
+<div class="line"><span class="keywordtype">int</span> <a class="code" href="kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97">main</a>() {</div>
+<div class="line">    <span class="comment">// 🚀 GPU-accelerated kaleidoscope</span></div>
 <div class="line">    kalos::cuda::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);</div>
 <div class="line"> </div>
-<div class="line">    /* ... */</div>
-<div class="line"> </div>
-<div class="line">    // Make sure inData and outData is device allocated!</div>
+<div class="line">    <span class="comment">// ⚡ Ultra-fast GPU processing</span></div>
+<div class="line">    <span class="comment">// ⚠️ Important: inData and outData must be device-allocated!</span></div>
 <div class="line">    handler.processImage(inData, outData, nPixel);</div>
 <div class="line"> </div>
-<div class="line">    /* ... */</div>
-<div class="line"> </div>
-<div class="line">    return 0;</div>
+<div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-</div><!-- fragment --><h2><a class="anchor" id="autotoc_md4"></a>
-Benchmark</h2>
-<p>It is really fast! On a Intel i7-11800H CPU it achieves,</p>
-<ul>
-<li>~65 FPS for 4K UHD (3840 x 2160)</li>
-<li>~265 FPS for Full HD (1920 x 1080)</li>
-<li>~640 FPS for 720p (1280 x 720)</li>
-<li>~1350 FPS for 576p (720 x 576)</li>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>💡 <b>Performance Tip</b>: Ensure your data is allocated on GPU memory for maximum speed </p>
+</blockquote>
+<p>&lt;/details&gt;</p>
+<blockquote class="doxtable">
+<p>🧪 <b>Examples</b>: See <code>tests/processingTest.cpp</code> and <code>tests/processingTest.cu</code> for complete implementations </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md21"></a>
+&lt;/blockquote&gt;</h2>
+<h2><a class="anchor" id="autotoc_md22"></a>
+🚀 &lt;strong&gt;Performance Benchmarks&lt;/strong&gt;</h2>
+<h3><a class="anchor" id="autotoc_md23"></a>
+⚡ &lt;strong&gt;Lightning Fast Performance&lt;/strong&gt;</h3>
+<blockquote class="doxtable">
+<p><b>Hardware</b>: Intel i7-11800H CPU </p>
+</blockquote>
+<div align="center"></div><div align="center"><table class="markdownTable">
+<tr class="markdownTableHead">
+<th class="markdownTableHeadLeft">🎥 <b>Resolution</b>   </th><th class="markdownTableHeadLeft">📊 <b>FPS</b>   </th><th class="markdownTableHeadLeft">🎯 <b>Use Case</b>    </th></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">🔥 <b>4K UHD</b> (3840×2160)   </td><td class="markdownTableBodyLeft">**~65 FPS**   </td><td class="markdownTableBodyLeft">Professional video editing    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">🎬 <b>Full HD</b> (1920×1080)   </td><td class="markdownTableBodyLeft">**~265 FPS**   </td><td class="markdownTableBodyLeft">Real-time streaming    </td></tr>
+<tr class="markdownTableRowOdd">
+<td class="markdownTableBodyLeft">📺 <b>720p</b> (1280×720)   </td><td class="markdownTableBodyLeft">**~640 FPS**   </td><td class="markdownTableBodyLeft">Gaming overlays    </td></tr>
+<tr class="markdownTableRowEven">
+<td class="markdownTableBodyLeft">📱 <b>576p</b> (720×576)   </td><td class="markdownTableBodyLeft">**~1350 FPS**   </td><td class="markdownTableBodyLeft">Mobile apps   </td></tr>
+</table>
+</div><div align="center"></div><h3><a class="anchor" id="autotoc_md24"></a>
+📈 &lt;strong&gt;Performance Visualization&lt;/strong&gt;</h3>
+<div align="center">  <img src="doc/images/performance-black.png" alt="Performance Chart" width="850" class="inline"/>  </div><p>&lt;details&gt;</p>
+<p><b>🔬 Mathematical Formula</b> </p>
+<p>The performance follows an exponential decay model:</p>
+<p>$$\Large FPS = a \cdot e^{b \cdot nPixels} + c \cdot e^{d \cdot nPixels}$$</p>
+<p><b>Where:</b></p><ul>
+<li>$a = 2492$</li>
+<li>$b = -2.165 \times 10^{-6}$</li>
+<li>$c = 364.9$</li>
+<li>$d = -2.08 \times 10^{-7}$</li>
 </ul>
-<p>resolution images. The performance estimation can be seen at the below</p>
-<div align="center">  <img src="doc/images/performance-black.png" alt="" width="850" class="inline"/>  </div><p>$$ FPS = a\text{ }e^{b\text{ }nPixels}+c\text{ }e^{d\text{ }nPixels} $$</p>
-<p>$$ a = 2492 \text{, } b = -2.165\text{ }10^{-6} \text{, } c = 364.9 \text{, } d = -2.08\text{ }10^{-7} $$</p>
-<p>If you want to benchmark code on your system make sure you configured with <code>-DCMAKE_BUILD_TYPE=Release</code> and use this command,</p>
-<p><code>./kaleidoscope-cmd &lt;Input Image Path&gt; &lt;Output Image Path&gt; &lt;N&gt; &lt;Number of loop&gt;</code> </p>
-</div></div><!-- PageDoc -->
+<p>&lt;/details&gt;</p>
+<h3><a class="anchor" id="autotoc_md25"></a>
+🏃‍♂️ &lt;strong&gt;Benchmark Your System&lt;/strong&gt;</h3>
+<div class="fragment"><div class="line"># 🎯 Test performance on your hardware</div>
+<div class="line">./kaleidoscope-cmd &lt;Input_Image&gt; &lt;Output_Image&gt; &lt;N&gt; &lt;Number_of_loops&gt;</div>
+</div><!-- fragment --><blockquote class="doxtable">
+<p>⚠️ <b>Important</b>: Use <code>-DCMAKE_BUILD_TYPE=Release</code> for accurate benchmarks </p>
+</blockquote>
+<h2><a class="anchor" id="autotoc_md26"></a>
+&lt;/blockquote&gt;</h2>
+<h2><a class="anchor" id="autotoc_md27"></a>
+🤝 &lt;strong&gt;Contributing&lt;/strong&gt;</h2>
+<p>We welcome contributions! Please feel free to submit issues, feature requests, or pull requests.</p>
+<h2><a class="anchor" id="autotoc_md28"></a>
+📄 &lt;strong&gt;License&lt;/strong&gt;</h2>
+<p>This project is licensed under the terms of MIT License.</p>
+<hr  />
+<div align="center"></div><div align="center"></div><h3><a class="anchor" id="autotoc_md30"></a>
+🌟 &lt;strong&gt;Star this repo if you found it useful!&lt;/strong&gt; 🌟</h3>
+<div align="center"> Made with ❤️ by <a href="https://github.com/egecetin">egecetin</a></div><div align="center"></div> </div></div><!-- PageDoc -->
 </div><!-- contents -->
 <!-- start footer part -->
 <hr class="footer"/><address class="footer"><small>
-Generated on Sat Mar 15 2025 11:58:45 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
+Generated on Fri Jul 25 2025 11:20:49 for kaleidoscope by&#160;<a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.9.1
 </small></address>
 </body>
 </html>
