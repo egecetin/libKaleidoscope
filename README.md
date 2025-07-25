@@ -255,7 +255,7 @@ int main() {
 <div align="center">
     <picture>
     <source media="(prefers-color-scheme: light)" srcset="doc/images/performance-black.png"/>
-    <img src="doc/images/performance-light.png" alt="Performance Chart" width="850"/>
+    <img src="doc/images/performance-white.png" alt="Performance Chart" width="850"/>
     </picture>
 </div>
 
