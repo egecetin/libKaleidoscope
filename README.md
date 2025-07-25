@@ -1,8 +1,6 @@
 <div align="center">
 
-<picture>
 <img src="doc/images/logo-white.png" alt="LibKaleidoscope" width="850"/>
-</picture>
 
 <h3>🌈✨ Transform Images into Mesmerizing Kaleidoscope Art ✨🌈</h3>
 
@@ -252,9 +250,7 @@ int main() {
 ### 📈 **Performance Visualization**
 
 <div align="center">
-    <picture>
     <img src="doc/images/performance-white.png" alt="Performance Chart" width="850"/>
-    </picture>
 </div>
 
 <details>
