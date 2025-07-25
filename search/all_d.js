@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['x_34',['x',['../structPoint2D__t.html#a8fe47b4ff21ec735e4063fa343b76afc',1,'Point2D_t']]]
+  ['ncomponents_0',['nComponents',['../structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3',1,'KaleidoscopeHandle_t']]],
+  ['npoints_1',['nPoints',['../structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0',1,'KaleidoscopeHandle_t']]]
 ];

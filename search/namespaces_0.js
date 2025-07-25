@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kalos_41',['kalos',['../namespacekalos.html',1,'']]]
+  ['kalos_0',['kalos',['../namespacekalos.html',1,'']]]
 ];

@@ -1,6 +1,4 @@
 var searchData=
 [
-  ['deinitkaleidoscope_1',['deInitKaleidoscope',['../kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea',1,'deInitKaleidoscope(KaleidoscopeHandle *handler):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#af94426aef969fbc479f07359b36a3bea',1,'deInitKaleidoscope(KaleidoscopeHandle *handler):&#160;kaleidoscope.c']]],
-  ['dstlocation_2',['dstLocation',['../structTransformationInfo__t.html#aef5347d4f97d304f640e57d47b8664ce',1,'TransformationInfo_t']]],
-  ['dstoffset_3',['dstOffset',['../structTransformationInfo__t.html#a4487e82f4ab6c7ca810c1c269c40162e',1,'TransformationInfo_t']]]
+  ['api_20strong_0',['🎪 &lt;strong&gt;Simple 3-Step API&lt;/strong&gt;',['../index.html#autotoc_md16',1,'']]]
 ];

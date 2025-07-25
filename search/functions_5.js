@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['main_55',['main',['../kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'kaleidoscope-cmd.c']]]
+  ['main_0',['main',['../kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'kaleidoscope-cmd.c']]]
 ];

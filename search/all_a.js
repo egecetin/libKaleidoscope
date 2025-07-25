@@ -1,6 +1,12 @@
 var searchData=
 [
-  ['slicetriangle_28',['sliceTriangle',['../kaleidoscope_8c.html#af4d2cb7fd0363406ec3b4e4b7d8692c4',1,'sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#af4d2cb7fd0363406ec3b4e4b7d8692c4',1,'sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown):&#160;kaleidoscope.c']]],
-  ['srclocation_29',['srcLocation',['../structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8',1,'TransformationInfo_t']]],
-  ['srcoffset_30',['srcOffset',['../structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5',1,'TransformationInfo_t']]]
+  ['kaleidoscope_0',['kaleidoscope',['../classkalos_1_1Kaleidoscope.html',1,'kalos::Kaleidoscope'],['../classkalos_1_1Kaleidoscope.html#ac244ab7153f5f124ba44805225b3faa5',1,'kalos::Kaleidoscope::Kaleidoscope()'],['../index.html',1,'kaleidoscope']]],
+  ['kaleidoscope_2dcmd_2ec_1',['kaleidoscope-cmd.c',['../kaleidoscope-cmd_8c.html',1,'']]],
+  ['kaleidoscope_2ec_2',['kaleidoscope.c',['../kaleidoscope_8c.html',1,'']]],
+  ['kaleidoscope_2eh_3',['kaleidoscope.h',['../kaleidoscope_8h.html',1,'']]],
+  ['kaleidoscope_2ehpp_4',['kaleidoscope.hpp',['../kaleidoscope_8hpp.html',1,'']]],
+  ['kaleidoscopehandle_5',['KaleidoscopeHandle',['../kaleidoscope_8h.html#a1df4ab560e37e1da5c1cfd735330cc49',1,'kaleidoscope.h']]],
+  ['kaleidoscopehandle_5ft_6',['KaleidoscopeHandle_t',['../structKaleidoscopeHandle__t.html',1,'']]],
+  ['kalos_7',['kalos',['../namespacekalos.html',1,'']]],
+  ['key_20features_20strong_8',['🌟 &lt;strong&gt;Key Features&lt;/strong&gt;',['../index.html#autotoc_md5',1,'']]]
 ];

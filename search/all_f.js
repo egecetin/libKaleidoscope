@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['_7ekaleidoscope_36',['~Kaleidoscope',['../classkalos_1_1Kaleidoscope.html#a0f2d840de0a83d9b02ddb94d26106168',1,'kalos::Kaleidoscope']]]
+  ['quick_20installation_20strong_0',['📦 &lt;strong&gt;Quick Installation&lt;/strong&gt;',['../index.html#autotoc_md10',1,'']]]
 ];

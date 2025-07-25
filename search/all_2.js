@@ -1,6 +1,7 @@
 var searchData=
 [
-  ['getkaleidoscopelibraryinfo_4',['getKaleidoscopeLibraryInfo',['../kaleidoscope_8c.html#a2d8801a2d0569fc6a6ace951fde5b8a6',1,'getKaleidoscopeLibraryInfo():&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a2d8801a2d0569fc6a6ace951fde5b8a6',1,'getKaleidoscopeLibraryInfo():&#160;kaleidoscope.c']]],
-  ['getkaleidoscopeversion_5',['getKaleidoscopeVersion',['../kaleidoscope_8c.html#a174e87ff30e52c1c35d87ee43e627401',1,'getKaleidoscopeVersion(int *major, int *minor, int *patch):&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a174e87ff30e52c1c35d87ee43e627401',1,'getKaleidoscopeVersion(int *major, int *minor, int *patch):&#160;kaleidoscope.c']]],
-  ['getkaleidoscopeversionstring_6',['getKaleidoscopeVersionString',['../kaleidoscope_8c.html#a63cdf27219978744bcc5b440a5628b7c',1,'getKaleidoscopeVersionString():&#160;kaleidoscope.c'],['../kaleidoscope_8h.html#a63cdf27219978744bcc5b440a5628b7c',1,'getKaleidoscopeVersionString():&#160;kaleidoscope.c']]]
+  ['benchmark_20your_20system_20strong_0',['🏃‍♂️ &lt;strong&gt;Benchmark Your System&lt;/strong&gt;',['../index.html#autotoc_md25',1,'']]],
+  ['benchmarks_20strong_1',['🚀 &lt;strong&gt;Performance Benchmarks&lt;/strong&gt;',['../index.html#autotoc_md22',1,'']]],
+  ['blockquote_2',['blockquote',['../index.html#autotoc_md12',1,'&lt;/blockquote&gt;'],['../index.html#autotoc_md21',1,'&lt;/blockquote&gt;'],['../index.html#autotoc_md26',1,'&lt;/blockquote&gt;']]],
+  ['building_20from_20source_20strong_3',['🛠️ &lt;strong&gt;Building from Source&lt;/strong&gt;',['../index.html#autotoc_md13',1,'']]]
 ];

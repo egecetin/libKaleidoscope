@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['width_33',['width',['../structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e',1,'KaleidoscopeHandle_t']]]
+  ['magic_20strong_0',['🖥️ &lt;strong&gt;Command Line Magic&lt;/strong&gt;',['../index.html#autotoc_md17',1,'']]],
+  ['main_1',['main',['../kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'kaleidoscope-cmd.c']]]
 ];
