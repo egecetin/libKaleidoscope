@@ -8,16 +8,15 @@ on:
 
 jobs:
   deploy:
-    runs-on: ubuntu-22.04
+    runs-on: ubuntu-latest
+    container: egecetinn/alpine
     steps:
       - name: Checkout repository
         uses: actions/checkout@v3
         with:
           submodules: "true"
-      - name: Install Doxygen
-        run: sudo apt-get install doxygen -y
       - name: Configure
-        run: cmake . -DKALEIDOSCOPE_ENABLE_DOCS=1
+        run: cmake . -DKALEIDOSCOPE_ENABLE_DOCS=1 -DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF
       - name: Generate Doxygen Documentation
         run: cmake --build . --target docs
       - name: Create .nojekyll (ensures pages with underscores work on gh pages)
