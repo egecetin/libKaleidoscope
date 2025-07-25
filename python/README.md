@@ -1,137 +1,304 @@
 <div align="center">
 
-<img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/logo-black.png" alt="" width="850"/>
-<br>
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="doc/images/logo-white.png"/>
+<img src="doc/images/logo-black.png" alt="LibKaleidoscope" width="850"/>
+</picture>
 
-A library to create kaleidoscope effect on images. You can build on all platforms using CMake.
+<h3>🌈✨ Transform Images into Mesmerizing Kaleidoscope Art ✨🌈</h3>
+
+<p>
+<strong>A blazingly fast, cross-platform library to create stunning kaleidoscope effects on images</strong><br>
+<em>Built with ❤️ using C, C++, Python, and CUDA</em>
+</p>
+
+---
+
+### 📊 **Project Status**
 
 ![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&label=pre-commit&logo=precommit&logoColor=white&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white&style=for-the-badge)
-
 ![Codecov](https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&logoColor=white&style=for-the-badge&token=70EJQJRRBH)
 ![Codacy grade](https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&style=for-the-badge)
 
+### 🛠️ **Technology Stack**
 
 ![C Badge](https://img.shields.io/badge/C-%23555555?style=for-the-badge&logo=c&logoColor=white)
 ![C++ Badge](https://img.shields.io/badge/C%2B%2B-%23f34b7d?style=for-the-badge&logo=cplusplus&logoColor=white)
 ![Python Badge](https://img.shields.io/badge/Python-%233572A5?style=for-the-badge&logo=python&logoColor=white)
 ![CUDA Badge](https://img.shields.io/badge/CUDA-%233A4E3A?style=for-the-badge&logo=nvidia&logoColor=white)
+![CMake Badge](https://img.shields.io/badge/CMake-%23008FBA?style=for-the-badge&logo=cmake&logoColor=white)
+
 </div>
 
-The library is written in C language so you can use Foreign Function Interface (FFI) to call functions from your favorite programming language. You can download from python package from PyPI. It also has C++ header only library to provide easier interface for C++ users and CUDA support for people who have doubts about performance. Check for mathematical explanation of the kaleidoscope effect from my [webpage](https://egecetin.github.io/Projects/kaleidoscope)
+---
 
-## Supported Languages
+## 🎯 **What is LibKaleidoscope?**
 
-- C : Main programming language
-- C++ : Header only binding for easier usage
-- Python : Bindings using Cython
-- CUDA : For GPU computing
+LibKaleidoscope is a **high-performance**, **cross-platform** library that transforms ordinary images into breathtaking kaleidoscope patterns. Written in C with FFI support, it offers seamless integration with multiple programming languages and includes GPU acceleration for ultimate performance.
 
-## Install for Python
+> 🔗 **Learn More**: Check out the [mathematical explanation](https://egecetin.github.io/Projects/kaleidoscope) of the kaleidoscope effect!
 
-```
+
+## 🌟 **Key Features**
+
+<div align="center">
+
+| 🚀 **Performance** | 🌐 **Multi-Language** | 🎨 **Easy to Use** | ⚡ **GPU Accelerated** |
+|:---:|:---:|:---:|:---:|
+| Ultra-fast processing with optimized algorithms | C, C++, Python, CUDA support | Simple 3-function API | CUDA backend for maximum speed |
+
+</div>
+
+---
+
+## 🎭 **Supported Languages**
+
+<details>
+<summary><strong>🔍 Click to see language details</strong></summary>
+
+### 🎯 **Core Languages**
+
+| Language | Purpose | Features |
+|:---------|:--------|:---------|
+| **🔧 C** | Main programming language | Core library, maximum performance |
+| **⚡ C++** | Header-only binding | Easy integration, STL compatibility |
+| **🐍 Python** | Cython bindings | PyPI package, Pythonic interface |
+| **🚀 CUDA** | GPU computing | Parallel processing, extreme performance |
+
+</details>
+
+---
+
+## 📦 **Quick Installation**
+
+### 🐍 **Python Users (Recommended)**
+
+```bash
+# 🎉 One-liner installation from PyPI
 pip install LibKaleidoscope
 ```
 
-Python users check python/python-test.py in GitHub for basic usage
+> 💡 **Pro Tip**: Check `python/python-test.py` for example usage!
 
-## Building
+---
 
-Use the following commands,
+## 🛠️ **Building from Source**
 
-```
+<details>
+<summary><strong>🏗️ Standard Build</strong></summary>
+
+```bash
+# 🚀 Quick build commands
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release ..
 cmake --build . --parallel
 ```
 
-If you want to enable CUDA backend,
+</details>
 
-```
+<details>
+<summary><strong>⚡ CUDA-Enabled Build</strong></summary>
+
+> ⚠️ **IMPORTANT**: CUDA Toolkit must be installed and available on your system before building with CUDA support. Download from [NVIDIA Developer](https://developer.nvidia.com/cuda-downloads).
+
+```bash
+# 🔥 GPU-accelerated build
 mkdir build && cd build
 cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CUDA=ON ..
 cmake --build . --parallel
 ```
 
-There is no direct dependency for libjpeg-turbo inside from the library. It is just for test and demonstration purposes. If you don't want to install/compile just disable command line tool compilation with ``-DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF``
+</details>
 
-## Usage
+<details>
+<summary><strong>🔧 Custom Build Options</strong></summary>
 
-The library has a simple usage and you need only three functions to use it. Check the sample usage at ``src/kaleidoscope-cmd.c``
+```bash
+# 🎛️ Disable command line tool (reduces dependencies)
+cmake -DCMAKE_BUILD_TYPE=Release -DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF ..
+```
 
-- Initialization of the transformation matrix: ``int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown)``
-- Processing image (Can be used multiple times if the input images have same dimensions): ``void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)``
-- Deinitialization of the transformation matrix: ``void deInitKaleidoscope(KaleidoscopeHandle *handler)``
+> 📝 **Note**: The libjpeg-turbo dependency is only for testing and demo purposes
 
-Alternatively you can directly use the command line program to create kaleidoscope effect with ``./kaleidoscope-cmd <Input Image Path> <Output Image Path> <N>``. You can see an example below for ``N=8``
+</details>
+
+---
+
+## 🎯 **Usage Guide**
+
+### 🎪 **Simple 3-Step API**
+
+LibKaleidoscope makes image transformation incredibly simple with just **3 functions**:
+
+```mermaid
+flowchart LR
+    A[🎯 Initialize] --> B[🎨 Process] --> C[🧹 Cleanup]
+    B --> B
+```
+
+<details>
+<summary><strong>🔍 C API Reference</strong></summary>
+
+| Step | Function | Purpose |
+|:----:|:---------|:--------|
+| **1️⃣** | `initKaleidoscope()` | Initialize transformation matrix |
+| **2️⃣** | `processKaleidoscope()` | Process images (reusable for same dimensions) |
+| **3️⃣** | `deInitKaleidoscope()` | Clean up resources |
+
+```c
+// 🎯 Step 1: Initialize
+int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, double scaleDown);
+
+// 🎨 Step 2: Process (use multiple times)
+void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut);
+
+// 🧹 Step 3: Cleanup
+void deInitKaleidoscope(KaleidoscopeHandle *handler);
+```
+
+> 📚 **Example**: Check `src/kaleidoscope-cmd.c` for complete usage
+
+</details>
+
+### 🖥️ **Command Line Magic**
+
+Transform images instantly with the command line tool:
+
+```bash
+# ✨ Create kaleidoscope effect (N=8 segments)
+./kaleidoscope-cmd <Input_Image> <Output_Image> <N>
+```
+
+### 🎨 **Visual Example**
+
 <div align="center">
-    <img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/ac-synin.jpg" width="425"/> <img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/ac-synin-out.jpg" width="425"/>
+    <img src="doc/images/ac-synin.jpg" width="400"/> ➡️ <img src="doc/images/ac-synin-out.jpg" width="400"/>
     <br>
-    Image source: AC Valhalla
+    <em>🎮 Original → Kaleidoscope (N=8)</em><br>
+    <small>Image source: AC Valhalla</small>
 </div>
 
-For C++ and CUDA usage check the unit tests at ``tests/processingTest.cpp`` and ``tests/processingTest.cu``. It is very easy! Just include the header and construct the ``Kaleidoscope`` class from ``kalos`` namespace.
+---
 
-- For C++ header only binding,
+### 💻 **Programming Language Examples**
 
-```
+<details>
+<summary><strong>⚡ C++ Header-Only Binding</strong></summary>
+
+```cpp
 #include <kaleidoscope.hpp>
 
-int main()
-{
+int main() {
+    // 🎯 One-line initialization with all parameters
     kalos::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);
 
-    /* ... */
-
+    // 🎨 Process your image data
     handler.processImage(inData, outData, nPixel);
 
-    /* ... */
-
+    // 🧹 Automatic cleanup when handler goes out of scope
     return 0;
 }
 ```
 
-- For CUDA backend,
+> 🚀 **Advantage**: RAII-style resource management, exception safety
 
-```
+</details>
+
+<details>
+<summary><strong>🔥 CUDA GPU Backend</strong></summary>
+
+```cpp
 #include <cuda/kaleidoscope.cuh>
 
-int main()
-{
+int main() {
+    // 🚀 GPU-accelerated kaleidoscope
     kalos::cuda::Kaleidoscope handler(n, width, height, nComponents, scaleDown, k);
 
-    /* ... */
-
-    // Make sure inData and outData is device allocated!
+    // ⚡ Ultra-fast GPU processing
+    // ⚠️ Important: inData and outData must be device-allocated!
     handler.processImage(inData, outData, nPixel);
-
-    /* ... */
 
     return 0;
 }
 ```
 
-## Benchmark
+> 💡 **Performance Tip**: Ensure your data is allocated on GPU memory for maximum speed
 
-It is really fast! On a Intel i7-11800H CPU it achieves,
+</details>
 
-- ~65 FPS for 4K UHD (3840 x 2160)
-- ~265 FPS for Full HD (1920 x 1080)
-- ~640 FPS for 720p (1280 x 720)
-- ~1350 FPS for 576p (720 x 576)
+> 🧪 **Examples**: See `tests/processingTest.cpp` and `tests/processingTest.cu` for complete implementations
 
-resolution images. The performance estimation can be seen at the below
+---
+
+## 🚀 **Performance Benchmarks**
+
+### ⚡ **Lightning Fast Performance**
+
+> **Hardware**: Intel i7-11800H CPU
 
 <div align="center">
-    <img src="https://raw.githubusercontent.com/egecetin/libKaleidoscope/master/doc/images/performance-black.png" alt="" width="850"/>
+
+| 🎥 **Resolution** | 📊 **FPS** | 🎯 **Use Case** |
+|:------------------|:-----------|:----------------|
+| 🔥 **4K UHD** (3840×2160) | **~65 FPS** | Professional video editing |
+| 🎬 **Full HD** (1920×1080) | **~265 FPS** | Real-time streaming |
+| 📺 **720p** (1280×720) | **~640 FPS** | Gaming overlays |
+| 📱 **576p** (720×576) | **~1350 FPS** | Mobile apps |
+
 </div>
 
-$$ FPS = a\text{ }e^{b\text{ }nPixels}+c\text{ }e^{d\text{ }nPixels} $$
+### 📈 **Performance Visualization**
 
-$$ a = 2492 \text{, } b = -2.165\text{ }10^{-6} \text{, } c = 364.9 \text{, } d = -2.08\text{ }10^{-7} $$
+<div align="center">
+    <picture>
+    <source media="(prefers-color-scheme: dark)" srcset="doc/images/performance-white.png"/>
+    <img src="doc/images/performance-black.png" alt="Performance Chart" width="850"/>
+    </picture>
+</div>
 
-If you want to benchmark code on your system make sure you configured with ```-DCMAKE_BUILD_TYPE=Release``` and use this command,
+<details>
+<summary><strong>🔬 Mathematical Formula</strong></summary>
 
-```./kaleidoscope-cmd <Input Image Path> <Output Image Path> <N> <Number of loop>```
+The performance follows an exponential decay model:
+
+$$\Large FPS = a \cdot e^{b \cdot nPixels} + c \cdot e^{d \cdot nPixels}$$
+
+**Where:**
+- $a = 2492$
+- $b = -2.165 \times 10^{-6}$
+- $c = 364.9$
+- $d = -2.08 \times 10^{-7}$
+
+</details>
+
+### 🏃‍♂️ **Benchmark Your System**
+
+```bash
+# 🎯 Test performance on your hardware
+./kaleidoscope-cmd <Input_Image> <Output_Image> <N> <Number_of_loops>
+```
+
+> ⚠️ **Important**: Use `-DCMAKE_BUILD_TYPE=Release` for accurate benchmarks
+
+---
+
+## 🤝 **Contributing**
+
+We welcome contributions! Please feel free to submit issues, feature requests, or pull requests.
+
+## 📄 **License**
+
+This project is licensed under the terms of MIT License.
+
+---
+
+<div align="center">
+
+### 🌟 **Star this repo if you found it useful!** 🌟
+
+Made with ❤️ by [egecetin](https://github.com/egecetin)
+
+</div>
