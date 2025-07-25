@@ -1,9 +1,6 @@
 <div align="center">
 
-<picture>
-<source media="(prefers-color-scheme: dark)" srcset="doc/images/logo-white.png"/>
-<img src="doc/images/logo-black.png" alt="LibKaleidoscope" width="850"/>
-</picture>
+<img src="doc/images/logo-white.png" alt="LibKaleidoscope" width="850"/>
 
 <h3>🌈✨ Transform Images into Mesmerizing Kaleidoscope Art ✨🌈</h3>
 
@@ -253,10 +250,7 @@ int main() {
 ### 📈 **Performance Visualization**
 
 <div align="center">
-    <picture>
-    <source media="(prefers-color-scheme: dark)" srcset="doc/images/performance-white.png"/>
-    <img src="doc/images/performance-black.png" alt="Performance Chart" width="850"/>
-    </picture>
+    <img src="doc/images/performance-white.png" alt="Performance Chart" width="850"/>
 </div>
 
 <details>
