@@ -1,0 +1,5 @@
+<map id="kalos::Kaleidoscope::processImage" name="kalos::Kaleidoscope::processImage">
+<area shape="rect" id="Node000001" title="Creates kaleidoscope effect." alt="" coords="5,5,145,50"/>
+<area shape="rect" id="Node000002" href="$kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1" title="Applies kaleidoscope effect to image." alt="" coords="193,14,340,42"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,25,177,25,177,30,145,30"/>
+</map>

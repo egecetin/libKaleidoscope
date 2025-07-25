@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['kaleidoscopehandle_0',['KaleidoscopeHandle',['../kaleidoscope_8h.html#a1df4ab560e37e1da5c1cfd735330cc49',1,'kaleidoscope.h']]]
+  ['imagedata_0',['ImageData',['../jpeg-utils_8h.html#a0b773eb4281ad4e7070264033eeb0b4b',1,'jpeg-utils.h']]]
 ];

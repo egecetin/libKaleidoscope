@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['💻_20strong_20programming_20language_20examples_20strong_0',['💻 &lt;strong&gt;Programming Language Examples&lt;/strong&gt;',['../index.html#autotoc_md20',1,'']]]
+  ['🐍_20strong_20python_20users_20recommended_20strong_0',['🐍 &lt;strong&gt;Python Users (Recommended)&lt;/strong&gt;',['../index.html#autotoc_md11',1,'']]]
 ];

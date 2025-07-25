@@ -1,0 +1,13 @@
+<map id="kalos::Kaleidoscope::Kaleidoscope" name="kalos::Kaleidoscope::Kaleidoscope">
+<area shape="rect" id="Node000001" title="Construct a new Kaleidoscope object." alt="" coords="5,76,145,120"/>
+<area shape="rect" id="Node000002" href="$kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60" title="Initializes kaleidoscope handler." alt="" coords="193,84,313,112"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="145,95,177,95,177,100,145,100"/>
+<area shape="rect" id="Node000003" href="$kaleidoscope_8c.html#abda94259734025bc9c543b9f2dfdd8be" title=" " alt="" coords="372,5,447,33"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="281,81,365,38,368,43,284,86"/>
+<area shape="rect" id="Node000004" href="$kaleidoscope_8c.html#a6536dd078a2b0423d1ca626aa74559e4" title="A simple interpolation function. Internal use only." alt="" coords="366,57,454,85"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="313,85,350,79,351,84,314,90"/>
+<area shape="rect" id="Node000005" href="$kaleidoscope_8c.html#a9e987dfda8c7f6030f43a35ec5742c1b" title="Rotates the coordinates of sliced triangle. Internal use only." alt="" coords="362,109,458,137"/>
+<area shape="poly" id="edge4_Node000002_Node000005" title=" " alt="" coords="314,105,347,110,346,116,313,110"/>
+<area shape="rect" id="Node000006" href="$kaleidoscope_8c.html#af4d2cb7fd0363406ec3b4e4b7d8692c4" title="Slices a suitable triangle from image." alt="" coords="361,161,458,189"/>
+<area shape="poly" id="edge5_Node000002_Node000006" title=" " alt="" coords="284,110,368,152,365,156,282,115"/>
+</map>

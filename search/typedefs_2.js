@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['transformationinfo_0',['TransformationInfo',['../kaleidoscope_8h.html#a103d4848afd54ba6d4444499f87d4544',1,'kaleidoscope.h']]]
+  ['point2d_0',['Point2D',['../kaleidoscope_8h.html#aeacb4acd0378c0e7c4a26c61fa07e291',1,'kaleidoscope.h']]]
 ];

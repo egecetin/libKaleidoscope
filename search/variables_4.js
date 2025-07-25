@@ -1,5 +1,4 @@
 var searchData=
 [
-  ['srclocation_0',['srcLocation',['../structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8',1,'TransformationInfo_t']]],
-  ['srcoffset_1',['srcOffset',['../structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5',1,'TransformationInfo_t']]]
+  ['ptransferfunc_0',['pTransferFunc',['../structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef',1,'KaleidoscopeHandle_t']]]
 ];

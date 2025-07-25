@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['⚡_20strong_20lightning_20fast_20performance_20strong_0',['⚡ &lt;strong&gt;Lightning Fast Performance&lt;/strong&gt;',['../index.html#autotoc_md23',1,'']]]
+  ['_7ekaleidoscope_0',['~Kaleidoscope',['../classkalos_1_1Kaleidoscope.html#a0f2d840de0a83d9b02ddb94d26106168',1,'kalos::Kaleidoscope']]]
 ];

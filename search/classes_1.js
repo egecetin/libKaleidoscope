@@ -1,4 +1,5 @@
 var searchData=
 [
-  ['point2d_5ft_0',['Point2D_t',['../structPoint2D__t.html',1,'']]]
+  ['kaleidoscope_0',['Kaleidoscope',['../classkalos_1_1Kaleidoscope.html',1,'kalos']]],
+  ['kaleidoscopehandle_5ft_1',['KaleidoscopeHandle_t',['../structKaleidoscopeHandle__t.html',1,'']]]
 ];

@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['ncomponents_0',['nComponents',['../structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3',1,'KaleidoscopeHandle_t']]],
-  ['npoints_1',['nPoints',['../structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0',1,'KaleidoscopeHandle_t']]]
+  ['magic_20strong_0',['🖥️ &lt;strong&gt;Command Line Magic&lt;/strong&gt;',['../index.html#autotoc_md17',1,'']]],
+  ['main_1',['main',['../kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97',1,'kaleidoscope-cmd.c']]]
 ];

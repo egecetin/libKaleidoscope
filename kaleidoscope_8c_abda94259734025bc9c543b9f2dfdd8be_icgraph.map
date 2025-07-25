@@ -1,0 +1,9 @@
+<map id="compare" name="compare">
+<area shape="rect" id="Node000001" title=" " alt="" coords="361,44,435,72"/>
+<area shape="rect" id="Node000002" href="$kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60" title="Initializes kaleidoscope handler." alt="" coords="193,44,313,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,61,313,61,313,56,345,56"/>
+<area shape="rect" id="Node000003" href="$classkalos_1_1Kaleidoscope.html#ac244ab7153f5f124ba44805225b3faa5" title="Construct a new Kaleidoscope object." alt="" coords="5,5,145,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="177,48,145,42,146,37,178,43"/>
+<area shape="rect" id="Node000004" href="$kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="49,74,101,102"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="178,73,101,86,100,81,177,68"/>
+</map>
