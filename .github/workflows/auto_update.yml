@@ -10,9 +10,9 @@ jobs:
 
     steps:
       - name: Checkout code
-        uses: actions/checkout@v3
+        uses: actions/checkout@v4
       - name: Setup Python
-        uses: actions/setup-python@v4
+        uses: actions/setup-python@v5
         with:
           python-version: "3.10.x"
       - name: Run update
@@ -20,7 +20,7 @@ jobs:
             pip install pre-commit
             pre-commit autoupdate
       - name: Create Pull Request
-        uses: peter-evans/create-pull-request@v4
+        uses: peter-evans/create-pull-request@v7
         with:
           author: GitHub <noreply@github.com>
           add-paths: .pre-commit-config.yaml
