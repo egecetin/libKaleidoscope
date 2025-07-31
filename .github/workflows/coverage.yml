@@ -9,7 +9,7 @@ jobs:
   linux:
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
         with:
           submodules: recursive
       - name: Prepare system
@@ -21,7 +21,7 @@ jobs:
       - name: Build
         run: cmake --build build --parallel --target coverage-xml
       - name: Process Results
-        uses: codecov/codecov-action@v3
+        uses: codecov/codecov-action@v5
         with:
           token: ${{secrets.CODECOV_TOKEN}}
           files: ./build/coverage-xml.xml
