@@ -6,3 +6,4 @@ NamespaceIndentation: All
 BraceWrapping:
     AfterClass: false
     AfterStruct: false
+...
