@@ -53,11 +53,11 @@ char *getKaleidoscopeLibraryInfo()
 	return info;
 }
 
-int compare(const void *lhsPtr, const void *rhsPtr)
+static int compare(const void *lhsPtr, const void *rhsPtr)
 {
 	const TransformationInfo *lhs = (const TransformationInfo *)lhsPtr;
 	const TransformationInfo *rhs = (const TransformationInfo *)rhsPtr;
-	return lhs->dstOffset - rhs->dstOffset;
+	return (int)(lhs->dstOffset - rhs->dstOffset);
 }
 
 void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
@@ -152,7 +152,7 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 	}
 }
 
-int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)
+void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)
 {
 	int idx, jdx;
 
@@ -192,8 +192,6 @@ int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n
 			ptr[jdx].dstLocation.y = (int)((idx - heightStart - height / 2) * scaleDown + scaleDownOffset);
 		}
 	}
-
-	return EXIT_SUCCESS;
 }
 
 int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)
@@ -219,15 +217,14 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	handler->width = width;
 	handler->height = height;
-	handler->nComponents = nComponents;
+	handler->nComponents = (unsigned char)nComponents;
 
 	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	if (!buffPtr1 || !buffPtr2)
 		goto cleanup;
 
-	if (sliceTriangle(buffPtr1, width, height, n, scaleDown))
-		goto cleanup;
+	sliceTriangle(buffPtr1, width, height, n, scaleDown);
 
 	// Rotate all points and fix origin to left top
 	for (idx = 0; idx < n; ++idx)

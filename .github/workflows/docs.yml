@@ -4,10 +4,16 @@ on:
   push:
     branches:
       - master
+  pull_request:
   workflow_dispatch:
+
+permissions:
+  contents: read
 
 jobs:
   deploy:
+    permissions:
+      contents: write  # for JamesIves/github-pages-deploy-action to push changes in repo
     runs-on: ubuntu-latest
     container: egecetinn/alpine
     steps:
@@ -22,6 +28,7 @@ jobs:
       - name: Create .nojekyll (ensures pages with underscores work on gh pages)
         run: touch doc/html/.nojekyll
       - name: Deploy to GitHub Pages
+        if: github.ref == 'refs/heads/master'
         uses: JamesIves/github-pages-deploy-action@v4
         with:
           branch: gh-pages

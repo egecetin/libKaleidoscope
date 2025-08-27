@@ -91,9 +91,8 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
  * @param[in] height Height of input image
  * @param[in] n Number of images for effect
  * @param[in] scaleDown Scale down ratio to shrink image
- * @return int 0 on success, -1 otherwise
  */
-int sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown);
+void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown);
 
 /**
  * @brief Initializes kaleidoscope handler

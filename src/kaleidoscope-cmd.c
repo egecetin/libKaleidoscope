@@ -5,9 +5,9 @@
 #include <stdlib.h>
 #include <time.h>
 
-int main(int argc, char *argv[])
+int main(int argc, const char *argv[])
 {
-	char *path = NULL, *outPath = NULL;
+	const char *path = NULL, *outPath = NULL;
 	int n = 6, retval = EXIT_FAILURE, benchmark = 0;
 	double k = 0.30;
 	double scaleDown = 0.45;
