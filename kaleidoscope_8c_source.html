@@ -329,128 +329,129 @@ $(function(){initNavTree('kaleidoscope_8c_source.html',''); initResizable(true);
 <div class="line"><a id="l00200" name="l00200"></a><span class="lineno">  200</span> </div>
 <div class="line"><a id="l00201" name="l00201"></a><span class="lineno">  201</span>    <span class="keywordtype">int</span> retval = EXIT_FAILURE;</div>
 <div class="line"><a id="l00202" name="l00202"></a><span class="lineno">  202</span>    <span class="keyword">const</span> <span class="keywordtype">int</span> nPixels = width * height;</div>
-<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *buffPtr1 = NULL, *buffPtr2 = NULL;</div>
-<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span> </div>
-<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span>    <span class="comment">// Check parameters</span></div>
-<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="keywordflow">if</span> (handler == NULL || n &lt;= 2 || width &lt;= 0 || height &lt;= 0 || nComponents &lt;= 0 || scaleDown &lt;= 0.0 ||</div>
-<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>        scaleDown &gt;= 1.0)</div>
-<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>    {</div>
-<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
-<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>    }</div>
-<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span> </div>
-<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span>    assert(handler);</div>
-<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    assert(n &gt; 2);</div>
-<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    assert(width &gt; 0);</div>
-<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    assert(height &gt; 0);</div>
-<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    assert(nComponents &gt; 0);</div>
-<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    assert(scaleDown &gt; 0.0);</div>
-<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    assert(scaleDown &lt; 1.0);</div>
-<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span> </div>
-<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">width</a> = width;</div>
-<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4">height</a> = height;</div>
-<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a> = (<span class="keywordtype">unsigned</span> char)nComponents;</div>
-<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span> </div>
-<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span>    buffPtr1 = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)calloc(nPixels, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
-<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    buffPtr2 = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)calloc(nPixels, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
-<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    <span class="keywordflow">if</span> (!buffPtr1 || !buffPtr2)</div>
-<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    {</div>
-<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>        <span class="keywordflow">goto</span> cleanup;</div>
-<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>    }</div>
-<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span> </div>
-<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span>    <a class="code hl_function" href="kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8">sliceTriangle</a>(buffPtr1, width, height, n, scaleDown);</div>
-<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span> </div>
-<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span>    <span class="comment">// Rotate all points and fix origin to left top</span></div>
-<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; n; ++idx)</div>
-<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    {</div>
-<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>        <span class="keywordtype">double</span> rotationAngle = idx * (360.0 / n);</div>
-<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <a class="code hl_function" href="kaleidoscope_8c.html#adce10abe22b01895bd2c6ed6863a10dc">rotatePoints</a>(buffPtr2, buffPtr1, width, height, rotationAngle);</div>
-<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>    }</div>
-<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span> </div>
-<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span>    <span class="comment">// Fill rotation artifacts</span></div>
-<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    memset(buffPtr1, 0, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>) * width * height);</div>
-<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    <a class="code hl_function" href="kaleidoscope_8c.html#a8aa0b9d3c5d0b182e40f765129664451">interpolate</a>(buffPtr1, buffPtr2, width, height);</div>
-<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span> </div>
-<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span>    <span class="comment">// Remove zeros and set to points for handler</span></div>
-<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> = 0;</div>
-<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; nPixels; ++idx)</div>
-<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    {</div>
-<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>        <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *ptr = &amp;buffPtr1[idx];</div>
-<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keywordflow">if</span> (!(ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a8fe47b4ff21ec735e4063fa343b76afc">x</a>) || !(ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a157421a06a599de8da3caedc4c129a33">y</a>))</div>
-<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        {</div>
-<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>            <span class="keywordflow">continue</span>;</div>
-<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>        }</div>
-<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span> </div>
-<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span>        buffPtr1[handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>] = *ptr;</div>
-<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        buffPtr1[handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>].<a class="code hl_variable" href="structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5">srcOffset</a> =</div>
-<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>            ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a8fe47b4ff21ec735e4063fa343b76afc">x</a> * nComponents + ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a157421a06a599de8da3caedc4c129a33">y</a> * width * nComponents;</div>
-<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>        buffPtr1[handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>].<a class="code hl_variable" href="structTransformationInfo__t.html#a4487e82f4ab6c7ca810c1c269c40162e">dstOffset</a> =</div>
-<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>            ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#aef5347d4f97d304f640e57d47b8664ce">dstLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a8fe47b4ff21ec735e4063fa343b76afc">x</a> * nComponents + ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#aef5347d4f97d304f640e57d47b8664ce">dstLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a157421a06a599de8da3caedc4c129a33">y</a> * width * nComponents;</div>
-<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>        ++(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>);</div>
-<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>    }</div>
-<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span> </div>
-<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span>    <span class="comment">// Sort</span></div>
-<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    qsort(buffPtr1, handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>), <a class="code hl_function" href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755">compare</a>);</div>
-<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span> </div>
-<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span>    <span class="comment">// Deduplicate</span></div>
-<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    jdx = 0;</div>
-<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 1; idx &lt; handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>; ++idx)</div>
-<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    {</div>
-<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755">compare</a>(&amp;buffPtr1[jdx], &amp;buffPtr1[idx]))</div>
-<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        {</div>
-<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>            buffPtr1[jdx] = buffPtr1[idx];</div>
-<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            ++jdx;</div>
-<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>        }</div>
-<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>    }</div>
-<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> = jdx;</div>
-<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span> </div>
-<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a> = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)malloc(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
-<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    memcpy(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>, buffPtr1, handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
-<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    retval = EXIT_SUCCESS;</div>
-<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span> </div>
-<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span>cleanup:</div>
-<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>    free(buffPtr1);</div>
-<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    free(buffPtr2);</div>
-<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span> </div>
-<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span>    <span class="keywordflow">if</span> (retval == EXIT_FAILURE)</div>
-<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    {</div>
-<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
-<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>    }</div>
-<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span> </div>
-<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span>    <span class="keywordflow">return</span> retval;</div>
-<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>}</div>
+<div class="line"><a id="l00203" name="l00203"></a><span class="lineno">  203</span>    <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *buffPtr1 = NULL;</div>
+<div class="line"><a id="l00204" name="l00204"></a><span class="lineno">  204</span>    <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *buffPtr2 = NULL;</div>
+<div class="line"><a id="l00205" name="l00205"></a><span class="lineno">  205</span> </div>
+<div class="line"><a id="l00206" name="l00206"></a><span class="lineno">  206</span>    <span class="comment">// Check parameters</span></div>
+<div class="line"><a id="l00207" name="l00207"></a><span class="lineno">  207</span>    <span class="keywordflow">if</span> (handler == NULL || n &lt;= 2 || width &lt;= 0 || height &lt;= 0 || nComponents &lt;= 0 || scaleDown &lt;= 0.0 ||</div>
+<div class="line"><a id="l00208" name="l00208"></a><span class="lineno">  208</span>        scaleDown &gt;= 1.0)</div>
+<div class="line"><a id="l00209" name="l00209"></a><span class="lineno">  209</span>    {</div>
+<div class="line"><a id="l00210" name="l00210"></a><span class="lineno">  210</span>        <span class="keywordflow">return</span> EXIT_FAILURE;</div>
+<div class="line"><a id="l00211" name="l00211"></a><span class="lineno">  211</span>    }</div>
+<div class="line"><a id="l00212" name="l00212"></a><span class="lineno">  212</span> </div>
+<div class="line"><a id="l00213" name="l00213"></a><span class="lineno">  213</span>    assert(handler);</div>
+<div class="line"><a id="l00214" name="l00214"></a><span class="lineno">  214</span>    assert(n &gt; 2);</div>
+<div class="line"><a id="l00215" name="l00215"></a><span class="lineno">  215</span>    assert(width &gt; 0);</div>
+<div class="line"><a id="l00216" name="l00216"></a><span class="lineno">  216</span>    assert(height &gt; 0);</div>
+<div class="line"><a id="l00217" name="l00217"></a><span class="lineno">  217</span>    assert(nComponents &gt; 0);</div>
+<div class="line"><a id="l00218" name="l00218"></a><span class="lineno">  218</span>    assert(scaleDown &gt; 0.0);</div>
+<div class="line"><a id="l00219" name="l00219"></a><span class="lineno">  219</span>    assert(scaleDown &lt; 1.0);</div>
+<div class="line"><a id="l00220" name="l00220"></a><span class="lineno">  220</span> </div>
+<div class="line"><a id="l00221" name="l00221"></a><span class="lineno">  221</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">width</a> = width;</div>
+<div class="line"><a id="l00222" name="l00222"></a><span class="lineno">  222</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4">height</a> = height;</div>
+<div class="line"><a id="l00223" name="l00223"></a><span class="lineno">  223</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a> = (<span class="keywordtype">unsigned</span> char)nComponents;</div>
+<div class="line"><a id="l00224" name="l00224"></a><span class="lineno">  224</span> </div>
+<div class="line"><a id="l00225" name="l00225"></a><span class="lineno">  225</span>    buffPtr1 = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)calloc(nPixels, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
+<div class="line"><a id="l00226" name="l00226"></a><span class="lineno">  226</span>    buffPtr2 = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)calloc(nPixels, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
+<div class="line"><a id="l00227" name="l00227"></a><span class="lineno">  227</span>    <span class="keywordflow">if</span> (!buffPtr1 || !buffPtr2)</div>
+<div class="line"><a id="l00228" name="l00228"></a><span class="lineno">  228</span>    {</div>
+<div class="line"><a id="l00229" name="l00229"></a><span class="lineno">  229</span>        <span class="keywordflow">goto</span> cleanup;</div>
+<div class="line"><a id="l00230" name="l00230"></a><span class="lineno">  230</span>    }</div>
+<div class="line"><a id="l00231" name="l00231"></a><span class="lineno">  231</span> </div>
+<div class="line"><a id="l00232" name="l00232"></a><span class="lineno">  232</span>    <a class="code hl_function" href="kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8">sliceTriangle</a>(buffPtr1, width, height, n, scaleDown);</div>
+<div class="line"><a id="l00233" name="l00233"></a><span class="lineno">  233</span> </div>
+<div class="line"><a id="l00234" name="l00234"></a><span class="lineno">  234</span>    <span class="comment">// Rotate all points and fix origin to left top</span></div>
+<div class="line"><a id="l00235" name="l00235"></a><span class="lineno">  235</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; n; ++idx)</div>
+<div class="line"><a id="l00236" name="l00236"></a><span class="lineno">  236</span>    {</div>
+<div class="line"><a id="l00237" name="l00237"></a><span class="lineno">  237</span>        <span class="keywordtype">double</span> rotationAngle = idx * (360.0 / n);</div>
+<div class="line"><a id="l00238" name="l00238"></a><span class="lineno">  238</span>        <a class="code hl_function" href="kaleidoscope_8c.html#adce10abe22b01895bd2c6ed6863a10dc">rotatePoints</a>(buffPtr2, buffPtr1, width, height, rotationAngle);</div>
+<div class="line"><a id="l00239" name="l00239"></a><span class="lineno">  239</span>    }</div>
+<div class="line"><a id="l00240" name="l00240"></a><span class="lineno">  240</span> </div>
+<div class="line"><a id="l00241" name="l00241"></a><span class="lineno">  241</span>    <span class="comment">// Fill rotation artifacts</span></div>
+<div class="line"><a id="l00242" name="l00242"></a><span class="lineno">  242</span>    memset(buffPtr1, 0, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>) * width * height);</div>
+<div class="line"><a id="l00243" name="l00243"></a><span class="lineno">  243</span>    <a class="code hl_function" href="kaleidoscope_8c.html#a8aa0b9d3c5d0b182e40f765129664451">interpolate</a>(buffPtr1, buffPtr2, width, height);</div>
+<div class="line"><a id="l00244" name="l00244"></a><span class="lineno">  244</span> </div>
+<div class="line"><a id="l00245" name="l00245"></a><span class="lineno">  245</span>    <span class="comment">// Remove zeros and set to points for handler</span></div>
+<div class="line"><a id="l00246" name="l00246"></a><span class="lineno">  246</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> = 0;</div>
+<div class="line"><a id="l00247" name="l00247"></a><span class="lineno">  247</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 0; idx &lt; nPixels; ++idx)</div>
+<div class="line"><a id="l00248" name="l00248"></a><span class="lineno">  248</span>    {</div>
+<div class="line"><a id="l00249" name="l00249"></a><span class="lineno">  249</span>        <span class="keyword">const</span> <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *ptr = &amp;buffPtr1[idx];</div>
+<div class="line"><a id="l00250" name="l00250"></a><span class="lineno">  250</span>        <span class="keywordflow">if</span> (!(ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a8fe47b4ff21ec735e4063fa343b76afc">x</a>) || !(ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a157421a06a599de8da3caedc4c129a33">y</a>))</div>
+<div class="line"><a id="l00251" name="l00251"></a><span class="lineno">  251</span>        {</div>
+<div class="line"><a id="l00252" name="l00252"></a><span class="lineno">  252</span>            <span class="keywordflow">continue</span>;</div>
+<div class="line"><a id="l00253" name="l00253"></a><span class="lineno">  253</span>        }</div>
+<div class="line"><a id="l00254" name="l00254"></a><span class="lineno">  254</span> </div>
+<div class="line"><a id="l00255" name="l00255"></a><span class="lineno">  255</span>        buffPtr1[handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>] = *ptr;</div>
+<div class="line"><a id="l00256" name="l00256"></a><span class="lineno">  256</span>        buffPtr1[handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>].<a class="code hl_variable" href="structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5">srcOffset</a> =</div>
+<div class="line"><a id="l00257" name="l00257"></a><span class="lineno">  257</span>            ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a8fe47b4ff21ec735e4063fa343b76afc">x</a> * nComponents + ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#ac337974d113d7a2294e0c3c7bdf46db8">srcLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a157421a06a599de8da3caedc4c129a33">y</a> * width * nComponents;</div>
+<div class="line"><a id="l00258" name="l00258"></a><span class="lineno">  258</span>        buffPtr1[handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>].<a class="code hl_variable" href="structTransformationInfo__t.html#a4487e82f4ab6c7ca810c1c269c40162e">dstOffset</a> =</div>
+<div class="line"><a id="l00259" name="l00259"></a><span class="lineno">  259</span>            ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#aef5347d4f97d304f640e57d47b8664ce">dstLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a8fe47b4ff21ec735e4063fa343b76afc">x</a> * nComponents + ptr-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#aef5347d4f97d304f640e57d47b8664ce">dstLocation</a>.<a class="code hl_variable" href="structPoint2D__t.html#a157421a06a599de8da3caedc4c129a33">y</a> * width * nComponents;</div>
+<div class="line"><a id="l00260" name="l00260"></a><span class="lineno">  260</span>        ++(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>);</div>
+<div class="line"><a id="l00261" name="l00261"></a><span class="lineno">  261</span>    }</div>
+<div class="line"><a id="l00262" name="l00262"></a><span class="lineno">  262</span> </div>
+<div class="line"><a id="l00263" name="l00263"></a><span class="lineno">  263</span>    <span class="comment">// Sort</span></div>
+<div class="line"><a id="l00264" name="l00264"></a><span class="lineno">  264</span>    qsort(buffPtr1, handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>, <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>), <a class="code hl_function" href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755">compare</a>);</div>
+<div class="line"><a id="l00265" name="l00265"></a><span class="lineno">  265</span> </div>
+<div class="line"><a id="l00266" name="l00266"></a><span class="lineno">  266</span>    <span class="comment">// Deduplicate</span></div>
+<div class="line"><a id="l00267" name="l00267"></a><span class="lineno">  267</span>    jdx = 0;</div>
+<div class="line"><a id="l00268" name="l00268"></a><span class="lineno">  268</span>    <span class="keywordflow">for</span> (<span class="keywordtype">int</span> idx = 1; idx &lt; handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>; ++idx)</div>
+<div class="line"><a id="l00269" name="l00269"></a><span class="lineno">  269</span>    {</div>
+<div class="line"><a id="l00270" name="l00270"></a><span class="lineno">  270</span>        <span class="keywordflow">if</span> (<a class="code hl_function" href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755">compare</a>(&amp;buffPtr1[jdx], &amp;buffPtr1[idx]))</div>
+<div class="line"><a id="l00271" name="l00271"></a><span class="lineno">  271</span>        {</div>
+<div class="line"><a id="l00272" name="l00272"></a><span class="lineno">  272</span>            buffPtr1[jdx] = buffPtr1[idx];</div>
+<div class="line"><a id="l00273" name="l00273"></a><span class="lineno">  273</span>            ++jdx;</div>
+<div class="line"><a id="l00274" name="l00274"></a><span class="lineno">  274</span>        }</div>
+<div class="line"><a id="l00275" name="l00275"></a><span class="lineno">  275</span>    }</div>
+<div class="line"><a id="l00276" name="l00276"></a><span class="lineno">  276</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> = jdx;</div>
+<div class="line"><a id="l00277" name="l00277"></a><span class="lineno">  277</span> </div>
+<div class="line"><a id="l00278" name="l00278"></a><span class="lineno">  278</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a> = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)malloc(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
+<div class="line"><a id="l00279" name="l00279"></a><span class="lineno">  279</span>    memcpy(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>, buffPtr1, handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
+<div class="line"><a id="l00280" name="l00280"></a><span class="lineno">  280</span>    retval = EXIT_SUCCESS;</div>
+<div class="line"><a id="l00281" name="l00281"></a><span class="lineno">  281</span> </div>
+<div class="line"><a id="l00282" name="l00282"></a><span class="lineno">  282</span>cleanup:</div>
+<div class="line"><a id="l00283" name="l00283"></a><span class="lineno">  283</span>    free(buffPtr1);</div>
+<div class="line"><a id="l00284" name="l00284"></a><span class="lineno">  284</span>    free(buffPtr2);</div>
+<div class="line"><a id="l00285" name="l00285"></a><span class="lineno">  285</span> </div>
+<div class="line"><a id="l00286" name="l00286"></a><span class="lineno">  286</span>    <span class="keywordflow">if</span> (retval == EXIT_FAILURE)</div>
+<div class="line"><a id="l00287" name="l00287"></a><span class="lineno">  287</span>    {</div>
+<div class="line"><a id="l00288" name="l00288"></a><span class="lineno">  288</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
+<div class="line"><a id="l00289" name="l00289"></a><span class="lineno">  289</span>    }</div>
+<div class="line"><a id="l00290" name="l00290"></a><span class="lineno">  290</span> </div>
+<div class="line"><a id="l00291" name="l00291"></a><span class="lineno">  291</span>    <span class="keywordflow">return</span> retval;</div>
+<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span>}</div>
 </div>
-<div class="line"><a id="l00292" name="l00292"></a><span class="lineno">  292</span> </div>
-<div class="foldopen" id="foldopen00293" data-start="{" data-end="}">
-<div class="line"><a id="l00293" name="l00293"></a><span class="lineno"><a class="line" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">  293</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler, <span class="keywordtype">double</span> k, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgIn, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgOut)</div>
-<div class="line"><a id="l00294" name="l00294"></a><span class="lineno">  294</span>{</div>
-<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>    <span class="keywordtype">long</span> <span class="keywordtype">long</span> idx;</div>
-<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nComponents = handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
-<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nPixels = (<span class="keywordtype">long</span> long)handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">width</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4">height</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
-<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span> </div>
-<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *srcPtr = imgIn;</div>
-<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *destPtr = imgOut;</div>
-<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *ptrTransform = &amp;(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>[0]);</div>
-<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span> </div>
-<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; nPixels; ++idx, ++destPtr, ++srcPtr) <span class="comment">// Dim image</span></div>
-<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    {</div>
-<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>        *destPtr = (<span class="keywordtype">unsigned</span> char)((*srcPtr) * k);</div>
-<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>    }</div>
-<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>; ++idx, ++ptrTransform) <span class="comment">// Merge</span></div>
-<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    {</div>
-<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>        memcpy(&amp;(imgOut[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a4487e82f4ab6c7ca810c1c269c40162e">dstOffset</a>]), &amp;(imgIn[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5">srcOffset</a>]), nComponents);</div>
-<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>    }</div>
-<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>}</div>
+<div class="line"><a id="l00293" name="l00293"></a><span class="lineno">  293</span> </div>
+<div class="foldopen" id="foldopen00294" data-start="{" data-end="}">
+<div class="line"><a id="l00294" name="l00294"></a><span class="lineno"><a class="line" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">  294</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a>(<span class="keyword">const</span> <a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler, <span class="keywordtype">double</span> k, <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgIn, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgOut)</div>
+<div class="line"><a id="l00295" name="l00295"></a><span class="lineno">  295</span>{</div>
+<div class="line"><a id="l00296" name="l00296"></a><span class="lineno">  296</span>    <span class="keywordtype">long</span> <span class="keywordtype">long</span> idx;</div>
+<div class="line"><a id="l00297" name="l00297"></a><span class="lineno">  297</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nComponents = handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
+<div class="line"><a id="l00298" name="l00298"></a><span class="lineno">  298</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nPixels = (<span class="keywordtype">long</span> long)handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">width</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4">height</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
+<div class="line"><a id="l00299" name="l00299"></a><span class="lineno">  299</span> </div>
+<div class="line"><a id="l00300" name="l00300"></a><span class="lineno">  300</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *srcPtr = imgIn;</div>
+<div class="line"><a id="l00301" name="l00301"></a><span class="lineno">  301</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *destPtr = imgOut;</div>
+<div class="line"><a id="l00302" name="l00302"></a><span class="lineno">  302</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *ptrTransform = &amp;(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>[0]);</div>
+<div class="line"><a id="l00303" name="l00303"></a><span class="lineno">  303</span> </div>
+<div class="line"><a id="l00304" name="l00304"></a><span class="lineno">  304</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; nPixels; ++idx, ++destPtr, ++srcPtr) <span class="comment">// Dim image</span></div>
+<div class="line"><a id="l00305" name="l00305"></a><span class="lineno">  305</span>    {</div>
+<div class="line"><a id="l00306" name="l00306"></a><span class="lineno">  306</span>        *destPtr = (<span class="keywordtype">unsigned</span> char)((*srcPtr) * k);</div>
+<div class="line"><a id="l00307" name="l00307"></a><span class="lineno">  307</span>    }</div>
+<div class="line"><a id="l00308" name="l00308"></a><span class="lineno">  308</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>; ++idx, ++ptrTransform) <span class="comment">// Merge</span></div>
+<div class="line"><a id="l00309" name="l00309"></a><span class="lineno">  309</span>    {</div>
+<div class="line"><a id="l00310" name="l00310"></a><span class="lineno">  310</span>        memcpy(&amp;(imgOut[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a4487e82f4ab6c7ca810c1c269c40162e">dstOffset</a>]), &amp;(imgIn[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5">srcOffset</a>]), nComponents);</div>
+<div class="line"><a id="l00311" name="l00311"></a><span class="lineno">  311</span>    }</div>
+<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span>}</div>
 </div>
-<div class="line"><a id="l00312" name="l00312"></a><span class="lineno">  312</span> </div>
-<div class="foldopen" id="foldopen00313" data-start="{" data-end="}">
-<div class="line"><a id="l00313" name="l00313"></a><span class="lineno"><a class="line" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">  313</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(<a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler)</div>
-<div class="line"><a id="l00314" name="l00314"></a><span class="lineno">  314</span>{</div>
-<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>    <span class="keywordflow">if</span> (handler)</div>
-<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
-<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>}</div>
+<div class="line"><a id="l00313" name="l00313"></a><span class="lineno">  313</span> </div>
+<div class="foldopen" id="foldopen00314" data-start="{" data-end="}">
+<div class="line"><a id="l00314" name="l00314"></a><span class="lineno"><a class="line" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">  314</a></span><span class="keywordtype">void</span> <a class="code hl_function" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(<a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler)</div>
+<div class="line"><a id="l00315" name="l00315"></a><span class="lineno">  315</span>{</div>
+<div class="line"><a id="l00316" name="l00316"></a><span class="lineno">  316</span>    <span class="keywordflow">if</span> (handler)</div>
+<div class="line"><a id="l00317" name="l00317"></a><span class="lineno">  317</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
+<div class="line"><a id="l00318" name="l00318"></a><span class="lineno">  318</span>}</div>
 </div>
 <div class="ttc" id="akaleidoscope_8c_html_a174e87ff30e52c1c35d87ee43e627401"><div class="ttname"><a href="kaleidoscope_8c.html#a174e87ff30e52c1c35d87ee43e627401">getKaleidoscopeVersion</a></div><div class="ttdeci">void getKaleidoscopeVersion(int *major, int *minor, int *patch)</div><div class="ttdoc">Get the Kaleidoscope Library version as integer.</div><div class="ttdef"><b>Definition</b> <a href="#l00013">kaleidoscope.c:13</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a1778484dc1404c93c4173053f0afb550"><div class="ttname"><a href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="#l00293">kaleidoscope.c:293</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a1778484dc1404c93c4173053f0afb550"><div class="ttname"><a href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="#l00294">kaleidoscope.c:294</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a1cee7bb50217c558e87055597f968249"><div class="ttname"><a href="kaleidoscope_8c.html#a1cee7bb50217c558e87055597f968249">getKaleidoscopeLibraryInfo</a></div><div class="ttdeci">char * getKaleidoscopeLibraryInfo()</div><div class="ttdoc">Get the Kaleidoscope Library info as string.</div><div class="ttdef"><b>Definition</b> <a href="#l00030">kaleidoscope.c:30</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a3c84dfd84c42812860ea81c2cf70d6e8"><div class="ttname"><a href="kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8">sliceTriangle</a></div><div class="ttdeci">void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)</div><div class="ttdoc">Slices a suitable triangle from image.</div><div class="ttdef"><b>Definition</b> <a href="#l00155">kaleidoscope.c:155</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a3f411641df7274966691d75b563b6755"><div class="ttname"><a href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755">compare</a></div><div class="ttdeci">static int compare(const void *lhsPtr, const void *rhsPtr)</div><div class="ttdef"><b>Definition</b> <a href="#l00055">kaleidoscope.c:55</a></div></div>
@@ -458,7 +459,7 @@ $(function(){initNavTree('kaleidoscope_8c_source.html',''); initResizable(true);
 <div class="ttc" id="akaleidoscope_8c_html_a47f48e3497cd41b6f6dd92fa1e2b4463"><div class="ttname"><a href="kaleidoscope_8c.html#a47f48e3497cd41b6f6dd92fa1e2b4463">getKaleidoscopeVersionString</a></div><div class="ttdeci">char * getKaleidoscopeVersionString()</div><div class="ttdoc">Get the Kaleidoscope Library version as string.</div><div class="ttdef"><b>Definition</b> <a href="#l00023">kaleidoscope.c:23</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a8aa0b9d3c5d0b182e40f765129664451"><div class="ttname"><a href="kaleidoscope_8c.html#a8aa0b9d3c5d0b182e40f765129664451">interpolate</a></div><div class="ttdeci">void interpolate(TransformationInfo *dataOut, const TransformationInfo *dataIn, int width, int height)</div><div class="ttdoc">A simple interpolation function. Internal use only.</div><div class="ttdef"><b>Definition</b> <a href="#l00062">kaleidoscope.c:62</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_adce10abe22b01895bd2c6ed6863a10dc"><div class="ttname"><a href="kaleidoscope_8c.html#adce10abe22b01895bd2c6ed6863a10dc">rotatePoints</a></div><div class="ttdeci">void rotatePoints(TransformationInfo *outData, const TransformationInfo *orgData, int width, int height, double angle)</div><div class="ttdoc">Rotates the coordinates of sliced triangle. Internal use only.</div><div class="ttdef"><b>Definition</b> <a href="#l00129">kaleidoscope.c:129</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="#l00313">kaleidoscope.c:313</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="#l00314">kaleidoscope.c:314</a></div></div>
 <div class="ttc" id="akaleidoscope_8h_html"><div class="ttname"><a href="kaleidoscope_8h.html">kaleidoscope.h</a></div></div>
 <div class="ttc" id="astructKaleidoscopeHandle__t_html"><div class="ttname"><a href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle_t</a></div><div class="ttdoc">Struct for kaleidoscope effect generator.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8h_source.html#l00031">kaleidoscope.h:31</a></div></div>
 <div class="ttc" id="astructKaleidoscopeHandle__t_html_a070a360cbf8f482d1ad62121c5857bb4"><div class="ttname"><a href="structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4">KaleidoscopeHandle_t::height</a></div><div class="ttdeci">int height</div><div class="ttdoc">Image height.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8h_source.html#l00035">kaleidoscope.h:35</a></div></div>
@@ -479,7 +480,7 @@ $(function(){initNavTree('kaleidoscope_8c_source.html',''); initResizable(true);
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="kaleidoscope_8c.html">kaleidoscope.c</a></li>
-    <li class="footer">Generated on Wed Aug 27 2025 12:16:33 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+    <li class="footer">Generated on Wed Aug 27 2025 12:36:18 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
 </body>
