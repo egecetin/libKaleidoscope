@@ -200,7 +200,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	int retval = EXIT_FAILURE;
 	const int nPixels = width * height;
-	TransformationInfo *buffPtr1 = NULL TransformationInfo *buffPtr2 = NULL;
+	TransformationInfo *buffPtr1 = NULL;
+	TransformationInfo *buffPtr2 = NULL;
 
 	// Check parameters
 	if (handler == NULL || n <= 2 || width <= 0 || height <= 0 || nComponents <= 0 || scaleDown <= 0.0 ||
