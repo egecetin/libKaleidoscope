@@ -1,4 +1,4 @@
 missingInclude:*
 missingIncludeSystem:*
 unusedFunction:*
-
+staticFunction:src/kaleidoscope.c
