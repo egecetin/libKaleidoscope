@@ -4,8 +4,7 @@
 /**
  * @brief Data struct for pixel locations
  */
-struct Point2D_t
-{
+struct Point2D_t {
 	int x;
 	int y;
 };
@@ -14,8 +13,7 @@ typedef struct Point2D_t Point2D;
 /**
  * @brief Data struct for transformation information
  */
-struct TransformationInfo_t
-{
+struct TransformationInfo_t {
 	/// Location from source image
 	Point2D srcLocation;
 	/// Location to destination image
@@ -30,8 +28,7 @@ typedef struct TransformationInfo_t TransformationInfo;
 /**
  * @brief Struct for kaleidoscope effect generator
  */
-struct KaleidoscopeHandle_t
-{
+struct KaleidoscopeHandle_t {
 	/// Image width
 	int width;
 	/// Image height
@@ -113,7 +110,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
  * @param[in] imgIn Input image
  * @param[out] imgOut Output image
  */
-void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut);
+void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn,
+						 unsigned char *imgOut);
 
 /**
  * @brief Deinitializes kaleidoscope handler

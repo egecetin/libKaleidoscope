@@ -6,8 +6,7 @@
 /**
  * @brief Data struct for images
  */
-struct ImageData_t
-{
+struct ImageData_t {
 	int width;
 	int height;
 	unsigned char nComponents;

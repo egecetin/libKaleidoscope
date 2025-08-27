@@ -13,8 +13,7 @@ namespace kalos
 	/**
 	 * @brief Kaleidoscope effect generator
 	 */
-	class Kaleidoscope
-	{
+	class Kaleidoscope {
 	  private:
 		double k;
 		KaleidoscopeHandle handler;

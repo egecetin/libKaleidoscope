@@ -177,7 +177,9 @@ void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int 
 
 		// Ensure limits within image
 		if (widthStart < 0 || widthStart > width || widthEnd < 0 || widthEnd > width)
+		{
 			continue;
+		}
 
 		TransformationInfo *ptr = &transformPtr[idx * width];
 		for (int jdx = widthStart; jdx <= widthEnd; ++jdx)
@@ -281,7 +283,9 @@ cleanup:
 	free(buffPtr2);
 
 	if (retval == EXIT_FAILURE)
+	{
 		free(handler->pTransferFunc);
+	}
 
 	return retval;
 }
@@ -297,9 +301,13 @@ void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsi
 	TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
 
 	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr) // Dim image
+	{
 		*destPtr = (unsigned char)((*srcPtr) * k);
+	}
 	for (idx = 0; idx < handler->nPoints; ++idx, ++ptrTransform) // Merge
+	{
 		memcpy(&(imgOut[ptrTransform->dstOffset]), &(imgIn[ptrTransform->srcOffset]), nComponents);
+	}
 }
 
 void deInitKaleidoscope(KaleidoscopeHandle *handler)
