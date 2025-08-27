@@ -53,9 +53,8 @@ namespace kalos
 		 * @brief Creates kaleidoscope effect. Uses dim constant provided in constructor
 		 * @param inImg Input image
 		 * @param outImg Output image
-		 * @param size Size of the images
 		 */
-		void processImage(uint8_t *inImg, uint8_t *outImg, size_t size) { processImage(inImg, outImg, size, k); }
+		void processImage(uint8_t *inImg, uint8_t *outImg) { processImage(inImg, outImg, k); }
 
 		/**
 		 * @brief Destroy the Kaleidoscope object

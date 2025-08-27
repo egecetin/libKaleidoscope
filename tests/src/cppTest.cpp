@@ -27,7 +27,7 @@ TEST(CppTests, processingTest)
 	std::unique_ptr<kalos::Kaleidoscope> handle;
 
 	ASSERT_NO_THROW(handle = std::make_unique<kalos::Kaleidoscope>(n, width, height, nComponents, scaleDown, k));
-	handle->processImage(inData.data(), outData.data(), nPixel);
+	handle->processImage(inData.data(), outData.data());
 
 	ASSERT_TRUE(expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size()).good());
 	ASSERT_TRUE(outData == expectedData);
