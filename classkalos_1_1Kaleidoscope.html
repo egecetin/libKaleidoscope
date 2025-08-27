@@ -141,12 +141,12 @@ Public Member Functions</h2></td></tr>
 <tr class="memitem:ac244ab7153f5f124ba44805225b3faa5" id="r_ac244ab7153f5f124ba44805225b3faa5"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac244ab7153f5f124ba44805225b3faa5">Kaleidoscope</a> (int nImage, int width, int height, int nComponents, double scaleDown, double dimConst)</td></tr>
 <tr class="memdesc:ac244ab7153f5f124ba44805225b3faa5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Construct a new <a class="el" href="classkalos_1_1Kaleidoscope.html" title="Kaleidoscope effect generator.">Kaleidoscope</a> object.  <br /></td></tr>
 <tr class="separator:ac244ab7153f5f124ba44805225b3faa5"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:aefe5f20972d4b8c8a5f24d066de78ada" id="r_aefe5f20972d4b8c8a5f24d066de78ada"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#aefe5f20972d4b8c8a5f24d066de78ada">processImage</a> (uint8_t *inImg, uint8_t *outImg, size_t size, double dimConst)</td></tr>
-<tr class="memdesc:aefe5f20972d4b8c8a5f24d066de78ada"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates kaleidoscope effect.  <br /></td></tr>
-<tr class="separator:aefe5f20972d4b8c8a5f24d066de78ada"><td class="memSeparator" colspan="2">&#160;</td></tr>
-<tr class="memitem:a89bc5511ae6d2bc69376f792ecca778f" id="r_a89bc5511ae6d2bc69376f792ecca778f"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a89bc5511ae6d2bc69376f792ecca778f">processImage</a> (uint8_t *inImg, uint8_t *outImg, size_t size)</td></tr>
-<tr class="memdesc:a89bc5511ae6d2bc69376f792ecca778f"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates kaleidoscope effect. Uses dim constant provided in constructor.  <br /></td></tr>
-<tr class="separator:a89bc5511ae6d2bc69376f792ecca778f"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a4216642ccc8c913cf1b073b201c299ac" id="r_a4216642ccc8c913cf1b073b201c299ac"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a4216642ccc8c913cf1b073b201c299ac">processImage</a> (uint8_t *inImg, uint8_t *outImg, double dimConst)</td></tr>
+<tr class="memdesc:a4216642ccc8c913cf1b073b201c299ac"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates kaleidoscope effect.  <br /></td></tr>
+<tr class="separator:a4216642ccc8c913cf1b073b201c299ac"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:a7023409c49b70bfcda1ed59c4d50dfb5" id="r_a7023409c49b70bfcda1ed59c4d50dfb5"><td class="memItemLeft" align="right" valign="top">void&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a7023409c49b70bfcda1ed59c4d50dfb5">processImage</a> (uint8_t *inImg, uint8_t *outImg)</td></tr>
+<tr class="memdesc:a7023409c49b70bfcda1ed59c4d50dfb5"><td class="mdescLeft">&#160;</td><td class="mdescRight">Creates kaleidoscope effect. Uses dim constant provided in constructor.  <br /></td></tr>
+<tr class="separator:a7023409c49b70bfcda1ed59c4d50dfb5"><td class="memSeparator" colspan="2">&#160;</td></tr>
 <tr class="memitem:a0f2d840de0a83d9b02ddb94d26106168" id="r_a0f2d840de0a83d9b02ddb94d26106168"><td class="memItemLeft" align="right" valign="top">&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0f2d840de0a83d9b02ddb94d26106168">~Kaleidoscope</a> ()</td></tr>
 <tr class="memdesc:a0f2d840de0a83d9b02ddb94d26106168"><td class="mdescLeft">&#160;</td><td class="mdescRight">Destroy the <a class="el" href="classkalos_1_1Kaleidoscope.html" title="Kaleidoscope effect generator.">Kaleidoscope</a> object.  <br /></td></tr>
 <tr class="separator:a0f2d840de0a83d9b02ddb94d26106168"><td class="memSeparator" colspan="2">&#160;</td></tr>
@@ -223,14 +223,16 @@ Private Attributes</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00032">32</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   33</span>            : <a class="code hl_variable" href="#a3af9d4707c80d6c3bb67d98365210c58">k</a>(dimConst)</div>
-<div class="line"><span class="lineno">   34</span>        {</div>
-<div class="line"><span class="lineno">   35</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(&amp;<a class="code hl_variable" href="#aaae6a72f29c776388db43f085b658809">handler</a>, nImage, width, height, nComponents, scaleDown) != 0)</div>
-<div class="line"><span class="lineno">   36</span>                <span class="keywordflow">throw</span> std::runtime_error(<span class="stringliteral">&quot;Can&#39;t init kaleidoscope structure for these inputs&quot;</span>);</div>
-<div class="line"><span class="lineno">   37</span>        }</div>
-<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_a3af9d4707c80d6c3bb67d98365210c58"><div class="ttname"><a href="#a3af9d4707c80d6c3bb67d98365210c58">kalos::Kaleidoscope::k</a></div><div class="ttdeci">double k</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00019">kaleidoscope.hpp:19</a></div></div>
-<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_aaae6a72f29c776388db43f085b658809"><div class="ttname"><a href="#aaae6a72f29c776388db43f085b658809">kalos::Kaleidoscope::handler</a></div><div class="ttdeci">KaleidoscopeHandle handler</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00020">kaleidoscope.hpp:20</a></div></div>
+<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00031">31</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   32</span>            : <a class="code hl_variable" href="#a3af9d4707c80d6c3bb67d98365210c58">k</a>(dimConst)</div>
+<div class="line"><span class="lineno">   33</span>        {</div>
+<div class="line"><span class="lineno">   34</span>            <span class="keywordflow">if</span> (<a class="code hl_function" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(&amp;<a class="code hl_variable" href="#aaae6a72f29c776388db43f085b658809">handler</a>, nImage, width, height, nComponents, scaleDown) != 0)</div>
+<div class="line"><span class="lineno">   35</span>            {</div>
+<div class="line"><span class="lineno">   36</span>                <span class="keywordflow">throw</span> std::invalid_argument(<span class="stringliteral">&quot;Can&#39;t init kaleidoscope structure for these inputs&quot;</span>);</div>
+<div class="line"><span class="lineno">   37</span>            }</div>
+<div class="line"><span class="lineno">   38</span>        }</div>
+<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_a3af9d4707c80d6c3bb67d98365210c58"><div class="ttname"><a href="#a3af9d4707c80d6c3bb67d98365210c58">kalos::Kaleidoscope::k</a></div><div class="ttdeci">double k</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00018">kaleidoscope.hpp:18</a></div></div>
+<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_aaae6a72f29c776388db43f085b658809"><div class="ttname"><a href="#aaae6a72f29c776388db43f085b658809">kalos::Kaleidoscope::handler</a></div><div class="ttdeci">KaleidoscopeHandle handler</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00019">kaleidoscope.hpp:19</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00197">kaleidoscope.c:197</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
@@ -242,9 +244,9 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="145,95,177,95,177,100,145,100"/>
 <area shape="rect" href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755" title=" " alt="" coords="372,5,447,33"/>
 <area shape="poly" title=" " alt="" coords="281,81,365,38,368,43,284,86"/>
-<area shape="rect" href="kaleidoscope_8c.html#a6536dd078a2b0423d1ca626aa74559e4" title="A simple interpolation function. Internal use only." alt="" coords="366,57,454,85"/>
+<area shape="rect" href="kaleidoscope_8c.html#a8aa0b9d3c5d0b182e40f765129664451" title="A simple interpolation function. Internal use only." alt="" coords="366,57,454,85"/>
 <area shape="poly" title=" " alt="" coords="313,85,350,79,351,84,314,90"/>
-<area shape="rect" href="kaleidoscope_8c.html#a9e987dfda8c7f6030f43a35ec5742c1b" title="Rotates the coordinates of sliced triangle. Internal use only." alt="" coords="362,109,458,137"/>
+<area shape="rect" href="kaleidoscope_8c.html#adce10abe22b01895bd2c6ed6863a10dc" title="Rotates the coordinates of sliced triangle. Internal use only." alt="" coords="362,109,458,137"/>
 <area shape="poly" title=" " alt="" coords="314,105,347,110,346,116,313,110"/>
 <area shape="rect" href="kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8" title="Slices a suitable triangle from image." alt="" coords="361,161,458,189"/>
 <area shape="poly" title=" " alt="" coords="284,110,368,152,365,156,282,115"/>
@@ -278,9 +280,9 @@ Here is the call graph for this function:</div>
 
 <p>Destroy the <a class="el" href="classkalos_1_1Kaleidoscope.html" title="Kaleidoscope effect generator.">Kaleidoscope</a> object. </p>
 
-<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00062">62</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   62</span>{ <a class="code hl_function" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(&amp;<a class="code hl_variable" href="#aaae6a72f29c776388db43f085b658809">handler</a>); }</div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00301">kaleidoscope.c:301</a></div></div>
+<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00061">61</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   61</span>{ <a class="code hl_function" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(&amp;<a class="code hl_variable" href="#aaae6a72f29c776388db43f085b658809">handler</a>); }</div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00313">kaleidoscope.c:313</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
@@ -295,8 +297,8 @@ Here is the call graph for this function:</div>
 </div>
 </div>
 <h2 class="groupheader">Member Function Documentation</h2>
-<a id="a89bc5511ae6d2bc69376f792ecca778f" name="a89bc5511ae6d2bc69376f792ecca778f"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a89bc5511ae6d2bc69376f792ecca778f">&#9670;&#160;</a></span>processImage() <span class="overload">[1/2]</span></h2>
+<a id="a7023409c49b70bfcda1ed59c4d50dfb5" name="a7023409c49b70bfcda1ed59c4d50dfb5"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a7023409c49b70bfcda1ed59c4d50dfb5">&#9670;&#160;</a></span>processImage() <span class="overload">[1/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -312,12 +314,7 @@ Here is the call graph for this function:</div>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>outImg</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>&#160;)</td>
+          <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>outImg</em></span>&#160;)</td>
         </tr>
       </table>
   </td>
@@ -332,19 +329,18 @@ Here is the call graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">inImg</td><td>Input image </td></tr>
     <tr><td class="paramname">outImg</td><td>Output image </td></tr>
-    <tr><td class="paramname">size</td><td>Size of the images </td></tr>
   </table>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00057">57</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">   57</span>{ <a class="code hl_function" href="#aefe5f20972d4b8c8a5f24d066de78ada">processImage</a>(inImg, outImg, size, <a class="code hl_variable" href="#a3af9d4707c80d6c3bb67d98365210c58">k</a>); }</div>
-<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_aefe5f20972d4b8c8a5f24d066de78ada"><div class="ttname"><a href="#aefe5f20972d4b8c8a5f24d066de78ada">kalos::Kaleidoscope::processImage</a></div><div class="ttdeci">void processImage(uint8_t *inImg, uint8_t *outImg, size_t size, double dimConst)</div><div class="ttdoc">Creates kaleidoscope effect.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00046">kaleidoscope.hpp:46</a></div></div>
+<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00056">56</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">   56</span>{ <a class="code hl_function" href="#a4216642ccc8c913cf1b073b201c299ac">processImage</a>(inImg, outImg, <a class="code hl_variable" href="#a3af9d4707c80d6c3bb67d98365210c58">k</a>); }</div>
+<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html_a4216642ccc8c913cf1b073b201c299ac"><div class="ttname"><a href="#a4216642ccc8c913cf1b073b201c299ac">kalos::Kaleidoscope::processImage</a></div><div class="ttdeci">void processImage(uint8_t *inImg, uint8_t *outImg, double dimConst)</div><div class="ttdoc">Creates kaleidoscope effect.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00046">kaleidoscope.hpp:46</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classkalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_cgraph.png" border="0" usemap="#aclasskalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_cgraph" alt=""/></div>
-<map name="aclasskalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_cgraph" id="aclasskalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_cgraph">
+<div class="center"><img src="classkalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_cgraph.png" border="0" usemap="#aclasskalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_cgraph" alt=""/></div>
+<map name="aclasskalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_cgraph" id="aclasskalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_cgraph">
 <area shape="rect" title="Creates kaleidoscope effect. Uses dim constant provided in constructor." alt="" coords="5,29,145,74"/>
 <area shape="poly" title=" " alt="" coords="47,29,47,19,51,11,61,5,75,3,90,5,100,12,97,16,88,10,75,8,63,10,55,14,52,20,53,29"/>
 </map>
@@ -352,8 +348,8 @@ Here is the call graph for this function:</div>
 <div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classkalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_icgraph.png" border="0" usemap="#aclasskalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_icgraph" alt=""/></div>
-<map name="aclasskalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_icgraph" id="aclasskalos_1_1Kaleidoscope_a89bc5511ae6d2bc69376f792ecca778f_icgraph">
+<div class="center"><img src="classkalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_icgraph.png" border="0" usemap="#aclasskalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_icgraph" alt=""/></div>
+<map name="aclasskalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_icgraph" id="aclasskalos_1_1Kaleidoscope_a7023409c49b70bfcda1ed59c4d50dfb5_icgraph">
 <area shape="rect" title="Creates kaleidoscope effect. Uses dim constant provided in constructor." alt="" coords="5,29,145,74"/>
 <area shape="poly" title=" " alt="" coords="97,16,88,10,75,8,63,10,55,14,52,20,53,29,47,29,47,19,51,11,61,5,75,3,90,5,100,12"/>
 </map>
@@ -361,8 +357,8 @@ Here is the caller graph for this function:</div>
 
 </div>
 </div>
-<a id="aefe5f20972d4b8c8a5f24d066de78ada" name="aefe5f20972d4b8c8a5f24d066de78ada"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#aefe5f20972d4b8c8a5f24d066de78ada">&#9670;&#160;</a></span>processImage() <span class="overload">[2/2]</span></h2>
+<a id="a4216642ccc8c913cf1b073b201c299ac" name="a4216642ccc8c913cf1b073b201c299ac"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#a4216642ccc8c913cf1b073b201c299ac">&#9670;&#160;</a></span>processImage() <span class="overload">[2/2]</span></h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -379,11 +375,6 @@ Here is the caller graph for this function:</div>
           <td class="paramkey"></td>
           <td></td>
           <td class="paramtype">uint8_t *</td>          <td class="paramname"><span class="paramname"><em>outImg</em></span>, </td>
-        </tr>
-        <tr>
-          <td class="paramkey"></td>
-          <td></td>
-          <td class="paramtype">size_t</td>          <td class="paramname"><span class="paramname"><em>size</em></span>, </td>
         </tr>
         <tr>
           <td class="paramkey"></td>
@@ -403,7 +394,6 @@ Here is the caller graph for this function:</div>
   <table class="params">
     <tr><td class="paramname">inImg</td><td>Input image </td></tr>
     <tr><td class="paramname">outImg</td><td>Output image </td></tr>
-    <tr><td class="paramname">size</td><td>Size of the images </td></tr>
     <tr><td class="paramname">dimConst</td><td>Variable to dim background. Should be between 0.0 and 1.0 </td></tr>
   </table>
   </dd>
@@ -411,16 +401,16 @@ Here is the caller graph for this function:</div>
 
 <p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00046">46</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">   47</span>        {</div>
-<div class="line"><span class="lineno">   48</span>            <a class="code hl_function" href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a>(&amp;<a class="code hl_variable" href="#aaae6a72f29c776388db43f085b658809">handler</a>, dimConst, inImg, outImg);</div>
+<div class="line"><span class="lineno">   48</span>            <a class="code hl_function" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a>(&amp;<a class="code hl_variable" href="#aaae6a72f29c776388db43f085b658809">handler</a>, dimConst, inImg, outImg);</div>
 <div class="line"><span class="lineno">   49</span>        }</div>
-<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00285">kaleidoscope.c:285</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a1778484dc1404c93c4173053f0afb550"><div class="ttname"><a href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00293">kaleidoscope.c:293</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="classkalos_1_1Kaleidoscope_aefe5f20972d4b8c8a5f24d066de78ada_cgraph.png" border="0" usemap="#aclasskalos_1_1Kaleidoscope_aefe5f20972d4b8c8a5f24d066de78ada_cgraph" alt=""/></div>
-<map name="aclasskalos_1_1Kaleidoscope_aefe5f20972d4b8c8a5f24d066de78ada_cgraph" id="aclasskalos_1_1Kaleidoscope_aefe5f20972d4b8c8a5f24d066de78ada_cgraph">
+<div class="center"><img src="classkalos_1_1Kaleidoscope_a4216642ccc8c913cf1b073b201c299ac_cgraph.png" border="0" usemap="#aclasskalos_1_1Kaleidoscope_a4216642ccc8c913cf1b073b201c299ac_cgraph" alt=""/></div>
+<map name="aclasskalos_1_1Kaleidoscope_a4216642ccc8c913cf1b073b201c299ac_cgraph" id="aclasskalos_1_1Kaleidoscope_a4216642ccc8c913cf1b073b201c299ac_cgraph">
 <area shape="rect" title="Creates kaleidoscope effect." alt="" coords="5,5,145,50"/>
-<area shape="rect" href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1" title="Applies kaleidoscope effect to image." alt="" coords="193,14,340,42"/>
+<area shape="rect" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550" title="Applies kaleidoscope effect to image." alt="" coords="193,14,340,42"/>
 <area shape="poly" title=" " alt="" coords="145,25,177,25,177,30,145,30"/>
 </map>
 </div>
@@ -448,7 +438,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00020">20</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00019">19</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
 
 </div>
 </div>
@@ -472,7 +462,7 @@ Here is the call graph for this function:</div>
 </table>
 </div><div class="memdoc">
 
-<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00019">19</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
+<p class="definition">Definition at line <a class="el" href="kaleidoscope_8hpp_source.html#l00018">18</a> of file <a class="el" href="kaleidoscope_8hpp_source.html">kaleidoscope.hpp</a>.</p>
 
 </div>
 </div>
@@ -485,7 +475,7 @@ Here is the call graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="namespacekalos.html">kalos</a></li><li class="navelem"><a class="el" href="classkalos_1_1Kaleidoscope.html">Kaleidoscope</a></li>
-    <li class="footer">Generated on Wed Aug 27 2025 10:42:09 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+    <li class="footer">Generated on Wed Aug 27 2025 12:05:33 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
 </body>

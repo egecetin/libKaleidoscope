@@ -223,7 +223,7 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"><b>1️⃣</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60" title="Initializes kaleidoscope handler.">initKaleidoscope()</a></code>   </td><td class="markdownTableBodyLeft">Initialize transformation matrix    </td></tr>
 <tr class="markdownTableRowEven">
-<td class="markdownTableBodyCenter"><b>2️⃣</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1" title="Applies kaleidoscope effect to image.">processKaleidoscope()</a></code>   </td><td class="markdownTableBodyLeft">Process images (reusable for same dimensions)    </td></tr>
+<td class="markdownTableBodyCenter"><b>2️⃣</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550" title="Applies kaleidoscope effect to image.">processKaleidoscope()</a></code>   </td><td class="markdownTableBodyLeft">Process images (reusable for same dimensions)    </td></tr>
 <tr class="markdownTableRowOdd">
 <td class="markdownTableBodyCenter"><b>3️⃣</b>   </td><td class="markdownTableBodyLeft"><code><a class="el" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea" title="Deinitializes kaleidoscope handler.">deInitKaleidoscope()</a></code>   </td><td class="markdownTableBodyLeft">Clean up resources   </td></tr>
 </table>
@@ -231,14 +231,14 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 <div class="line"><span class="keywordtype">int</span> <a class="code hl_function" href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a>(<a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler, <span class="keywordtype">int</span> n, <span class="keywordtype">int</span> width, <span class="keywordtype">int</span> height, <span class="keywordtype">double</span> scaleDown);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 🎨 Step 2: Process (use multiple times)</span></div>
-<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a>(<a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler, <span class="keywordtype">double</span> k, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgIn, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgOut);</div>
+<div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a>(<a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler, <span class="keywordtype">double</span> k, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgIn, <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *imgOut);</div>
 <div class="line"> </div>
 <div class="line"><span class="comment">// 🧹 Step 3: Cleanup</span></div>
 <div class="line"><span class="keywordtype">void</span> <a class="code hl_function" href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a>(<a class="code hl_struct" href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle</a> *handler);</div>
+<div class="ttc" id="akaleidoscope_8c_html_a1778484dc1404c93c4173053f0afb550"><div class="ttname"><a href="kaleidoscope_8c.html#a1778484dc1404c93c4173053f0afb550">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00293">kaleidoscope.c:293</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00197">kaleidoscope.c:197</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00285">kaleidoscope.c:285</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00301">kaleidoscope.c:301</a></div></div>
-<div class="ttc" id="astructKaleidoscopeHandle__t_html"><div class="ttname"><a href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle_t</a></div><div class="ttdoc">Struct for kaleidoscope effect generator.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8h_source.html#l00033">kaleidoscope.h:34</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00313">kaleidoscope.c:313</a></div></div>
+<div class="ttc" id="astructKaleidoscopeHandle__t_html"><div class="ttname"><a href="structKaleidoscopeHandle__t.html">KaleidoscopeHandle_t</a></div><div class="ttdoc">Struct for kaleidoscope effect generator.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8h_source.html#l00031">kaleidoscope.h:31</a></div></div>
 </div><!-- fragment --><blockquote class="doxtable">
 <p>&zwj;📚 <b>Example</b>: Check <code><a class="el" href="kaleidoscope-cmd_8c.html">src/kaleidoscope-cmd.c</a></code> for complete usage </p>
 </blockquote>
@@ -271,7 +271,7 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 <div class="line">    <span class="comment">// 🧹 Automatic cleanup when handler goes out of scope</span></div>
 <div class="line">    <span class="keywordflow">return</span> 0;</div>
 <div class="line">}</div>
-<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html"><div class="ttname"><a href="classkalos_1_1Kaleidoscope.html">kalos::Kaleidoscope</a></div><div class="ttdoc">Kaleidoscope effect generator.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00016">kaleidoscope.hpp:17</a></div></div>
+<div class="ttc" id="aclasskalos_1_1Kaleidoscope_html"><div class="ttname"><a href="classkalos_1_1Kaleidoscope.html">kalos::Kaleidoscope</a></div><div class="ttdoc">Kaleidoscope effect generator.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8hpp_source.html#l00016">kaleidoscope.hpp:16</a></div></div>
 <div class="ttc" id="akaleidoscope-cmd_8c_html_ac0f2228420376f4db7e1274f2b41667c"><div class="ttname"><a href="kaleidoscope-cmd_8c.html#ac0f2228420376f4db7e1274f2b41667c">main</a></div><div class="ttdeci">int main(int argc, const char *argv[])</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope-cmd_8c_source.html#l00008">kaleidoscope-cmd.c:8</a></div></div>
 <div class="ttc" id="akaleidoscope_8hpp_html"><div class="ttname"><a href="kaleidoscope_8hpp.html">kaleidoscope.hpp</a></div></div>
 </div><!-- fragment --><blockquote class="doxtable">
@@ -363,7 +363,7 @@ $(function(){initNavTree('index.html',''); initResizable(true); });
 <!-- start footer part -->
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
-    <li class="footer">Generated on Wed Aug 27 2025 10:42:09 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+    <li class="footer">Generated on Wed Aug 27 2025 12:05:33 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
 </body>
