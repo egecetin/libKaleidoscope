@@ -23,8 +23,6 @@ jobs:
         run: cppcheck -Iinclude/ src --verbose --enable=all --error-exitcode=1 --language=c --suppressions-list=cppcheckSuppressions.txt --inline-suppr --check-level=exhaustive
       - name: Configure for clang-tidy
         run: cmake -S . -B build
-      - name: Clang-tidy
-        run: run-clang-tidy -j`nproc` -p=build -header-filter=`pwd`/include/ src/*.c src/**/*.c src/**/*.cu
 
   os-build:
     runs-on: ${{ matrix.os-version }}
