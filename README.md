@@ -16,6 +16,8 @@
 ![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white&style=for-the-badge)
+![Sonarcloud Analysis](https://img.shields.io/sonar/quality_gate/egecetin_libKaleidoscope?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarqubecloud)
+![Scorecard score](https://img.shields.io/ossf-scorecard/github.com/egecetin/libKaleidoscope?label=OpenSSF%20Score&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMTEiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMSIgcng9IjIiIHJ5PSIyIj48L3JlY3Q+PHBhdGggZD0ibTcgMTFWN0E1IDUgMCAwIDEgMTcgN3Y0Ij48L3BhdGg+PC9zdmc+)
 
 ### 🛠️ **Technology Stack**
 
