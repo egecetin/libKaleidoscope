@@ -113,7 +113,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
  * @param[in] imgIn Input image
  * @param[out] imgOut Output image
  */
-void processKaleidoscope(const KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut);
+void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut);
 
 /**
  * @brief Deinitializes kaleidoscope handler

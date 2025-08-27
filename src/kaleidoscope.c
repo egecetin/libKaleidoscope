@@ -286,7 +286,7 @@ cleanup:
 	return retval;
 }
 
-void processKaleidoscope(const KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)
+void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut)
 {
 	long long idx;
 	const long long nComponents = handler->nComponents;
