@@ -57,7 +57,7 @@ static int compare(const void *lhsPtr, const void *rhsPtr)
 {
 	const TransformationInfo *lhs = (const TransformationInfo *)lhsPtr;
 	const TransformationInfo *rhs = (const TransformationInfo *)rhsPtr;
-	return lhs->dstOffset - rhs->dstOffset;
+	return (int)(lhs->dstOffset - rhs->dstOffset);
 }
 
 void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
@@ -217,7 +217,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	handler->width = width;
 	handler->height = height;
-	handler->nComponents = nComponents;
+	handler->nComponents = (unsigned char)nComponents;
 
 	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
