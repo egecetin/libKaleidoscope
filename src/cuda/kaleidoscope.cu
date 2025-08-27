@@ -61,7 +61,7 @@ namespace kalos
 
 			cudaMalloc(&(handler.pTransferFunc), sizeof(TransformationInfo) * handlerLocal.nPoints);
 			cudaMemcpy(handler.pTransferFunc, handlerLocal.pTransferFunc,
-							sizeof(TransformationInfo) * handlerLocal.nPoints, cudaMemcpyHostToDevice);
+					   sizeof(TransformationInfo) * handlerLocal.nPoints, cudaMemcpyHostToDevice);
 
 			deInitKaleidoscope(&handlerLocal);
 		}
