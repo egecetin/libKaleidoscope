@@ -200,7 +200,8 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	int retval = EXIT_FAILURE;
 	const int nPixels = width * height;
-	TransformationInfo *buffPtr1 = NULL, *buffPtr2 = NULL;
+	TransformationInfo *buffPtr1 = NULL;
+	TransformationInfo *buffPtr2 = NULL;
 
 	// Check parameters
 	if (handler == NULL || n <= 2 || width <= 0 || height <= 0 || nComponents <= 0 || scaleDown <= 0.0 ||
@@ -245,7 +246,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	handler->nPoints = 0;
 	for (int idx = 0; idx < nPixels; ++idx)
 	{
-		TransformationInfo *ptr = &buffPtr1[idx];
+		const TransformationInfo *ptr = &buffPtr1[idx];
 		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
 		{
 			continue;
@@ -296,9 +297,9 @@ void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsi
 	const long long nComponents = handler->nComponents;
 	const long long nPixels = (long long)handler->width * handler->height * handler->nComponents;
 
-	unsigned char *srcPtr = imgIn;
+	const unsigned char *srcPtr = imgIn;
 	unsigned char *destPtr = imgOut;
-	TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
+	const TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
 
 	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr) // Dim image
 	{
