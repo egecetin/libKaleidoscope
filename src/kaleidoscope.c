@@ -203,7 +203,9 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	// Check parameters
 	if (handler == NULL || n <= 2 || width <= 0 || height <= 0 || nComponents <= 0 || scaleDown <= 0.0 ||
 		scaleDown >= 1.0)
-		{return EXIT_FAILURE;}
+	{
+		return EXIT_FAILURE;
+	}
 
 	assert(handler);
 	assert(n > 2);
@@ -220,7 +222,9 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	if (!buffPtr1 || !buffPtr2)
-		{goto cleanup;}
+	{
+		goto cleanup;
+	}
 
 	sliceTriangle(buffPtr1, width, height, n, scaleDown);
 
@@ -241,7 +245,9 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	{
 		TransformationInfo *ptr = &buffPtr1[idx];
 		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
-		{	continue;}
+		{
+			continue;
+		}
 
 		buffPtr1[handler->nPoints] = *ptr;
 		buffPtr1[handler->nPoints].srcOffset =
