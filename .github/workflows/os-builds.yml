@@ -18,13 +18,13 @@ jobs:
         with:
           submodules: recursive
       - name: Run clang-format
-        run: clang-format include/**/*.hpp src/*.cpp src/**/*.cpp --verbose --dry-run --Werror
+        run: clang-format include/*.hpp include/*.h include/**/*.hpp include/**/*.h include/**/*.cuh src/*.c src/**/*.c src/**/*.cu --verbose --dry-run --Werror
       - name: Run cppcheck
-        run: cppcheck -Iinclude/ src --verbose --enable=all --error-exitcode=1 --std=c++17 --language=c++ --suppressions-list=cppcheckSuppressions.txt --inline-suppr --check-level=exhaustive
+        run: cppcheck -Iinclude/ src --verbose --enable=all --error-exitcode=1 --language=c --suppressions-list=cppcheckSuppressions.txt --inline-suppr --check-level=exhaustive
       - name: Configure for clang-tidy
         run: cmake -S . -B build
       - name: Clang-tidy
-        run: run-clang-tidy -j`nproc` -p=build -header-filter=`pwd`/include/ src/*.cpp src/**/*.cpp
+        run: run-clang-tidy -j`nproc` -p=build -header-filter=`pwd`/include/ src/*.c src/**/*.c src/**/*.cu
 
   os-build:
     runs-on: ${{ matrix.os-version }}
