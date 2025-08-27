@@ -32,3 +32,6 @@ repos:
     hooks:
       - id: codespell
         pass_filenames: false
+
+ci:
+  autofix_prs: false
