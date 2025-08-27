@@ -18,7 +18,7 @@ jobs:
         with:
           submodules: recursive
       - name: Run clang-format
-        run: clang-format include/*.hpp include/*.h include/**/*.hpp include/**/*.h include/**/*.cuh src/*.c src/**/*.c src/**/*.cu --verbose --dry-run --Werror
+        run: clang-format include/*.hpp include/*.h include/**/*.h include/**/*.cuh src/*.c src/**/*.c src/**/*.cu --verbose --dry-run --Werror
       - name: Run cppcheck
         run: cppcheck -Iinclude/ src --verbose --enable=all --error-exitcode=1 --language=c --suppressions-list=cppcheckSuppressions.txt --inline-suppr --check-level=exhaustive
       - name: Configure for clang-tidy
