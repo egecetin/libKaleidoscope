@@ -5,7 +5,27 @@ on:
     - 'master'
   pull_request:
 
+permissions:
+  contents: read
+
 jobs:
+  static-analysis:
+    runs-on: ubuntu-latest
+    container: egecetinn/alpine
+    steps:
+      - name: Checkout Code
+        uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
+        with:
+          submodules: recursive
+      - name: Run clang-format
+        run: clang-format include/**/*.hpp src/*.cpp src/**/*.cpp --verbose --dry-run --Werror
+      - name: Run cppcheck
+        run: cppcheck -Iinclude/ src --verbose --enable=all --error-exitcode=1 --std=c++17 --language=c++ --suppressions-list=cppcheckSuppressions.txt --inline-suppr --check-level=exhaustive
+      - name: Configure for clang-tidy
+        run: cmake -S . -B build
+      - name: Clang-tidy
+        run: run-clang-tidy -j`nproc` -p=build -header-filter=`pwd`/include/ src/*.cpp src/**/*.cpp
+
   os-build:
     runs-on: ${{ matrix.os-version }}
     strategy:
@@ -18,7 +38,7 @@ jobs:
             venv-command: . .venv/bin/activate
 
     steps:
-      - uses: actions/checkout@v4
+      - uses: actions/checkout@11bd71901bbe5b1630ceea73d27597364c9af683 # v4.2.2
         with:
           submodules: recursive
       - name: Install Python Requirements
