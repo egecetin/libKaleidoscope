@@ -33,17 +33,18 @@ namespace kalos
 			: k(dimConst)
 		{
 			if (initKaleidoscope(&handler, nImage, width, height, nComponents, scaleDown) != 0)
-				throw std::runtime_error("Can't init kaleidoscope structure for these inputs");
+			{
+				throw std::invalid_argument("Can't init kaleidoscope structure for these inputs");
+			}
 		}
 
 		/**
 		 * @brief Creates kaleidoscope effect
 		 * @param inImg Input image
 		 * @param outImg Output image
-		 * @param size Size of the images
 		 * @param dimConst Variable to dim background. Should be between 0.0 and 1.0
 		 */
-		void processImage(uint8_t *inImg, uint8_t *outImg, size_t size, double dimConst)
+		void processImage(uint8_t *inImg, uint8_t *outImg, double dimConst)
 		{
 			processKaleidoscope(&handler, dimConst, inImg, outImg);
 		}

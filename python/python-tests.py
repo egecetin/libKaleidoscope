@@ -4,21 +4,21 @@ import kaleidoscope
 
 class TestSuite:
     def test_processing(self):
-        nPixel = 1935 * 1088 * 3
+        n_pixel = 1935 * 1088 * 3
 
         # Read data
-        fileIn = open("tests/data/processing_1935x1088_InputData.bin", "rb")
-        fileExpected = open("tests/data/processing_1935x1088_ExpectedData.bin", "rb")
+        file_in = open("tests/data/processing_1935x1088_InputData.bin", "rb")
+        file_expected = open("tests/data/processing_1935x1088_ExpectedData.bin", "rb")
 
-        inImg = bytearray(fileIn.read())
-        expectedImg = bytearray(fileExpected.read())
-        outImg = bytearray(nPixel)
+        in_img = bytearray(file_in.read())
+        expected_img = bytearray(file_expected.read())
+        out_img = bytearray(n_pixel)
 
         # Process
         handle = kaleidoscope.PyKaleidoscope(6, 1935, 1088, 3, 0.45, 0.3)
 
-        handle.processImage(inImg, outImg, nPixel)
-        assert outImg == expectedImg
+        handle.processImage(in_img, out_img, n_pixel)
+        assert out_img == expected_img
 
     def test_exception(self):
         k = 0.30
@@ -26,20 +26,20 @@ class TestSuite:
         n = 6
         width = 1935
         height = 1088
-        nComponents = 3
+        n_components = 3
 
         with pytest.raises(Exception):
-            kaleidoscope.PyKaleidoscope(2, width, height, nComponents, scaleDown, k)
+            kaleidoscope.PyKaleidoscope(2, width, height, n_components, scaleDown, k)
 
         with pytest.raises(Exception):
-            kaleidoscope.PyKaleidoscope(n, 0, height, nComponents, scaleDown, k)
+            kaleidoscope.PyKaleidoscope(n, 0, height, n_components, scaleDown, k)
         with pytest.raises(Exception):
-            kaleidoscope.PyKaleidoscope(n, -1, height, nComponents, scaleDown, k)
+            kaleidoscope.PyKaleidoscope(n, -1, height, n_components, scaleDown, k)
 
         with pytest.raises(Exception):
-            kaleidoscope.PyKaleidoscope(n, width, 0, nComponents, scaleDown, k)
+            kaleidoscope.PyKaleidoscope(n, width, 0, n_components, scaleDown, k)
         with pytest.raises(Exception):
-            kaleidoscope.PyKaleidoscope(n, width, -1, nComponents, scaleDown, k)
+            kaleidoscope.PyKaleidoscope(n, width, -1, n_components, scaleDown, k)
 
         with pytest.raises(Exception):
             kaleidoscope.PyKaleidoscope(n, width, height, 0, scaleDown, k)
@@ -47,6 +47,6 @@ class TestSuite:
             kaleidoscope.PyKaleidoscope(n, width, height, -1, scaleDown, k)
 
         with pytest.raises(Exception):
-            kaleidoscope.PyKaleidoscope(n, width, height, nComponents, -0.01, k)
+            kaleidoscope.PyKaleidoscope(n, width, height, n_components, -0.01, k)
         with pytest.raises(Exception):
-            kaleidoscope.PyKaleidoscope(n, width, height, nComponents, 1.01, k)
+            kaleidoscope.PyKaleidoscope(n, width, height, n_components, 1.01, k)

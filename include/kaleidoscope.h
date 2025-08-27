@@ -72,7 +72,7 @@ char *getKaleidoscopeLibraryInfo();
  * @param[in] width Width of input image
  * @param[in] height Height of input image
  */
-void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height);
+void interpolate(TransformationInfo *dataOut, const TransformationInfo *dataIn, int width, int height);
 
 /**
  * @brief Rotates the coordinates of sliced triangle. Internal use only
@@ -82,7 +82,7 @@ void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int wi
  * @param[in] height Height of input image
  * @param[in] angle Top angle of sliced triangle
  */
-void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle);
+void rotatePoints(TransformationInfo *outData, const TransformationInfo *orgData, int width, int height, double angle);
 
 /**
  * @brief Slices a suitable triangle from image
@@ -113,7 +113,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
  * @param[in] imgIn Input image
  * @param[out] imgOut Output image
  */
-void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut);
+void processKaleidoscope(const KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut);
 
 /**
  * @brief Deinitializes kaleidoscope handler
