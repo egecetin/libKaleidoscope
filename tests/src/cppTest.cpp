@@ -27,7 +27,7 @@ TEST(CppTests, processingTest)
 	std::unique_ptr<kalos::Kaleidoscope> handle;
 
 	ASSERT_NO_THROW(handle = std::make_unique<kalos::Kaleidoscope>(n, width, height, nComponents, scaleDown, k));
-	handle->processImage(inData.data(), outData.data(), nPixel);
+	handle->processImage(inData.data(), outData.data());
 
 	ASSERT_TRUE(expectedFile.read(reinterpret_cast<char *>(expectedData.data()), expectedData.size()).good());
 	ASSERT_TRUE(outData == expectedData);
@@ -41,17 +41,17 @@ TEST(CppTests, generalTest)
 
 	ASSERT_NO_THROW(kalos::Kaleidoscope(n, width, height, nComponents, scaleDown, k));
 
-	ASSERT_THROW(kalos::Kaleidoscope(2, width, height, nComponents, scaleDown, k), std::runtime_error);
+	ASSERT_THROW(kalos::Kaleidoscope(2, width, height, nComponents, scaleDown, k), std::invalid_argument);
 
-	ASSERT_THROW(kalos::Kaleidoscope(n, 0, height, nComponents, scaleDown, k), std::runtime_error);
-	ASSERT_THROW(kalos::Kaleidoscope(n, -1, height, nComponents, scaleDown, k), std::runtime_error);
+	ASSERT_THROW(kalos::Kaleidoscope(n, 0, height, nComponents, scaleDown, k), std::invalid_argument);
+	ASSERT_THROW(kalos::Kaleidoscope(n, -1, height, nComponents, scaleDown, k), std::invalid_argument);
 
-	ASSERT_THROW(kalos::Kaleidoscope(n, width, 0, nComponents, scaleDown, k), std::runtime_error);
-	ASSERT_THROW(kalos::Kaleidoscope(n, width, -1, nComponents, scaleDown, k), std::runtime_error);
+	ASSERT_THROW(kalos::Kaleidoscope(n, width, 0, nComponents, scaleDown, k), std::invalid_argument);
+	ASSERT_THROW(kalos::Kaleidoscope(n, width, -1, nComponents, scaleDown, k), std::invalid_argument);
 
-	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, 0, scaleDown, k), std::runtime_error);
-	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, -1, scaleDown, k), std::runtime_error);
+	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, 0, scaleDown, k), std::invalid_argument);
+	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, -1, scaleDown, k), std::invalid_argument);
 
-	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, nComponents, -0.01, k), std::runtime_error);
-	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, nComponents, 1.01, k), std::runtime_error);
+	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, nComponents, -0.01, k), std::invalid_argument);
+	ASSERT_THROW(kalos::Kaleidoscope(n, width, height, nComponents, 1.01, k), std::invalid_argument);
 }

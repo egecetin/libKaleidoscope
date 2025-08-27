@@ -17,8 +17,7 @@ namespace kalos
 		/**
 		 * @brief Kaleidoscope effect generator with CUDA backend
 		 */
-		class Kaleidoscope
-		{
+		class Kaleidoscope {
 		  private:
 			double k;
 			KaleidoscopeHandle handler;

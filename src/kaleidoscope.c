@@ -48,7 +48,6 @@ char *getKaleidoscopeLibraryInfo()
 	offset += sizeof(PROJECT_BUILD_DATE);
 	memset(&info[offset - 1], 32, 1);
 	strncpy(&info[offset], PROJECT_BUILD_TIME, sizeof(PROJECT_BUILD_TIME));
-	// offset += sizeof(PROJECT_BUILD_TIME);
 
 	return info;
 }
@@ -60,17 +59,15 @@ static int compare(const void *lhsPtr, const void *rhsPtr)
 	return (int)(lhs->dstOffset - rhs->dstOffset);
 }
 
-void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int width, int height)
+void interpolate(TransformationInfo *dataOut, const TransformationInfo *dataIn, int width, int height)
 {
-	int idx, jdx;
-
 	// Very simple implementation of nearest neighbour interpolation
-	for (idx = 1; idx < height - 1; ++idx)
+	for (int idx = 1; idx < height - 1; ++idx)
 	{
 		int heightOffset = idx * width;
-		for (jdx = 1; jdx < width - 1; ++jdx)
+		for (int jdx = 1; jdx < width - 1; ++jdx)
 		{
-			TransformationInfo *ptrIn = &dataIn[heightOffset + jdx];
+			const TransformationInfo *ptrIn = &dataIn[heightOffset + jdx];
 			TransformationInfo *ptrOut = &dataOut[heightOffset + jdx];
 			if (!(ptrIn->dstLocation.x) && !(ptrIn->dstLocation.y))
 			{
@@ -117,21 +114,24 @@ void interpolate(TransformationInfo *dataOut, TransformationInfo *dataIn, int wi
 					ptrOut->srcLocation.y = (ptrIn + width + 1)->srcLocation.y + 1;
 				}
 				else
+				{
 					memset(ptrOut, 0, sizeof(TransformationInfo));
+				}
 			}
 			else
+			{
 				*ptrOut = *ptrIn;
+			}
 		}
 	}
 }
 
-void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int width, int height, double angle)
+void rotatePoints(TransformationInfo *outData, const TransformationInfo *orgData, int width, int height, double angle)
 {
-	int idx;
 	double cosVal = cos(angle * M_PI / 180);
 	double sinVal = sin(angle * M_PI / 180);
 
-	for (idx = 0; idx < width * height; ++idx)
+	for (int idx = 0; idx < width * height; ++idx)
 	{
 		if (orgData[idx].dstLocation.x || orgData[idx].dstLocation.y)
 		{
@@ -154,8 +154,6 @@ void rotatePoints(TransformationInfo *outData, TransformationInfo *orgData, int 
 
 void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)
 {
-	int idx, jdx;
-
 	// Variables
 	const double topAngle = 360.0 / n;
 	const double tanVal = tan(topAngle / 2.0 * M_PI / 180.0); // tan(topAngle / 2) in radians
@@ -170,7 +168,7 @@ void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int 
 	assert(heightEnd >= 0);
 	assert(heightEnd <= height);
 
-	for (idx = heightStart; idx < heightEnd; ++idx)
+	for (int idx = heightStart; idx < heightEnd; ++idx)
 	{
 		const int currentBaseLength = (int)((idx - heightStart) * tanVal);
 
@@ -179,10 +177,12 @@ void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int 
 
 		// Ensure limits within image
 		if (widthStart < 0 || widthStart > width || widthEnd < 0 || widthEnd > width)
+		{
 			continue;
+		}
 
 		TransformationInfo *ptr = &transformPtr[idx * width];
-		for (jdx = widthStart; jdx <= widthEnd; ++jdx)
+		for (int jdx = widthStart; jdx <= widthEnd; ++jdx)
 		{
 			ptr[jdx].srcLocation.x = jdx;
 			ptr[jdx].srcLocation.y = idx;
@@ -196,7 +196,7 @@ void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int 
 
 int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)
 {
-	int idx, jdx;
+	int jdx;
 
 	int retval = EXIT_FAILURE;
 	const int nPixels = width * height;
@@ -205,7 +205,9 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	// Check parameters
 	if (handler == NULL || n <= 2 || width <= 0 || height <= 0 || nComponents <= 0 || scaleDown <= 0.0 ||
 		scaleDown >= 1.0)
+	{
 		return EXIT_FAILURE;
+	}
 
 	assert(handler);
 	assert(n > 2);
@@ -222,12 +224,14 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	buffPtr1 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	buffPtr2 = (TransformationInfo *)calloc(nPixels, sizeof(TransformationInfo));
 	if (!buffPtr1 || !buffPtr2)
+	{
 		goto cleanup;
+	}
 
 	sliceTriangle(buffPtr1, width, height, n, scaleDown);
 
 	// Rotate all points and fix origin to left top
-	for (idx = 0; idx < n; ++idx)
+	for (int idx = 0; idx < n; ++idx)
 	{
 		double rotationAngle = idx * (360.0 / n);
 		rotatePoints(buffPtr2, buffPtr1, width, height, rotationAngle);
@@ -239,11 +243,13 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	// Remove zeros and set to points for handler
 	handler->nPoints = 0;
-	for (idx = 0; idx < nPixels; ++idx)
+	for (int idx = 0; idx < nPixels; ++idx)
 	{
 		TransformationInfo *ptr = &buffPtr1[idx];
 		if (!(ptr->srcLocation.x) || !(ptr->srcLocation.y))
+		{
 			continue;
+		}
 
 		buffPtr1[handler->nPoints] = *ptr;
 		buffPtr1[handler->nPoints].srcOffset =
@@ -258,7 +264,7 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 
 	// Deduplicate
 	jdx = 0;
-	for (idx = 1; idx < handler->nPoints; ++idx)
+	for (int idx = 1; idx < handler->nPoints; ++idx)
 	{
 		if (compare(&buffPtr1[jdx], &buffPtr1[idx]))
 		{
@@ -277,12 +283,14 @@ cleanup:
 	free(buffPtr2);
 
 	if (retval == EXIT_FAILURE)
+	{
 		free(handler->pTransferFunc);
+	}
 
 	return retval;
 }
 
-void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)
+void processKaleidoscope(const KaleidoscopeHandle *handler, double k, const unsigned char *imgIn, unsigned char *imgOut)
 {
 	long long idx;
 	const long long nComponents = handler->nComponents;
@@ -293,9 +301,13 @@ void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *i
 	TransformationInfo *ptrTransform = &(handler->pTransferFunc[0]);
 
 	for (idx = 0; idx < nPixels; ++idx, ++destPtr, ++srcPtr) // Dim image
+	{
 		*destPtr = (unsigned char)((*srcPtr) * k);
+	}
 	for (idx = 0; idx < handler->nPoints; ++idx, ++ptrTransform) // Merge
+	{
 		memcpy(&(imgOut[ptrTransform->dstOffset]), &(imgIn[ptrTransform->srcOffset]), nComponents);
+	}
 }
 
 void deInitKaleidoscope(KaleidoscopeHandle *handler)
