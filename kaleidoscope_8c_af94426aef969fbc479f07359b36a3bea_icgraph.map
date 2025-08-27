@@ -1,6 +1,6 @@
 <map id="deInitKaleidoscope" name="deInitKaleidoscope">
 <area shape="rect" id="Node000001" title="Deinitializes kaleidoscope handler." alt="" coords="193,36,329,64"/>
-<area shape="rect" id="Node000002" href="$kaleidoscope-cmd_8c.html#a0ddf1224851353fc92bfbff6f499fa97" title=" " alt="" coords="49,5,101,33"/>
+<area shape="rect" id="Node000002" href="$kaleidoscope-cmd_8c.html#ac0f2228420376f4db7e1274f2b41667c" title=" " alt="" coords="49,5,101,33"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="177,39,101,26,101,21,178,33"/>
 <area shape="rect" id="Node000003" href="$classkalos_1_1Kaleidoscope.html#a0f2d840de0a83d9b02ddb94d26106168" title="Destroy the Kaleidoscope object." alt="" coords="5,57,145,102"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="178,66,146,71,145,65,177,60"/>

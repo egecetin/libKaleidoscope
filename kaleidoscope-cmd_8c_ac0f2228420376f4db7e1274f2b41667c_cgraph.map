@@ -16,12 +16,12 @@
 <area shape="poly" id="edge11_Node000001_Node000012" title=" " alt="" coords="41,215,65,258,84,282,106,302,141,319,139,324,103,307,80,286,61,261,36,217"/>
 <area shape="rect" id="Node000013" href="$jpeg-utils_8c.html#a752b15c180149635d2dcbd40e6956a9b" title="Save image data to an output file." alt="" coords="156,369,241,397"/>
 <area shape="poly" id="edge12_Node000001_Node000013" title=" " alt="" coords="38,216,45,245,58,282,78,321,106,354,123,365,142,373,140,378,120,370,103,359,74,324,53,285,40,246,32,217"/>
-<area shape="rect" id="Node000007" href="$kaleidoscope_8c.html#abda94259734025bc9c543b9f2dfdd8be" title=" " alt="" coords="352,136,426,164"/>
+<area shape="rect" id="Node000007" href="$kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755" title=" " alt="" coords="352,136,426,164"/>
 <area shape="poly" id="edge6_Node000006_Node000007" title=" " alt="" coords="256,210,291,198,347,169,350,174,293,203,257,215"/>
 <area shape="rect" id="Node000008" href="$kaleidoscope_8c.html#a6536dd078a2b0423d1ca626aa74559e4" title="A simple interpolation function. Internal use only." alt="" coords="344,188,433,216"/>
 <area shape="poly" id="edge7_Node000006_Node000008" title=" " alt="" coords="259,217,329,207,330,212,259,222"/>
 <area shape="rect" id="Node000009" href="$kaleidoscope_8c.html#a9e987dfda8c7f6030f43a35ec5742c1b" title="Rotates the coordinates of sliced triangle. Internal use only." alt="" coords="340,240,437,268"/>
 <area shape="poly" id="edge8_Node000006_Node000009" title=" " alt="" coords="259,233,326,242,325,248,259,238"/>
-<area shape="rect" id="Node000010" href="$kaleidoscope_8c.html#af4d2cb7fd0363406ec3b4e4b7d8692c4" title="Slices a suitable triangle from image." alt="" coords="340,292,437,320"/>
+<area shape="rect" id="Node000010" href="$kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8" title="Slices a suitable triangle from image." alt="" coords="340,292,437,320"/>
 <area shape="poly" id="edge9_Node000006_Node000010" title=" " alt="" coords="258,239,293,251,349,282,347,286,291,256,256,244"/>
 </map>

@@ -14,5 +14,5 @@ var kaleidoscope_8h =
     [ "interpolate", "kaleidoscope_8h.html#a6536dd078a2b0423d1ca626aa74559e4", null ],
     [ "processKaleidoscope", "kaleidoscope_8h.html#ab5b2988a55fb746fbe1fa80dc7b72df1", null ],
     [ "rotatePoints", "kaleidoscope_8h.html#a9e987dfda8c7f6030f43a35ec5742c1b", null ],
-    [ "sliceTriangle", "kaleidoscope_8h.html#af4d2cb7fd0363406ec3b4e4b7d8692c4", null ]
+    [ "sliceTriangle", "kaleidoscope_8h.html#a3c84dfd84c42812860ea81c2cf70d6e8", null ]
 ];

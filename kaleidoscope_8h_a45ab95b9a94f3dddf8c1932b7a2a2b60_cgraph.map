@@ -1,11 +1,11 @@
 <map id="initKaleidoscope" name="initKaleidoscope">
 <area shape="rect" id="Node000001" title="Initializes kaleidoscope handler." alt="" coords="5,84,126,112"/>
-<area shape="rect" id="Node000002" href="$kaleidoscope_8c.html#abda94259734025bc9c543b9f2dfdd8be" title=" " alt="" coords="185,5,260,33"/>
+<area shape="rect" id="Node000002" href="$kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755" title=" " alt="" coords="185,5,260,33"/>
 <area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="94,81,178,38,181,43,96,86"/>
 <area shape="rect" id="Node000003" href="$kaleidoscope_8c.html#a6536dd078a2b0423d1ca626aa74559e4" title="A simple interpolation function. Internal use only." alt="" coords="178,57,266,85"/>
 <area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="126,85,162,79,163,84,126,90"/>
 <area shape="rect" id="Node000004" href="$kaleidoscope_8c.html#a9e987dfda8c7f6030f43a35ec5742c1b" title="Rotates the coordinates of sliced triangle. Internal use only." alt="" coords="174,109,270,137"/>
 <area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="126,105,159,110,158,116,126,110"/>
-<area shape="rect" id="Node000005" href="$kaleidoscope_8c.html#af4d2cb7fd0363406ec3b4e4b7d8692c4" title="Slices a suitable triangle from image." alt="" coords="174,161,271,189"/>
+<area shape="rect" id="Node000005" href="$kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8" title="Slices a suitable triangle from image." alt="" coords="174,161,271,189"/>
 <area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="97,110,180,152,178,156,94,115"/>
 </map>

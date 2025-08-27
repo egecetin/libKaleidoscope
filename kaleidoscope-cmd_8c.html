@@ -144,12 +144,12 @@ Include dependency graph for kaleidoscope-cmd.c:</div>
 <table class="memberdecls">
 <tr class="heading"><td colspan="2"><h2 class="groupheader"><a id="func-members" name="func-members"></a>
 Functions</h2></td></tr>
-<tr class="memitem:a0ddf1224851353fc92bfbff6f499fa97" id="r_a0ddf1224851353fc92bfbff6f499fa97"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#a0ddf1224851353fc92bfbff6f499fa97">main</a> (int argc, char *argv[])</td></tr>
-<tr class="separator:a0ddf1224851353fc92bfbff6f499fa97"><td class="memSeparator" colspan="2">&#160;</td></tr>
+<tr class="memitem:ac0f2228420376f4db7e1274f2b41667c" id="r_ac0f2228420376f4db7e1274f2b41667c"><td class="memItemLeft" align="right" valign="top">int&#160;</td><td class="memItemRight" valign="bottom"><a class="el" href="#ac0f2228420376f4db7e1274f2b41667c">main</a> (int argc, const char *argv[])</td></tr>
+<tr class="separator:ac0f2228420376f4db7e1274f2b41667c"><td class="memSeparator" colspan="2">&#160;</td></tr>
 </table>
 <h2 class="groupheader">Function Documentation</h2>
-<a id="a0ddf1224851353fc92bfbff6f499fa97" name="a0ddf1224851353fc92bfbff6f499fa97"></a>
-<h2 class="memtitle"><span class="permalink"><a href="#a0ddf1224851353fc92bfbff6f499fa97">&#9670;&#160;</a></span>main()</h2>
+<a id="ac0f2228420376f4db7e1274f2b41667c" name="ac0f2228420376f4db7e1274f2b41667c"></a>
+<h2 class="memtitle"><span class="permalink"><a href="#ac0f2228420376f4db7e1274f2b41667c">&#9670;&#160;</a></span>main()</h2>
 
 <div class="memitem">
 <div class="memproto">
@@ -162,14 +162,14 @@ Functions</h2></td></tr>
         <tr>
           <td class="paramkey"></td>
           <td></td>
-          <td class="paramtype">char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
+          <td class="paramtype">const char *</td>          <td class="paramname"><span class="paramname"><em>argv</em></span>[]&#160;)</td>
         </tr>
       </table>
 </div><div class="memdoc">
 
 <p class="definition">Definition at line <a class="el" href="kaleidoscope-cmd_8c_source.html#l00008">8</a> of file <a class="el" href="kaleidoscope-cmd_8c_source.html">kaleidoscope-cmd.c</a>.</p>
 <div class="fragment"><div class="line"><span class="lineno">    9</span>{</div>
-<div class="line"><span class="lineno">   10</span>    <span class="keywordtype">char</span> *path = NULL, *outPath = NULL;</div>
+<div class="line"><span class="lineno">   10</span>    <span class="keyword">const</span> <span class="keywordtype">char</span> *path = NULL, *outPath = NULL;</div>
 <div class="line"><span class="lineno">   11</span>    <span class="keywordtype">int</span> n = 6, retval = EXIT_FAILURE, benchmark = 0;</div>
 <div class="line"><span class="lineno">   12</span>    <span class="keywordtype">double</span> k = 0.30;</div>
 <div class="line"><span class="lineno">   13</span>    <span class="keywordtype">double</span> scaleDown = 0.45;</div>
@@ -262,9 +262,9 @@ Functions</h2></td></tr>
 <div class="ttc" id="ajpeg-utils_8c_html_a8ca98701abc68afad444ae367e208d43"><div class="ttname"><a href="jpeg-utils_8c.html#a8ca98701abc68afad444ae367e208d43">deInitImageData</a></div><div class="ttdeci">void deInitImageData(ImageData *img)</div><div class="ttdoc">Free memory allocated by read image.</div><div class="ttdef"><b>Definition</b> <a href="jpeg-utils_8c_source.html#l00122">jpeg-utils.c:122</a></div></div>
 <div class="ttc" id="ajpeg-utils_8c_html_a8e3da351004b5412eecdf7ab84c70b13"><div class="ttname"><a href="jpeg-utils_8c.html#a8e3da351004b5412eecdf7ab84c70b13">readImage</a></div><div class="ttdeci">int readImage(const char *path, ImageData *img)</div><div class="ttdoc">Get image data from an input file.</div><div class="ttdef"><b>Definition</b> <a href="jpeg-utils_8c_source.html#l00007">jpeg-utils.c:7</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a1cee7bb50217c558e87055597f968249"><div class="ttname"><a href="kaleidoscope_8c.html#a1cee7bb50217c558e87055597f968249">getKaleidoscopeLibraryInfo</a></div><div class="ttdeci">char * getKaleidoscopeLibraryInfo()</div><div class="ttdoc">Get the Kaleidoscope Library info as string.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00030">kaleidoscope.c:30</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00199">kaleidoscope.c:199</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00288">kaleidoscope.c:288</a></div></div>
-<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00304">kaleidoscope.c:304</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_a45ab95b9a94f3dddf8c1932b7a2a2b60"><div class="ttname"><a href="kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60">initKaleidoscope</a></div><div class="ttdeci">int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, int nComponents, double scaleDown)</div><div class="ttdoc">Initializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00197">kaleidoscope.c:197</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_ab5b2988a55fb746fbe1fa80dc7b72df1"><div class="ttname"><a href="kaleidoscope_8c.html#ab5b2988a55fb746fbe1fa80dc7b72df1">processKaleidoscope</a></div><div class="ttdeci">void processKaleidoscope(KaleidoscopeHandle *handler, double k, unsigned char *imgIn, unsigned char *imgOut)</div><div class="ttdoc">Applies kaleidoscope effect to image.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00285">kaleidoscope.c:285</a></div></div>
+<div class="ttc" id="akaleidoscope_8c_html_af94426aef969fbc479f07359b36a3bea"><div class="ttname"><a href="kaleidoscope_8c.html#af94426aef969fbc479f07359b36a3bea">deInitKaleidoscope</a></div><div class="ttdeci">void deInitKaleidoscope(KaleidoscopeHandle *handler)</div><div class="ttdoc">Deinitializes kaleidoscope handler.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00301">kaleidoscope.c:301</a></div></div>
 <div class="ttc" id="astructImageData__t_html"><div class="ttname"><a href="structImageData__t.html">ImageData_t</a></div><div class="ttdoc">Data struct for images.</div><div class="ttdef"><b>Definition</b> <a href="jpeg-utils_8h_source.html#l00009">jpeg-utils.h:10</a></div></div>
 <div class="ttc" id="astructImageData__t_html_a14d490ab06ebbcb2ec5abfc5723813cc"><div class="ttname"><a href="structImageData__t.html#a14d490ab06ebbcb2ec5abfc5723813cc">ImageData_t::nComponents</a></div><div class="ttdeci">unsigned char nComponents</div><div class="ttdef"><b>Definition</b> <a href="jpeg-utils_8h_source.html#l00013">jpeg-utils.h:13</a></div></div>
 <div class="ttc" id="astructImageData__t_html_a62d7b7f720d651b8a4ab066b6361457f"><div class="ttname"><a href="structImageData__t.html#a62d7b7f720d651b8a4ab066b6361457f">ImageData_t::data</a></div><div class="ttdeci">unsigned char * data</div><div class="ttdef"><b>Definition</b> <a href="jpeg-utils_8h_source.html#l00014">jpeg-utils.h:14</a></div></div>
@@ -274,8 +274,8 @@ Functions</h2></td></tr>
 </div><!-- fragment --><div class="dynheader">
 Here is the call graph for this function:</div>
 <div class="dyncontent">
-<div class="center"><img src="kaleidoscope-cmd_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph.png" border="0" usemap="#akaleidoscope-cmd_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph" alt=""/></div>
-<map name="akaleidoscope-cmd_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph" id="akaleidoscope-cmd_8c_a0ddf1224851353fc92bfbff6f499fa97_cgraph">
+<div class="center"><img src="kaleidoscope-cmd_8c_ac0f2228420376f4db7e1274f2b41667c_cgraph.png" border="0" usemap="#akaleidoscope-cmd_8c_ac0f2228420376f4db7e1274f2b41667c_cgraph" alt=""/></div>
+<map name="akaleidoscope-cmd_8c_ac0f2228420376f4db7e1274f2b41667c_cgraph" id="akaleidoscope-cmd_8c_ac0f2228420376f4db7e1274f2b41667c_cgraph">
 <area shape="rect" title=" " alt="" coords="5,188,57,216"/>
 <area shape="rect" href="jpeg-utils_8c.html#a8ca98701abc68afad444ae367e208d43" title="Free memory allocated by read image." alt="" coords="137,5,260,33"/>
 <area shape="poly" title=" " alt="" coords="32,187,40,157,53,118,73,78,103,44,121,32,124,36,106,48,78,81,58,121,45,158,37,188"/>
@@ -293,13 +293,13 @@ Here is the call graph for this function:</div>
 <area shape="poly" title=" " alt="" coords="41,215,65,258,84,282,106,302,141,319,139,324,103,307,80,286,61,261,36,217"/>
 <area shape="rect" href="jpeg-utils_8c.html#a752b15c180149635d2dcbd40e6956a9b" title="Save image data to an output file." alt="" coords="156,369,241,397"/>
 <area shape="poly" title=" " alt="" coords="38,216,45,245,58,282,78,321,106,354,123,365,142,373,140,378,120,370,103,359,74,324,53,285,40,246,32,217"/>
-<area shape="rect" href="kaleidoscope_8c.html#abda94259734025bc9c543b9f2dfdd8be" title=" " alt="" coords="352,136,426,164"/>
+<area shape="rect" href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755" title=" " alt="" coords="352,136,426,164"/>
 <area shape="poly" title=" " alt="" coords="256,210,291,198,347,169,350,174,293,203,257,215"/>
 <area shape="rect" href="kaleidoscope_8c.html#a6536dd078a2b0423d1ca626aa74559e4" title="A simple interpolation function. Internal use only." alt="" coords="344,188,433,216"/>
 <area shape="poly" title=" " alt="" coords="259,217,329,207,330,212,259,222"/>
 <area shape="rect" href="kaleidoscope_8c.html#a9e987dfda8c7f6030f43a35ec5742c1b" title="Rotates the coordinates of sliced triangle. Internal use only." alt="" coords="340,240,437,268"/>
 <area shape="poly" title=" " alt="" coords="259,233,326,242,325,248,259,238"/>
-<area shape="rect" href="kaleidoscope_8c.html#af4d2cb7fd0363406ec3b4e4b7d8692c4" title="Slices a suitable triangle from image." alt="" coords="340,292,437,320"/>
+<area shape="rect" href="kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8" title="Slices a suitable triangle from image." alt="" coords="340,292,437,320"/>
 <area shape="poly" title=" " alt="" coords="258,239,293,251,349,282,347,286,291,256,256,244"/>
 </map>
 </div>
@@ -312,7 +312,7 @@ Here is the call graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_68267d1309a1af8e8297ef4c3efbcdba.html">src</a></li><li class="navelem"><a class="el" href="kaleidoscope-cmd_8c.html">kaleidoscope-cmd.c</a></li>
-    <li class="footer">Generated on Fri Aug 15 2025 11:13:56 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+    <li class="footer">Generated on Wed Aug 27 2025 10:42:09 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
 </body>
