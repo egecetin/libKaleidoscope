@@ -28,6 +28,10 @@ jobs:
 
   os-build:
     runs-on: ${{ matrix.os-version }}
+    permissions:
+      contents: write
+      attestations: write
+      id-token: write
     strategy:
       matrix:
         include:
