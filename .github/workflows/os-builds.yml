@@ -67,3 +67,16 @@ jobs:
         with:
           name: ${{ matrix.os-version }}
           path: build/dist/*
+      - name: Generate artifact attestation
+        if: github.ref_type == 'tag'
+        uses: actions/attest-build-provenance@e8998f949152b193b063cb0ec769d69d929409be # v2.4.0
+        with:
+          subject-path: "build/dist/*"
+      - name: Upload binaries to release
+        if: github.ref_type == 'tag'
+        uses: ncipollo/release-action@bcfe5470707e8832e12347755757cec0eb3c22af # v1.18.0
+        with:
+          draft: true
+          allowUpdates: true
+          updateOnlyUnreleased: true
+          artifacts: "build/dist/*"
