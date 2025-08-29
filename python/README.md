@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/logo-white.png" alt="LibKaleidoscope" width="850"/>
+<img src="https://github.com/egecetin/libKaleidoscope/blob/master/doc/images/logo-black.png?raw=true" alt="LibKaleidoscope" width="850"/>
 
 <h3>🌈✨ Transform Images into Mesmerizing Kaleidoscope Art ✨🌈</h3>
 
@@ -14,11 +14,10 @@
 ### 📊 **Project Status**
 
 ![GitHub](https://img.shields.io/github/license/egecetin/libKaleidoscope?style=for-the-badge)
-![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/pre-commit.yml?branch=master&label=pre-commit&logo=precommit&logoColor=white&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/codeql-analysis.yml?branch=master&label=CodeQL&logo=github&style=for-the-badge)
 ![GitHub Workflow Status](https://img.shields.io/github/actions/workflow/status/egecetin/libKaleidoscope/os-builds.yml?branch=master&label=Build&logo=github&logoColor=white&style=for-the-badge)
-![Codecov](https://img.shields.io/codecov/c/github/egecetin/libkaleidoscope?logo=codecov&logoColor=white&style=for-the-badge&token=70EJQJRRBH)
-![Codacy grade](https://img.shields.io/codacy/grade/b6c3a6abeeb34c2e8aa67aaeb8bd2982?logo=codacy&style=for-the-badge)
+![Sonarcloud Analysis](https://img.shields.io/sonar/quality_gate/egecetin_libKaleidoscope?server=https%3A%2F%2Fsonarcloud.io&style=for-the-badge&logo=sonarqubecloud)
+![Scorecard score](https://img.shields.io/ossf-scorecard/github.com/egecetin/libKaleidoscope?label=OpenSSF%20Score&style=for-the-badge&logo=data:image/svg+xml;base64,PHN2ZyB4bWxucz0iaHR0cDovL3d3dy53My5vcmcvMjAwMC9zdmciIHdpZHRoPSIyNCIgaGVpZ2h0PSIyNCIgdmlld0JveD0iMCAwIDI0IDI0IiBmaWxsPSJub25lIiBzdHJva2U9IndoaXRlIiBzdHJva2Utd2lkdGg9IjIiIHN0cm9rZS1saW5lY2FwPSJyb3VuZCIgc3Ryb2tlLWxpbmVqb2luPSJyb3VuZCI+PHJlY3QgeD0iMyIgeT0iMTEiIHdpZHRoPSIxOCIgaGVpZ2h0PSIxMSIgcng9IjIiIHJ5PSIyIj48L3JlY3Q+PHBhdGggZD0ibTcgMTFWN0E1IDUgMCAwIDEgMTcgN3Y0Ij48L3BhdGg+PC9zdmc+)
 
 ### 🛠️ **Technology Stack**
 
@@ -172,7 +171,7 @@ Transform images instantly with the command line tool:
 ### 🎨 **Visual Example**
 
 <div align="center">
-    <img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/ac-synin.jpg" width="400"/> ➡️ <img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/ac-synin-out.jpg" width="400"/>
+    <img src="https://github.com/egecetin/libKaleidoscope/blob/master/doc/images/ac-synin.jpg?raw=true" width="400"/> ➡️ <img src="https://github.com/egecetin/libKaleidoscope/blob/master/doc/images/ac-synin-out.jpg?raw=true" width="400"/>
     <br>
     <em>🎮 Original → Kaleidoscope (N=8)</em><br>
     <small>Image source: AC Valhalla</small>
@@ -250,7 +249,7 @@ int main() {
 ### 📈 **Performance Visualization**
 
 <div align="center">
-    <img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/performance-white.png" alt="Performance Chart" width="850"/>
+    <img src="https://github.com/egecetin/libKaleidoscope/blob/master/doc/images/performance-black.png?raw=true" alt="Performance Chart" width="850"/>
 </div>
 
 <details>
