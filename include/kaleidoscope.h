@@ -94,7 +94,7 @@ void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int 
 /**
  * @brief Initializes kaleidoscope handler
  * @param[in, out] handler Kaleidoscope effect handler
- * @param[in] n Number of images for effect
+ * @param[in] n Number of images for effect. Should be greater than 2
  * @param[in] width Image width
  * @param[in] height Image height
  * @param[in] nComponents Number of image components (eg 3 for RGB)
