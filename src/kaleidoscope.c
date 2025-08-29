@@ -275,6 +275,11 @@ int initKaleidoscope(KaleidoscopeHandle *handler, int n, int width, int height, 
 	}
 	handler->nPoints = jdx;
 
+	if (handler->nPoints <= 0) // Prevent allocation of zero points
+	{
+		goto cleanup;
+	}
+
 	handler->pTransferFunc = (TransformationInfo *)malloc(handler->nPoints * sizeof(TransformationInfo));
 	memcpy(handler->pTransferFunc, buffPtr1, handler->nPoints * sizeof(TransformationInfo));
 	retval = EXIT_SUCCESS;
