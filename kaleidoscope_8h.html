@@ -257,11 +257,11 @@ Functions</h2></td></tr>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kaleidoscope_8c_source.html#l00314">314</a> of file <a class="el" href="kaleidoscope_8c_source.html">kaleidoscope.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  315</span>{</div>
-<div class="line"><span class="lineno">  316</span>    <span class="keywordflow">if</span> (handler)</div>
-<div class="line"><span class="lineno">  317</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
-<div class="line"><span class="lineno">  318</span>}</div>
+<p class="definition">Definition at line <a class="el" href="kaleidoscope_8c_source.html#l00319">319</a> of file <a class="el" href="kaleidoscope_8c_source.html">kaleidoscope.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  320</span>{</div>
+<div class="line"><span class="lineno">  321</span>    <span class="keywordflow">if</span> (handler)</div>
+<div class="line"><span class="lineno">  322</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
+<div class="line"><span class="lineno">  323</span>}</div>
 <div class="ttc" id="astructKaleidoscopeHandle__t_html_aaec3786e4d00a05b9f987928c54f2fef"><div class="ttname"><a href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">KaleidoscopeHandle_t::pTransferFunc</a></div><div class="ttdeci">struct TransformationInfo_t * pTransferFunc</div><div class="ttdoc">Transformation info.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8h_source.html#l00041">kaleidoscope.h:41</a></div></div>
 </div><!-- fragment --><div class="dynheader">
 Here is the caller graph for this function:</div>
@@ -540,21 +540,26 @@ Here is the caller graph for this function:</div>
 <div class="line"><span class="lineno">  275</span>    }</div>
 <div class="line"><span class="lineno">  276</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> = jdx;</div>
 <div class="line"><span class="lineno">  277</span> </div>
-<div class="line"><span class="lineno">  278</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a> = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)malloc(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
-<div class="line"><span class="lineno">  279</span>    memcpy(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>, buffPtr1, handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
-<div class="line"><span class="lineno">  280</span>    retval = EXIT_SUCCESS;</div>
-<div class="line"><span class="lineno">  281</span> </div>
-<div class="line"><span class="lineno">  282</span>cleanup:</div>
-<div class="line"><span class="lineno">  283</span>    free(buffPtr1);</div>
-<div class="line"><span class="lineno">  284</span>    free(buffPtr2);</div>
-<div class="line"><span class="lineno">  285</span> </div>
-<div class="line"><span class="lineno">  286</span>    <span class="keywordflow">if</span> (retval == EXIT_FAILURE)</div>
-<div class="line"><span class="lineno">  287</span>    {</div>
-<div class="line"><span class="lineno">  288</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
-<div class="line"><span class="lineno">  289</span>    }</div>
+<div class="line"><span class="lineno">  278</span>    <span class="keywordflow">if</span> (handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> &lt;= 0) <span class="comment">// Prevent allocation of zero points</span></div>
+<div class="line"><span class="lineno">  279</span>    {</div>
+<div class="line"><span class="lineno">  280</span>        <span class="keywordflow">goto</span> cleanup;</div>
+<div class="line"><span class="lineno">  281</span>    }</div>
+<div class="line"><span class="lineno">  282</span> </div>
+<div class="line"><span class="lineno">  283</span>    handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a> = (<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *)malloc(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
+<div class="line"><span class="lineno">  284</span>    memcpy(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>, buffPtr1, handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a> * <span class="keyword">sizeof</span>(<a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a>));</div>
+<div class="line"><span class="lineno">  285</span>    retval = EXIT_SUCCESS;</div>
+<div class="line"><span class="lineno">  286</span> </div>
+<div class="line"><span class="lineno">  287</span>cleanup:</div>
+<div class="line"><span class="lineno">  288</span>    free(buffPtr1);</div>
+<div class="line"><span class="lineno">  289</span>    free(buffPtr2);</div>
 <div class="line"><span class="lineno">  290</span> </div>
-<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">return</span> retval;</div>
-<div class="line"><span class="lineno">  292</span>}</div>
+<div class="line"><span class="lineno">  291</span>    <span class="keywordflow">if</span> (retval == EXIT_FAILURE)</div>
+<div class="line"><span class="lineno">  292</span>    {</div>
+<div class="line"><span class="lineno">  293</span>        free(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>);</div>
+<div class="line"><span class="lineno">  294</span>    }</div>
+<div class="line"><span class="lineno">  295</span> </div>
+<div class="line"><span class="lineno">  296</span>    <span class="keywordflow">return</span> retval;</div>
+<div class="line"><span class="lineno">  297</span>}</div>
 <div class="ttc" id="akaleidoscope_8c_html_a3c84dfd84c42812860ea81c2cf70d6e8"><div class="ttname"><a href="kaleidoscope_8c.html#a3c84dfd84c42812860ea81c2cf70d6e8">sliceTriangle</a></div><div class="ttdeci">void sliceTriangle(TransformationInfo *transformPtr, int width, int height, int n, double scaleDown)</div><div class="ttdoc">Slices a suitable triangle from image.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00155">kaleidoscope.c:155</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a3f411641df7274966691d75b563b6755"><div class="ttname"><a href="kaleidoscope_8c.html#a3f411641df7274966691d75b563b6755">compare</a></div><div class="ttdeci">static int compare(const void *lhsPtr, const void *rhsPtr)</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00055">kaleidoscope.c:55</a></div></div>
 <div class="ttc" id="akaleidoscope_8c_html_a8aa0b9d3c5d0b182e40f765129664451"><div class="ttname"><a href="kaleidoscope_8c.html#a8aa0b9d3c5d0b182e40f765129664451">interpolate</a></div><div class="ttdeci">void interpolate(TransformationInfo *dataOut, const TransformationInfo *dataIn, int width, int height)</div><div class="ttdoc">A simple interpolation function. Internal use only.</div><div class="ttdef"><b>Definition</b> <a href="kaleidoscope_8c_source.html#l00062">kaleidoscope.c:62</a></div></div>
@@ -764,25 +769,25 @@ Here is the caller graph for this function:</div>
   </dd>
 </dl>
 
-<p class="definition">Definition at line <a class="el" href="kaleidoscope_8c_source.html#l00294">294</a> of file <a class="el" href="kaleidoscope_8c_source.html">kaleidoscope.c</a>.</p>
-<div class="fragment"><div class="line"><span class="lineno">  295</span>{</div>
-<div class="line"><span class="lineno">  296</span>    <span class="keywordtype">long</span> <span class="keywordtype">long</span> idx;</div>
-<div class="line"><span class="lineno">  297</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nComponents = handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
-<div class="line"><span class="lineno">  298</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nPixels = (<span class="keywordtype">long</span> long)handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">width</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4">height</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
-<div class="line"><span class="lineno">  299</span> </div>
-<div class="line"><span class="lineno">  300</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *srcPtr = imgIn;</div>
-<div class="line"><span class="lineno">  301</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *destPtr = imgOut;</div>
-<div class="line"><span class="lineno">  302</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *ptrTransform = &amp;(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>[0]);</div>
-<div class="line"><span class="lineno">  303</span> </div>
-<div class="line"><span class="lineno">  304</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; nPixels; ++idx, ++destPtr, ++srcPtr) <span class="comment">// Dim image</span></div>
-<div class="line"><span class="lineno">  305</span>    {</div>
-<div class="line"><span class="lineno">  306</span>        *destPtr = (<span class="keywordtype">unsigned</span> char)((*srcPtr) * k);</div>
-<div class="line"><span class="lineno">  307</span>    }</div>
-<div class="line"><span class="lineno">  308</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>; ++idx, ++ptrTransform) <span class="comment">// Merge</span></div>
-<div class="line"><span class="lineno">  309</span>    {</div>
-<div class="line"><span class="lineno">  310</span>        memcpy(&amp;(imgOut[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a4487e82f4ab6c7ca810c1c269c40162e">dstOffset</a>]), &amp;(imgIn[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5">srcOffset</a>]), nComponents);</div>
-<div class="line"><span class="lineno">  311</span>    }</div>
-<div class="line"><span class="lineno">  312</span>}</div>
+<p class="definition">Definition at line <a class="el" href="kaleidoscope_8c_source.html#l00299">299</a> of file <a class="el" href="kaleidoscope_8c_source.html">kaleidoscope.c</a>.</p>
+<div class="fragment"><div class="line"><span class="lineno">  300</span>{</div>
+<div class="line"><span class="lineno">  301</span>    <span class="keywordtype">long</span> <span class="keywordtype">long</span> idx;</div>
+<div class="line"><span class="lineno">  302</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nComponents = handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
+<div class="line"><span class="lineno">  303</span>    <span class="keyword">const</span> <span class="keywordtype">long</span> <span class="keywordtype">long</span> nPixels = (<span class="keywordtype">long</span> long)handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a2051d622e9a73a60e2bdd0991865bb4e">width</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a070a360cbf8f482d1ad62121c5857bb4">height</a> * handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#ac2eeae2cb291eb691a9546a4af805ec3">nComponents</a>;</div>
+<div class="line"><span class="lineno">  304</span> </div>
+<div class="line"><span class="lineno">  305</span>    <span class="keyword">const</span> <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *srcPtr = imgIn;</div>
+<div class="line"><span class="lineno">  306</span>    <span class="keywordtype">unsigned</span> <span class="keywordtype">char</span> *destPtr = imgOut;</div>
+<div class="line"><span class="lineno">  307</span>    <span class="keyword">const</span> <a class="code hl_struct" href="structTransformationInfo__t.html">TransformationInfo</a> *ptrTransform = &amp;(handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#aaec3786e4d00a05b9f987928c54f2fef">pTransferFunc</a>[0]);</div>
+<div class="line"><span class="lineno">  308</span> </div>
+<div class="line"><span class="lineno">  309</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; nPixels; ++idx, ++destPtr, ++srcPtr) <span class="comment">// Dim image</span></div>
+<div class="line"><span class="lineno">  310</span>    {</div>
+<div class="line"><span class="lineno">  311</span>        *destPtr = (<span class="keywordtype">unsigned</span> char)((*srcPtr) * k);</div>
+<div class="line"><span class="lineno">  312</span>    }</div>
+<div class="line"><span class="lineno">  313</span>    <span class="keywordflow">for</span> (idx = 0; idx &lt; handler-&gt;<a class="code hl_variable" href="structKaleidoscopeHandle__t.html#a86f503a3e8c0cf40ddbfa7faf2c10ff0">nPoints</a>; ++idx, ++ptrTransform) <span class="comment">// Merge</span></div>
+<div class="line"><span class="lineno">  314</span>    {</div>
+<div class="line"><span class="lineno">  315</span>        memcpy(&amp;(imgOut[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a4487e82f4ab6c7ca810c1c269c40162e">dstOffset</a>]), &amp;(imgIn[ptrTransform-&gt;<a class="code hl_variable" href="structTransformationInfo__t.html#a2a85246bd5dc74432320d0a898ff8bf5">srcOffset</a>]), nComponents);</div>
+<div class="line"><span class="lineno">  316</span>    }</div>
+<div class="line"><span class="lineno">  317</span>}</div>
 </div><!-- fragment --><div class="dynheader">
 Here is the caller graph for this function:</div>
 <div class="dyncontent">
@@ -996,7 +1001,7 @@ Here is the caller graph for this function:</div>
 <div id="nav-path" class="navpath"><!-- id is needed for treeview function! -->
   <ul>
     <li class="navelem"><a class="el" href="dir_d44c64559bbebec7f509842c48db8b23.html">include</a></li><li class="navelem"><a class="el" href="kaleidoscope_8h.html">kaleidoscope.h</a></li>
-    <li class="footer">Generated on Thu Aug 28 2025 18:42:21 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
+    <li class="footer">Generated on Fri Aug 29 2025 06:35:29 for kaleidoscope by <a href="https://www.doxygen.org/index.html"><img class="footer" src="doxygen.svg" width="104" height="31" alt="doxygen"/></a> 1.12.0 </li>
   </ul>
 </div>
 </body>
