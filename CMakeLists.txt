@@ -1,5 +1,5 @@
 cmake_minimum_required(VERSION 3.12)
-project(kaleidoscope VERSION 1.4.1)
+project(kaleidoscope VERSION 1.4.2)
 
 # Options
 set(CMAKE_DEBUG_POSTFIX d)
