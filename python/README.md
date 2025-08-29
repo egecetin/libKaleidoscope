@@ -1,6 +1,6 @@
 <div align="center">
 
-<img src="https://github.com/egecetin/libKaleidoscope/blob/bde264d311cb7e87cc2e476702ff14fcf1328ed3/doc/images/logo-white.png" alt="LibKaleidoscope" width="850"/>
+<img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/logo-white.png" alt="LibKaleidoscope" width="850"/>
 
 <h3>🌈✨ Transform Images into Mesmerizing Kaleidoscope Art ✨🌈</h3>
 
@@ -172,7 +172,7 @@ Transform images instantly with the command line tool:
 ### 🎨 **Visual Example**
 
 <div align="center">
-    <img src="https://github.com/egecetin/libKaleidoscope/blob/bde264d311cb7e87cc2e476702ff14fcf1328ed3/doc/images/ac-synin.jpg" width="400"/> ➡️ <img src="https://github.com/egecetin/libKaleidoscope/blob/bde264d311cb7e87cc2e476702ff14fcf1328ed3/doc/images/ac-synin-out.jpg" width="400"/>
+    <img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/ac-synin.jpg" width="400"/> ➡️ <img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/ac-synin-out.jpg" width="400"/>
     <br>
     <em>🎮 Original → Kaleidoscope (N=8)</em><br>
     <small>Image source: AC Valhalla</small>
@@ -250,7 +250,7 @@ int main() {
 ### 📈 **Performance Visualization**
 
 <div align="center">
-    <img src="https://github.com/egecetin/libKaleidoscope/blob/bde264d311cb7e87cc2e476702ff14fcf1328ed3/doc/images/performance-white.png" alt="Performance Chart" width="850"/>
+    <img src="https://github.com/egecetin/libKaleidoscope/blob/c1a603da36bcb27b31339bd1075c5e54b156f166/doc/images/performance-white.png" alt="Performance Chart" width="850"/>
 </div>
 
 <details>
