@@ -24,14 +24,17 @@ jobs:
           submodules: recursive
       - name: Prepare
         run: git config --global --add safe.directory "$GITHUB_WORKSPACE"
-      - name: Install sonar-scanner and build-wrapper
-        uses: sonarsource/sonarcloud-github-c-cpp@44cc4d3d487fbc35e5c29b0a9d717be218d3a0e8 # v3.2.0
+      - name: Install Build Wrapper
+        uses: SonarSource/sonarqube-scan-action/install-build-wrapper@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
       - name: Configure
         run: cmake -DCMAKE_BUILD_TYPE=Debug -DKALEIDOSCOPE_ENABLE_TESTS=1 -DKALEIDOSCOPE_ENABLE_COVERAGE=1 -DKALEIDOSCOPE_ENABLE_CMD_TOOL=0 -S . -B build
       - name: Run build-wrapper
         run: build-wrapper-linux-x86-64 --out-dir ${{ env.BUILD_WRAPPER_OUT_DIR }} cmake --build build/ --config Debug --parallel --target coverage-xml
       - name: Run sonar-scanner
+        uses: SonarSource/sonarqube-scan-action@fd88b7d7ccbaefd23d8f36f73b59db7a3d246602
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
-        run: sonar-scanner --define sonar.cfamily.compile-commands="${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json" --define sonar.coverageReportPaths=./build/coverage-xml-sonar.xml
+        with:
+          args: >
+            --define sonar.cfamily.compile-commands=${{ env.BUILD_WRAPPER_OUT_DIR }}/compile_commands.json --define sonar.coverageReportPaths=./build/coverage-xml-sonar.xml
