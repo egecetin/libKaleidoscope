@@ -37,7 +37,7 @@ jobs:
         include:
           - os-version: ubuntu-24.04
             venv-command: . .venv/bin/activate
-          - os-version: windows-2025
+          - os-version: windows-2022
 
     steps:
       - uses: actions/checkout@1af3b93b6815bc44a9784bd300feb67ff0d1eeb3 # v6.0.0
