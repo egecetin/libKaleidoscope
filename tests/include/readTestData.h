@@ -14,7 +14,7 @@ int readTransformInfo(const char *path, TransformationInfo *dataPtr)
 	if ((fptr = fopen(path, "rb")) == NULL)
 		return -2;
 
-	while (fscanf(fptr, "%d,%d,%d,%d\n", &val1, &val2, &val3, &val4) > 0)
+	while (fscanf(fptr, "%d,%d,%d,%d", &val1, &val2, &val3, &val4) == 4)
 	{
 		dataPtr[ctr].srcLocation.x = val1;
 		dataPtr[ctr].srcLocation.y = val2;
