@@ -55,7 +55,7 @@ jobs:
       - name: Build
         run: |
           ${{ matrix.venv-command }}
-          cmake --build build --parallel --config Release
+          cmake --build build --parallel --config Release --verbose
       - name: Install python package
         run: |
           ${{ matrix.venv-command }}
