@@ -35,10 +35,10 @@ jobs:
     strategy:
       matrix:
         include:
-          - os-version: ubuntu-22.04
+          - os-version: ubuntu-24.04
             venv-command: . .venv/bin/activate
-          - os-version: windows-2022
-          - os-version: macos-13
+          - os-version: windows-2025
+          - os-version: macos-15
             venv-command: . .venv/bin/activate
 
     steps:
