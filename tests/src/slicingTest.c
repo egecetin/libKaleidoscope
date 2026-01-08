@@ -25,6 +25,36 @@ START_TEST(SlicingTest)
 	// Check
 	sliceTriangle(inPtr, width, height, n, scaleDown);
 
+	// Manual comparison with detailed output
+	int mismatch_count = 0;
+	for (int i = 0; i < width * height; i++)
+	{
+		if (memcmp(&inPtr[i], &expectedOutPtr[i], sizeof(TransformationInfo)) != 0)
+		{
+			printf("Mismatch at index %d:\n", i);
+			printf("  Row: %d, Col: %d\n", i / width, i % width);
+			printf("  inPtr[%d]: bytes = ", i);
+			unsigned char *in_bytes = (unsigned char *)&inPtr[i];
+			for (size_t j = 0; j < sizeof(TransformationInfo); j++)
+			{
+				printf("%02x ", in_bytes[j]);
+			}
+			printf("\n  expectedOutPtr[%d]: bytes = ", i);
+			unsigned char *exp_bytes = (unsigned char *)&expectedOutPtr[i];
+			for (size_t j = 0; j < sizeof(TransformationInfo); j++)
+			{
+				printf("%02x ", exp_bytes[j]);
+			}
+			printf("\n");
+			mismatch_count++;
+			if (mismatch_count >= 10)
+			{ // Limit output to first 10 mismatches
+				printf("... (showing first 10 mismatches only)\n");
+				break;
+			}
+		}
+	}
+
 	ck_assert_mem_eq(inPtr, expectedOutPtr, width * height * sizeof(TransformationInfo));
 
 	// De-init
