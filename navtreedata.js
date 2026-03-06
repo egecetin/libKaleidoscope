@@ -36,7 +36,6 @@ var NAVTREE =
       [ "📦 Quick Installation", "index.html#autotoc_md10", [
         [ "🐍 Python Users (Recommended)", "index.html#autotoc_md11", null ]
       ] ],
-      [ "", "index.html#autotoc_md12", null ],
       [ "🛠️ Building from Source", "index.html#autotoc_md13", null ],
       [ "🎯 Usage Guide", "index.html#autotoc_md15", [
         [ "🎪 Simple 3-Step API", "index.html#autotoc_md16", null ],
@@ -44,13 +43,11 @@ var NAVTREE =
         [ "🎨 Visual Example", "index.html#autotoc_md18", null ],
         [ "💻 Programming Language Examples", "index.html#autotoc_md20", null ]
       ] ],
-      [ "", "index.html#autotoc_md21", null ],
       [ "🚀 Performance Benchmarks", "index.html#autotoc_md22", [
         [ "⚡ Lightning Fast Performance", "index.html#autotoc_md23", null ],
         [ "📈 Performance Visualization", "index.html#autotoc_md24", null ],
         [ "🏃‍♂️ Benchmark Your System", "index.html#autotoc_md25", null ]
       ] ],
-      [ "", "index.html#autotoc_md26", null ],
       [ "🤝 Contributing", "index.html#autotoc_md27", null ],
       [ "📄 License", "index.html#autotoc_md28", [
         [ "🌟 Star this repo if you found it useful! 🌟", "index.html#autotoc_md30", null ]
@@ -82,5 +79,5 @@ var NAVTREEINDEX =
 "annotated.html"
 ];
 
-var SYNCONMSG = 'click to disable panel synchronisation';
-var SYNCOFFMSG = 'click to enable panel synchronisation';
+var SYNCONMSG = 'click to disable panel synchronization';
+var SYNCOFFMSG = 'click to enable panel synchronization';
