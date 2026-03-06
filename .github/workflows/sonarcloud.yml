@@ -13,7 +13,7 @@ permissions: read-all
 jobs:
   sonarcloud:
     runs-on: ubuntu-latest
-    container: egecetinn/ubuntu2204
+    container: egecetinn/ubuntu2404
     env:
       BUILD_WRAPPER_OUT_DIR: build/sonar
     steps:

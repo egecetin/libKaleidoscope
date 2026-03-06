@@ -2,3 +2,4 @@ missingInclude:*
 missingIncludeSystem:*
 unusedFunction:*
 unmatchedSuppression:*
+staticFuntion:*
