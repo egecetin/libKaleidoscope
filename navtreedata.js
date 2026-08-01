@@ -26,31 +26,33 @@ var NAVTREE =
 [
   [ "kaleidoscope", "index.html", [
     [ "Namespaces", "namespaces.html", [
-      [ "🎯 What is LibKaleidoscope?", "index.html#autotoc_md4", null ],
-      [ "🌟 Key Features", "index.html#autotoc_md5", null ],
-      [ "🎭 Supported Languages", "index.html#autotoc_md7", [
+      [ "🎯 What is LibKaleidoscope?", "index.html#autotoc_md4", [
         [ "📊 Project Status", "index.html#autotoc_md1", null ],
         [ "🛠️ Technology Stack", "index.html#autotoc_md2", null ],
-        [ "🎯 Core Languages", "index.html#autotoc_md8", null ]
+        [ "AI Usage Disclosure", "index.html#autotoc_md5", null ]
       ] ],
-      [ "📦 Quick Installation", "index.html#autotoc_md10", [
-        [ "🐍 Python Users (Recommended)", "index.html#autotoc_md11", null ]
+      [ "🌟 Key Features", "index.html#autotoc_md6", null ],
+      [ "🎭 Supported Languages", "index.html#autotoc_md8", [
+        [ "🎯 Core Languages", "index.html#autotoc_md9", null ]
       ] ],
-      [ "🛠️ Building from Source", "index.html#autotoc_md13", null ],
-      [ "🎯 Usage Guide", "index.html#autotoc_md15", [
-        [ "🎪 Simple 3-Step API", "index.html#autotoc_md16", null ],
-        [ "🖥️ Command Line Magic", "index.html#autotoc_md17", null ],
-        [ "🎨 Visual Example", "index.html#autotoc_md18", null ],
-        [ "💻 Programming Language Examples", "index.html#autotoc_md20", null ]
+      [ "📦 Quick Installation", "index.html#autotoc_md11", [
+        [ "🐍 Python Users (Recommended)", "index.html#autotoc_md12", null ]
       ] ],
-      [ "🚀 Performance Benchmarks", "index.html#autotoc_md22", [
-        [ "⚡ Lightning Fast Performance", "index.html#autotoc_md23", null ],
-        [ "📈 Performance Visualization", "index.html#autotoc_md24", null ],
-        [ "🏃‍♂️ Benchmark Your System", "index.html#autotoc_md25", null ]
+      [ "🛠️ Building from Source", "index.html#autotoc_md14", null ],
+      [ "🎯 Usage Guide", "index.html#autotoc_md16", [
+        [ "🎪 Simple 3-Step API", "index.html#autotoc_md17", null ],
+        [ "🖥️ Command Line Magic", "index.html#autotoc_md18", null ],
+        [ "🎨 Visual Example", "index.html#autotoc_md19", null ],
+        [ "💻 Programming Language Examples", "index.html#autotoc_md21", null ]
       ] ],
-      [ "🤝 Contributing", "index.html#autotoc_md27", null ],
-      [ "📄 License", "index.html#autotoc_md28", [
-        [ "🌟 Star this repo if you found it useful! 🌟", "index.html#autotoc_md30", null ]
+      [ "🚀 Performance Benchmarks", "index.html#autotoc_md23", [
+        [ "⚡ Lightning Fast Performance", "index.html#autotoc_md24", null ],
+        [ "📈 Performance Visualization", "index.html#autotoc_md25", null ],
+        [ "🏃‍♂️ Benchmark Your System", "index.html#autotoc_md26", null ]
+      ] ],
+      [ "🤝 Contributing", "index.html#autotoc_md28", null ],
+      [ "📄 License", "index.html#autotoc_md29", [
+        [ "🌟 Star this repo if you found it useful! 🌟", "index.html#autotoc_md31", null ]
       ] ],
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],

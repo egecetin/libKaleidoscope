@@ -10,5 +10,5 @@ var searchData=
   ['kaleidoscopehandle_7',['KaleidoscopeHandle',['../kaleidoscope_8h.html#a1df4ab560e37e1da5c1cfd735330cc49',1,'kaleidoscope.h']]],
   ['kaleidoscopehandle_5ft_8',['KaleidoscopeHandle_t',['../structKaleidoscopeHandle__t.html',1,'']]],
   ['kalos_9',['kalos',['../namespacekalos.html',1,'']]],
-  ['key_20features_20strong_10',['🌟 &lt;strong&gt;Key Features&lt;/strong&gt;',['../index.html#autotoc_md5',1,'']]]
+  ['key_20features_20strong_10',['🌟 &lt;strong&gt;Key Features&lt;/strong&gt;',['../index.html#autotoc_md6',1,'']]]
 ];
