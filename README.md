@@ -37,6 +37,14 @@ LibKaleidoscope is a **high-performance**, **cross-platform** library that trans
 
 > 🔗 **Learn More**: Check out the [mathematical explanation](https://egecetin.github.io/Projects/kaleidoscope) of the kaleidoscope effect!
 
+### AI Usage Disclosure
+
+This is not a vibe coding project. Project utilizes generative AI tools to create and fix documentation only.
+
+- **Tools Used:** Github Copilot
+- **Scope of Use:**
+  - **Documentation:** Most of the README sections and function descriptions were AI-generated. But only for documentation purposes!
+
 
 ## 🌟 **Key Features**
 
