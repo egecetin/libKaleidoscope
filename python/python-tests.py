@@ -28,25 +28,25 @@ class TestSuite:
         height = 1088
         n_components = 3
 
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(2, width, height, n_components, scale_down, k)
 
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, 0, height, n_components, scale_down, k)
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, -1, height, n_components, scale_down, k)
 
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, width, 0, n_components, scale_down, k)
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, width, -1, n_components, scale_down, k)
 
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, width, height, 0, scale_down, k)
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, width, height, -1, scale_down, k)
 
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, width, height, n_components, -0.01, k)
-        with pytest.raises(Exception):
+        with pytest.raises(ValueError):
             kaleidoscope.PyKaleidoscope(n, width, height, n_components, 1.01, k)
