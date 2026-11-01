@@ -1,9 +1,9 @@
 <map id="interpolate" name="interpolate">
-<area shape="rect" id="Node000001" title="A simple interpolation function. Internal use only." alt="" coords="361,44,449,72"/>
-<area shape="rect" id="Node000002" href="$kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60" title="Initializes kaleidoscope handler." alt="" coords="193,44,313,72"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="345,61,314,61,314,56,345,56"/>
-<area shape="rect" id="Node000003" href="$classkalos_1_1Kaleidoscope.html#ac244ab7153f5f124ba44805225b3faa5" title="Construct a new Kaleidoscope object." alt="" coords="5,5,145,50"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="177,48,145,42,146,37,178,43"/>
-<area shape="rect" id="Node000004" href="$kaleidoscope-cmd_8c.html#ac0f2228420376f4db7e1274f2b41667c" title=" " alt="" coords="49,74,101,102"/>
-<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="178,73,101,86,100,81,177,68"/>
+<area shape="rect" id="Node000001" title="A simple interpolation function. Internal use only." alt="" coords="381,44,473,72"/>
+<area shape="rect" id="Node000002" href="$kaleidoscope_8c.html#a45ab95b9a94f3dddf8c1932b7a2a2b60" title="Initializes kaleidoscope handler." alt="" coords="204,44,333,72"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="363,59,333,61,333,56,368,58"/>
+<area shape="rect" id="Node000003" href="$classkalos_1_1Kaleidoscope.html#ac244ab7153f5f124ba44805225b3faa5" title="Construct a new Kaleidoscope object." alt="" coords="5,5,156,50"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="186,46,156,43,156,37,191,45"/>
+<area shape="rect" id="Node000004" href="$kaleidoscope-cmd_8c.html#ac0f2228420376f4db7e1274f2b41667c" title=" " alt="" coords="53,74,108,102"/>
+<area shape="poly" id="edge3_Node000002_Node000004" title=" " alt="" coords="186,71,108,86,108,81,191,70"/>
 </map>

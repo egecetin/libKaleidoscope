@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🚀_20strong_20performance_20benchmarks_20strong_0',['🚀 &lt;strong&gt;Performance Benchmarks&lt;/strong&gt;',['../index.html#autotoc_md23',1,'']]]
+  ['🚀_20performance_20benchmarks_0',['🚀 &lt;b&gt;Performance Benchmarks&lt;/b&gt;',['../index.html#autotoc_md23',1,'']]]
 ];

@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['📦_20strong_20quick_20installation_20strong_0',['📦 &lt;strong&gt;Quick Installation&lt;/strong&gt;',['../index.html#autotoc_md11',1,'']]]
+  ['📦_20quick_20installation_0',['📦 &lt;b&gt;Quick Installation&lt;/b&gt;',['../index.html#autotoc_md11',1,'']]]
 ];

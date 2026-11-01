@@ -1,5 +1,5 @@
 var searchData=
 [
-  ['🛠️_20strong_20building_20from_20source_20strong_0',['🛠️ &lt;strong&gt;Building from Source&lt;/strong&gt;',['../index.html#autotoc_md14',1,'']]],
-  ['🛠️_20strong_20technology_20stack_20strong_1',['🛠️ &lt;strong&gt;Technology Stack&lt;/strong&gt;',['../index.html#autotoc_md2',1,'']]]
+  ['🛠️_20building_20from_20source_0',['🛠️ &lt;b&gt;Building from Source&lt;/b&gt;',['../index.html#autotoc_md14',1,'']]],
+  ['🛠️_20technology_20stack_1',['🛠️ &lt;b&gt;Technology Stack&lt;/b&gt;',['../index.html#autotoc_md2',1,'']]]
 ];

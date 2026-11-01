@@ -1,15 +1,15 @@
 <map id="src/kaleidoscope&#45;cmd.c" name="src/kaleidoscope&#45;cmd.c">
-<area shape="rect" id="Node000001" title=" " alt="" coords="266,5,429,33"/>
-<area shape="rect" id="Node000002" href="$jpeg-utils_8h.html" title=" " alt="" coords="5,81,157,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="301,36,144,79,142,74,299,31"/>
-<area shape="rect" id="Node000004" href="$kaleidoscope_8h.html" title=" " alt="" coords="181,81,293,109"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="329,36,270,75,267,70,326,31"/>
-<area shape="rect" id="Node000005" title=" " alt="" coords="316,81,379,109"/>
-<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="350,34,350,65,345,65,345,34"/>
-<area shape="rect" id="Node000006" title=" " alt="" coords="402,81,469,109"/>
-<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="365,31,410,69,407,73,362,36"/>
-<area shape="rect" id="Node000007" title=" " alt="" coords="493,81,552,109"/>
-<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="380,31,480,73,478,78,378,36"/>
-<area shape="rect" id="Node000003" title=" " alt="" coords="35,157,127,184"/>
-<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="84,109,84,141,78,141,78,109"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="277,5,450,33"/>
+<area shape="rect" id="Node000002" href="$jpeg-utils_8h.html" title=" " alt="" coords="5,81,165,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="313,36,150,79,148,74,315,31"/>
+<area shape="rect" id="Node000004" href="$kaleidoscope_8h.html" title=" " alt="" coords="188,81,307,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="345,32,282,75,280,70,341,35"/>
+<area shape="rect" id="Node000005" title=" " alt="" coords="331,81,396,109"/>
+<area shape="poly" id="edge4_Node000001_Node000005" title=" " alt="" coords="365,31,366,67,361,64,362,36"/>
+<area shape="rect" id="Node000006" title=" " alt="" coords="421,81,490,109"/>
+<area shape="poly" id="edge5_Node000001_Node000006" title=" " alt="" coords="381,31,430,72,425,71,379,36"/>
+<area shape="rect" id="Node000007" title=" " alt="" coords="515,81,578,109"/>
+<area shape="poly" id="edge6_Node000001_Node000007" title=" " alt="" coords="397,31,503,75,498,75,396,36"/>
+<area shape="rect" id="Node000003" title=" " alt="" coords="37,157,133,184"/>
+<area shape="poly" id="edge2_Node000002_Node000003" title=" " alt="" coords="87,107,88,142,82,140,83,111"/>
 </map>

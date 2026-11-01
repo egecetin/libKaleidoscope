@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🖥️_20strong_20command_20line_20magic_20strong_0',['🖥️ &lt;strong&gt;Command Line Magic&lt;/strong&gt;',['../index.html#autotoc_md18',1,'']]]
+  ['🖥️_20command_20line_20magic_0',['🖥️ &lt;b&gt;Command Line Magic&lt;/b&gt;',['../index.html#autotoc_md18',1,'']]]
 ];

@@ -1,4 +1,4 @@
 <map id="kalos::Kaleidoscope::processImage" name="kalos::Kaleidoscope::processImage">
-<area shape="rect" id="Node000001" title="Creates kaleidoscope effect. Uses dim constant provided in constructor." alt="" coords="5,29,145,74"/>
-<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="97,16,88,10,75,8,63,10,55,14,52,20,53,29,47,29,47,19,51,11,61,5,75,3,90,5,100,12"/>
+<area shape="rect" id="Node000001" title="Creates kaleidoscope effect. Uses dim constant provided in constructor." alt="" coords="5,29,156,74"/>
+<area shape="poly" id="edge1_Node000001_Node000001" title=" " alt="" coords="103,14,95,10,80,8,67,10,59,14,55,20,56,29,51,28,50,19,55,11,65,5,81,3,97,5,108,14"/>
 </map>

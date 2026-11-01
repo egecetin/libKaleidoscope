@@ -7,7 +7,7 @@ var indexSectionsWithContent =
   4: "cdgikmprs~",
   5: "dhknpswxy",
   6: "ikpt",
-  7: "k"
+  7: "3abcdefgiklmpqrstuvwy⚡🌟🎨🎪🎭🎯🏃🐍💻📄📈📊📦🖥🚀🛠🤝"
 };
 
 var indexSectionNames =

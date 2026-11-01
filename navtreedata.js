@@ -26,33 +26,33 @@ var NAVTREE =
 [
   [ "kaleidoscope", "index.html", [
     [ "Namespaces", "namespaces.html", [
-      [ "🎯 What is LibKaleidoscope?", "index.html#autotoc_md4", [
-        [ "📊 Project Status", "index.html#autotoc_md1", null ],
-        [ "🛠️ Technology Stack", "index.html#autotoc_md2", null ],
+      [ "🎯 <b>What is LibKaleidoscope?</b>", "index.html#autotoc_md4", [
+        [ "📊 <b>Project Status</b>", "index.html#autotoc_md1", null ],
+        [ "🛠️ <b>Technology Stack</b>", "index.html#autotoc_md2", null ],
         [ "AI Usage Disclosure", "index.html#autotoc_md5", null ]
       ] ],
-      [ "🌟 Key Features", "index.html#autotoc_md6", null ],
-      [ "🎭 Supported Languages", "index.html#autotoc_md8", [
-        [ "🎯 Core Languages", "index.html#autotoc_md9", null ]
+      [ "🌟 <b>Key Features</b>", "index.html#autotoc_md6", null ],
+      [ "🎭 <b>Supported Languages</b>", "index.html#autotoc_md8", [
+        [ "🎯 <b>Core Languages</b>", "index.html#autotoc_md9", null ]
       ] ],
-      [ "📦 Quick Installation", "index.html#autotoc_md11", [
-        [ "🐍 Python Users (Recommended)", "index.html#autotoc_md12", null ]
+      [ "📦 <b>Quick Installation</b>", "index.html#autotoc_md11", [
+        [ "🐍 <b>Python Users (Recommended)</b>", "index.html#autotoc_md12", null ]
       ] ],
-      [ "🛠️ Building from Source", "index.html#autotoc_md14", null ],
-      [ "🎯 Usage Guide", "index.html#autotoc_md16", [
-        [ "🎪 Simple 3-Step API", "index.html#autotoc_md17", null ],
-        [ "🖥️ Command Line Magic", "index.html#autotoc_md18", null ],
-        [ "🎨 Visual Example", "index.html#autotoc_md19", null ],
-        [ "💻 Programming Language Examples", "index.html#autotoc_md21", null ]
+      [ "🛠️ <b>Building from Source</b>", "index.html#autotoc_md14", null ],
+      [ "🎯 <b>Usage Guide</b>", "index.html#autotoc_md16", [
+        [ "🎪 <b>Simple 3-Step API</b>", "index.html#autotoc_md17", null ],
+        [ "🖥️ <b>Command Line Magic</b>", "index.html#autotoc_md18", null ],
+        [ "🎨 <b>Visual Example</b>", "index.html#autotoc_md19", null ],
+        [ "💻 <b>Programming Language Examples</b>", "index.html#autotoc_md21", null ]
       ] ],
-      [ "🚀 Performance Benchmarks", "index.html#autotoc_md23", [
-        [ "⚡ Lightning Fast Performance", "index.html#autotoc_md24", null ],
-        [ "📈 Performance Visualization", "index.html#autotoc_md25", null ],
-        [ "🏃‍♂️ Benchmark Your System", "index.html#autotoc_md26", null ]
+      [ "🚀 <b>Performance Benchmarks</b>", "index.html#autotoc_md23", [
+        [ "⚡ <b>Lightning Fast Performance</b>", "index.html#autotoc_md24", null ],
+        [ "📈 <b>Performance Visualization</b>", "index.html#autotoc_md25", null ],
+        [ "🏃‍♂️ <b>Benchmark Your System</b>", "index.html#autotoc_md26", null ]
       ] ],
-      [ "🤝 Contributing", "index.html#autotoc_md28", null ],
-      [ "📄 License", "index.html#autotoc_md29", [
-        [ "🌟 Star this repo if you found it useful! 🌟", "index.html#autotoc_md31", null ]
+      [ "🤝 <b>Contributing</b>", "index.html#autotoc_md28", null ],
+      [ "📄 <b>License</b>", "index.html#autotoc_md29", [
+        [ "🌟 <b>Star this repo if you found it useful!</b> 🌟", "index.html#autotoc_md31", null ]
       ] ],
       [ "Namespace List", "namespaces.html", "namespaces_dup" ]
     ] ],
@@ -83,3 +83,4 @@ var NAVTREEINDEX =
 
 var SYNCONMSG = 'click to disable panel synchronization';
 var SYNCOFFMSG = 'click to enable panel synchronization';
+var LISTOFALLMEMBERS = 'List of all members';

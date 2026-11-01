@@ -1,9 +1,9 @@
 <map id="include/kaleidoscope.h" name="include/kaleidoscope.h">
-<area shape="rect" id="Node000001" title=" " alt="" coords="207,5,366,33"/>
-<area shape="rect" id="Node000002" href="$kaleidoscope_8hpp.html" title=" " alt="" coords="5,81,181,109"/>
-<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="239,41,128,83,126,78,237,36"/>
-<area shape="rect" id="Node000003" href="$kaleidoscope-cmd_8c.html" title=" " alt="" coords="205,81,368,109"/>
-<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="289,49,289,81,284,81,284,49"/>
-<area shape="rect" id="Node000004" href="$kaleidoscope_8c.html" title=" " alt="" coords="393,81,524,109"/>
-<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="332,37,429,78,427,83,330,42"/>
+<area shape="rect" id="Node000001" title=" " alt="" coords="217,5,387,33"/>
+<area shape="rect" id="Node000002" href="$kaleidoscope_8hpp.html" title=" " alt="" coords="5,81,191,109"/>
+<area shape="poly" id="edge1_Node000001_Node000002" title=" " alt="" coords="254,39,135,83,134,78,249,38"/>
+<area shape="rect" id="Node000003" href="$kaleidoscope-cmd_8c.html" title=" " alt="" coords="215,81,389,109"/>
+<area shape="poly" id="edge2_Node000001_Node000003" title=" " alt="" coords="304,47,304,82,300,79,300,51"/>
+<area shape="rect" id="Node000004" href="$kaleidoscope_8c.html" title=" " alt="" coords="413,81,554,109"/>
+<area shape="poly" id="edge3_Node000001_Node000004" title=" " alt="" coords="349,37,454,80,449,81,348,42"/>
 </map>

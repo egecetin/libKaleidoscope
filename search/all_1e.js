@@ -1,4 +1,4 @@
 var searchData=
 [
-  ['🎭_20strong_20supported_20languages_20strong_0',['🎭 &lt;strong&gt;Supported Languages&lt;/strong&gt;',['../index.html#autotoc_md8',1,'']]]
+  ['🎭_20supported_20languages_0',['🎭 &lt;b&gt;Supported Languages&lt;/b&gt;',['../index.html#autotoc_md8',1,'']]]
 ];
