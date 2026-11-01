@@ -13,7 +13,7 @@ permissions:
 jobs:
   static-analysis:
     runs-on: ubuntu-latest
-    container: egecetinn/alpine
+    container: egecetinn/ubuntu2604@sha256:6da5b408684179bc461a30b7a932f24f250e54797d1061d1547c570bdff9afb7
     steps:
       - name: Checkout Code
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
