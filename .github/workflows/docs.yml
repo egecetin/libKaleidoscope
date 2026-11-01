@@ -15,12 +15,14 @@ jobs:
     permissions:
       contents: write  # for JamesIves/github-pages-deploy-action to push changes in repo
     runs-on: ubuntu-latest
-    container: egecetinn/alpine
+    container: egecetinn/ubuntu2604@sha256:6da5b408684179bc461a30b7a932f24f250e54797d1061d1547c570bdff9afb7
     steps:
       - name: Checkout repository
         uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
         with:
           submodules: "true"
+      - name: Set up dependencies
+        run: apt-get update && apt-get install -y rsync
       - name: Configure
         run: cmake . -DKALEIDOSCOPE_ENABLE_DOCS=1 -DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF
       - name: Generate Doxygen Documentation
