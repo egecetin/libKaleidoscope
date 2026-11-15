@@ -1,0 +1,74 @@
+name: CUDA tests on simulated H100
+
+# Optional, non-required check. The hosted runners have no GPU, so this builds
+# the CUDA backend and runs its test on a simulated NVIDIA H100
+# (https://github.com/pantheongpu/pantheonsim). A simulator cannot reproduce
+# hardware-specific behavior or timing, so it complements real-GPU testing and
+# does not replace it.
+
+on:
+  workflow_dispatch:
+  pull_request:
+    branches: [ master ]
+    paths:
+      - "src/**"
+      - "include/**"
+      - "tests/**"
+      - "CMakeLists.txt"
+      - ".github/workflows/gpu-sim.yml"
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.ref }}
+  cancel-in-progress: true
+
+permissions:
+  contents: read
+
+jobs:
+  cuda-sim:
+    name: CUDA 13.0 and simulated H100
+    runs-on: ubuntu-24.04
+    timeout-minutes: 30
+
+    steps:
+      - uses: actions/checkout@9c091bb21b7c1c1d1991bb908d89e4e9dddfe3e0 # v7.0.0
+        with:
+          submodules: recursive
+          persist-credentials: false
+
+      - name: Set up the simulated GPU and CUDA toolkit
+        uses: pantheongpu/setup-pantheonsim@656f502ef4782d94d34d8ddd368e333960609639 # v0.1.8
+        with:
+          gpu: nvidia/h100
+          cuda-toolkit: "13.0"
+
+      # The simulator runs PTX only, so the CUDA architecture list is replaced
+      # by 90-virtual (the top-level CMakeLists.txt sets it with a plain set()
+      # that a -D option does not override). It also needs a shared CUDA
+      # runtime. The command line tool and the Python bindings are not built:
+      # the CUDA test does not use them.
+      - name: Configure
+        run: |
+          sed -i 's/^set(KALEIDOSCOPE_TARGET_CUDA_ARCH .*/set(KALEIDOSCOPE_TARGET_CUDA_ARCH "90-virtual")/' CMakeLists.txt
+          grep -q 'KALEIDOSCOPE_TARGET_CUDA_ARCH "90-virtual"' CMakeLists.txt
+          cmake -S . -B build \
+            -DCMAKE_BUILD_TYPE=Release \
+            -DCMAKE_CUDA_COMPILER=/usr/local/cuda-13.0/bin/nvcc \
+            -DCMAKE_CUDA_RUNTIME_LIBRARY=Shared \
+            -DKALEIDOSCOPE_ENABLE_CUDA=ON \
+            -DKALEIDOSCOPE_ENABLE_TESTS=ON \
+            -DKALEIDOSCOPE_ENABLE_CMD_TOOL=OFF \
+            -DKALEIDOSCOPE_BUILD_PYTHON_BINDINGS=OFF
+
+      - name: Build
+        run: cmake --build build -j3
+
+      # processingTestCuda compares the GPU output with the expected image, so
+      # it fails if no device is found. Also fail if the simulated H100 was not
+      # initialized or the CUDA test did not run and pass.
+      - name: Test
+        run: |
+          vgpu run ctest --test-dir build/tests --output-on-failure --no-tests=error -V 2>&1 | tee test.log
+          grep -q 'virtual GPU platform initialized: 1 x nvidia/h100' test.log
+          ! grep -q 'SKIPPED' test.log
+          grep -q '\[       OK \] CppTests.processingTestCuda' test.log
